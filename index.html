@@ -10,16 +10,16 @@
             <div id="intro" class="row">
                 <div class="cell;">
                     <h1>Passphrase and password generator</h1>
-                    <p><strong>This site is not logging the generated passwords!</strong> If you don't believe me, view the HTML source of this webpage, save it to a text file, disconnect your computer from the Internet, and run it locally in your browser. Everything is handled via local JavaScript. Each of these passwords and passphrases is based on <a href="https://pthree.org/2014/03/16/creating-strong-passwords-without-a-computer-part-0-understanding-entropy/">entropy</a>. 50-bits of entropy is just barely outside of the range of a professional password cracker. Test additional password entropy at <a href="https://ae7.st/ent/">https://ae7.st/ent/</a>.</p>
+                    <p><strong>This site is not logging the generated passwords!</strong> If you don't believe me, view the HTML source of this webpage, save it to a text file, disconnect your computer from the Internet, and run it locally in your browser. Everything is handled via local JavaScript. Each of these passwords and passphrases is based on <a href="https://pthree.org/2014/03/16/creating-strong-passwords-without-a-computer-part-0-understanding-entropy/">entropy</a>. 55-bits of entropy (9 random characters) is just barely outside of the range of a professional password cracker. Test additional password entropy at <a href="https://ae7.st/ent/">https://ae7.st/ent/</a>.</p>
                         <div id="outer">
                             <p>Select minimum entropy: </p>
                             <div id="entropy-toolbar">
-                                <input type="radio" name="entropy" value="50" id="rtb1"><label for="rtb1">50-bits</label>
-                                <input type="radio" name="entropy" value="55" id="rtb2"><label for="rtb2">55-bits</label>
-                                <input type="radio" name="entropy" value="60" id="rtb3"><label for="rtb3">60-bits</label>
-                                <input type="radio" name="entropy" value="65" id="rtb4"><label for="rtb4">65-bits</label>
-                                <input type="radio" name="entropy" value="70" id="rtb5" checked><label for="rtb5">70-bits</label>
-                                <input type="radio" name="entropy" value="75" id="rtb6"><label for="rtb6">75-bits</label>
+                                <input type="radio" name="entropy" value="55" id="rtb1"><label for="rtb1">55-bits</label>
+                                <input type="radio" name="entropy" value="60" id="rtb2"><label for="rtb2">60-bits</label>
+                                <input type="radio" name="entropy" value="65" id="rtb3"><label for="rtb3">65-bits</label>
+                                <input type="radio" name="entropy" value="70" id="rtb4" checked><label for="rtb4">70-bits</label>
+                                <input type="radio" name="entropy" value="75" id="rtb5"><label for="rtb5">75-bits</label>
+                                <input type="radio" name="entropy" value="80" id="rtb6"><label for="rtb6">80-bits</label>
                             </div>
                         </div>
                 </div>
