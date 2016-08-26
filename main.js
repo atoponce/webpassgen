@@ -35,12 +35,12 @@ function gen_pass(len, chars) {
 
 function generate_xkcd(wordlist) {
     var entropy = parseInt(document.querySelector('input[name="entropy"]:checked').value);
-    var len = Math.floor(entropy/Math.log2(wordlist.length));
-    var tmp = new Array(8);
+    var len = Math.ceil(entropy/Math.log2(wordlist.length));
+    var tmp = [];
     var pass = "";
     for (i=0; i<len; i++) {
         rand_num = cryptoObj.getRandomValues(rand_arr)[0]/Math.pow(2,16);
-        tmp[i] = wordlist[secureRandom(wordlist.length)];
+        tmp = tmp.concat(wordlist[secureRandom(wordlist.length)]);
     }
     pass = tmp.join(" ");
     pass = pass.rtrim();
@@ -50,38 +50,68 @@ function generate_xkcd(wordlist) {
 function generate_hex() {
     var entropy = parseInt(document.querySelector('input[name="entropy"]:checked').value);
     var s = "0123456789abcdef"
-    var len = Math.floor(entropy/Math.log2(s.length));
+    var len = Math.ceil(entropy/Math.log2(s.length));
     document.getElementById("hex-pass").innerHTML = gen_pass(len, s);
 }
 
 function generate_base32() {
     var entropy = parseInt(document.querySelector('input[name="entropy"]:checked').value);
     var s = "0123456789abcdefghjkmnpqrstvwxyz";
-    var len = Math.floor(entropy/Math.log2(s.length));
+    var len = Math.ceil(entropy/Math.log2(s.length));
     document.getElementById("base32-pass").innerHTML = gen_pass(len, s);
 }
 
 function generate_base64() {
     var entropy = parseInt(document.querySelector('input[name="entropy"]:checked').value);
     var s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/";
-    var len = Math.floor(entropy/Math.log2(s.length));
+    var len = Math.ceil(entropy/Math.log2(s.length));
     document.getElementById("base64-pass").innerHTML = gen_pass(len, s);
 }
 
 function generate_babble() {
+    var tmp = [];
+    var pass = [];
     var vowels = "aeiouy";
     var consonants = "bcdfghklmnprstvzx";
     var entropy = parseInt(document.querySelector('input[name="entropy"]:checked').value);
-    var pass = [];
+
+    // remove the entropy from the first and last pseudowords
+    entropy = entropy - 2*(2*Math.log2(consonants.length)+2*Math.log2(vowels.length));
+
+    // get number of inner pseudowords
+    var len = Math.ceil(entropy/(3*Math.log2(consonants.length)+2*Math.log2(vowels.length)));
+
+    // generate first pseudoword (~13.34485068394299 bits entropy)
     for (var i=0; i<5; i++) {
+        if (i % 2 == 0) tmp[i] = gen_pass(1, consonants);
+        else tmp[i] = gen_pass(1, vowels);
+    }
+    pass = pass.concat(tmp);
+    pass[0] = "x";
+
+    var tmp = [];
+    // generate additional pseudowords (~17.43231352519333 bits entropy)
+    for (var i=0; i<len; i++) {
         for (var j=0; j<5; j++) {
-            if (j % 2 == 0) pass[(5*i)+j] = gen_pass(1, consonants);
-            else pass[(5*i)+j] = gen_pass(1, vowels);
+            if (j % 2 == 0) tmp[(5*i)+j] = gen_pass(1, consonants);
+            else tmp[(5*i)+j] = gen_pass(1, vowels);
         }
     }
-    pass[0] = "x";
-    pass[24] = "x";
-    for (var i=20; i>0; i-=5) pass.splice(i, 0, "-");
+
+    pass = pass.concat(tmp);
+    tmp = [];
+
+    // generate final pseudoword (~13.34485068394299 bits entropy)
+    for (var i=0; i<5; i++) {
+        if (i % 2 == 0) tmp[i] = gen_pass(1, consonants);
+        else tmp[i] = gen_pass(1, vowels);
+    }
+
+    pass = pass.concat(tmp);
+    pass[pass.length-1] = "x";
+
+    for (var i=pass.length; i>0; i-=5) pass.splice(i, 0, "-");
+    pass.pop() // strip last "-"
     document.getElementById("babble-pass").innerHTML = pass.join("");
 }
 
@@ -103,7 +133,7 @@ function generate_random() {
     var entropy = parseInt(document.querySelector('input[name="entropy"]:checked').value);
     var s = '';
     for (i=0; i<94; i++) s += String.fromCharCode(33+i);
-    var len = Math.floor(entropy/Math.log2(s.length));
+    var len = Math.ceil(entropy/Math.log2(s.length));
     var pass = gen_pass(len, s);
     // fix HTML '&', '<', and '>'
     pass = pass.replace(/&/g, "&amp");
