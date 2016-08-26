@@ -33,7 +33,9 @@ function gen_pass(len, chars) {
 }
 
 
-function generate_xkcd(len, wordlist) {
+function generate_xkcd(wordlist) {
+    var entropy = parseInt(document.querySelector('input[name="entropy"]:checked').value);
+    var len = Math.floor(entropy/Math.log2(wordlist.length));
     var tmp = new Array(8);
     var pass = "";
     for (i=0; i<len; i++) {
@@ -46,26 +48,30 @@ function generate_xkcd(len, wordlist) {
 }
 
 function generate_hex() {
-    var len = 20;
+    var entropy = parseInt(document.querySelector('input[name="entropy"]:checked').value);
     var s = "0123456789abcdef"
+    var len = Math.floor(entropy/Math.log2(s.length));
     document.getElementById("hex-pass").innerHTML = gen_pass(len, s);
 }
 
 function generate_base32() {
-    var len = 16;
+    var entropy = parseInt(document.querySelector('input[name="entropy"]:checked').value);
     var s = "0123456789abcdefghjkmnpqrstvwxyz";
+    var len = Math.floor(entropy/Math.log2(s.length));
     document.getElementById("base32-pass").innerHTML = gen_pass(len, s);
 }
 
 function generate_base64() {
-    var len = 13;
+    var entropy = parseInt(document.querySelector('input[name="entropy"]:checked').value);
     var s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/";
+    var len = Math.floor(entropy/Math.log2(s.length));
     document.getElementById("base64-pass").innerHTML = gen_pass(len, s);
 }
 
 function generate_babble() {
     var vowels = "aeiouy";
     var consonants = "bcdfghklmnprstvzx";
+    var entropy = parseInt(document.querySelector('input[name="entropy"]:checked').value);
     var pass = [];
     for (var i=0; i<5; i++) {
         for (var j=0; j<5; j++) {
@@ -80,7 +86,7 @@ function generate_babble() {
 }
 
 function generate_leetspeak() {
-    var pass = generate_xkcd(8, eff_short);
+    var pass = generate_xkcd(eff_short);
     pass = pass.replace(/or/g, "r0");
     pass = pass.replace(/a/g, "4");
     pass = pass.replace(/e/g, "3");
@@ -94,9 +100,10 @@ function generate_leetspeak() {
 }
 
 function generate_random() {
-    var len = 12;
+    var entropy = parseInt(document.querySelector('input[name="entropy"]:checked').value);
     var s = '';
     for (i=0; i<94; i++) s += String.fromCharCode(33+i);
+    var len = Math.floor(entropy/Math.log2(s.length));
     var pass = gen_pass(len, s);
     // fix HTML '&', '<', and '>'
     pass = pass.replace(/&/g, "&amp");
