@@ -1,0 +1,63 @@
+@font-face {
+    font-family: "DejaVu Sans Mono";
+    src: url("DejaVuSansMono.ttf");
+}
+h1 {
+    text-align: center;
+}
+#radio-select {
+    bottom: 15px;
+    position: absolute;
+    left: 10px;
+}
+button {
+    bottom: 10px;
+    position: absolute;
+    right: 10px;
+}
+#container {
+    margin: 0 auto;
+    width: 1260px;
+}
+div.table {
+    border-collapse: separate;
+    border-spacing: 10px;
+    display: table;
+    width: 100%;
+}
+div.row {
+    display: table-row;
+}
+div.cell {
+    border: 1px  solid black;
+    display: table-cell;
+    height: 250px;
+    padding: 10px;
+    position: relative;
+    text-align: left;
+    width: 400px;
+}
+p.password {
+    font-family: "DejaVu Sans Mono";
+    font-size: 18px;
+    text-align: center;
+}
+p.cell-title {
+    text-align: center;
+}
+@media only screen and (max-width: 1000px) {
+    div.cell {
+        display: block;
+        height: auto;
+        margin: 10px;
+        padding: 10px;
+        width: 80%;
+    }
+    #container {
+        margin: 0 auto;
+        width: 90%;
+    }
+    p.password {
+        padding-bottom: 10px;
+    }
+}

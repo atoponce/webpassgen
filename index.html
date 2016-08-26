@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Passphrase and password generator</title>
+    </head>
+    <body onload="load_passes()">
+        <div id="container">
+            <div id="intro" class="row">
+                <div class="cell;">
+                    <h1>Passphrase and password generator</h1>
+                    <p>Each of these passwords and passphrases are guaranteed to have between <a href="https://pthree.org/2014/03/16/creating-strong-passwords-without-a-computer-part-0-understanding-entropy/">76 and 84-bits of entropy</a>, which should be the target for any password. Test additional password entropy at <a href="https://ae7.st/ent/">https://ae7.st/ent/</a>.</p>
+                    <p><strong>This site is not logging the generated passwords!</strong> If you don't believe me, view the HTML source of this webpage, save it to a text file, disconnect your computer from the Internet, and run it locally in your browser. Everything is handled via local JavaScript.</p>
+                </div>
+            </div>
+            <div class="table">
+                <div id="row1" class="row">
+                    <div id="diceware" class="cell">
+                        <p class="cell-title"><strong>Diceware Wordlist</strong></p>
+                        <p><a href="http://world.std.com/~reinhold/diceware.html">Diceware passphrases</a> uses many obscure English words and non-words such as numbers and punctuation. This list may also contain offensive words or randomly generatate offensive phrases. ~77.55-bits entropy.</p>
+                        <p>Your passphrase is:</p>
+                        <p id="diceware-pass" class="password"></p>
+                        <button value="Generate" onclick="document.getElementById('diceware-pass').innerHTML = generate_xkcd(6, diceware_wordlist);">Generate</button>
+                    </div>
+                    <div id="beale" class="cell">
+                        <p class="cell-title"><strong>Beale Wordlist</strong></p>
+                        <p>The <a href="http://world.std.com/~reinhold/beale.wordlist.asc">Beale wordlist</a> is based on Diceware, and while it uses more common English words, it still contains some obscure words. This list may also contain offensive words or randomly generate offensive phrases. ~77.55-bits entropy.</p>
+                        <p>Your passphrase is:</p>
+                        <p id="beale-pass" class="password"></p>
+                        <button value="Generate" onclick="document.getElementById('beale-pass').innerHTML = generate_xkcd(6, beale_wordlist);">Generate</button>
+                    </div>
+                    <div id="eff" class="cell">
+                        <p class="cell-title"><strong>EFF Wordlists</strong></p>
+                        <p>The <a href="https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases">EFF wordlists</a> are the least obscure of the three passphrase wordlists, and the easist to recall, with either short or long words. This list may also contain offensive words or randomly generate offensive phrases. ~<span id="eff_entropy">82.72</span>-bits entropy.</p> <p>Your passphrase is:</p>
+                        <p id="eff-pass" class="password"></p>
+                        <div id="radio-select">
+                            <input type="radio" name="wordlist" id="eff-short" value="short" checked /><label for="eff-short">Short</label>
+                            <input type="radio" name="wordlist" id="eff-long" value="long" /><label for="eff-long">Long</label>
+                        </div>
+                        <button value="Generate" onclick="var eff_wordlist = switch_eff(); if (eff_wordlist.length == 1296) {var len = 8; document.getElementById('eff_entropy').innerHTML = '82.72';} else {var len = 6; document.getElementById('eff_entropy').innerHTML = '77.55';} document.getElementById('eff-pass').innerHTML = generate_xkcd(len, eff_wordlist);">Generate</button>
+                    </div>
+                </div>
+                <div id="row2" class="row">
+                    <div id="leetspeak" class="cell">
+                        <p class="cell-title"><strong>Leet-Speak</strong></p>
+                        <p>Leet-speak is a lame hacker ("h4x0r") attempt at replacing common characters with others that look vaguely familiar. It's bad and you should feel bad. ~77.55-bits of entropy.</p>
+                        <p>Your password is:</p>
+                        <p id="leetspeak-pass" class="password"></p>
+                        <button value="Generate" onclick="generate_leetspeak();">Generate</button>
+                    </div>
+                    <div id="bubble-babble" class="cell">
+                        <p class="cell-title"><strong>Bubble-Babble</strong></p>
+                        <p><a href="http://www.wiki.yak.net/589">Bubble Babble Encoding</a> is a system designed to encode binary bits into pseudowords. In this case, rather than encode data, it's generated randomly. ~78.99-bits of entropy.</p>
+                        <p>Your password is:</p>
+                        <p id="babble-pass" class="password"></p>
+                        <button value="Generate" onclick="generate_babble();">Generate</button>
+                    </div>
+                    <div id="random" class="cell">
+                        <p class="cell-title"><strong>Random Characters</strong></p>
+                        <p>This password is built from 94 printable ASCII characters. As such, it is the shortest ASCII password on this page. ~78.66-bits of entropy.</p>
+                        <p>Your password is:</p>
+                        <p id="random-pass" class="password"></p>
+                        <button value="Generate" onclick="generate_random();">Generate</button>
+                    </div>
+                </div>
+                <div id="row3" class="row">
+                    <div id="base64" class="cell">
+                        <p class="cell-title"><strong>Base64 Characters</strong></p>
+                        <p>Base64 strings encompass all lowercase and uppercase characters and all digits, including two additional characters. This follows <a href="https://tools.ietf.org/html/rfc3548">RFC 3548</a>. 78-bits of entropy.</p>
+                        <p>Your password is:</p>
+                        <p id="base64-pass" class="password"></p>
+                        <button value="Generate" onclick="generate_base64();">Generate</button>
+                    </div>
+                    <div id="base32" class="cell">
+                        <p class="cell-title"><strong>Base32 Characters</strong></p>
+                        <p>Base32 strings can still be mostly unambiguous while using more characters from the keyboard. This uses Crockford's base32. 80-bits of entropy.</p>
+                        <p>Your password is:</p>
+                        <p id="base32-pass" class="password"></p>
+                        <button value="Generate" onclick="generate_base32();">Generate</button>
+                    </div>
+                    <div id="hexadecimal" class="cell">
+                        <p class="cell-title"><strong>Hexadecimal Characters</strong></p>
+                        <p>Hexadecimal strings are unambiguous with digits 0-9 and characters a-f. However, they provide less entropy per character, so it needs to be longer. 80-bits of entropy.</p>
+                        <p>Your password is:</p>
+                        <p id="hex-pass" class="password"></p>
+                        <button value="Generate" onclick="generate_hex();">Generate</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="main.js"></script>
+        <script src="diceware.js"></script>
+        <script src="beale.js"></script>
+        <script src="eff-long.js"></script>
+        <script src="eff-short.js"></script>
+        <script type="text/javascript">
+            function switch_eff() {
+                if (document.getElementById('eff-short').checked)  return eff_short;
+                else return eff_long;
+            }
+            function load_passes() {
+                document.getElementById('diceware-pass').innerHTML = generate_xkcd(6, diceware_wordlist);
+                document.getElementById('beale-pass').innerHTML = generate_xkcd(6, beale_wordlist);
+                document.getElementById('eff-pass').innerHTML = generate_xkcd(8, eff_short);
+                generate_leetspeak();
+                generate_random();
+                generate_babble();
+                generate_base64();
+                generate_base32();
+                generate_hex();
+            }
+        </script>
+    </body>
+</html>
