@@ -10,7 +10,7 @@ function get_entropy() {
     return parseInt(document.querySelector('input[name="entropy"]:checked').value);
 }
 
-function secureRandom(count) {
+function sec_rand(count) {
     // provided by `Sc00bz' at: https://www.reddit.com/r/crypto/comments/4xe21s/
     var rand = new Uint32Array(1);
     var skip = 0x7fffffff - 0x7fffffff % count;
@@ -32,40 +32,38 @@ function gen_pass(len, set, spaces=false) {
     else pass_arr = set;
     for(i=len; i--;) {
         rand_num = cryptoObj.getRandomValues(rand_arr)[0]/Math.pow(2,16);
-        if (spaces == false) {
-            pass += pass_arr[secureRandom(set.length)];
+        if (spaces) {
+            pass += pass_arr[sec_rand(set.length)];
+            pass += " ";
             
         }
-        else {
-            pass += pass_arr[secureRandom(set.length)];
-            pass += " ";
-        }
+        else pass += pass_arr[sec_rand(set.length)];
     }
-    return pass
+    return pass.rtrim();
 }
 
 function generate_eff() {
-    if (document.querySelector('input[name="wordlist"]:checked').value == "long") {
-        var wordlist = eff_long;
-    }
-    else {
-        var wordlist = eff_short;
-    }
+    var option = document.querySelector('input[name="wordlist"]:checked').value;
     var entropy = get_entropy();
-    var len = Math.ceil(entropy/Math.log2(wordlist.length));
-    document.getElementById('eff-pass').innerHTML = gen_pass(len, wordlist, true);
+    if (option == "long") var eff_wordlist = eff_long;
+    else var eff_wordlist = eff_short;
+    var len = Math.ceil(entropy/Math.log2(eff_wordlist.length));
+    var pass_id = document.getElementById('eff-pass');
+    pass_id.innerHTML = gen_pass(len, eff_wordlist, true);
 }
 
 function generate_diceware() {
     var entropy = get_entropy();
     var len = Math.ceil(entropy/Math.log2(diceware_wordlist.length));
-    document.getElementById('diceware-pass').innerHTML = gen_pass(len, diceware_wordlist, true);
+    var pass_id = document.getElementById('diceware-pass');
+    pass_id.innerHTML = gen_pass(len, diceware_wordlist, true);
 }
 
 function generate_beale() {
     var entropy = get_entropy();
     var len = Math.ceil(entropy/Math.log2(beale_wordlist.length));
-    document.getElementById('beale-pass').innerHTML = gen_pass(len, beale_wordlist, true);
+    var pass_id = document.getElementById('beale-pass');
+    pass_id.innerHTML = gen_pass(len, beale_wordlist, true);
 }
 
 function generate_babble() {
