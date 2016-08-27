@@ -45,7 +45,7 @@ p.password {
 p.cell-title {
     text-align: center;
 }
-#outer {
+#header #outer {
     text-align: center;
     width: 100%;
 }
@@ -93,6 +93,10 @@ p.cell-title {
 }
 
 @media only screen and (max-width: 1000px) {
+    #header #outer {
+        text-align: center;
+        width: 80%;
+    }
     div.cell {
         display: block;
         height: auto;
