@@ -27,6 +27,7 @@ function load_js() {
             case "German": wordlist = german_wordlist; break;
             case "Italian": wordlist = italian_wordlist; break;
             case "Japanese": wordlist = japanese_wordlist; break;
+            case "Klingon": wordlist = klingon_wordlist; break;
             case "Maori": wordlist = maori_wordlist; break;
             case "Norwegian": wordlist = norwegian_wordlist; break;
             case "Polish": wordlist = polish_wordlist; break;

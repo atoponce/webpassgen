@@ -34,7 +34,7 @@ div.cell {
     width: 400px;
 }
 p.password {
-    font-family: "Courier New", Courier, "Lucidia Console", Monaco, monospace;
+    font-family: "Dejavu Sans Mono", "Courier New", "Lucidia Console", Monaco, monospace;
     font-size: 18px;
     text-align: center;
 }
