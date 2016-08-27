@@ -6,6 +6,10 @@ String.prototype.rtrim = function() {
    return this.replace(/\s+$/g,"");  
 }
 
+function get_entropy() {
+    return parseInt(document.querySelector('input[name="entropy"]:checked').value);
+}
+
 function secureRandom(count) {
     // provided by `Sc00bz' at: https://www.reddit.com/r/crypto/comments/4xe21s/
     var rand = new Uint32Array(1);
@@ -22,50 +26,46 @@ function secureRandom(count) {
     return result % count;
 }
 
-function gen_pass(len, chars) {
+function gen_pass(len, set, spaces=false) {
     var pass = "";
-    var pass_arr = chars.split("");
+    if (typeof set == "string") var pass_arr = set.split("");
+    else pass_arr = set;
     for(i=len; i--;) {
         rand_num = cryptoObj.getRandomValues(rand_arr)[0]/Math.pow(2,16);
-        pass += pass_arr[secureRandom(chars.length)];
+        if (spaces == false) {
+            pass += pass_arr[secureRandom(set.length)];
+            
+        }
+        else {
+            pass += pass_arr[secureRandom(set.length)];
+            pass += " ";
+        }
     }
     return pass
 }
 
-
-function generate_xkcd(wordlist) {
-    var entropy = parseInt(document.querySelector('input[name="entropy"]:checked').value);
-    var len = Math.ceil(entropy/Math.log2(wordlist.length));
-    var tmp = [];
-    var pass = "";
-    for (i=0; i<len; i++) {
-        rand_num = cryptoObj.getRandomValues(rand_arr)[0]/Math.pow(2,16);
-        tmp = tmp.concat(wordlist[secureRandom(wordlist.length)]);
+function generate_eff() {
+    if (document.querySelector('input[name="wordlist"]:checked').value == "long") {
+        var wordlist = eff_long;
     }
-    pass = tmp.join(" ");
-    pass = pass.rtrim();
-    return pass;
+    else {
+        var wordlist = eff_short;
+    }
+    var entropy = get_entropy();
+    var len = Math.ceil(entropy/Math.log2(wordlist.length));
+    document.getElementById('eff-pass').innerHTML = gen_pass(len, wordlist, true);
 }
 
-function generate_hex() {
-    var entropy = parseInt(document.querySelector('input[name="entropy"]:checked').value);
-    var s = "0123456789abcdef"
-    var len = Math.ceil(entropy/Math.log2(s.length));
-    document.getElementById("hex-pass").innerHTML = gen_pass(len, s);
+function generate_diceware() {
+    var entropy = get_entropy();
+    var len = Math.ceil(entropy/Math.log2(diceware_wordlist.length));
+    document.getElementById('diceware-pass').innerHTML = gen_pass(len, diceware_wordlist, true);
 }
 
-function generate_base32() {
-    var entropy = parseInt(document.querySelector('input[name="entropy"]:checked').value);
-    var s = "0123456789abcdefghjkmnpqrstvwxyz";
-    var len = Math.ceil(entropy/Math.log2(s.length));
-    document.getElementById("base32-pass").innerHTML = gen_pass(len, s);
-}
-
-function generate_base64() {
-    var entropy = parseInt(document.querySelector('input[name="entropy"]:checked').value);
-    var s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/";
-    var len = Math.ceil(entropy/Math.log2(s.length));
-    document.getElementById("base64-pass").innerHTML = gen_pass(len, s);
+function generate_beale() {
+    var entropy = get_entropy();
+    var len = Math.ceil(entropy/Math.log2(beale_wordlist.length));
+    document.getElementById('beale-pass').innerHTML = gen_pass(len, beale_wordlist, true);
 }
 
 function generate_babble() {
@@ -73,7 +73,7 @@ function generate_babble() {
     var pass = [];
     var vowels = "aeiouy";
     var consonants = "bcdfghklmnprstvzx";
-    var entropy = parseInt(document.querySelector('input[name="entropy"]:checked').value);
+    var entropy = get_entropy();
 
     // remove the entropy from the first and last pseudowords
     entropy = entropy - 2*(2*Math.log2(consonants.length)+2*Math.log2(vowels.length));
@@ -116,7 +116,9 @@ function generate_babble() {
 }
 
 function generate_leetspeak() {
-    var pass = generate_xkcd(eff_short);
+    var entropy = get_entropy();
+    var len = Math.ceil(entropy/Math.log2(eff_short.length));
+    var pass = gen_pass(len, eff_short, true);
     pass = pass.replace(/or/g, "r0");
     pass = pass.replace(/a/g, "4");
     pass = pass.replace(/e/g, "3");
@@ -130,7 +132,7 @@ function generate_leetspeak() {
 }
 
 function generate_random() {
-    var entropy = parseInt(document.querySelector('input[name="entropy"]:checked').value);
+    var entropy = get_entropy();
     var s = '';
     for (i=0; i<94; i++) s += String.fromCharCode(33+i);
     var len = Math.ceil(entropy/Math.log2(s.length));
@@ -140,4 +142,25 @@ function generate_random() {
     pass = pass.replace(/</g, "&lt;");
     pass = pass.replace(/>/g, "&gt;");
     document.getElementById("random-pass").innerHTML = pass;
+}
+
+function generate_base64() {
+    var entropy = get_entropy();
+    var s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/";
+    var len = Math.ceil(entropy/Math.log2(s.length));
+    document.getElementById("base64-pass").innerHTML = gen_pass(len, s);
+}
+
+function generate_base32() {
+    var entropy = get_entropy();
+    var s = "0123456789abcdefghjkmnpqrstvwxyz";
+    var len = Math.ceil(entropy/Math.log2(s.length));
+    document.getElementById("base32-pass").innerHTML = gen_pass(len, s);
+}
+
+function generate_hex() {
+    var entropy = get_entropy();
+    var s = "0123456789abcdef"
+    var len = Math.ceil(entropy/Math.log2(s.length));
+    document.getElementById("hex-pass").innerHTML = gen_pass(len, s);
 }
