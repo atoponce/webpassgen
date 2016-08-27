@@ -17,7 +17,7 @@
                                 <input type="radio" name="entropy" value="55" id="rtb1" onclick="load_passes()"><label for="rtb1">55-bits</label>
                                 <input type="radio" name="entropy" value="60" id="rtb2" onclick="load_passes()"><label for="rtb2">60-bits</label>
                                 <input type="radio" name="entropy" value="65" id="rtb3" onclick="load_passes()"><label for="rtb3">65-bits</label>
-                                <input type="radio" name="entropy" value="70" id="rtb4" checked><label for="rtb4" onclick="load_passes()">70-bits</label>
+                                <input type="radio" name="entropy" value="70" id="rtb4" onclick="load_passes()" checked><label for="rtb4">70-bits</label>
                                 <input type="radio" name="entropy" value="75" id="rtb5" onclick="load_passes()"><label for="rtb5">75-bits</label>
                                 <input type="radio" name="entropy" value="80" id="rtb6" onclick="load_passes()"><label for="rtb6">80-bits</label>
                             </div>
@@ -26,6 +26,17 @@
             </div>
             <div class="table">
                 <div id="row1" class="row">
+                    <div id="eff" class="cell">
+                        <p class="cell-title"><strong>EFF Wordlists</strong></p>
+                        <p>The <a href="https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases">EFF wordlists</a> are the least obscure of the three passphrase wordlists, and the easist to recall, with either short or long words. This list may also contain offensive words or randomly generate offensive phrases.</p>
+                        <p>Your passphrase is:</p>
+                        <p id="eff-pass" class="password"></p>
+                        <div id="radio-select">
+                            <input type="radio" name="wordlist" id="eff-short" value="short" onclick="document.getElementById('eff-pass').innerHTML = generate_xkcd(eff_short);" checked /><label for="eff-short">Short</label>
+                            <input type="radio" name="wordlist" id="eff-long" value="long" onclick="document.getElementById('eff-pass').innerHTML = generate_xkcd(eff_long);" /><label for="eff-long">Long</label>
+                        </div>
+                        <button value="Generate" onclick="var eff_wordlist = switch_eff(); document.getElementById('eff-pass').innerHTML = generate_xkcd(eff_wordlist);">Generate</button>
+                    </div>
                     <div id="diceware" class="cell">
                         <p class="cell-title"><strong>Diceware Wordlist</strong></p>
                         <p><a href="http://world.std.com/~reinhold/diceware.html">Diceware passphrases</a> uses many obscure English words and non-words such as numbers and punctuation. This list may also contain offensive words or randomly generatate offensive phrases.</p>
@@ -39,17 +50,6 @@
                         <p>Your passphrase is:</p>
                         <p id="beale-pass" class="password"></p>
                         <button value="Generate" onclick="document.getElementById('beale-pass').innerHTML = generate_xkcd(beale_wordlist);">Generate</button>
-                    </div>
-                    <div id="eff" class="cell">
-                        <p class="cell-title"><strong>EFF Wordlists</strong></p>
-                        <p>The <a href="https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases">EFF wordlists</a> are the least obscure of the three passphrase wordlists, and the easist to recall, with either short or long words. This list may also contain offensive words or randomly generate offensive phrases.</p>
-                        <p>Your passphrase is:</p>
-                        <p id="eff-pass" class="password"></p>
-                        <div id="radio-select">
-                            <input type="radio" name="wordlist" id="eff-short" value="short" checked /><label for="eff-short">Short</label>
-                            <input type="radio" name="wordlist" id="eff-long" value="long" /><label for="eff-long">Long</label>
-                        </div>
-                        <button value="Generate" onclick="var eff_wordlist = switch_eff(); document.getElementById('eff-pass').innerHTML = generate_xkcd(eff_wordlist);">Generate</button>
                     </div>
                 </div>
                 <div id="row2" class="row">
@@ -107,8 +107,12 @@
         <script src="eff-short.js"></script>
         <script type="text/javascript">
             function switch_eff() {
-                if (document.getElementById('eff-short').checked)  return eff_short;
-                else return eff_long;
+                if (document.querySelector('input[name="wordlist"]:checked').value == "long") {
+                    return eff_long;
+                }
+                else {
+                    return eff_short;
+                }
             }
             function load_passes() {
                 document.getElementById('diceware-pass').innerHTML = generate_xkcd(diceware_wordlist);
