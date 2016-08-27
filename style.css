@@ -1,12 +1,8 @@
-@font-face {
-    font-family: "DejaVu Sans Mono";
-    src: url("DejaVuSansMono.ttf");
-}
 h1 {
     text-align: center;
 }
-#radio-select {
-    bottom: 15px;
+.optional {
+    bottom: 10px;
     position: absolute;
     left: 10px;
 }
@@ -38,7 +34,7 @@ div.cell {
     width: 400px;
 }
 p.password {
-    font-family: "DejaVu Sans Mono";
+    font-family: "Courier New", Courier, "Lucidia Console", Monaco, monospace;
     font-size: 18px;
     text-align: center;
 }

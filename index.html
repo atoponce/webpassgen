@@ -26,7 +26,7 @@
                     <div id="eff" class="cell">
                         <p class="cell-title"><strong>EFF Wordlists</strong></p>
                         <p id="eff-pass" class="password"></p>
-                        <div id="radio-select">
+                        <div class="optional">
                             <input type="radio" name="wordlist" id="eff-short" value="short" onclick="generate_eff();" checked /><label for="eff-short">Short</label>
                             <input type="radio" name="wordlist" id="eff-long" value="long" onclick="generate_eff();" /><label for="eff-long">Long</label>
                         </div>
@@ -36,8 +36,28 @@
                     <div id="diceware" class="cell">
                         <p class="cell-title"><strong>Diceware Wordlist</strong></p>
                         <p id="diceware-pass" class="password"></p>
+                        <div class="optional">
+                            <select>
+                                <option name="language" onclick="load_js();">English</option>
+                                <option name="language" onclick="load_js();">Catalan</option>
+                                <option name="language" onclick="load_js();">Danish</option>
+                                <option name="language" onclick="load_js();">Dutch</option>
+                                <option name="language" onclick="load_js();">Esperanto</option>
+                                <option name="language" onclick="load_js();">Finnish</option>
+                                <option name="language" onclick="load_js();">French</option>
+                                <option name="language" onclick="load_js();">German</option>
+                                <option name="language" onclick="load_js();">Italian</option>
+                                <option name="language" onclick="load_js();">Japanese</option>
+                                <option name="language" onclick="load_js();">Maori</option>
+                                <option name="language" onclick="load_js();">Norwegian</option>
+                                <option name="language" onclick="load_js();">Polish</option>
+                                <option name="language" onclick="load_js();">Spanish</option>
+                                <option name="language" onclick="load_js();">Swedish</option>
+                                <option name="language" onclick="load_js();">Turkish</option>
+                            </select>
+                        </div>
                         <p class="fyi"><a href="http://world.std.com/~reinhold/diceware.html">Diceware passphrases</a> uses many obscure English words and non-words such as numbers and punctuation.</p>
-                        <button value="Generate" onclick="generate_diceware();">Generate</button>
+                        <button value="Generate" onclick="load_js();">Generate</button>
                     </div>
                     <div id="beale" class="cell">
                         <p class="cell-title"><strong>Beale Wordlist</strong></p>
@@ -90,10 +110,10 @@
             <p><strong>This site is not logging the generated passwords!</strong> If you don't believe me, view the HTML source of this webpage, save it to a text file, disconnect your computer from the Internet, and run it locally in your browser. Everything is handled via local JavaScript. Each of these passwords and passphrases is based on <a href="https://pthree.org/2014/03/16/creating-strong-passwords-without-a-computer-part-0-understanding-entropy/">entropy</a>. 55-bits of entropy (9 random characters) is just barely outside of the range of a hobbyist password cracker. Test additional password entropy at <a href="https://ae7.st/ent/">https://ae7.st/ent/</a>. The source code for this site is available at <a href="https://github.com/atoponce/webpassgen">https://github.com/atoponce/webpassgen</a>.</p>
         </div>
         <script src="main.js"></script>
-        <script src="diceware.js"></script>
-        <script src="beale.js"></script>
-        <script src="eff-long.js"></script>
-        <script src="eff-short.js"></script>
+        <script src="lists/eff-short.js"></script>
+        <script src="lists/eff-long.js"></script>
+        <script src="lists/beale.js"></script>
+        <script src="lists/english.js"></script> <!-- diceware -->
         <script type="text/javascript">
             function load_passes() {
                 generate_eff();
