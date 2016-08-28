@@ -122,9 +122,9 @@ button {
     }
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 500px) {
     #entropy-toolbar {
-        width: 200px;
+        width: 250px;
         margin: 0 auto;
     }
 }
