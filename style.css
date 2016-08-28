@@ -1,30 +1,26 @@
-h1 {
-    text-align: center;
-}
-.optional {
-    bottom: 10px;
-    position: absolute;
-    left: 10px;
-}
+/* body tags */
 button {
     bottom: 10px;
     position: absolute;
     right: 10px;
 }
-#container {
-    margin: 0 auto;
-    width: 1260px;
+
+/* classes */
+.optional {
+    bottom: 10px;
+    position: absolute;
+    left: 10px;
 }
-div.table {
+.table {
     border-collapse: separate;
     border-spacing: 10px;
     display: table;
     width: 100%;
 }
-div.row {
+.row {
     display: table-row;
 }
-div.cell {
+.cell {
     border: 1px  solid black;
     display: table-cell;
     height: auto;
@@ -33,17 +29,24 @@ div.cell {
     text-align: left;
     width: 400px;
 }
-p.password {
+.password {
     font-family: "Dejavu Sans Mono", "Courier New", "Lucidia Console", Monaco, monospace;
     font-size: 18px;
     text-align: center;
 }
-p.cell-title {
+.cell-title {
     text-align: center;
 }
-#header #outer {
+
+/* ids */
+#container {
+    margin: 0 auto;
+    width: 1260px;
+}
+#header {
+    margin: 0 auto;
+    width: 1260px;
     text-align: center;
-    width: 100%;
 }
 #entropy-toolbar input[type="radio"] {
     display: none;
@@ -95,22 +98,33 @@ p.cell-title {
 #base32-fyi { display: none; }
 #hexadecimal-fyi { display: none; }
 
+/* mobile */
 @media only screen and (max-width: 1000px) {
-    #header #outer {
-        text-align: center;
-    }
-    div.cell {
+    /* classes */
+    .cell {
         display: block;
         height: auto;
         margin: 10px;
         padding: 10px;
         width: auto;
     }
+    .password {
+        padding-bottom: 10px;
+    }
+    /* ids */
     #container {
         margin: 0 auto;
         width: 100%;
     }
-    p.password {
-        padding-bottom: 10px;
+    #header {
+        text-align: center;
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    #entropy-toolbar {
+        width: 200px;
+        margin: 0 auto;
     }
 }
