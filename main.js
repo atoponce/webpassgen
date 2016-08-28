@@ -12,10 +12,8 @@ function get_entropy() {
 
 function load_js() {
     var language = document.querySelector('option[name="language"]:checked').value;
-    var language_id = language.toLowerCase() + "_id";
     var script_obj = document.createElement("script");
     script_obj.src = "lists/" + language.toLowerCase() + ".js";
-    script_obj.id = language_id;
     document.body.appendChild(script_obj);
     script_obj.onload = function () {
         switch(language) {
