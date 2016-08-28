@@ -4,11 +4,11 @@
         <link rel="stylesheet" href="style.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Passphrase and password generator</title>
+        <title>Passphrase and Password Generator</title>
     </head>
     <body onload="load_passes()">
         <div id="header">
-            <h1>Passphrase and password generator</h1>
+            <h1>Passphrase and Password Generator</h1>
             <div id="outer">
                 <p>Select minimum entropy: </p>
                 <div id="entropy-toolbar">
@@ -24,17 +24,19 @@
         <div id="container">
             <div class="table">
                 <div id="row1" class="row">
-                    <div id="eff" class="cell">
+                    <div id="eff-default" class="cell">
                         <p class="cell-title"><strong>EFF Wordlists</strong></p>
                         <p id="eff-pass" class="password"></p>
                         <div class="optional">
                             <input type="radio" name="wordlist" id="eff-short" value="short" onclick="generate_eff();" checked /><label for="eff-short">Short</label>
                             <input type="radio" name="wordlist" id="eff-long" value="long" onclick="generate_eff();" /><label for="eff-long">Long</label>
                         </div>
-                        <p class="fyi">The <a href="https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases">EFF wordlists</a> are the least obscure of the three passphrase wordlists, and the easist to recall, with either short or long words.</p>
                         <button value="Generate" onclick="generate_eff();">Generate</button>
                     </div>
-                    <div id="diceware" class="cell">
+                    <div id="eff-fyi" class="cell">
+                        <p>The <a href="https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases">EFF wordlists</a> are the least obscure of the three passphrase wordlists, and the easist to recall, with either short or long words.</p>
+                    </div>
+                    <div id="diceware-default" class="cell">
                         <p class="cell-title"><strong>Diceware Wordlist</strong></p>
                         <p id="diceware-pass" class="password"></p>
                         <div class="optional">
@@ -59,54 +61,70 @@
                                 <option name="language" onclick="load_js();">Turkish</option>
                             </select>
                         </div>
-                        <p class="fyi"><a href="http://world.std.com/~reinhold/diceware.html">Diceware passphrases</a> uses many obscure English words and non-words such as numbers and punctuation.</p>
                         <button value="Generate" onclick="load_js();">Generate</button>
                     </div>
-                    <div id="beale" class="cell">
+                    <div id="diceware-fyi" class="cell">
+                        <p><a href="http://world.std.com/~reinhold/diceware.html">Diceware passphrases</a> uses many obscure English words and non-words such as numbers and punctuation.</p>
+                    </div>
+                    <div id="beale-default" class="cell">
                         <p class="cell-title"><strong>Beale Wordlist</strong></p>
                         <p id="beale-pass" class="password"></p>
-                        <p class="fyi">The <a href="http://world.std.com/~reinhold/beale.wordlist.asc">Beale wordlist</a> is based on Diceware, and while it uses more common English words, it still contains some obscure words.</p>
                         <button value="Generate" onclick="generate_beale();">Generate</button>
+                    </div>
+                    <div id="beale-fyi" class="cell">
+                        <p>The <a href="http://world.std.com/~reinhold/beale.wordlist.asc">Beale wordlist</a> is based on Diceware, and while it uses more common English words, it still contains some obscure words.</p>
                     </div>
                 </div>
                 <div id="row2" class="row">
-                    <div id="leetspeak" class="cell">
+                    <div id="leetspeak-default" class="cell">
                         <p class="cell-title"><strong>Leet-Speak</strong></p>
                         <p id="leetspeak-pass" class="password"></p>
-                        <p class="fyi">Leet-speak is a lame hacker ("h4x0r") attempt at replacing common characters with others that look vaguely familiar. It's bad and you should feel bad.</p>
                         <button value="Generate" onclick="generate_leetspeak();">Generate</button>
                     </div>
-                    <div id="bubble-babble" class="cell">
+                    <div id="leetspeak-fyi" class="cell">
+                        <p>Leet-speak is a lame hacker ("h4x0r") attempt at replacing common characters with others that look vaguely familiar. It's bad and you should feel bad.</p>
+                    </div>
+                    <div id="bubble-babble-default" class="cell">
                         <p class="cell-title"><strong>Bubble-Babble</strong></p>
                         <p id="babble-pass" class="password"></p>
-                        <p class="fyi"><a href="http://www.wiki.yak.net/589">Bubble Babble Encoding</a> is a system designed to encode binary bits into pseudowords. In this case, rather than encode data, it's generated randomly.</p>
                         <button value="Generate" onclick="generate_babble();">Generate</button>
                     </div>
-                    <div id="random" class="cell">
-                        <p class="cell-title"><strong>Random Characters</strong></p>
+                    <div id="bubble-babble-fyi" class="cell">
+                        <p><a href="http://www.wiki.yak.net/589">Bubble Babble Encoding</a> is a system designed to encode binary bits into pseudowords. In this case, rather than encode data, it's generated randomly.</p>
+                    </div>
+                    <div id="random-default" class="cell">
+                        <p class="cell-title"><strong>Base94 Characters</strong></p>
                         <p id="random-pass" class="password"></p>
-                        <p class="fyi">This password is built from 94 printable ASCII characters. It provides the most entropy per character. As such, it is the shortest ASCII password on this page.</p>
                         <button value="Generate" onclick="generate_random();">Generate</button>
+                    </div>
+                    <div id="random-fyi" class="cell">
+                        <p>This password is built from 94 printable ASCII characters. It provides the most entropy per character. As such, it is the shortest ASCII password on this page.</p>
                     </div>
                 </div>
                 <div id="row3" class="row">
-                    <div id="base64" class="cell">
+                    <div id="base64-default" class="cell">
                         <p class="cell-title"><strong>Base64 Characters</strong></p>
                         <p id="base64-pass" class="password"></p>
-                        <p class="fyi">Base64 strings encompass all lowercase and uppercase characters and all digits, including two additional characters. This follows <a href="https://tools.ietf.org/html/rfc3548">RFC 3548</a>.</p>
                         <button value="Generate" onclick="generate_base64();">Generate</button>
                     </div>
-                    <div id="base32" class="cell">
+                    <div id="base64-fyi" class="cell">
+                        <p>Base64 strings encompass all lowercase and uppercase characters and all digits, including two additional characters. This follows <a href="https://tools.ietf.org/html/rfc3548">RFC 3548</a>.</p>
+                    </div>
+                    <div id="base32-default" class="cell">
                         <p class="cell-title"><strong>Base32 Characters</strong></p>
                         <p id="base32-pass" class="password"></p>
-                        <p class="fyi">Base32 strings can still be mostly unambiguous while using more characters from the keyboard. This uses Crockford's base32.</p>
                         <button value="Generate" onclick="generate_base32();">Generate</button>
                     </div>
-                    <div id="hexadecimal" class="cell">
-                        <p class="cell-title"><strong>Hexadecimal Characters</strong></p>
+                    <div id="base32-fyi" class="cell">
+                        <p>Base32 strings can still be mostly unambiguous while using more characters from the keyboard. This uses Crockford's base32.</p>
+                    </div>
+                    <div id="hexadecimal-default" class="cell">
+                        <p class="cell-title"><strong>Base16 Characters</strong></p>
                         <p id="hex-pass" class="password"></p>
-                        <p class="fyi">Hexadecimal strings are unambiguous with digits 0-9 and characters a-f. However, they provide less entropy per character, so it needs to be longer.</p>
                         <button value="Generate" onclick="generate_hex();">Generate</button>
+                    </div>
+                    <div id="hexadecimal-fyi" class="cell">
+                        <p>Hexadecimal strings are unambiguous with digits 0-9 and characters a-f. However, they provide less entropy per character, so it needs to be longer.</p>
                     </div>
                 </div>
             </div>

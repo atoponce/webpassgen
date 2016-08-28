@@ -27,8 +27,8 @@ div.row {
 div.cell {
     border: 1px  solid black;
     display: table-cell;
-    height: 250px;
-    padding: 10px;
+    height: auto;
+    padding: 10px 10px 20px 10px;
     position: relative;
     text-align: left;
     width: 400px;
@@ -45,60 +45,66 @@ p.cell-title {
     text-align: center;
     width: 100%;
 }
-#entropy-toolbar {
-    display: inline-block;
-}
 #entropy-toolbar input[type="radio"] {
-    display:none;
+    display: none;
 }
-#entropy-toolbar label {
-    background-color:#ddd;
-    color:rgba(0,0,0,0.5);
-    display:inline-block;
-    float:left;
-    font-family: "DejaVu Sans Mono";
-    font-size:16px;
-    padding:4px 11px;
-}
-#entropy-toolbar label:hover {
+#entropy-toolbar input[type="radio"] + label {
+    border: 1px solid #ccc;
+    border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+    border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
+    border-bottom-color: #b3b3b3;
+    -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+    -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+    color: #333;
     cursor: pointer;
+    display:inline-block;
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff',endColorstr='#ffe6e6e6',GradientType=0);
+    font-size: 14px;
+    line-height: 20px;
+    margin:-2px;
+    padding: 4px 12px;
+    text-align: center;
+    text-shadow: 0 1px 1px rgba(255,255,255,0.75);
+    vertical-align: middle;
 }
 #entropy-toolbar input[type="radio"]:checked + label {
-    box-shadow:inset 0 0 3px black;
-    color:black;
-    font-weight:bold;
+    background-image: none;
+    -webkit-box-shadow: inset 0 2px 4px rgba(0,0,0,0.15),0 1px 2px rgba(0,0,0,0.05);
+    -moz-box-shadow: inset 0 2px 4px rgba(0,0,0,0.15),0 1px 2px rgba(0,0,0,0.05);
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.15),0 1px 2px rgba(0,0,0,0.05);
+    font-weight: bold;
+    outline: 0;
 }
 
-#entropy-toolbar label:nth-child(2) {
-    background: #ff6961;
-}
-#entropy-toolbar label:nth-child(4) {
-    background: #ffb347;
-}
-#entropy-toolbar label:nth-child(6) {
-    background: #fdfd96;
-}
-#entropy-toolbar label:nth-child(8) {
-    background: #77dd77;
-}
-#entropy-toolbar label:nth-child(10) {
-    background: #77dd77;
-}
-#entropy-toolbar label:nth-child(12) {
-    background: #77dd77;
-}
+#entropy-toolbar input[type="radio"] + label:nth-child(2) { background: #ff6961; }
+#entropy-toolbar input[type="radio"] + label:nth-child(4) { background: #ffb347; }
+#entropy-toolbar input[type="radio"] + label:nth-child(6) { background: #fdfd96; }
+#entropy-toolbar input[type="radio"] + label:nth-child(8) { background: #77dd77; }
+#entropy-toolbar input[type="radio"] + label:nth-child(10){ background: #77dd77; }
+#entropy-toolbar input[type="radio"] + label:nth-child(12){ background: #77dd77; }
+
+#eff-fyi { display: none; }
+#diceware-fyi { display: none; }
+#beale-fyi { display: none; }
+#leetspeak-fyi { display: none; }
+#bubble-babble-fyi { display: none; }
+#random-fyi { display: none; }
+#base64-fyi { display: none; }
+#base32-fyi { display: none; }
+#hexadecimal-fyi { display: none; }
 
 @media only screen and (max-width: 1000px) {
     #header #outer {
         text-align: center;
-        width: 80%;
     }
     div.cell {
         display: block;
         height: auto;
         margin: 10px;
         padding: 10px;
-        width: 80%;
+        width: auto;
     }
     #container {
         margin: 0 auto;
