@@ -90,13 +90,13 @@ button {
 
 #eff-fyi { display: none; }
 #diceware-fyi { display: none; }
-#beale-fyi { display: none; }
-#leetspeak-fyi { display: none; }
+#alt-fyi { display: none; }
 #bubble-babble-fyi { display: none; }
 #random-fyi { display: none; }
 #base64-fyi { display: none; }
 #base32-fyi { display: none; }
 #hexadecimal-fyi { display: none; }
+#decimal-fyi { display: none; }
 
 /* mobile */
 @media only screen and (max-width: 1000px) {

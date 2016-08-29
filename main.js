@@ -10,13 +10,34 @@ function get_entropy() {
     return parseInt(document.querySelector('input[name="entropy"]:checked').value);
 }
 
-function load_js() {
-    var language = document.querySelector('option[name="language"]:checked').value;
+function load_js(source) {
+    switch(source) {
+        case "eff":
+            var s_list = document.querySelector('option[name="eff_list"]:checked').value;
+            break;
+        case "diceware":
+            var s_list = document.querySelector('option[name="diceware_list"]:checked').value;
+            break;
+        case "alternate":
+            var s_list = document.querySelector('option[name="alternate_list"]:checked').value;
+            break;
+    }
+
+    if (s_list == "Distant Words") { s_list = "eff_distant"; }
+    else if (s_list == "Long Words") { s_list = "eff_long"; }
+    else if (s_list == "Short Words") { s_list = "eff_short"; }
+
     var script_obj = document.createElement("script");
-    script_obj.src = "lists/" + language.toLowerCase() + ".js";
+    script_obj.src = "lists/" + s_list.toLowerCase() + ".js";
     document.body.appendChild(script_obj);
+
     script_obj.onload = function () {
-        switch(language) {
+        switch(s_list) {
+            case "eff_distant": wordlist = eff_distant; break;
+            case "eff_long": wordlist = eff_long; break;
+            case "eff_short": wordlist = eff_short; break;
+            case "Beale": wordlist = beale_wordlist; break;
+            case "Bitcoin": wordlist = bitcoin_wordlist; break;
             case "Catalan": wordlist = catalan_wordlist; break;
             case "Danish": wordlist = danish_wordlist; break;
             case "Dutch": wordlist = dutch_wordlist; break;
@@ -26,17 +47,22 @@ function load_js() {
             case "French": wordlist = french_wordlist; break;
             case "German": wordlist = german_wordlist; break;
             case "Italian": wordlist = italian_wordlist; break;
-            case "Japanese": wordlist = japanese_wordlist; break;
             case "Klingon": wordlist = klingon_wordlist; break;
+            case "Japanese": wordlist = japanese_wordlist; break;
             case "Maori": wordlist = maori_wordlist; break;
             case "Norwegian": wordlist = norwegian_wordlist; break;
+            case "PGP": wordlist = pgp_wordlist; break;
             case "Polish": wordlist = polish_wordlist; break;
-            case "Russian": wordlist = russian_wordlist; break;
+            case "Simpsons": wordlist = simpsons_wordlist; break;
             case "Spanish": wordlist = spanish_wordlist; break;
             case "Swedish": wordlist = swedish_wordlist; break;
             case "Turkish": wordlist = turkish_wordlist; break;
         }
-        generate_diceware(wordlist);
+        switch(source) {
+            case "eff": generate_eff(wordlist); break;
+            case "diceware": generate_diceware(wordlist); break;
+            case "alternate": generate_alternate(wordlist); break;
+        }
     };
     document.body.removeChild(script_obj);
 }
@@ -73,14 +99,11 @@ function gen_pass(len, set, spaces=false) {
     return pass.rtrim();
 }
 
-function generate_eff() {
-    var option = document.querySelector('input[name="wordlist"]:checked').value;
+function generate_eff(wordlist=eff_short) {
     var entropy = get_entropy();
-    if (option == "long") var eff_wordlist = eff_long;
-    else var eff_wordlist = eff_short;
-    var len = Math.ceil(entropy/Math.log2(eff_wordlist.length));
+    var len = Math.ceil(entropy/Math.log2(wordlist.length));
     var pass_id = document.getElementById('eff-pass');
-    pass_id.innerHTML = gen_pass(len, eff_wordlist, true);
+    pass_id.innerHTML = gen_pass(len, wordlist, true);
 }
 
 function generate_diceware(wordlist=english_wordlist) {
@@ -90,11 +113,11 @@ function generate_diceware(wordlist=english_wordlist) {
     pass_id.innerHTML = gen_pass(len, wordlist, true);
 }
 
-function generate_beale() {
+function generate_alternate(wordlist=klingon_wordlist) {
     var entropy = get_entropy();
-    var len = Math.ceil(entropy/Math.log2(beale_wordlist.length));
-    var pass_id = document.getElementById('beale-pass');
-    pass_id.innerHTML = gen_pass(len, beale_wordlist, true);
+    var len = Math.ceil(entropy/Math.log2(wordlist.length));
+    var pass_id = document.getElementById('alt-pass');
+    pass_id.innerHTML = gen_pass(len, wordlist, true);
 }
 
 function generate_babble() {
@@ -144,22 +167,6 @@ function generate_babble() {
     document.getElementById("babble-pass").innerHTML = pass.join("");
 }
 
-function generate_leetspeak() {
-    var entropy = get_entropy();
-    var len = Math.ceil(entropy/Math.log2(eff_short.length));
-    var pass = gen_pass(len, eff_short, true);
-    pass = pass.replace(/or/g, "r0");
-    pass = pass.replace(/a/g, "4");
-    pass = pass.replace(/e/g, "3");
-    pass = pass.replace(/i/g, "!");
-    pass = pass.replace(/n/g, "N");
-    pass = pass.replace(/o/g, "0");
-    pass = pass.replace(/r/g, "R");
-    pass = pass.replace(/s/g, "$");
-    pass = pass.replace(/t/g, "7");
-    document.getElementById("leetspeak-pass").innerHTML = pass;
-}
-
 function generate_random() {
     var entropy = get_entropy();
     var s = '';
@@ -192,4 +199,11 @@ function generate_hex() {
     var s = "0123456789abcdef"
     var len = Math.ceil(entropy/Math.log2(s.length));
     document.getElementById("hex-pass").innerHTML = gen_pass(len, s);
+}
+
+function generate_decimal() {
+    var entropy = get_entropy();
+    var s = "0123456789"
+    var len = Math.ceil(entropy/Math.log2(s.length));
+    document.getElementById("decimal-pass").innerHTML = gen_pass(len, s);
 }

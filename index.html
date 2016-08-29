@@ -22,66 +22,68 @@
         <div id="container">
             <div class="table">
                 <div id="row1" class="row">
-                    <div id="eff-default" class="cell">
-                        <p class="cell-title"><strong>EFF Wordlists</strong></p>
-                        <p id="eff-pass" class="password"></p>
-                        <div class="optional">
-                            <input type="radio" name="wordlist" id="eff-short" value="short" onclick="generate_eff();" checked /><label for="eff-short">Short</label>
-                            <input type="radio" name="wordlist" id="eff-long" value="long" onclick="generate_eff();" /><label for="eff-long">Long</label>
-                        </div>
-                        <button value="Generate" onclick="generate_eff();">Generate</button>
-                    </div>
-                    <div id="eff-fyi" class="cell">
-                        <p>The <a href="https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases">EFF wordlists</a> are the least obscure of the three passphrase wordlists, and the easist to recall, with either short or long words.</p>
-                    </div>
                     <div id="diceware-default" class="cell">
                         <p class="cell-title"><strong>Diceware Wordlist</strong></p>
                         <p id="diceware-pass" class="password"></p>
                         <div class="optional">
                             <select>
-                                <option name="language" onclick="load_js();">Catalan</option>
-                                <option name="language" onclick="load_js();">Danish</option>
-                                <option name="language" onclick="load_js();">Dutch</option>
-                                <option name="language" onclick="load_js();" selected="selected">English</option>
-                                <option name="language" onclick="load_js();">Esperanto</option>
-                                <option name="language" onclick="load_js();">Finnish</option>
-                                <option name="language" onclick="load_js();">French</option>
-                                <option name="language" onclick="load_js();">German</option>
-                                <option name="language" onclick="load_js();">Italian</option>
-                                <option name="language" onclick="load_js();">Japanese</option>
-                                <option name="language" onclick="load_js();">Klingon</option>
-                                <option name="language" onclick="load_js();">Maori</option>
-                                <option name="language" onclick="load_js();">Norwegian</option>
-                                <option name="language" onclick="load_js();">Polish</option>
-                                <option name="language" onclick="load_js();">Russian</option>
-                                <option name="language" onclick="load_js();">Spanish</option>
-                                <option name="language" onclick="load_js();">Swedish</option>
-                                <option name="language" onclick="load_js();">Turkish</option>
+                                <option name="diceware_list" onclick="load_js('diceware');">Beale</option>
+                                <option name="diceware_list" onclick="load_js('diceware');">Catalan</option>
+                                <option name="diceware_list" onclick="load_js('diceware');">Danish</option>
+                                <option name="diceware_list" onclick="load_js('diceware');">Dutch</option>
+                                <option name="diceware_list" onclick="load_js('diceware');" selected="selected">English</option>
+                                <option name="diceware_list" onclick="load_js('diceware');">Esperanto</option>
+                                <option name="diceware_list" onclick="load_js('diceware');">Finnish</option>
+                                <option name="diceware_list" onclick="load_js('diceware');">French</option>
+                                <option name="diceware_list" onclick="load_js('diceware');">German</option>
+                                <option name="diceware_list" onclick="load_js('diceware');">Italian</option>
+                                <option name="diceware_list" onclick="load_js('diceware');">Japanese</option>
+                                <option name="diceware_list" onclick="load_js('diceware');">Maori</option>
+                                <option name="diceware_list" onclick="load_js('diceware');">Norwegian</option>
+                                <option name="diceware_list" onclick="load_js('diceware');">Polish</option>
+                                <option name="diceware_list" onclick="load_js('diceware');">Spanish</option>
+                                <option name="diceware_list" onclick="load_js('diceware');">Swedish</option>
+                                <option name="diceware_list" onclick="load_js('diceware');">Turkish</option>
                             </select>
                         </div>
-                        <button value="Generate" onclick="load_js();">Generate</button>
+                        <button value="Generate" onclick="load_js('diceware');">Generate</button>
                     </div>
                     <div id="diceware-fyi" class="cell">
                         <p><a href="http://world.std.com/~reinhold/diceware.html">Diceware passphrases</a> uses many obscure English words and non-words such as numbers and punctuation.</p>
                     </div>
-                    <div id="beale-default" class="cell">
-                        <p class="cell-title"><strong>Beale Wordlist</strong></p>
-                        <p id="beale-pass" class="password"></p>
-                        <button value="Generate" onclick="generate_beale();">Generate</button>
+                    <div id="eff-default" class="cell">
+                        <p class="cell-title"><strong>EFF Wordlists</strong></p>
+                        <p id="eff-pass" class="password"></p>
+                        <div class="optional">
+                            <select>
+                                <option name="eff_list" onclick="load_js('eff');">Distant Words</option>
+                                <option name="eff_list" onclick="load_js('eff');">Long Words</option>
+                                <option name="eff_list" onclick="load_js('eff');" selected="selected">Short Words</option>
+                            </select>
+                        </div>
+                        <button value="Generate" onclick="load_js('eff');">Generate</button>
                     </div>
-                    <div id="beale-fyi" class="cell">
-                        <p>The <a href="http://world.std.com/~reinhold/beale.wordlist.asc">Beale wordlist</a> is based on Diceware, and while it uses more common English words, it still contains some obscure words.</p>
+                    <div id="eff-fyi" class="cell">
+                        <p>The <a href="https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases">EFF wordlists</a> are the least obscure of the three passphrase wordlists, and the easist to recall, with either short or long words.</p>
+                    </div>
+                    <div id="alt-default" class="cell">
+                        <p class="cell-title"><strong>Alternate Wordlists</strong></p>
+                        <p id="alt-pass" class="password"></p>
+                        <div class="optional">
+                            <select>
+                                <option name="alternate_list" onclick="load_js('alternate');">Bitcoin</option>
+                                <option name="alternate_list" onclick="load_js('alternate');">Klingon</option>
+                                <option name="alternate_list" onclick="load_js('alternate');">PGP</option>
+                                <option name="alternate_list" onclick="load_js('alternate');" selected="selected" selected="selected">Simpsons</option>
+                            </select>
+                        </div>
+                        <button value="Generate" onclick="load_js('alternate');">Generate</button>
+                    </div>
+                    <div id="alt-fyi" class="cell">
+                        <-- FYI for the alternate lists here -->
                     </div>
                 </div>
                 <div id="row2" class="row">
-                    <div id="leetspeak-default" class="cell">
-                        <p class="cell-title"><strong>Leet-Speak</strong></p>
-                        <p id="leetspeak-pass" class="password"></p>
-                        <button value="Generate" onclick="generate_leetspeak();">Generate</button>
-                    </div>
-                    <div id="leetspeak-fyi" class="cell">
-                        <p>Leet-speak is a lame hacker ("h4x0r") attempt at replacing common characters with others that look vaguely familiar. It's bad and you should feel bad.</p>
-                    </div>
                     <div id="bubble-babble-default" class="cell">
                         <p class="cell-title"><strong>Bubble-Babble</strong></p>
                         <p id="babble-pass" class="password"></p>
@@ -98,8 +100,6 @@
                     <div id="random-fyi" class="cell">
                         <p>This password is built from 94 printable ASCII characters. It provides the most entropy per character. As such, it is the shortest ASCII password on this page.</p>
                     </div>
-                </div>
-                <div id="row3" class="row">
                     <div id="base64-default" class="cell">
                         <p class="cell-title"><strong>Base64 Characters</strong></p>
                         <p id="base64-pass" class="password"></p>
@@ -108,6 +108,8 @@
                     <div id="base64-fyi" class="cell">
                         <p>Base64 strings encompass all lowercase and uppercase characters and all digits, including two additional characters. This follows <a href="https://tools.ietf.org/html/rfc3548">RFC 3548</a>.</p>
                     </div>
+                </div>
+                <div id="row3" class="row">
                     <div id="base32-default" class="cell">
                         <p class="cell-title"><strong>Base32 Characters</strong></p>
                         <p id="base32-pass" class="password"></p>
@@ -124,26 +126,33 @@
                     <div id="hexadecimal-fyi" class="cell">
                         <p>Hexadecimal strings are unambiguous with digits 0-9 and characters a-f. However, they provide less entropy per character, so it needs to be longer.</p>
                     </div>
+                    <div id="decimal-default" class="cell">
+                        <p class="cell-title"><strong>Base10 Characters</strong></p>
+                        <p id="decimal-pass" class="password"></p>
+                        <button value="Generate" onclick="generate_decimal();">Generate</button>
+                    </div>
+                    <div id="decimal-fyi" class="cell">
+                        <p>Hexadecimal strings are unambiguous with digits 0-9 and characters a-f. However, they provide less entropy per character, so it needs to be longer.</p>
+                    </div>
                 </div>
             </div>
             <p><strong>This site is not logging the generated passwords!</strong> If you don't believe me, view the HTML source of this webpage, save it to a text file, disconnect your computer from the Internet, and run it locally in your browser. Everything is handled via local JavaScript. Each of these passwords and passphrases is based on <a href="https://pthree.org/2014/03/16/creating-strong-passwords-without-a-computer-part-0-understanding-entropy/">entropy</a>. 55-bits of entropy (9 random characters) is just barely outside of the range of a hobbyist password cracker. Test additional password entropy at <a href="https://ae7.st/ent/">https://ae7.st/ent/</a>. The source code for this site is available at <a href="https://github.com/atoponce/webpassgen">https://github.com/atoponce/webpassgen</a>.</p>
         </div>
         <script src="main.js"></script>
-        <script src="lists/eff-short.js"></script>
-        <script src="lists/eff-long.js"></script>
-        <script src="lists/beale.js"></script>
-        <script src="lists/english.js"></script> <!-- diceware -->
+        <script src="lists/eff_short.js"></script>
+        <script src="lists/english.js"></script>
+        <script src="lists/simpsons.js"></script>
         <script type="text/javascript">
             function load_passes() {
-                load_js(); // diceware
-                generate_eff();
-                generate_beale();
-                generate_leetspeak();
+                load_js('eff');
+                load_js('diceware');
+                load_js('alternate');
                 generate_random();
                 generate_babble();
                 generate_base64();
                 generate_base32();
                 generate_hex();
+                generate_decimal();
             }
         </script>
     </body>
