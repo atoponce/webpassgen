@@ -41,6 +41,7 @@ function load_js(source) {
             case "Catalan": wordlist = catalan_wordlist; break;
             case "Danish": wordlist = danish_wordlist; break;
             case "Dutch": wordlist = dutch_wordlist; break;
+            case "Elvish": wordlist = elvish_wordlist; break;
             case "English": wordlist = english_wordlist; break;
             case "Esperanto": wordlist = esperanto_wordlist; break;
             case "Finnish": wordlist = finnish_wordlist; break;
