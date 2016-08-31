@@ -121,21 +121,36 @@ function generate_diceware(wordlist) {
     var entropy = get_entropy();
     var len = Math.ceil(entropy/Math.log2(wordlist.length));
     var pass_id = document.getElementById('diceware-pass');
-    pass_id.innerHTML = gen_pass(len, wordlist, true);
+    var pass_length = document.getElementById('diceware-length');
+    var pass_entropy = document.getElementById('diceware-entropy');
+    pass = gen_pass(len, wordlist, true);
+    pass_id.innerHTML = pass;
+    pass_length.innerHTML = pass.replace(/\s/g, '').length + " characters.";
+    pass_entropy.innerHTML = "~" + parseFloat(len * Math.log2(wordlist.length)).toFixed(4) + "-bits.";
 }
 
 function generate_eff(wordlist) {
     var entropy = get_entropy();
     var len = Math.ceil(entropy/Math.log2(wordlist.length));
     var pass_id = document.getElementById('eff-pass');
-    pass_id.innerHTML = gen_pass(len, wordlist, true);
+    var pass_length = document.getElementById('eff-length');
+    var pass_entropy = document.getElementById('eff-entropy');
+    pass = gen_pass(len, wordlist, true);
+    pass_id.innerHTML = pass;
+    pass_length.innerHTML = pass.replace(/\s/g, '').length + " characters.";
+    pass_entropy.innerHTML = "~" + parseFloat(len * Math.log2(wordlist.length)).toFixed(4) + "-bits.";
 }
 
 function generate_alternate(wordlist) {
     var entropy = get_entropy();
     var len = Math.ceil(entropy/Math.log2(wordlist.length));
     var pass_id = document.getElementById('alt-pass');
-    pass_id.innerHTML = gen_pass(len, wordlist, true);
+    var pass_length = document.getElementById('alt-length');
+    var pass_entropy = document.getElementById('alt-entropy');
+    pass = gen_pass(len, wordlist, true);
+    pass_id.innerHTML = pass;
+    pass_length.innerHTML = pass.replace(/\s/g, '').length + " characters.";
+    pass_entropy.innerHTML = "~" + parseFloat(len * Math.log2(wordlist.length)).toFixed(4) + "-bits.";
 }
 
 function generate_ninja() {
@@ -151,7 +166,7 @@ function generate_ninja() {
             pass += "-";
         }
     }
-    return pass;
+    return [pass, len];
 }
 
 function generate_babble() {
@@ -198,18 +213,25 @@ function generate_babble() {
 
     for (var i=pass.length; i>0; i-=5) pass.splice(i, 0, "-");
     pass.pop() // strip last "-"
-    return pass.join("");
+    return [pass.join(""), len];
 }
 
 function generate_pseudowords() {
     var pseudo = document.querySelector('option[name="pseudowords"]:checked').value;
     if (pseudo == "Bubble Babble") {
-        var pass = generate_babble();
+        var ret = generate_babble();
     }
     else if (pseudo == "Secret Ninja") {
-        var pass = generate_ninja();
+        var ret = generate_ninja();
     }
-    document.getElementById("pseudo-pass").innerHTML = pass;
+    var pass = ret[0];
+    var len = ret[1];
+    var pass_id = document.getElementById('pseudo-pass');
+    var pass_length = document.getElementById('pseudo-length');
+    var pass_entropy = document.getElementById('pseudo-entropy');
+    pass_id.innerHTML = pass;
+    pass_length.innerHTML = pass.replace(/-/g, '').length + " characters.";
+    pass_entropy.innerHTML = "~" + parseFloat(len * Math.log2(pass.length)).toFixed(4) + "-bits.";
 }
 
 function generate_random() {
@@ -222,33 +244,62 @@ function generate_random() {
     pass = pass.replace(/&/g, "&amp");
     pass = pass.replace(/</g, "&lt;");
     pass = pass.replace(/>/g, "&gt;");
-    document.getElementById("random-pass").innerHTML = pass;
+    var pass_id = document.getElementById('random-pass');
+    var pass_length = document.getElementById('random-length');
+    var pass_entropy = document.getElementById('random-entropy');
+    pass_id.innerHTML = pass;
+    pass_length.innerHTML = pass.replace(/-/g, '').length + " characters.";
+    pass_entropy.innerHTML = "~" + parseFloat(len * Math.log2(s.length)).toFixed(4) + "-bits.";
 }
 
 function generate_base64() {
     var entropy = get_entropy();
     var s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/";
     var len = Math.ceil(entropy/Math.log2(s.length));
-    document.getElementById("base64-pass").innerHTML = gen_pass(len, s);
+    var pass = gen_pass(len, s);
+    var pass_id = document.getElementById('base64-pass');
+    var pass_length = document.getElementById('base64-length');
+    var pass_entropy = document.getElementById('base64-entropy');
+    pass_id.innerHTML = pass;
+    pass_length.innerHTML = pass.replace(/-/g, '').length + " characters.";
+    pass_entropy.innerHTML = "~" + parseFloat(len * Math.log2(s.length)).toFixed(4) + "-bits.";
 }
 
 function generate_base32() {
     var entropy = get_entropy();
     var s = "0123456789abcdefghjkmnpqrstvwxyz";
     var len = Math.ceil(entropy/Math.log2(s.length));
-    document.getElementById("base32-pass").innerHTML = gen_pass(len, s);
+    var pass = gen_pass(len, s);
+    var pass_id = document.getElementById('base32-pass');
+    var pass_length = document.getElementById('base32-length');
+    var pass_entropy = document.getElementById('base32-entropy');
+    pass_id.innerHTML = pass;
+    pass_length.innerHTML = pass.replace(/-/g, '').length + " characters.";
+    pass_entropy.innerHTML = "~" + parseFloat(len * Math.log2(s.length)).toFixed(4) + "-bits.";
 }
 
 function generate_hex() {
     var entropy = get_entropy();
     var s = "0123456789abcdef"
     var len = Math.ceil(entropy/Math.log2(s.length));
-    document.getElementById("hex-pass").innerHTML = gen_pass(len, s);
+    var pass = gen_pass(len, s);
+    var pass_id = document.getElementById('hex-pass');
+    var pass_length = document.getElementById('hex-length');
+    var pass_entropy = document.getElementById('hex-entropy');
+    pass_id.innerHTML = pass;
+    pass_length.innerHTML = pass.replace(/-/g, '').length + " characters.";
+    pass_entropy.innerHTML = "~" + parseFloat(len * Math.log2(s.length)).toFixed(4) + "-bits.";
 }
 
 function generate_decimal() {
     var entropy = get_entropy();
     var s = "0123456789"
     var len = Math.ceil(entropy/Math.log2(s.length));
-    document.getElementById("decimal-pass").innerHTML = gen_pass(len, s);
+    var pass = gen_pass(len, s);
+    var pass_id = document.getElementById('decimal-pass');
+    var pass_length = document.getElementById('decimal-length');
+    var pass_entropy = document.getElementById('decimal-entropy');
+    pass_id.innerHTML = pass;
+    pass_length.innerHTML = pass.replace(/-/g, '').length + " characters.";
+    pass_entropy.innerHTML = "~" + parseFloat(len * Math.log2(s.length)).toFixed(4) + "-bits.";
 }

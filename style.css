@@ -1,11 +1,25 @@
 /* body tags */
 button {
-    top: 10px;
+    top: 5px;
     position: absolute;
     right: 10px;
 }
 
 /* classes */
+.stats {
+    bottom: 0px;
+    position: absolute;
+    font-size: 12px;
+}
+
+.pass-length {
+}
+
+.entropy {
+    left: 50%;
+    position: absolute;
+}
+
 .optional {
     top: 10px;
     position: absolute;
@@ -39,12 +53,15 @@ button {
 }
 
 /* ids */
-#row1 .cell {
+/*#row1 .cell {
     height: 150px;
 }
 #row2 .cell {
     height: 125px;
 }
+#row3 .cell {
+    height: 100px;
+}*/
 #container {
     margin: 0 auto;
     width: 1260px;
