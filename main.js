@@ -1,3 +1,4 @@
+var wordlists = {};
 var cryptoObj = window.crypto || window.msCrypto;
 var rand_arr = new Uint16Array(1);
 var rand_num = cryptoObj.getRandomValues(rand_arr)[0]/Math.pow(2,16);
@@ -10,62 +11,78 @@ function get_entropy() {
     return parseInt(document.querySelector('input[name="entropy"]:checked').value);
 }
 
-function load_js(source) {
+function get_source_list(source) {
     switch(source) {
-        case "eff":
-            var s_list = document.querySelector('option[name="eff_list"]:checked').value;
-            break;
         case "diceware":
             var s_list = document.querySelector('option[name="diceware_list"]:checked').value;
+            break;
+        case "eff":
+            var s_list = document.querySelector('option[name="eff_list"]:checked').value;
             break;
         case "alternate":
             var s_list = document.querySelector('option[name="alternate_list"]:checked').value;
             break;
     }
+    return s_list;
+}
 
-    if (s_list == "Distant Words") { s_list = "eff_distant"; }
-    else if (s_list == "Long Words") { s_list = "eff_long"; }
-    else if (s_list == "Short Words") { s_list = "eff_short"; }
+function generate_passphrase(source) {
+    var s_list = get_source_list(source);
 
-    var script_obj = document.createElement("script");
-    script_obj.src = "lists/" + s_list.toLowerCase() + ".js";
-    document.body.appendChild(script_obj);
+    if (s_list == "Distant Words") { file = "eff_distant"; }
+    else if (s_list == "Long Words") { file = "eff_long"; }
+    else if (s_list == "Short Words") { file = "eff_short"; }
+    else file = s_list.toLowerCase();
+
+    if (!wordlists.hasOwnProperty(s_list)) {
+        var script_obj = document.createElement("script");
+        script_obj.src = "lists/" + file + ".js";
+        document.body.appendChild(script_obj);
+        load_js(script_obj, source);
+    }
+    else {
+        switch(source) {
+            case 'diceware': generate_diceware(wordlists[s_list]); break;
+            case 'eff': generate_eff(wordlists[s_list]); break;
+            case 'alternate': generate_alternate(wordlists[s_list]); break;
+        }
+    }
+}
+
+function load_js(script_obj='', source) {
+    var file = "";
+    var s_list = get_source_list(source);
 
     script_obj.onload = function () {
         switch(s_list) {
-            case "eff_distant": wordlist = eff_distant; break;
-            case "eff_long": wordlist = eff_long; break;
-            case "eff_short": wordlist = eff_short; break;
-            case "Beale": wordlist = beale_wordlist; break;
-            case "Bitcoin": wordlist = bitcoin_wordlist; break;
-            case "Catalan": wordlist = catalan_wordlist; break;
-            case "Danish": wordlist = danish_wordlist; break;
-            case "Dutch": wordlist = dutch_wordlist; break;
-            case "Elvish": wordlist = elvish_wordlist; break;
-            case "English": wordlist = english_wordlist; break;
-            case "Esperanto": wordlist = esperanto_wordlist; break;
-            case "Finnish": wordlist = finnish_wordlist; break;
-            case "French": wordlist = french_wordlist; break;
-            case "German": wordlist = german_wordlist; break;
-            case "Italian": wordlist = italian_wordlist; break;
-            case "Klingon": wordlist = klingon_wordlist; break;
-            case "Japanese": wordlist = japanese_wordlist; break;
-            case "Maori": wordlist = maori_wordlist; break;
-            case "Norwegian": wordlist = norwegian_wordlist; break;
-            case "PGP": wordlist = pgp_wordlist; break;
-            case "Polish": wordlist = polish_wordlist; break;
-            case "Simpsons": wordlist = simpsons_wordlist; break;
-            case "Spanish": wordlist = spanish_wordlist; break;
-            case "Swedish": wordlist = swedish_wordlist; break;
-            case "Turkish": wordlist = turkish_wordlist; break;
+            case "Beale": wordlists[s_list] = beale_wordlist; break;
+            case "Bitcoin": wordlists[s_list] = bitcoin_wordlist; break;
+            case "Catalan": wordlists[s_list] = catalan_wordlist; break;
+            case "Danish": wordlists[s_list] = danish_wordlist; break;
+            case "Distant Words": wordlists[s_list] = eff_distant; break;
+            case "Dutch": wordlists[s_list] = dutch_wordlist; break;
+            case "Elvish": wordlists[s_list] = elvish_wordlist; break;
+            case "English": wordlists[s_list] = english_wordlist; break;
+            case "Esperanto": wordlists[s_list] = esperanto_wordlist; break;
+            case "Finnish": wordlists[s_list] = finnish_wordlist; break;
+            case "French": wordlists[s_list] = french_wordlist; break;
+            case "German": wordlists[s_list] = german_wordlist; break;
+            case "Italian": wordlists[s_list] = italian_wordlist; break;
+            case "Japanese": wordlists[s_list] = japanese_wordlist; break;
+            case "Klingon": wordlists[s_list] = klingon_wordlist; break;
+            case "Long Words": wordlists[s_list] = eff_long; break;
+            case "Maori": wordlists[s_list] = maori_wordlist; break;
+            case "Norwegian": wordlists[s_list] = norwegian_wordlist; break;
+            case "PGP": wordlists[s_list] = pgp_wordlist; break;
+            case "Polish": wordlists[s_list] = polish_wordlist; break;
+            case "Short Words": wordlists[s_list] = eff_short; break;
+            case "Simpsons": wordlists[s_list] = simpsons_wordlist; break;
+            case "Spanish": wordlists[s_list] = spanish_wordlist; break;
+            case "Swedish": wordlists[s_list] = swedish_wordlist; break;
+            case "Turkish": wordlists[s_list] = turkish_wordlist; break;
         }
-        switch(source) {
-            case "eff": generate_eff(wordlist); break;
-            case "diceware": generate_diceware(wordlist); break;
-            case "alternate": generate_alternate(wordlist); break;
-        }
+        generate_passphrase(source);
     };
-    document.body.removeChild(script_obj);
 }
 
 function sec_rand(count) {
@@ -100,21 +117,21 @@ function gen_pass(len, set, spaces=false) {
     return pass.rtrim();
 }
 
-function generate_eff(wordlist=eff_short) {
-    var entropy = get_entropy();
-    var len = Math.ceil(entropy/Math.log2(wordlist.length));
-    var pass_id = document.getElementById('eff-pass');
-    pass_id.innerHTML = gen_pass(len, wordlist, true);
-}
-
-function generate_diceware(wordlist=english_wordlist) {
+function generate_diceware(wordlist) {
     var entropy = get_entropy();
     var len = Math.ceil(entropy/Math.log2(wordlist.length));
     var pass_id = document.getElementById('diceware-pass');
     pass_id.innerHTML = gen_pass(len, wordlist, true);
 }
 
-function generate_alternate(wordlist=klingon_wordlist) {
+function generate_eff(wordlist) {
+    var entropy = get_entropy();
+    var len = Math.ceil(entropy/Math.log2(wordlist.length));
+    var pass_id = document.getElementById('eff-pass');
+    pass_id.innerHTML = gen_pass(len, wordlist, true);
+}
+
+function generate_alternate(wordlist) {
     var entropy = get_entropy();
     var len = Math.ceil(entropy/Math.log2(wordlist.length));
     var pass_id = document.getElementById('alt-pass');

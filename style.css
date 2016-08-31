@@ -39,6 +39,15 @@ button {
 }
 
 /* ids */
+#row1 .cell {
+    height: 175px;
+}
+#row2 .cell {
+    height: 150px;
+}
+#row3 .cell {
+    height: 125px;
+}
 #container {
     margin: 0 auto;
     width: 1260px;
