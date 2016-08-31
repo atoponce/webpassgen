@@ -75,7 +75,7 @@
                                 <option name="alternate_list" onclick="load_js('alternate');">Elvish</option>
                                 <option name="alternate_list" onclick="load_js('alternate');">Klingon</option>
                                 <option name="alternate_list" onclick="load_js('alternate');">PGP</option>
-                                <option name="alternate_list" onclick="load_js('alternate');" selected="selected" selected="selected">Simpsons</option>
+                                <option name="alternate_list" onclick="load_js('alternate');" selected="selected">Simpsons</option>
                             </select>
                         </div>
                         <button value="Generate" onclick="load_js('alternate');">Generate</button>
@@ -85,12 +85,18 @@
                     </div>
                 </div>
                 <div id="row2" class="row">
-                    <div id="bubble-babble-default" class="cell">
-                        <p class="cell-title"><strong>Bubble-Babble</strong></p>
-                        <p id="babble-pass" class="password"></p>
-                        <button value="Generate" onclick="generate_babble();">Generate</button>
+                    <div id="pseudo-default" class="cell">
+                        <p class="cell-title"><strong>Pseudoword Babble</strong></p>
+                        <p id="pseudo-pass" class="password"></p>
+                        <div class="optional">
+                            <select>
+                                <option name="pseudowords" onclick="generate_pseudowords();" selected="selected">Bubble Babble</option>
+                                <option name="pseudowords" onclick="generate_pseudowords();" >Secret Ninja</option>
+                            </select>
+                        </div>
+                        <button value="Generate" onclick="generate_pseudowords();">Generate</button>
                     </div>
-                    <div id="bubble-babble-fyi" class="cell">
+                    <div id="pseudo-fyi" class="cell">
                         <p><a href="http://www.wiki.yak.net/589">Bubble Babble Encoding</a> is a system designed to encode binary bits into pseudowords. In this case, rather than encode data, it's generated randomly.</p>
                     </div>
                     <div id="random-default" class="cell">
@@ -149,7 +155,7 @@
                 load_js('diceware');
                 load_js('alternate');
                 generate_random();
-                generate_babble();
+                generate_pseudowords();
                 generate_base64();
                 generate_base32();
                 generate_hex();

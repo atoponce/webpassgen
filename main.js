@@ -121,6 +121,22 @@ function generate_alternate(wordlist=klingon_wordlist) {
     pass_id.innerHTML = gen_pass(len, wordlist, true);
 }
 
+function generate_ninja() {
+    var ninja = ['ka','zu','mi','te','ku','lu','ji','ri','ki','zu','me','ta','rin','to','mo','no','ke','shi','ari','chi','do','ru','mei','na','fu','zi'];
+    var entropy = get_entropy();
+    var len = Math.ceil(entropy/Math.log2(ninja.length));
+    var pass = "";
+    
+    for (i=0; i<len; i++) {
+        rand_num = cryptoObj.getRandomValues(rand_arr)[0]/Math.pow(2,16);
+        pass += ninja[sec_rand(len)];
+        if (i%3 == 2 && i!=len-1) {
+            pass += "-";
+        }
+    }
+    return pass;
+}
+
 function generate_babble() {
     var tmp = [];
     var pass = [];
@@ -165,7 +181,18 @@ function generate_babble() {
 
     for (var i=pass.length; i>0; i-=5) pass.splice(i, 0, "-");
     pass.pop() // strip last "-"
-    document.getElementById("babble-pass").innerHTML = pass.join("");
+    return pass.join("");
+}
+
+function generate_pseudowords() {
+    var pseudo = document.querySelector('option[name="pseudowords"]:checked').value;
+    if (pseudo == "Bubble Babble") {
+        var pass = generate_babble();
+    }
+    else if (pseudo == "Secret Ninja") {
+        var pass = generate_ninja();
+    }
+    document.getElementById("pseudo-pass").innerHTML = pass;
 }
 
 function generate_random() {
