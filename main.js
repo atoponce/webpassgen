@@ -166,7 +166,7 @@ function generate_ninja() {
             pass += "-";
         }
     }
-    return [pass, len];
+    return [pass, ninja.length];
 }
 
 function generate_babble() {
@@ -213,7 +213,7 @@ function generate_babble() {
 
     for (var i=pass.length; i>0; i-=5) pass.splice(i, 0, "-");
     pass.pop() // strip last "-"
-    return [pass.join(""), len];
+    return [pass.join(""), vowels.concat(consonants).length];
 }
 
 function generate_pseudowords() {
@@ -230,8 +230,8 @@ function generate_pseudowords() {
     var pass_length = document.getElementById('pseudo-length');
     var pass_entropy = document.getElementById('pseudo-entropy');
     pass_id.innerHTML = pass;
-    pass_length.innerHTML = pass.replace(/-/g, '').length + " characters.";
-    pass_entropy.innerHTML = "~" + parseFloat(len * Math.log2(pass.length)).toFixed(4) + "-bits.";
+    //pass_length.innerHTML = pass.replace(/-/g, '').length + " characters.";
+    //pass_entropy.innerHTML = "~" + parseFloat((pass.length/2) * Math.log2(len)).toFixed(4) + "-bits.";
 }
 
 function generate_random() {
