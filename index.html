@@ -23,8 +23,7 @@
             <div class="table">
                 <div id="row1" class="row">
                     <div id="diceware-default" class="cell">
-                        <p class="cell-title"><strong>Diceware Wordlists</strong></p>
-                        <p id="diceware-pass" class="password"></p>
+                        <p class="cell-title"><strong>Diceware</strong></p>
                         <div class="optional">
                             <select>
                                 <option name="diceware_list" onclick="load_js('diceware');">Beale</option>
@@ -47,13 +46,16 @@
                             </select>
                         </div>
                         <button value="Generate" onclick="generate_passphrase('diceware');">Generate</button>
+                        <p id="diceware-pass" class="password"></p>
+                        <p class="stats length">Length: <span id="diceware-length"></span></p>
+                        <p class="stats entropy">Entropy: <span id="diceware-entropy"></span></p>
+                        </p>
                     </div>
                     <div id="diceware-fyi" class="cell">
                         <p><a href="http://world.std.com/~reinhold/diceware.html">Diceware passphrases</a> uses many obscure English words and non-words such as numbers and punctuation.</p>
                     </div>
                     <div id="eff-default" class="cell">
-                        <p class="cell-title"><strong>EFF Wordlists</strong></p>
-                        <p id="eff-pass" class="password"></p>
+                        <p class="cell-title"><strong>EFF</strong></p>
                         <div class="optional">
                             <select>
                                 <option name="eff_list" onclick="load_js('eff');">Distant Words</option>
@@ -62,13 +64,15 @@
                             </select>
                         </div>
                         <button value="Generate" onclick="generate_passphrase('eff');">Generate</button>
+                        <p id="eff-pass" class="password"></p>
+                        <p class="stats length">Length: <span id="eff-length"></span></p>
+                        <p class="stats entropy">Entropy: <span id="eff-entropy"></span></p>
                     </div>
                     <div id="eff-fyi" class="cell">
                         <p>The <a href="https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases">EFF wordlists</a> are the least obscure of the three passphrase wordlists, and the easist to recall, with either short or long words.</p>
                     </div>
                     <div id="alt-default" class="cell">
-                        <p class="cell-title"><strong>Alternate Wordlists</strong></p>
-                        <p id="alt-pass" class="password"></p>
+                        <p class="cell-title"><strong>Alternate</strong></p>
                         <div class="optional">
                             <select>
                                 <option name="alternate_list" onclick="load_js('alternate');">Bitcoin</option>
@@ -79,6 +83,9 @@
                             </select>
                         </div>
                         <button value="Generate" onclick="generate_passphrase('alternate');">Generate</button>
+                        <p id="alt-pass" class="password"></p>
+                        <p class="stats length">Length: <span id="alt-length"></span></p>
+                        <p class="stats entropy">Entropy: <span id="alt-entropy"></span></p>
                     </div>
                     <div id="alt-fyi" class="cell">
                         <-- FYI for the alternate lists here -->
@@ -87,7 +94,6 @@
                 <div id="row2" class="row">
                     <div id="pseudo-default" class="cell">
                         <p class="cell-title"><strong>Pseudowords</strong></p>
-                        <p id="pseudo-pass" class="password"></p>
                         <div class="optional">
                             <select>
                                 <option name="pseudowords" selected="selected">Bubble Babble</option>
@@ -95,22 +101,29 @@
                             </select>
                         </div>
                         <button value="Generate" onclick="generate_pseudowords();">Generate</button>
+                        <p id="pseudo-pass" class="password"></p>
+                        <p class="stats length">Length: <span id="pseudo-length"></span></p>
+                        <p class="stats entropy">Entropy: <span id="pseudo-entropy"></span></p>
                     </div>
                     <div id="pseudo-fyi" class="cell">
                         <p><a href="http://www.wiki.yak.net/589">Bubble Babble Encoding</a> is a system designed to encode binary bits into pseudowords. In this case, rather than encode data, it's generated randomly.</p>
                     </div>
                     <div id="random-default" class="cell">
                         <p class="cell-title"><strong>Base94 Characters</strong></p>
-                        <p id="random-pass" class="password"></p>
                         <button value="Generate" onclick="generate_random();">Generate</button>
+                        <p id="random-pass" class="password"></p>
+                        <p class="stats length">Length: <span id="random-length"></span></p>
+                        <p class="stats entropy">Entropy: <span id="random-entropy"></span></p>
                     </div>
                     <div id="random-fyi" class="cell">
                         <p>This password is built from 94 printable ASCII characters. It provides the most entropy per character. As such, it is the shortest ASCII password on this page.</p>
                     </div>
                     <div id="base64-default" class="cell">
                         <p class="cell-title"><strong>Base64 Characters</strong></p>
-                        <p id="base64-pass" class="password"></p>
                         <button value="Generate" onclick="generate_base64();">Generate</button>
+                        <p id="base64-pass" class="password"></p>
+                        <p class="stats length">Length: <span id="base64-length"></span></p>
+                        <p class="stats entropy">Entropy: <span id="base64-entropy"></span></p>
                     </div>
                     <div id="base64-fyi" class="cell">
                         <p>Base64 strings encompass all lowercase and uppercase characters and all digits, including two additional characters. This follows <a href="https://tools.ietf.org/html/rfc3548">RFC 3548</a>.</p>
@@ -119,24 +132,30 @@
                 <div id="row3" class="row">
                     <div id="base32-default" class="cell">
                         <p class="cell-title"><strong>Base32 Characters</strong></p>
-                        <p id="base32-pass" class="password"></p>
                         <button value="Generate" onclick="generate_base32();">Generate</button>
+                        <p id="base32-pass" class="password"></p>
+                        <p class="stats length">Length: <span id="base32-length"></span></p>
+                        <p class="stats entropy">Entropy: <span id="base32-entropy"></span></p>
                     </div>
                     <div id="base32-fyi" class="cell">
                         <p>Base32 strings can still be mostly unambiguous while using more characters from the keyboard. This uses Crockford's base32.</p>
                     </div>
                     <div id="hexadecimal-default" class="cell">
                         <p class="cell-title"><strong>Base16 Characters</strong></p>
-                        <p id="hex-pass" class="password"></p>
                         <button value="Generate" onclick="generate_hex();">Generate</button>
+                        <p id="hex-pass" class="password"></p>
+                        <p class="stats length">Length: <span id="hex-length"></span></p>
+                        <p class="stats entropy">Entropy: <span id="hex-entropy"></span></p>
                     </div>
                     <div id="hexadecimal-fyi" class="cell">
                         <p>Hexadecimal strings are unambiguous with digits 0-9 and characters a-f. However, they provide less entropy per character, so it needs to be longer.</p>
                     </div>
                     <div id="decimal-default" class="cell">
                         <p class="cell-title"><strong>Base10 Characters</strong></p>
-                        <p id="decimal-pass" class="password"></p>
                         <button value="Generate" onclick="generate_decimal();">Generate</button>
+                        <p id="decimal-pass" class="password"></p>
+                        <p class="stats length">Length: <span id="decimal-length"></span></p>
+                        <p class="stats entropy">Entropy: <span id="decimal-entropy"></span></p>
                     </div>
                     <div id="decimal-fyi" class="cell">
                         <p>Hexadecimal strings are unambiguous with digits 0-9 and characters a-f. However, they provide less entropy per character, so it needs to be longer.</p>
