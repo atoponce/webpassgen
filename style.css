@@ -1,14 +1,14 @@
 /* body tags */
 button {
-    top: 5px;
     position: absolute;
-    right: 5px;
+    right: 10px;
+    top: 10px;
 }
 /* classes */
 .stats {
     bottom: 0px;
-    position: absolute;
     font-size: 12px;
+    position: absolute;
 }
 
 .entropy {
@@ -17,9 +17,9 @@ button {
 }
 
 .optional {
-    top: 5px;
+    left: 10px;
     position: absolute;
-    left: 5px;
+    top: 10px;
 }
 .table {
     border-collapse: separate;
@@ -42,7 +42,10 @@ button {
     font-size: 18px;
     text-align: center;
 }
-.cell-title { text-align: center; }
+.cell-title {
+    margin-top: 25px;
+    text-align: center;
+}
 /* ids */
 #container {
     margin: 0 auto;
