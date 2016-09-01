@@ -166,54 +166,37 @@ function generate_ninja() {
             pass += "-";
         }
     }
-    return [pass, ninja.length];
+    return [pass, ninja.length, len*Math.log2(ninja.length).toFixed(4)];
 }
 
 function generate_babble() {
-    var tmp = [];
     var pass = [];
     var vowels = "aeiouy";
     var consonants = "bcdfghklmnprstvzx";
     var entropy = get_entropy();
+    var v_ent = Math.log2(vowels.length);
+    var c_ent = Math.log2(consonants.length);
+    var out_ent = (2*c_ent)+(2*v_ent);
+    var in_ent = (3*c_ent)+(2*v_ent);
 
-    // remove the entropy from the first and last pseudowords
-    entropy = entropy - 2*(2*Math.log2(consonants.length)+2*Math.log2(vowels.length));
+    entropy = entropy - (2*out_ent);
 
-    // get number of inner pseudowords
-    var len = Math.ceil(entropy/(3*Math.log2(consonants.length)+2*Math.log2(vowels.length)));
+    var len = Math.ceil(entropy/in_ent);
+    var tot_ent = out_ent + (len*in_ent) + out_ent;
 
-    // generate first pseudoword (~13.34485068394299 bits entropy)
-    for (var i=0; i<5; i++) {
-        if (i % 2 == 0) tmp[i] = gen_pass(1, consonants);
-        else tmp[i] = gen_pass(1, vowels);
-    }
-    pass = pass.concat(tmp);
-    pass[0] = "x";
-
-    var tmp = [];
-    // generate additional pseudowords (~17.43231352519333 bits entropy)
-    for (var i=0; i<len; i++) {
+    for (var i=0; i<len+2; i++) {
         for (var j=0; j<5; j++) {
-            if (j % 2 == 0) tmp[(5*i)+j] = gen_pass(1, consonants);
-            else tmp[(5*i)+j] = gen_pass(1, vowels);
+            if (j % 2 == 0) pass[(5*i)+j] = gen_pass(1, consonants);
+            else pass[(5*i)+j] = gen_pass(1, vowels);
         }
     }
 
-    pass = pass.concat(tmp);
-    tmp = [];
-
-    // generate final pseudoword (~13.34485068394299 bits entropy)
-    for (var i=0; i<5; i++) {
-        if (i % 2 == 0) tmp[i] = gen_pass(1, consonants);
-        else tmp[i] = gen_pass(1, vowels);
-    }
-
-    pass = pass.concat(tmp);
+    pass[0] = "x";
     pass[pass.length-1] = "x";
 
     for (var i=pass.length; i>0; i-=5) pass.splice(i, 0, "-");
     pass.pop() // strip last "-"
-    return [pass.join(""), vowels.concat(consonants).length];
+    return [pass.join(""), (len+2)*5, tot_ent.toFixed(4)];
 }
 
 function generate_pseudowords() {
@@ -226,12 +209,13 @@ function generate_pseudowords() {
     }
     var pass = ret[0];
     var len = ret[1];
+    var ent = ret[2];
     var pass_id = document.getElementById('pseudo-pass');
     var pass_length = document.getElementById('pseudo-length');
     var pass_entropy = document.getElementById('pseudo-entropy');
     pass_id.innerHTML = pass;
-    //pass_length.innerHTML = pass.replace(/-/g, '').length + " characters.";
-    //pass_entropy.innerHTML = "~" + parseFloat((pass.length/2) * Math.log2(len)).toFixed(4) + "-bits.";
+    pass_length.innerHTML = pass.replace(/-/g, '').length + " characters.";
+    pass_entropy.innerHTML = "~" + ent + "-bits.";
 }
 
 function generate_random() {

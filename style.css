@@ -12,16 +12,13 @@ button {
     font-size: 12px;
 }
 
-.pass-length {
-}
-
 .entropy {
     left: 50%;
     position: absolute;
 }
 
 .optional {
-    top: 10px;
+    top: 8px;
     position: absolute;
     left: 10px;
 }
