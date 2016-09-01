@@ -2,9 +2,8 @@
 button {
     top: 5px;
     position: absolute;
-    right: 10px;
+    right: 5px;
 }
-
 /* classes */
 .stats {
     bottom: 0px;
@@ -18,9 +17,9 @@ button {
 }
 
 .optional {
-    top: 8px;
+    top: 5px;
     position: absolute;
-    left: 10px;
+    left: 5px;
 }
 .table {
     border-collapse: separate;
@@ -28,9 +27,7 @@ button {
     display: table;
     width: 100%;
 }
-.row {
-    display: table-row;
-}
+.row { display: table-row; }
 .cell {
     border: 1px  solid black;
     display: table-cell;
@@ -45,20 +42,8 @@ button {
     font-size: 18px;
     text-align: center;
 }
-.cell-title {
-    text-align: center;
-}
-
+.cell-title { text-align: center; }
 /* ids */
-/*#row1 .cell {
-    height: 150px;
-}
-#row2 .cell {
-    height: 125px;
-}
-#row3 .cell {
-    height: 100px;
-}*/
 #container {
     margin: 0 auto;
     width: 1260px;
@@ -68,9 +53,7 @@ button {
     width: 1260px;
     text-align: center;
 }
-#entropy-toolbar input[type="radio"] {
-    display: none;
-}
+#entropy-toolbar input[type="radio"] { display: none; }
 #entropy-toolbar input[type="radio"] + label {
     border: 1px solid #ccc;
     border-color: #e6e6e6 #e6e6e6 #bfbfbf;
@@ -100,14 +83,12 @@ button {
     font-weight: bold;
     outline: 0;
 }
-
 #entropy-toolbar input[type="radio"] + label:nth-child(2) { background: #ff6961; }
 #entropy-toolbar input[type="radio"] + label:nth-child(4) { background: #ffb347; }
 #entropy-toolbar input[type="radio"] + label:nth-child(6) { background: #fdfd96; }
 #entropy-toolbar input[type="radio"] + label:nth-child(8) { background: #77dd77; }
 #entropy-toolbar input[type="radio"] + label:nth-child(10){ background: #77dd77; }
 #entropy-toolbar input[type="radio"] + label:nth-child(12){ background: #77dd77; }
-
 #eff-fyi { display: none; }
 #diceware-fyi { display: none; }
 #alt-fyi { display: none; }
@@ -117,7 +98,6 @@ button {
 #base32-fyi { display: none; }
 #hexadecimal-fyi { display: none; }
 #decimal-fyi { display: none; }
-
 /* mobile */
 @media only screen and (max-width: 1000px) {
     /* classes */
@@ -128,9 +108,7 @@ button {
         padding: 10px;
         width: auto;
     }
-    .password {
-        padding-bottom: 10px;
-    }
+    .password { padding-bottom: 10px; }
     /* ids */
     #container {
         margin: 0 auto;
