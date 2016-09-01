@@ -3,9 +3,7 @@ var cryptoObj = window.crypto || window.msCrypto;
 var rand_arr = new Uint16Array(1);
 var rand_num = cryptoObj.getRandomValues(rand_arr)[0]/Math.pow(2,16);
 
-String.prototype.rtrim = function() {  
-   return this.replace(/\s+$/g,"");  
-}
+String.prototype.rtrim = function() { return this.replace(/\s+$/g,""); }
 
 function get_entropy() {
     return parseInt(document.querySelector('input[name="entropy"]:checked').value);
@@ -162,9 +160,7 @@ function generate_ninja() {
     for (i=0; i<len; i++) {
         rand_num = cryptoObj.getRandomValues(rand_arr)[0]/Math.pow(2,16);
         pass += ninja[sec_rand(len)];
-        if (i%3 == 2 && i!=len-1) {
-            pass += "-";
-        }
+        if (i%3 == 2 && i!=len-1) pass += "-";
     }
     return [pass, ninja.length, len*Math.log2(ninja.length).toFixed(4)];
 }
@@ -201,12 +197,8 @@ function generate_babble() {
 
 function generate_pseudowords() {
     var pseudo = document.querySelector('option[name="pseudowords"]:checked').value;
-    if (pseudo == "Bubble Babble") {
-        var ret = generate_babble();
-    }
-    else if (pseudo == "Secret Ninja") {
-        var ret = generate_ninja();
-    }
+    if (pseudo == "Bubble Babble") var ret = generate_babble();
+    else if (pseudo == "Secret Ninja") var ret = generate_ninja();
     var pass = ret[0];
     var len = ret[1];
     var ent = ret[2];
@@ -219,20 +211,20 @@ function generate_pseudowords() {
 }
 
 function generate_random() {
-    var entropy = get_entropy();
     var s = '';
+    var entropy = get_entropy();
+    var pass_id = document.getElementById('random-pass');
+    var pass_length = document.getElementById('random-length');
+    var pass_entropy = document.getElementById('random-entropy');
     for (i=0; i<94; i++) s += String.fromCharCode(33+i);
     var len = Math.ceil(entropy/Math.log2(s.length));
     var pass = gen_pass(len, s);
+    pass_length.innerHTML = pass.length + " characters.";
     // fix HTML '&', '<', and '>'
     pass = pass.replace(/&/g, "&amp");
     pass = pass.replace(/</g, "&lt;");
     pass = pass.replace(/>/g, "&gt;");
-    var pass_id = document.getElementById('random-pass');
-    var pass_length = document.getElementById('random-length');
-    var pass_entropy = document.getElementById('random-entropy');
     pass_id.innerHTML = pass;
-    pass_length.innerHTML = pass.replace(/-/g, '').length + " characters.";
     pass_entropy.innerHTML = "~" + parseFloat(len * Math.log2(s.length)).toFixed(4) + "-bits.";
 }
 
