@@ -4,6 +4,21 @@
         <link rel="stylesheet" href="style.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <script src="sjcl.js"></script>
+        <script src="main.js"></script>
+        <script type="text/javascript">
+            function load_passes() {
+                generate_passphrase('diceware');
+                generate_passphrase('eff');
+                generate_passphrase('alternate');
+                generate_random();
+                generate_pseudowords();
+                generate_base64();
+                generate_base32();
+                generate_hex();
+                generate_decimal();
+            }
+        </script>
         <title>Passphrase and Password Generator</title>
     </head>
     <body onload="load_passes()">
@@ -164,19 +179,5 @@
             </div>
             <p><strong>This site is not logging the generated passwords!</strong> If you don't believe me, view the HTML source of this webpage, save it to a text file, disconnect your computer from the Internet, and run it locally in your browser. Everything is handled via local JavaScript. Each of these passwords and passphrases is based on <a href="https://pthree.org/2014/03/16/creating-strong-passwords-without-a-computer-part-0-understanding-entropy/">entropy</a>. 55-bits of entropy (9 random characters) is just barely outside of the range of a hobbyist password cracker. Test additional password entropy at <a href="https://ae7.st/ent/">https://ae7.st/ent/</a>. The source code for this site is available at <a href="https://github.com/atoponce/webpassgen">https://github.com/atoponce/webpassgen</a>.</p>
         </div>
-        <script src="main.js"></script>
-        <script type="text/javascript">
-            function load_passes() {
-                generate_passphrase('diceware');
-                generate_passphrase('eff');
-                generate_passphrase('alternate');
-                generate_random();
-                generate_pseudowords();
-                generate_base64();
-                generate_base32();
-                generate_hex();
-                generate_decimal();
-            }
-        </script>
     </body>
 </html>

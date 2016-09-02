@@ -1,7 +1,6 @@
 var wordlists = {};
-var cryptoObj = window.crypto || window.msCrypto;
-var rand_arr = new Uint16Array(1);
-var rand_num = cryptoObj.getRandomValues(rand_arr)[0]/Math.pow(2,16);
+var script_obj='';
+var spaces=false;
 
 String.prototype.rtrim = function() { return this.replace(/\s+$/g,""); }
 
@@ -47,7 +46,7 @@ function generate_passphrase(source) {
     }
 }
 
-function load_js(script_obj='', source) {
+function load_js(script_obj, source) {
     var file = "";
     var s_list = get_source_list(source);
 
@@ -85,26 +84,25 @@ function load_js(script_obj='', source) {
 
 function sec_rand(count) {
     // provided by `Sc00bz' at: https://www.reddit.com/r/crypto/comments/4xe21s/
-    var rand = new Uint32Array(1);
     var skip = 0x7fffffff - 0x7fffffff % count;
     var result;
+    var rand;
     if (((count - 1) & count) === 0) {
-        cryptoObj.getRandomValues(rand);
+        rand = sjcl.random.randomWords(1);
         return rand[0] & (count - 1);
     }
     do {
-        cryptoObj.getRandomValues(rand);
+        rand = sjcl.random.randomWords(1);
         result = rand[0] & 0x7fffffff;
     } while (result >= skip);
     return result % count;
 }
 
-function gen_pass(len, set, spaces=false) {
+function generate_pass(len, set, spaces) {
     var pass = "";
     if (typeof set == "string") var pass_arr = set.split("");
     else pass_arr = set;
     for(i=len; i--;) {
-        rand_num = cryptoObj.getRandomValues(rand_arr)[0]/Math.pow(2,16);
         if (spaces) {
             pass += pass_arr[sec_rand(set.length)];
             pass += " ";
@@ -121,7 +119,7 @@ function generate_diceware(wordlist) {
     var pass_id = document.getElementById('diceware-pass');
     var pass_length = document.getElementById('diceware-length');
     var pass_entropy = document.getElementById('diceware-entropy');
-    pass = gen_pass(len, wordlist, true);
+    pass = generate_pass(len, wordlist, true);
     pass_id.innerHTML = pass;
     pass_length.innerHTML = pass.replace(/\s/g, '').length + " characters.";
     pass_entropy.innerHTML = "~" + parseFloat(len * Math.log2(wordlist.length)).toFixed(4) + "-bits.";
@@ -133,7 +131,7 @@ function generate_eff(wordlist) {
     var pass_id = document.getElementById('eff-pass');
     var pass_length = document.getElementById('eff-length');
     var pass_entropy = document.getElementById('eff-entropy');
-    pass = gen_pass(len, wordlist, true);
+    pass = generate_pass(len, wordlist, true);
     pass_id.innerHTML = pass;
     pass_length.innerHTML = pass.replace(/\s/g, '').length + " characters.";
     pass_entropy.innerHTML = "~" + parseFloat(len * Math.log2(wordlist.length)).toFixed(4) + "-bits.";
@@ -145,7 +143,7 @@ function generate_alternate(wordlist) {
     var pass_id = document.getElementById('alt-pass');
     var pass_length = document.getElementById('alt-length');
     var pass_entropy = document.getElementById('alt-entropy');
-    pass = gen_pass(len, wordlist, true);
+    pass = generate_pass(len, wordlist, true);
     pass_id.innerHTML = pass;
     pass_length.innerHTML = pass.replace(/\s/g, '').length + " characters.";
     pass_entropy.innerHTML = "~" + parseFloat(len * Math.log2(wordlist.length)).toFixed(4) + "-bits.";
@@ -158,7 +156,6 @@ function generate_ninja() {
     var pass = "";
     
     for (i=0; i<len; i++) {
-        rand_num = cryptoObj.getRandomValues(rand_arr)[0]/Math.pow(2,16);
         pass += ninja[sec_rand(len)];
         if (i%3 == 2 && i!=len-1) pass += "-";
     }
@@ -182,8 +179,8 @@ function generate_babble() {
 
     for (var i=0; i<len+2; i++) {
         for (var j=0; j<5; j++) {
-            if (j % 2 == 0) pass[(5*i)+j] = gen_pass(1, consonants);
-            else pass[(5*i)+j] = gen_pass(1, vowels);
+            if (j % 2 == 0) pass[(5*i)+j] = generate_pass(1, consonants);
+            else pass[(5*i)+j] = generate_pass(1, vowels);
         }
     }
 
@@ -218,7 +215,7 @@ function generate_random() {
     var pass_entropy = document.getElementById('random-entropy');
     for (i=0; i<94; i++) s += String.fromCharCode(33+i);
     var len = Math.ceil(entropy/Math.log2(s.length));
-    var pass = gen_pass(len, s);
+    var pass = generate_pass(len, s);
     pass_length.innerHTML = pass.length + " characters.";
     // fix HTML '&', '<', and '>'
     pass = pass.replace(/&/g, "&amp");
@@ -232,7 +229,7 @@ function generate_base64() {
     var entropy = get_entropy();
     var s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/";
     var len = Math.ceil(entropy/Math.log2(s.length));
-    var pass = gen_pass(len, s);
+    var pass = generate_pass(len, s);
     var pass_id = document.getElementById('base64-pass');
     var pass_length = document.getElementById('base64-length');
     var pass_entropy = document.getElementById('base64-entropy');
@@ -245,7 +242,7 @@ function generate_base32() {
     var entropy = get_entropy();
     var s = "0123456789abcdefghjkmnpqrstvwxyz";
     var len = Math.ceil(entropy/Math.log2(s.length));
-    var pass = gen_pass(len, s);
+    var pass = generate_pass(len, s);
     var pass_id = document.getElementById('base32-pass');
     var pass_length = document.getElementById('base32-length');
     var pass_entropy = document.getElementById('base32-entropy');
@@ -258,7 +255,7 @@ function generate_hex() {
     var entropy = get_entropy();
     var s = "0123456789abcdef"
     var len = Math.ceil(entropy/Math.log2(s.length));
-    var pass = gen_pass(len, s);
+    var pass = generate_pass(len, s);
     var pass_id = document.getElementById('hex-pass');
     var pass_length = document.getElementById('hex-length');
     var pass_entropy = document.getElementById('hex-entropy');
@@ -271,7 +268,7 @@ function generate_decimal() {
     var entropy = get_entropy();
     var s = "0123456789"
     var len = Math.ceil(entropy/Math.log2(s.length));
-    var pass = gen_pass(len, s);
+    var pass = generate_pass(len, s);
     var pass_id = document.getElementById('decimal-pass');
     var pass_length = document.getElementById('decimal-length');
     var pass_entropy = document.getElementById('decimal-entropy');
