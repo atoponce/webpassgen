@@ -119,7 +119,7 @@ button {
 {color: yellow;}
 
 /* mobile */
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1260px) {
     /* classes */
     .cell {
         display: block;

@@ -4,20 +4,16 @@ var spaces=false;
 
 String.prototype.rtrim = function() { return this.replace(/\s+$/g,""); }
 
-function toggle_info(id1, id2) {
-    var div_default = document.getElementById(id1);
-    var div_fyi = document.getElementById(id2);
+function toggle_info(def, fyi) {
+    var div_default = document.getElementById(def);
+    var div_fyi = document.getElementById(fyi);
 
-    if (div_default.style.display == '' && div_fyi.style.display == 'none') {
+    if (div_default.style.display == '') {
         div_default.style.display = 'none';
-        if (screen.width >= 1000) div_fyi.style.display = 'table-cell';
+        if (screen.width >= 1260) div_fyi.style.display = 'table-cell';
         else div_fyi.style.display = 'block';
     }
-    else if (div_default.style.display == 'none' && div_fyi.style.display == 'table-cell') {
-        div_default.style.display = '';
-        div_fyi.style.display = 'none';
-    }
-    else if (div_default.style.display == 'none' && div_fyi.style.display == 'block') {
+    else {
         div_default.style.display = '';
         div_fyi.style.display = 'none';
     }
