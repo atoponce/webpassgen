@@ -6,7 +6,8 @@ button {
 }
 /* classes */
 .stats {
-    bottom: 0px;
+    bottom: 5px;
+    left: 5px;
     font-size: 12px;
     position: absolute;
 }
@@ -31,7 +32,6 @@ button {
 .cell {
     border: 1px  solid black;
     display: table-cell;
-    height: auto;
     padding: 0px 10px 20px 10px;
     position: relative;
     text-align: left;
@@ -46,7 +46,15 @@ button {
     margin-top: 25px;
     text-align: center;
 }
+.info-link {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+}
 /* ids */
+#row1 .cell { height: 150px; }
+#row2 .cell { height: 125px; }
+#row3 .cell { height: 100px; }
 #container {
     margin: 0 auto;
     width: 1260px;
@@ -93,7 +101,13 @@ button {
 #entropy-toolbar input[type="radio"] + label:nth-child(10){ background: #77dd77; }
 #entropy-toolbar input[type="radio"] + label:nth-child(12){ background: #77dd77; }
 #eff-fyi { display: none; }
-#diceware-fyi { display: none; }
+#diceware-fyi {
+    background: black;
+    color: white;
+    display: none;
+}
+#diceware-fyi a:link {color: yellow;}
+#diceware-fyi a:visited {color: orange;}
 #alt-fyi { display: none; }
 #pseudo-fyi { display: none; }
 #random-fyi { display: none; }

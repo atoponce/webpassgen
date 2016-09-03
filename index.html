@@ -37,7 +37,7 @@
         <div id="container">
             <div class="table">
                 <div id="row1" class="row">
-                    <div id="diceware-default" class="cell">
+                    <div style="display:block;" id="diceware-default" class="cell">
                         <p class="cell-title"><strong>Diceware</strong></p>
                         <div class="optional">
                             <select>
@@ -61,15 +61,18 @@
                             </select>
                         </div>
                         <button value="Generate" onclick="generate_passphrase('diceware');">Generate</button>
-                        <p id="diceware-pass" class="password"></p>
-                        <p class="stats length">Length: <span id="diceware-length"></span></p>
-                        <p class="stats entropy">Entropy: <span id="diceware-entropy"></span></p>
-                        </p>
+                        <div id="diceware-pass" class="password"></div>
+                        <div class="stats length">
+                            <span id="diceware-length"></span>
+                            <span id="diceware-entropy"></span>
+                        </div>
+                        <div class="info-link"><a href="#" onclick="toggle_info('diceware-default', 'diceware-fyi')">Info</a></div>
                     </div>
-                    <div id="diceware-fyi" class="cell">
+                    <div style="display:none;" id="diceware-fyi" class="cell">
                         <p><a href="http://world.std.com/~reinhold/diceware.html">Diceware passphrases</a> uses many obscure English words and non-words such as numbers and punctuation.</p>
+                        <div class="info-link"><a href="#" onclick="toggle_info('diceware-default', 'diceware-fyi')">Close</a></div>
                     </div>
-                    <div id="eff-default" class="cell">
+                    <div style="display:block;" id="eff-default" class="cell">
                         <p class="cell-title"><strong>EFF</strong></p>
                         <div class="optional">
                             <select>
@@ -82,11 +85,13 @@
                         <p id="eff-pass" class="password"></p>
                         <p class="stats length">Length: <span id="eff-length"></span></p>
                         <p class="stats entropy">Entropy: <span id="eff-entropy"></span></p>
+                        <div class="info-link"><a href="#" onclick="toggle_info('diceware-default', 'diceware-fyi')">Info</a></div>
                     </div>
-                    <div id="eff-fyi" class="cell">
+                    <div style="display:none;" id="eff-fyi" class="cell">
                         <p>The <a href="https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases">EFF wordlists</a> are the least obscure of the three passphrase wordlists, and the easist to recall, with either short or long words.</p>
+                        <div class="info-link"><a href="#" onclick="toggle_info('diceware-default', 'diceware-fyi')">Close</a></div>
                     </div>
-                    <div id="alt-default" class="cell">
+                    <div style="display:block;" id="alt-default" class="cell">
                         <p class="cell-title"><strong>Alternate</strong></p>
                         <div class="optional">
                             <select>
@@ -102,9 +107,11 @@
                         <p id="alt-pass" class="password"></p>
                         <p class="stats length">Length: <span id="alt-length"></span></p>
                         <p class="stats entropy">Entropy: <span id="alt-entropy"></span></p>
+                        <div class="info-link"><a href="#" onclick="toggle_info('diceware-default', 'diceware-fyi')">Info</a></div>
                     </div>
-                    <div id="alt-fyi" class="cell">
+                    <div style="display:none"; id="alt-fyi" class="cell">
                         <-- FYI for the alternate lists here -->
+                        <div class="info-link"><a href="#" onclick="toggle_info('diceware-default', 'diceware-fyi')">Close</a></div>
                     </div>
                 </div>
                 <div id="row2" class="row">

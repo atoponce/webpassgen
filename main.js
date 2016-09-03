@@ -4,6 +4,19 @@ var spaces=false;
 
 String.prototype.rtrim = function() { return this.replace(/\s+$/g,""); }
 
+function toggle_info(id1, id2) {
+    var div_default = document.getElementById(id1);
+    var div_fyi = document.getElementById(id2);
+
+    if (div_default.style.display == 'block') {
+        div_default.style.display = 'none';
+        div_fyi.style.display = 'block';
+    }
+    else {
+        div_default.style.display = 'block';
+        div_fyi.style.display = 'none';
+    }
+}
 function get_entropy() {
     return parseInt(document.querySelector('input[name="entropy"]:checked').value);
 }
