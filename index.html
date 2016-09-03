@@ -4,21 +4,6 @@
         <link rel="stylesheet" href="style.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <script src="sjcl.js"></script>
-        <script src="main.js"></script>
-        <script type="text/javascript">
-            function load_passes() {
-                generate_passphrase('diceware');
-                generate_passphrase('eff');
-                generate_passphrase('alternate');
-                generate_random();
-                generate_pseudowords();
-                generate_base64();
-                generate_base32();
-                generate_hex();
-                generate_decimal();
-            }
-        </script>
         <title>Passphrase and Password Generator</title>
     </head>
     <body onload="load_passes()">
@@ -37,7 +22,7 @@
         <div id="container">
             <div class="table">
                 <div id="row1" class="row">
-                    <div style="display:block;" id="diceware-default" class="cell">
+                    <div style="display:table-cell;" id="diceware-default" class="cell">
                         <p class="cell-title"><strong>Diceware</strong></p>
                         <div class="optional">
                             <select>
@@ -63,16 +48,16 @@
                         <button value="Generate" onclick="generate_passphrase('diceware');">Generate</button>
                         <div id="diceware-pass" class="password"></div>
                         <div class="stats length">
-                            <span id="diceware-length"></span>
                             <span id="diceware-entropy"></span>
+                            <span id="diceware-length"></span>
                         </div>
-                        <div class="info-link"><a href="#" onclick="toggle_info('diceware-default', 'diceware-fyi')">Info</a></div>
+                        <div class="info-link"><a href="#" onclick="return toggle_info('diceware-default', 'diceware-fyi')">Info</a></div>
                     </div>
                     <div style="display:none;" id="diceware-fyi" class="cell">
-                        <p><a href="http://world.std.com/~reinhold/diceware.html">Diceware passphrases</a> uses many obscure English words and non-words such as numbers and punctuation.</p>
-                        <div class="info-link"><a href="#" onclick="toggle_info('diceware-default', 'diceware-fyi')">Close</a></div>
+                        <p><a href="http://world.std.com/~reinhold/diceware.html">Diceware passphrases</a> uses many obscure English words and non-words such as numbers and punctuation. Each word list is 7,776 words long, and contains ~12.9-bits of entropy per word.</p>
+                        <div class="info-link"><a href="#" onclick="return toggle_info('diceware-default', 'diceware-fyi')">Close</a></div>
                     </div>
-                    <div style="display:block;" id="eff-default" class="cell">
+                    <div style="display:table-cell;" id="eff-default" class="cell">
                         <p class="cell-title"><strong>EFF</strong></p>
                         <div class="optional">
                             <select>
@@ -82,16 +67,24 @@
                             </select>
                         </div>
                         <button value="Generate" onclick="generate_passphrase('eff');">Generate</button>
-                        <p id="eff-pass" class="password"></p>
-                        <p class="stats length">Length: <span id="eff-length"></span></p>
-                        <p class="stats entropy">Entropy: <span id="eff-entropy"></span></p>
-                        <div class="info-link"><a href="#" onclick="toggle_info('diceware-default', 'diceware-fyi')">Info</a></div>
+                        <div id="eff-pass" class="password"></div>
+                        <div class="stats length">
+                            <span id="eff-entropy"></span>
+                            <span id="eff-length"></span>
+                        </div>
+                        <div class="info-link"><a href="#" onclick="return toggle_info('eff-default', 'eff-fyi')">Info</a></div>
                     </div>
                     <div style="display:none;" id="eff-fyi" class="cell">
-                        <p>The <a href="https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases">EFF wordlists</a> are the least obscure of the three passphrase wordlists, and the easist to recall, with either short or long words.</p>
-                        <div class="info-link"><a href="#" onclick="toggle_info('diceware-default', 'diceware-fyi')">Close</a></div>
+                        <p>The <a href="https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases">EFF wordlists</a> are the least obscure of the three passphrase wordlists, and the easist to recall.
+                            <ul>
+                                <li>Distant Words- 1,296 words. ~10.3-bits/word.</li>
+                                <li>Long Words- 7,776 words. ~12.9-bits/word.</li>
+                                <li>Short Words- 1,296 words. ~10.3-bits/word.</li>
+                            </ul>
+                        </p>
+                        <div class="info-link"><a href="#" onclick="return toggle_info('eff-default', 'eff-fyi')">Close</a></div>
                     </div>
-                    <div style="display:block;" id="alt-default" class="cell">
+                    <div style="display:table-cell;" id="alt-default" class="cell">
                         <p class="cell-title"><strong>Alternate</strong></p>
                         <div class="optional">
                             <select>
@@ -104,18 +97,29 @@
                             </select>
                         </div>
                         <button value="Generate" onclick="generate_passphrase('alternate');">Generate</button>
-                        <p id="alt-pass" class="password"></p>
-                        <p class="stats length">Length: <span id="alt-length"></span></p>
-                        <p class="stats entropy">Entropy: <span id="alt-entropy"></span></p>
-                        <div class="info-link"><a href="#" onclick="toggle_info('diceware-default', 'diceware-fyi')">Info</a></div>
+                        <div id="alt-pass" class="password"></div>
+                        <div class="stats length">
+                            <span id="alt-entropy"></span>
+                            <span id="alt-length"></span>
+                        </div>
+                        <div class="info-link"><a href="#" onclick="return toggle_info('alt-default', 'alt-fyi')">Info</a></div>
                     </div>
                     <div style="display:none"; id="alt-fyi" class="cell">
-                        <-- FYI for the alternate lists here -->
-                        <div class="info-link"><a href="#" onclick="toggle_info('diceware-default', 'diceware-fyi')">Close</a></div>
+                        <p>
+                            <ul>
+                                <li><a href="https://github.com/bitcoin/bips/blob/master/bip-0039/bip-0039-wordlists.md">Bitcoin</a>- 2,048 words, 12-bits/word.</li>
+                                <li><a href="http://www.eldamo.org/">Elvish</a>- 7,776 words. ~12.9-bits/word.</li>
+                                <li><a href="http://www.frathwiki.com/Klingon/lexicon">Klingon</a>- 2,604 words. ~11.3-bits/word.</li>
+                                <li><a href="https://en.wikipedia.org/wiki/PGP_word_list">PGP</a>- 512 words. 9-bits/word.</li>
+                                <li><a href="https://wiki.skullsecurity.org/index.php?title=Passwords">RockYou</a>- 7,776 words. ~12.9-bits/word.</li>
+                                <li><a href="https://github.com/PeerioTechnologies/peerio-web-passphrase-generator/tree/master/src/dict">Simpsons</a>- 5,000 words. ~12.3-bits/word.</li>
+                            </ul>
+                        </p>
+                        <div class="info-link"><a href="#" onclick="return toggle_info('alt-default', 'alt-fyi')">Close</a></div>
                     </div>
                 </div>
                 <div id="row2" class="row">
-                    <div id="pseudo-default" class="cell">
+                    <div style="display:table-cell;" id="pseudo-default" class="cell">
                         <p class="cell-title"><strong>Pseudowords</strong></p>
                         <div class="optional">
                             <select>
@@ -125,67 +129,111 @@
                         </div>
                         <button value="Generate" onclick="generate_pseudowords();">Generate</button>
                         <p id="pseudo-pass" class="password"></p>
-                        <p class="stats length">Length: <span id="pseudo-length"></span></p>
-                        <p class="stats entropy">Entropy: <span id="pseudo-entropy"></span></p>
+                        <div class="stats length">
+                            <span id="pseudo-entropy"></span>
+                            <span id="pseudo-length"></span>
+                        </div>
+                        <div class="info-link"><a href="#" onclick="return toggle_info('pseudo-default', 'pseudo-fyi')">Info</a></div>
                     </div>
                     <div id="pseudo-fyi" class="cell">
-                        <p><a href="http://www.wiki.yak.net/589">Bubble Babble Encoding</a> is a system designed to encode binary bits into pseudowords. In this case, rather than encode data, it's generated randomly.</p>
+                        <p>
+                            <ul>
+                                <li><a href="http://www.wiki.yak.net/589">Bubble Babble</a>- 6 vowels, 17 consonants. ~6.7-bits/pair.</li>
+                                <li><a href="http://i762.photobucket.com/albums/xx262/SteveStrummerGB/NINJA.png">Ninja Names</a>- 26 pseudowords. ~4.7-bits/pseudoword.</li>
+                            </ul>
+                        </p>
+                        <div class="info-link"><a href="#" onclick="return toggle_info('pseudo-default', 'pseudo-fyi')">Close</a></div>
                     </div>
-                    <div id="random-default" class="cell">
+                    <div style="display:table-cell;" id="base94-default" class="cell">
                         <p class="cell-title"><strong>Base94 Characters</strong></p>
-                        <button value="Generate" onclick="generate_random();">Generate</button>
-                        <p id="random-pass" class="password"></p>
-                        <p class="stats length">Length: <span id="random-length"></span></p>
-                        <p class="stats entropy">Entropy: <span id="random-entropy"></span></p>
+                        <button value="Generate" onclick="generate_base94();">Generate</button>
+                        <p id="base94-pass" class="password"></p>
+                        <div class="stats length">
+                            <span id="base94-entropy"></span>
+                            <span id="base94-length"></span>
+                        </div>
+                        <div class="info-link"><a href="#" onclick="return toggle_info('base94-default', 'base94-fyi')">Info</a></div>
                     </div>
-                    <div id="random-fyi" class="cell">
-                        <p>This password is built from 94 printable ASCII characters. It provides the most entropy per character. As such, it is the shortest ASCII password on this page.</p>
+                    <div id="base94-fyi" class="cell">
+                        <p>This password is built from 94 printable ASCII characters. It provides the most entropy per character, at ~6.6-bits/character. As such, it is the shortest ASCII password on this page.</p>
+                        <div class="info-link"><a href="#" onclick="return toggle_info('base94-default', 'base94-fyi')">Close</a></div>
                     </div>
-                    <div id="base64-default" class="cell">
+                    <div style="display:table-cell;" id="base64-default" class="cell">
                         <p class="cell-title"><strong>Base64 Characters</strong></p>
                         <button value="Generate" onclick="generate_base64();">Generate</button>
                         <p id="base64-pass" class="password"></p>
-                        <p class="stats length">Length: <span id="base64-length"></span></p>
-                        <p class="stats entropy">Entropy: <span id="base64-entropy"></span></p>
+                        <div class="stats length">
+                            <span id="base64-entropy"></span>
+                            <span id="base64-length"></span>
+                        </div>
+                        <div class="info-link"><a href="#" onclick="return toggle_info('base64-default', 'base64-fyi')">Info</a></div>
                     </div>
                     <div id="base64-fyi" class="cell">
-                        <p>Base64 strings encompass all lowercase and uppercase characters and all digits, including two additional characters. This follows <a href="https://tools.ietf.org/html/rfc3548">RFC 3548</a>.</p>
+                        <p>Base64 strings encompass all lowercase and uppercase characters and all digits, including two additional characters. This follows <a href="https://tools.ietf.org/html/rfc4648">RFC 4648</a>. 6-bits/character.</p>
+                        <div class="info-link"><a href="#" onclick="return toggle_info('base64-default', 'base64-fyi')">Close</a></div>
                     </div>
                 </div>
                 <div id="row3" class="row">
-                    <div id="base32-default" class="cell">
+                    <div style="display:table-cell;" id="base32-default" class="cell">
                         <p class="cell-title"><strong>Base32 Characters</strong></p>
                         <button value="Generate" onclick="generate_base32();">Generate</button>
                         <p id="base32-pass" class="password"></p>
-                        <p class="stats length">Length: <span id="base32-length"></span></p>
-                        <p class="stats entropy">Entropy: <span id="base32-entropy"></span></p>
+                        <div class="stats length">
+                            <span id="base32-entropy"></span>
+                            <span id="base32-length"></span>
+                        </div>
+                        <div class="info-link"><a href="#" onclick="return toggle_info('base32-default', 'base32-fyi')">Info</a></div>
                     </div>
                     <div id="base32-fyi" class="cell">
-                        <p>Base32 strings can still be mostly unambiguous while using more characters from the keyboard. This uses Crockford's base32.</p>
+                        <p>Base32 strings can still be mostly unambiguous while using more characters from the keyboard. This follows <a href="https://tools.ietf.org/html/rfc4648">RFC 4648</a>. 5-bits/character.</p>
+                        <div class="info-link"><a href="#" onclick="return toggle_info('base32-default', 'base32-fyi')">Close</a></div>
                     </div>
-                    <div id="hexadecimal-default" class="cell">
+                    <div style="display:table-cell;" id="base16-default" class="cell">
                         <p class="cell-title"><strong>Base16 Characters</strong></p>
-                        <button value="Generate" onclick="generate_hex();">Generate</button>
-                        <p id="hex-pass" class="password"></p>
-                        <p class="stats length">Length: <span id="hex-length"></span></p>
-                        <p class="stats entropy">Entropy: <span id="hex-entropy"></span></p>
+                        <button value="Generate" onclick="generate_base16();">Generate</button>
+                        <p id="base16-pass" class="password"></p>
+                        <div class="stats length">
+                            <span id="base16-entropy"></span>
+                            <span id="base16-length"></span>
+                        </div>
+                        <div class="info-link"><a href="#" onclick="return toggle_info('base16-default', 'base16-fyi')">Info</a></div>
                     </div>
-                    <div id="hexadecimal-fyi" class="cell">
-                        <p>Hexadecimal strings are unambiguous with digits 0-9 and characters a-f. However, they provide less entropy per character, so it needs to be longer.</p>
+                    <div id="base16-fyi" class="cell">
+                        <p>Hexadecimal strings are unambiguous with digits 0-9 and characters a-f. However, they provide less entropy per character, so it needs to be longer.This follows <a href="https://tools.ietf.org/html/rfc4648">RFC 4648</a>. 4-bits/character.</p>
+                        <div class="info-link"><a href="#" onclick="return toggle_info('base16-default', 'base16-fyi')">Close</a></div>
                     </div>
-                    <div id="decimal-default" class="cell">
+                    <div style="display:table-cell;" id="base10-default" class="cell">
                         <p class="cell-title"><strong>Base10 Characters</strong></p>
-                        <button value="Generate" onclick="generate_decimal();">Generate</button>
-                        <p id="decimal-pass" class="password"></p>
-                        <p class="stats length">Length: <span id="decimal-length"></span></p>
-                        <p class="stats entropy">Entropy: <span id="decimal-entropy"></span></p>
+                        <button value="Generate" onclick="generate_base10();">Generate</button>
+                        <p id="base10-pass" class="password"></p>
+                        <div class="stats length">
+                            <span id="base10-entropy"></span>
+                            <span id="base10-length"></span>
+                        </div>
+                        <div class="info-link"><a href="#" onclick="return toggle_info('base10-default', 'base10-fyi')">Info</a></div>
                     </div>
-                    <div id="decimal-fyi" class="cell">
-                        <p>Hexadecimal strings are unambiguous with digits 0-9 and characters a-f. However, they provide less entropy per character, so it needs to be longer.</p>
+                    <div id="base10-fyi" class="cell">
+                        <p>Hexadecimal strings are unambiguous with digits 0-9 and characters a-f. However, they provide less entropy per character, at ~3.3-bits/digit, so it needs to be longer.</p>
+                        <div class="info-link"><a href="#" onclick="return toggle_info('base10-default', 'base10-fyi')">Close</a></div>
                     </div>
                 </div>
             </div>
             <p><strong>This site is not logging the generated passwords!</strong> If you don't believe me, view the HTML source of this webpage, save it to a text file, disconnect your computer from the Internet, and run it locally in your browser. Everything is handled via local JavaScript. Each of these passwords and passphrases is based on <a href="https://pthree.org/2014/03/16/creating-strong-passwords-without-a-computer-part-0-understanding-entropy/">entropy</a>. 55-bits of entropy (9 random characters) is just barely outside of the range of a hobbyist password cracker. Test additional password entropy at <a href="https://ae7.st/ent/">https://ae7.st/ent/</a>. The source code for this site is available at <a href="https://github.com/atoponce/webpassgen">https://github.com/atoponce/webpassgen</a>.</p>
         </div>
+        <script src="sjcl.js"></script>
+        <script src="main.js"></script>
+        <script type="text/javascript">
+            function load_passes() {
+                generate_passphrase('diceware');
+                generate_passphrase('eff');
+                generate_passphrase('alternate');
+                generate_pseudowords();
+                generate_base94();
+                generate_base64();
+                generate_base32();
+                generate_base16();
+                generate_base10();
+            }
+        </script>
     </body>
 </html>

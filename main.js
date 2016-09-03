@@ -8,14 +8,15 @@ function toggle_info(id1, id2) {
     var div_default = document.getElementById(id1);
     var div_fyi = document.getElementById(id2);
 
-    if (div_default.style.display == 'block') {
+    if (div_default.style.display == 'table-cell') {
         div_default.style.display = 'none';
-        div_fyi.style.display = 'block';
+        div_fyi.style.display = 'table-cell';
     }
     else {
-        div_default.style.display = 'block';
+        div_default.style.display = 'table-cell';
         div_fyi.style.display = 'none';
     }
+    return false;
 }
 function get_entropy() {
     return parseInt(document.querySelector('input[name="entropy"]:checked').value);
@@ -136,7 +137,7 @@ function generate_diceware(wordlist) {
     pass = generate_pass(len, wordlist, true);
     pass_id.innerHTML = pass;
     pass_length.innerHTML = pass.replace(/\s/g, '').length + " characters.";
-    pass_entropy.innerHTML = "~" + parseFloat(len * Math.log2(wordlist.length)).toFixed(4) + "-bits.";
+    pass_entropy.innerHTML = "~" + parseFloat(len * Math.log2(wordlist.length)).toFixed(0) + "-bits.";
 }
 
 function generate_eff(wordlist) {
@@ -148,7 +149,7 @@ function generate_eff(wordlist) {
     pass = generate_pass(len, wordlist, true);
     pass_id.innerHTML = pass;
     pass_length.innerHTML = pass.replace(/\s/g, '').length + " characters.";
-    pass_entropy.innerHTML = "~" + parseFloat(len * Math.log2(wordlist.length)).toFixed(4) + "-bits.";
+    pass_entropy.innerHTML = "~" + parseFloat(len * Math.log2(wordlist.length)).toFixed(0) + "-bits.";
 }
 
 function generate_alternate(wordlist) {
@@ -160,7 +161,7 @@ function generate_alternate(wordlist) {
     pass = generate_pass(len, wordlist, true);
     pass_id.innerHTML = pass;
     pass_length.innerHTML = pass.replace(/\s/g, '').length + " characters.";
-    pass_entropy.innerHTML = "~" + parseFloat(len * Math.log2(wordlist.length)).toFixed(4) + "-bits.";
+    pass_entropy.innerHTML = "~" + parseFloat(len * Math.log2(wordlist.length)).toFixed(0) + "-bits.";
 }
 
 function generate_ninja() {
@@ -173,7 +174,7 @@ function generate_ninja() {
         pass += ninja[sec_rand(len)];
         if (i%3 == 2 && i!=len-1) pass += "-";
     }
-    return [pass, ninja.length, len*Math.log2(ninja.length).toFixed(4)];
+    return [pass, ninja.length, len*Math.log2(ninja.length).toFixed(0)];
 }
 
 function generate_babble() {
@@ -203,7 +204,7 @@ function generate_babble() {
 
     for (var i=pass.length; i>0; i-=5) pass.splice(i, 0, "-");
     pass.pop() // strip last "-"
-    return [pass.join(""), (len+2)*5, tot_ent.toFixed(4)];
+    return [pass.join(""), (len+2)*5, tot_ent.toFixed(0)];
 }
 
 function generate_pseudowords() {
@@ -221,12 +222,12 @@ function generate_pseudowords() {
     pass_entropy.innerHTML = "~" + ent + "-bits.";
 }
 
-function generate_random() {
+function generate_base94() {
     var s = '';
     var entropy = get_entropy();
-    var pass_id = document.getElementById('random-pass');
-    var pass_length = document.getElementById('random-length');
-    var pass_entropy = document.getElementById('random-entropy');
+    var pass_id = document.getElementById('base94-pass');
+    var pass_length = document.getElementById('base94-length');
+    var pass_entropy = document.getElementById('base94-entropy');
     for (i=0; i<94; i++) s += String.fromCharCode(33+i);
     var len = Math.ceil(entropy/Math.log2(s.length));
     var pass = generate_pass(len, s);
@@ -236,7 +237,7 @@ function generate_random() {
     pass = pass.replace(/</g, "&lt;");
     pass = pass.replace(/>/g, "&gt;");
     pass_id.innerHTML = pass;
-    pass_entropy.innerHTML = "~" + parseFloat(len * Math.log2(s.length)).toFixed(4) + "-bits.";
+    pass_entropy.innerHTML = "~" + parseFloat(len * Math.log2(s.length)).toFixed(0) + "-bits.";
 }
 
 function generate_base64() {
@@ -249,7 +250,7 @@ function generate_base64() {
     var pass_entropy = document.getElementById('base64-entropy');
     pass_id.innerHTML = pass;
     pass_length.innerHTML = pass.replace(/-/g, '').length + " characters.";
-    pass_entropy.innerHTML = "~" + parseFloat(len * Math.log2(s.length)).toFixed(4) + "-bits.";
+    pass_entropy.innerHTML = "~" + parseFloat(len * Math.log2(s.length)).toFixed(0) + "-bits.";
 }
 
 function generate_base32() {
@@ -262,31 +263,31 @@ function generate_base32() {
     var pass_entropy = document.getElementById('base32-entropy');
     pass_id.innerHTML = pass;
     pass_length.innerHTML = pass.replace(/-/g, '').length + " characters.";
-    pass_entropy.innerHTML = "~" + parseFloat(len * Math.log2(s.length)).toFixed(4) + "-bits.";
+    pass_entropy.innerHTML = "~" + parseFloat(len * Math.log2(s.length)).toFixed(0) + "-bits.";
 }
 
-function generate_hex() {
+function generate_base16() {
     var entropy = get_entropy();
     var s = "0123456789abcdef"
     var len = Math.ceil(entropy/Math.log2(s.length));
     var pass = generate_pass(len, s);
-    var pass_id = document.getElementById('hex-pass');
-    var pass_length = document.getElementById('hex-length');
-    var pass_entropy = document.getElementById('hex-entropy');
+    var pass_id = document.getElementById('base16-pass');
+    var pass_length = document.getElementById('base16-length');
+    var pass_entropy = document.getElementById('base16-entropy');
     pass_id.innerHTML = pass;
     pass_length.innerHTML = pass.replace(/-/g, '').length + " characters.";
-    pass_entropy.innerHTML = "~" + parseFloat(len * Math.log2(s.length)).toFixed(4) + "-bits.";
+    pass_entropy.innerHTML = "~" + parseFloat(len * Math.log2(s.length)).toFixed(0) + "-bits.";
 }
 
-function generate_decimal() {
+function generate_base10() {
     var entropy = get_entropy();
     var s = "0123456789"
     var len = Math.ceil(entropy/Math.log2(s.length));
     var pass = generate_pass(len, s);
-    var pass_id = document.getElementById('decimal-pass');
-    var pass_length = document.getElementById('decimal-length');
-    var pass_entropy = document.getElementById('decimal-entropy');
+    var pass_id = document.getElementById('base10-pass');
+    var pass_length = document.getElementById('base10-length');
+    var pass_entropy = document.getElementById('base10-entropy');
     pass_id.innerHTML = pass;
     pass_length.innerHTML = pass.replace(/-/g, '').length + " characters.";
-    pass_entropy.innerHTML = "~" + parseFloat(len * Math.log2(s.length)).toFixed(4) + "-bits.";
+    pass_entropy.innerHTML = "~" + parseFloat(len * Math.log2(s.length)).toFixed(0) + "-bits.";
 }
