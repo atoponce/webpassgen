@@ -54,7 +54,7 @@
                         <div class="info-link"><a href="#" onclick="return toggle_info('diceware-default', 'diceware-fyi')">Info</a></div>
                     </div>
                     <div style="display:none;" id="diceware-fyi" class="cell">
-                        <p><a href="http://world.std.com/~reinhold/diceware.html">Diceware passphrases</a> uses many obscure English words and non-words such as numbers and punctuation. Each word list is 7,776 words long, and contains ~12.9-bits of entropy per word.</p>
+                        <p><a href="http://world.std.com/~reinhold/diceware.html">Diceware passphrases</a> uses many obscure English words and non-words such as numbers and punctuation. Each word list is 7,776 words long, and contains ~13-bits of entropy per word.</p>
                         <div class="info-link"><a href="#" onclick="return toggle_info('diceware-default', 'diceware-fyi')">Close</a></div>
                     </div>
                     <div id="eff-default" class="cell">
@@ -77,9 +77,9 @@
                     <div style="display:none;" id="eff-fyi" class="cell">
                         <p>The <a href="https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases">EFF wordlists</a> are the least obscure of the three passphrase wordlists, and the easist to recall.
                             <ul>
-                                <li>Distant Words- 1,296 words. ~10.3-bits/word.</li>
-                                <li>Long Words- 7,776 words. ~12.9-bits/word.</li>
-                                <li>Short Words- 1,296 words. ~10.3-bits/word.</li>
+                                <li>Distant Words- 1,296 words. ~10-bits/word.</li>
+                                <li>Long Words- 7,776 words. ~13-bits/word.</li>
+                                <li>Short Words- 1,296 words. ~10-bits/word.</li>
                             </ul>
                         </p>
                         <div class="info-link"><a href="#" onclick="return toggle_info('eff-default', 'eff-fyi')">Close</a></div>
@@ -108,11 +108,11 @@
                         <p>
                             <ul>
                                 <li><a href="https://github.com/bitcoin/bips/blob/master/bip-0039/bip-0039-wordlists.md">Bitcoin</a>- 2,048 words, 12-bits/word.</li>
-                                <li><a href="http://www.eldamo.org/">Elvish</a>- 7,776 words. ~12.9-bits/word.</li>
-                                <li><a href="http://www.frathwiki.com/Klingon/lexicon">Klingon</a>- 2,604 words. ~11.3-bits/word.</li>
+                                <li><a href="http://www.eldamo.org/">Elvish</a>- 7,776 words. ~13-bits/word.</li>
+                                <li><a href="http://www.frathwiki.com/Klingon/lexicon">Klingon</a>- 2,604 words. ~11-bits/word.</li>
                                 <li><a href="https://en.wikipedia.org/wiki/PGP_word_list">PGP</a>- 512 words. 9-bits/word.</li>
-                                <li><a href="https://wiki.skullsecurity.org/index.php?title=Passwords">RockYou</a>- 7,776 words. ~12.9-bits/word.</li>
-                                <li><a href="https://github.com/PeerioTechnologies/peerio-web-passphrase-generator/tree/master/src/dict">Simpsons</a>- 5,000 words. ~12.3-bits/word.</li>
+                                <li><a href="https://wiki.skullsecurity.org/index.php?title=Passwords">RockYou</a>- 7,776 words. ~13-bits/word.</li>
+                                <li><a href="https://github.com/PeerioTechnologies/peerio-web-passphrase-generator/tree/master/src/dict">Simpsons</a>- 5,000 words. ~12-bits/word.</li>
                             </ul>
                         </p>
                         <div class="info-link"><a href="#" onclick="return toggle_info('alt-default', 'alt-fyi')">Close</a></div>
@@ -138,8 +138,8 @@
                     <div id="pseudo-fyi" class="cell">
                         <p>
                             <ul>
-                                <li><a href="http://www.wiki.yak.net/589">Bubble Babble</a>- 6 vowels, 17 consonants. ~6.7-bits/pair.</li>
-                                <li><a href="http://i762.photobucket.com/albums/xx262/SteveStrummerGB/NINJA.png">Ninja Names</a>- 26 pseudowords. ~4.7-bits/pseudoword.</li>
+                                <li><a href="http://www.wiki.yak.net/589">Bubble Babble</a>- 6 vowels, 17 consonants. ~7-bits/pair.</li>
+                                <li><a href="http://i762.photobucket.com/albums/xx262/SteveStrummerGB/NINJA.png">Ninja Names</a>- 26 pseudowords. ~5-bits/pseudoword.</li>
                             </ul>
                         </p>
                         <div class="info-link"><a href="#" onclick="return toggle_info('pseudo-default', 'pseudo-fyi')">Close</a></div>
@@ -155,7 +155,7 @@
                         <div class="info-link"><a href="#" onclick="return toggle_info('base94-default', 'base94-fyi')">Info</a></div>
                     </div>
                     <div id="base94-fyi" class="cell">
-                        <p>This password is built from 94 printable ASCII characters. It provides the most entropy per character, at ~6.6-bits/character. As such, it is the shortest ASCII password on this page.</p>
+                        <p>This password is built from 94 printable ASCII characters. It provides the most entropy per character, at ~7-bits/character. As such, it is the shortest ASCII password on this page.</p>
                         <div class="info-link"><a href="#" onclick="return toggle_info('base94-default', 'base94-fyi')">Close</a></div>
                     </div>
                     <div id="base64-default" class="cell">
@@ -213,7 +213,7 @@
                         <div class="info-link"><a href="#" onclick="return toggle_info('base10-default', 'base10-fyi')">Info</a></div>
                     </div>
                     <div id="base10-fyi" class="cell">
-                        <p>Hexadecimal strings are unambiguous with digits 0-9 and characters a-f. However, they provide less entropy per character, at ~3.3-bits/digit, so it needs to be longer.</p>
+                        <p>Hexadecimal strings are unambiguous with digits 0-9 and characters a-f. However, they provide less entropy per character, at ~3-bits/digit, so it needs to be longer.</p>
                         <div class="info-link"><a href="#" onclick="return toggle_info('base10-default', 'base10-fyi')">Close</a></div>
                     </div>
                 </div>
