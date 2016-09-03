@@ -8,12 +8,17 @@ function toggle_info(id1, id2) {
     var div_default = document.getElementById(id1);
     var div_fyi = document.getElementById(id2);
 
-    if (div_default.style.display == 'table-cell') {
+    if (div_default.style.display == '' && div_fyi.style.display == 'none') {
         div_default.style.display = 'none';
-        div_fyi.style.display = 'table-cell';
+        if (screen.width >= 1000) div_fyi.style.display = 'table-cell';
+        else div_fyi.style.display = 'block';
     }
-    else {
-        div_default.style.display = 'table-cell';
+    else if (div_default.style.display == 'none' && div_fyi.style.display == 'table-cell') {
+        div_default.style.display = '';
+        div_fyi.style.display = 'none';
+    }
+    else if (div_default.style.display == 'none' && div_fyi.style.display == 'block') {
+        div_default.style.display = '';
         div_fyi.style.display = 'none';
     }
     return false;

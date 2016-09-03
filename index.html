@@ -22,7 +22,7 @@
         <div id="container">
             <div class="table">
                 <div id="row1" class="row">
-                    <div style="display:table-cell;" id="diceware-default" class="cell">
+                    <div id="diceware-default" class="cell">
                         <p class="cell-title"><strong>Diceware</strong></p>
                         <div class="optional">
                             <select>
@@ -57,7 +57,7 @@
                         <p><a href="http://world.std.com/~reinhold/diceware.html">Diceware passphrases</a> uses many obscure English words and non-words such as numbers and punctuation. Each word list is 7,776 words long, and contains ~12.9-bits of entropy per word.</p>
                         <div class="info-link"><a href="#" onclick="return toggle_info('diceware-default', 'diceware-fyi')">Close</a></div>
                     </div>
-                    <div style="display:table-cell;" id="eff-default" class="cell">
+                    <div id="eff-default" class="cell">
                         <p class="cell-title"><strong>EFF</strong></p>
                         <div class="optional">
                             <select>
@@ -84,7 +84,7 @@
                         </p>
                         <div class="info-link"><a href="#" onclick="return toggle_info('eff-default', 'eff-fyi')">Close</a></div>
                     </div>
-                    <div style="display:table-cell;" id="alt-default" class="cell">
+                    <div id="alt-default" class="cell">
                         <p class="cell-title"><strong>Alternate</strong></p>
                         <div class="optional">
                             <select>
@@ -119,7 +119,7 @@
                     </div>
                 </div>
                 <div id="row2" class="row">
-                    <div style="display:table-cell;" id="pseudo-default" class="cell">
+                    <div id="pseudo-default" class="cell">
                         <p class="cell-title"><strong>Pseudowords</strong></p>
                         <div class="optional">
                             <select>
@@ -144,7 +144,7 @@
                         </p>
                         <div class="info-link"><a href="#" onclick="return toggle_info('pseudo-default', 'pseudo-fyi')">Close</a></div>
                     </div>
-                    <div style="display:table-cell;" id="base94-default" class="cell">
+                    <div id="base94-default" class="cell">
                         <p class="cell-title"><strong>Base94 Characters</strong></p>
                         <button value="Generate" onclick="generate_base94();">Generate</button>
                         <p id="base94-pass" class="password"></p>
@@ -158,7 +158,7 @@
                         <p>This password is built from 94 printable ASCII characters. It provides the most entropy per character, at ~6.6-bits/character. As such, it is the shortest ASCII password on this page.</p>
                         <div class="info-link"><a href="#" onclick="return toggle_info('base94-default', 'base94-fyi')">Close</a></div>
                     </div>
-                    <div style="display:table-cell;" id="base64-default" class="cell">
+                    <div id="base64-default" class="cell">
                         <p class="cell-title"><strong>Base64 Characters</strong></p>
                         <button value="Generate" onclick="generate_base64();">Generate</button>
                         <p id="base64-pass" class="password"></p>
@@ -174,7 +174,7 @@
                     </div>
                 </div>
                 <div id="row3" class="row">
-                    <div style="display:table-cell;" id="base32-default" class="cell">
+                    <div id="base32-default" class="cell">
                         <p class="cell-title"><strong>Base32 Characters</strong></p>
                         <button value="Generate" onclick="generate_base32();">Generate</button>
                         <p id="base32-pass" class="password"></p>
@@ -188,7 +188,7 @@
                         <p>Base32 strings can still be mostly unambiguous while using more characters from the keyboard. This follows <a href="https://tools.ietf.org/html/rfc4648">RFC 4648</a>. 5-bits/character.</p>
                         <div class="info-link"><a href="#" onclick="return toggle_info('base32-default', 'base32-fyi')">Close</a></div>
                     </div>
-                    <div style="display:table-cell;" id="base16-default" class="cell">
+                    <div id="base16-default" class="cell">
                         <p class="cell-title"><strong>Base16 Characters</strong></p>
                         <button value="Generate" onclick="generate_base16();">Generate</button>
                         <p id="base16-pass" class="password"></p>
@@ -202,7 +202,7 @@
                         <p>Hexadecimal strings are unambiguous with digits 0-9 and characters a-f. However, they provide less entropy per character, so it needs to be longer.This follows <a href="https://tools.ietf.org/html/rfc4648">RFC 4648</a>. 4-bits/character.</p>
                         <div class="info-link"><a href="#" onclick="return toggle_info('base16-default', 'base16-fyi')">Close</a></div>
                     </div>
-                    <div style="display:table-cell;" id="base10-default" class="cell">
+                    <div id="base10-default" class="cell">
                         <p class="cell-title"><strong>Base10 Characters</strong></p>
                         <button value="Generate" onclick="generate_base10();">Generate</button>
                         <p id="base10-pass" class="password"></p>
