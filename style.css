@@ -1,4 +1,5 @@
 /* body tags */
+body { margin: 0; }
 button {
     position: absolute;
     right: 10px;
@@ -22,19 +23,14 @@ button {
     position: absolute;
     top: 10px;
 }
-.table {
-    border-collapse: separate;
-    border-spacing: 10px;
-    display: table;
-    width: 100%;
-}
-.row { display: table-row; }
 .cell {
-    border: 1px  solid black;
+    border: 1px solid black;
     display: table-cell;
-    padding: 0px 10px 20px 10px;
+    float: left;
+    height: 150px;
+    margin: 5px;
+    padding: 0px 4px;
     position: relative;
-    text-align: left;
     width: 400px;
 }
 .password {
@@ -52,18 +48,17 @@ button {
     right: 5px;
 }
 /* ids */
-#row1 .cell { height: 150px; }
-#row2 .cell { height: 125px; }
-#row3 .cell { height: 100px; }
 #container {
+    display: table;
     margin: 0 auto;
     width: 1260px;
 }
 #header {
-    margin: 0 auto;
-    width: 1260px;
+    display: table;
     text-align: center;
+    width: 100%;
 }
+#footer { clear: both; }
 #entropy-toolbar input[type="radio"] { display: none; }
 #entropy-toolbar input[type="radio"] + label {
     border: 1px solid #ccc;
@@ -118,31 +113,32 @@ button {
 #base32-fyi a:visited, #base16-fyi a:visited, #base10-fyi a:visited
 {color: yellow;}
 
-/* mobile */
-@media only screen and (max-width: 1260px) {
-    /* classes */
-    .cell {
-        display: block;
-        height: auto;
-        margin: 10px;
-        padding: 10px;
-        width: auto;
-    }
-    .password { padding-bottom: 10px; }
-    /* ids */
+@media only screen and (max-width: 1259px) {
     #container {
-        margin: 0 auto;
-        width: 100%;
+        width: 1024px;
     }
-    #header {
-        text-align: center;
-        width: 100%;
+    .cell {
+        width: 492px;
     }
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 1023px) {
+    #container {
+        width: 768px;
+    }
+    .cell {
+        width: 364px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    #container {
+        width: 480px;
+    }
+    .cell {
+        width: 100%;
+    }
     #entropy-toolbar {
-        width: 250px;
         margin: 0 auto;
     }
 }

@@ -10,12 +10,11 @@ function toggle_info(def, fyi) {
 
     if (div_default.style.display == '') {
         div_default.style.display = 'none';
-        if (screen.width >= 1260) div_fyi.style.display = 'table-cell';
-        else div_fyi.style.display = 'block';
+        div_fyi.style.display = 'table-cell';
     }
     else {
         div_default.style.display = '';
-        div_fyi.style.display = 'none';
+        div_fyi.style.display = '';
     }
     return false;
 }
