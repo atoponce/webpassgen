@@ -138,7 +138,7 @@ function generate_diceware(wordlist) {
     pass = generate_pass(len, wordlist, true);
     pass_id.innerHTML = pass;
     pass_length.innerHTML = pass.replace(/\s/g, '').length + " characters.";
-    pass_entropy.innerHTML = "~" + parseFloat(len * Math.log2(wordlist.length)).toFixed(0) + "-bits.";
+    pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(wordlist.length)) + "-bits.";
 }
 
 function generate_eff(wordlist) {
@@ -150,7 +150,7 @@ function generate_eff(wordlist) {
     pass = generate_pass(len, wordlist, true);
     pass_id.innerHTML = pass;
     pass_length.innerHTML = pass.replace(/\s/g, '').length + " characters.";
-    pass_entropy.innerHTML = "~" + parseFloat(len * Math.log2(wordlist.length)).toFixed(0) + "-bits.";
+    pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(wordlist.length)) + "-bits.";
 }
 
 function generate_alternate(wordlist) {
@@ -162,7 +162,7 @@ function generate_alternate(wordlist) {
     pass = generate_pass(len, wordlist, true);
     pass_id.innerHTML = pass;
     pass_length.innerHTML = pass.replace(/\s/g, '').length + " characters.";
-    pass_entropy.innerHTML = "~" + parseFloat(len * Math.log2(wordlist.length)).toFixed(0) + "-bits.";
+    pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(wordlist.length)) + "-bits.";
 }
 
 function generate_ninja() {
@@ -175,7 +175,7 @@ function generate_ninja() {
         pass += ninja[sec_rand(len)];
         if (i%3 == 2 && i!=len-1) pass += "-";
     }
-    return [pass, ninja.length, len*Math.log2(ninja.length).toFixed(0)];
+    return [pass, ninja.length, Math.floor(len*Math.log2(ninja.length))];
 }
 
 function generate_babble() {
@@ -205,7 +205,7 @@ function generate_babble() {
 
     for (var i=pass.length; i>0; i-=5) pass.splice(i, 0, "-");
     pass.pop() // strip last "-"
-    return [pass.join(""), (len+2)*5, tot_ent.toFixed(0)];
+    return [pass.join(""), (len+2)*5, Math.floor(tot_ent)];
 }
 
 function generate_pseudowords() {
@@ -238,7 +238,7 @@ function generate_base94() {
     pass = pass.replace(/</g, "&lt;");
     pass = pass.replace(/>/g, "&gt;");
     pass_id.innerHTML = pass;
-    pass_entropy.innerHTML = "~" + parseFloat(len * Math.log2(s.length)).toFixed(0) + "-bits.";
+    pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(s.length)) + "-bits.";
 }
 
 function generate_base64() {
@@ -251,7 +251,7 @@ function generate_base64() {
     var pass_entropy = document.getElementById('base64-entropy');
     pass_id.innerHTML = pass;
     pass_length.innerHTML = pass.replace(/-/g, '').length + " characters.";
-    pass_entropy.innerHTML = "~" + parseFloat(len * Math.log2(s.length)).toFixed(0) + "-bits.";
+    pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(s.length)) + "-bits.";
 }
 
 function generate_base32() {
@@ -264,7 +264,7 @@ function generate_base32() {
     var pass_entropy = document.getElementById('base32-entropy');
     pass_id.innerHTML = pass;
     pass_length.innerHTML = pass.replace(/-/g, '').length + " characters.";
-    pass_entropy.innerHTML = "~" + parseFloat(len * Math.log2(s.length)).toFixed(0) + "-bits.";
+    pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(s.length)) + "-bits.";
 }
 
 function generate_base16() {
@@ -277,7 +277,7 @@ function generate_base16() {
     var pass_entropy = document.getElementById('base16-entropy');
     pass_id.innerHTML = pass;
     pass_length.innerHTML = pass.replace(/-/g, '').length + " characters.";
-    pass_entropy.innerHTML = "~" + parseFloat(len * Math.log2(s.length)).toFixed(0) + "-bits.";
+    pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(s.length)) + "-bits.";
 }
 
 function generate_base10() {
@@ -290,5 +290,5 @@ function generate_base10() {
     var pass_entropy = document.getElementById('base10-entropy');
     pass_id.innerHTML = pass;
     pass_length.innerHTML = pass.replace(/-/g, '').length + " characters.";
-    pass_entropy.innerHTML = "~" + parseFloat(len * Math.log2(s.length)).toFixed(0) + "-bits.";
+    pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(s.length)) + "-bits.";
 }
