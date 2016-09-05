@@ -114,31 +114,26 @@ button {
 {color: yellow;}
 
 @media only screen and (max-width: 1259px) {
-    #container {
-        width: 1024px;
-    }
-    .cell {
-        width: 492px;
-    }
+    #container { width: 1024px; }
+    .cell { width: 492px; }
 }
-
 @media only screen and (max-width: 1023px) {
-    #container {
-        width: 768px;
-    }
-    .cell {
-        width: 364px;
-    }
+    #container { width: 768px; }
+    .cell { width: 364px; }
 }
-
 @media only screen and (max-width: 767px) {
-    #container {
-        width: 480px;
-    }
-    .cell {
-        width: 100%;
-    }
+    #container { width: 480px; }
+    .cell { width: 460px; }
     #entropy-toolbar {
         margin: 0 auto;
+	width: 250px;
+    }
+}
+@media only screen and (max-width: 479px) {
+    #container { width: 100%; }
+    .cell { width: 95%; }
+    #entropy-toolbar {
+        margin: 0 auto;
+        width: 250px;
     }
 }
