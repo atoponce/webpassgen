@@ -10,6 +10,13 @@
         <div id="container">
             <div id="header">
             <h1>Passphrase and Password Generator</h1>
+                <ul id="navigation">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="what.html">What is entropy?</a></li>
+                    <li><a href="#">How do I use these passwords?</a></li>
+                    <li><a href="#">Why should I care?</a></li>
+                    <li><a href="#">Test password entropy</a></li>
+                </ul>
                 <p>Select minimum entropy: </p>
                 <div id="entropy-toolbar">
                     <input type="radio" name="entropy" value="55" id="rtb1" onclick="load_passes()"><label for="rtb1">55-bits</label>
@@ -213,7 +220,7 @@
                 </div>
             </div>
             <div id="footer">
-                <p><strong>This site is not logging the generated passwords!</strong> If you don't believe me, view the HTML source of this webpage, save it to a text file, disconnect your computer from the Internet, and run it locally in your browser. Everything is handled via local JavaScript. Each of these passwords and passphrases is based on <a href="https://pthree.org/2014/03/16/creating-strong-passwords-without-a-computer-part-0-understanding-entropy/">entropy</a>. 55-bits of entropy (9 random characters) is just barely outside of the range of a hobbyist password cracker. Test additional password entropy at <a href="https://ae7.st/ent/">https://ae7.st/ent/</a>. The source code for this site is available at <a href="https://github.com/atoponce/webpassgen">https://github.com/atoponce/webpassgen</a>.</p>
+                <p><strong>Disclaimer: This site is not logging the generated passwords!</strong> If you don't believe me, check out the source code at <a href="https://github.com/atoponce/webpassgen">https://github.com/atoponce/webpassgen</a>, and run it locally in your browser, after disconnecting from the Internet.</p>
             </div>
         </div>
         <script src="sjcl.js"></script>

@@ -58,6 +58,14 @@ button {
     text-align: center;
     width: 100%;
 }
+#navigation li {
+    display: inline;
+    list-style-type: none;
+    padding-right: 20px;
+}
+#content {
+    padding: 10px;
+}
 #footer { clear: both; }
 #entropy-toolbar { margin: 10px auto; }
 #entropy-toolbar input[type="radio"] { display: none; }
