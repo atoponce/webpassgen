@@ -59,6 +59,7 @@ button {
     width: 100%;
 }
 #footer { clear: both; }
+#entropy-toolbar { margin: 10px auto; }
 #entropy-toolbar input[type="radio"] { display: none; }
 #entropy-toolbar input[type="radio"] + label {
     border: 1px solid #ccc;
@@ -75,7 +76,7 @@ button {
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff',endColorstr='#ffe6e6e6',GradientType=0);
     font-size: 14px;
     line-height: 20px;
-    margin:-2px;
+    margin: -2px;
     padding: 4px 12px;
     text-align: center;
     text-shadow: 0 1px 1px rgba(255,255,255,0.75);
@@ -114,10 +115,6 @@ button {
 {color: yellow;}
 
 @media only screen and (max-width: 1259px) {
-    #container { width: 1024px; }
-    .cell { width: 492px; }
-}
-@media only screen and (max-width: 1023px) {
     #container { width: 768px; }
     .cell { width: 364px; }
 }
@@ -125,15 +122,19 @@ button {
     #container { width: 480px; }
     .cell { width: 460px; }
     #entropy-toolbar {
-        margin: 0 auto;
-	width: 250px;
+	width: 195px;
     }
+    #entropy-toolbar input[type="radio"] + label:nth-child(8) { margin-top: 2px; }
+    #entropy-toolbar input[type="radio"] + label:nth-child(10){ margin-top: 2px; }
+    #entropy-toolbar input[type="radio"] + label:nth-child(12){ margin-top: 2px; }
 }
 @media only screen and (max-width: 479px) {
     #container { width: 100%; }
     .cell { width: 95%; }
     #entropy-toolbar {
-        margin: 0 auto;
-        width: 250px;
+        width: 195px;
     }
+    #entropy-toolbar input[type="radio"] + label:nth-child(8) { margin-top: 2px; }
+    #entropy-toolbar input[type="radio"] + label:nth-child(10){ margin-top: 2px; }
+    #entropy-toolbar input[type="radio"] + label:nth-child(12){ margin-top: 2px; }
 }
