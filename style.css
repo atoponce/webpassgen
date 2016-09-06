@@ -122,7 +122,7 @@ button {
     #container { width: 480px; }
     .cell { width: 460px; }
     #entropy-toolbar {
-	width: 195px;
+	width: 215px;
     }
     #entropy-toolbar input[type="radio"] + label:nth-child(8) { margin-top: 2px; }
     #entropy-toolbar input[type="radio"] + label:nth-child(10){ margin-top: 2px; }
@@ -132,7 +132,7 @@ button {
     #container { width: 100%; }
     .cell { width: 95%; }
     #entropy-toolbar {
-        width: 195px;
+        width: 215px;
     }
     #entropy-toolbar input[type="radio"] + label:nth-child(8) { margin-top: 2px; }
     #entropy-toolbar input[type="radio"] + label:nth-child(10){ margin-top: 2px; }
