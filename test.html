@@ -44,10 +44,6 @@
                 position: absolute;
                 top: 5px;
             }
-            .warning {
-                color: red;
-                font-weight: bold;
-            }
             @media only screen and (max-width: 767px) {
                 .align-center { width: 480px; }
             }
@@ -61,16 +57,13 @@
             <div id="header">
                 <h1>Passphrase and Password Generator</h1>
                 <ul id="navigation">
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html">Generate Passwords</a></li>
                     <li><a href="what.html">What is entropy?</a></li>
-                    <li><a href="#">How do I use these passwords?</a></li>
-                    <li><a href="#">Why should I care?</a></li>
-                    <li><a href="test.html">Test password entropy</a></li>
+                    <li><a href="test.html">Entropy Testing Meter</a></li>
                 </ul>
             </div>
             <div class="align-center">
                 <p class="justify-left">Below is a password meter that tests entropy using <a href="https://github.com/dropbox/zxcvbn">zxcvbn by Dropbox</a>. It tests for dictionary words, leet-speak, recognizable patterns, and other heuristics to give an educated guess at what the entropy could be.</p>
-                <p class="justify-left"><span class="warning">DO NOT ENTER YOUR ACTUAL PASSWORDS!</span> I promise I'm not logging them, but you can't prove that. This is meant as an exercise to show you weak or strong your intuition may be when creating passwords.</p>
                 <input type="password" id="password" name="password" type="text" size="48">
                 <div id="show_me">
                     <input onclick="toggle_password_visibility()" id="checkbox" type="checkbox" name="checkbox" />
