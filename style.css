@@ -12,12 +12,15 @@ button {
     font-size: 12px;
     position: absolute;
 }
-
 .entropy {
     left: 50%;
     position: absolute;
 }
-
+.passphrase-separator {
+    bottom: 5px;
+    right: 40px;
+    position: absolute;
+}
 .optional {
     left: 10px;
     position: absolute;
