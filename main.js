@@ -142,10 +142,12 @@ function generate_diceware(wordlist) {
     var pass_id = document.getElementById('diceware-pass');
     var pass_length = document.getElementById('diceware-length');
     var pass_entropy = document.getElementById('diceware-entropy');
+    var hyphens = document.getElementById('hyphen8_1');
     pass = generate_pass(len, wordlist, true);
     pass_id.innerHTML = pass;
     pass_length.innerHTML = pass.replace(/\s/g, '').length + " characters.";
     pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(wordlist.length)) + "-bits.";
+    if (hyphens.checked) pass_id.innerHTML = pass.split(' ').join('-');
 }
 
 function generate_eff(wordlist) {
@@ -154,10 +156,12 @@ function generate_eff(wordlist) {
     var pass_id = document.getElementById('eff-pass');
     var pass_length = document.getElementById('eff-length');
     var pass_entropy = document.getElementById('eff-entropy');
+    var hyphens = document.getElementById('hyphen8_2');
     pass = generate_pass(len, wordlist, true);
     pass_id.innerHTML = pass;
     pass_length.innerHTML = pass.replace(/\s/g, '').length + " characters.";
     pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(wordlist.length)) + "-bits.";
+    if (hyphens.checked) pass_id.innerHTML = pass.split(' ').join('-');
 }
 
 function generate_alternate(wordlist) {
@@ -166,10 +170,12 @@ function generate_alternate(wordlist) {
     var pass_id = document.getElementById('alt-pass');
     var pass_length = document.getElementById('alt-length');
     var pass_entropy = document.getElementById('alt-entropy');
+    var hyphens = document.getElementById('hyphen8_3');
     pass = generate_pass(len, wordlist, true);
     pass_id.innerHTML = pass;
     pass_length.innerHTML = pass.replace(/\s/g, '').length + " characters.";
     pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(wordlist.length)) + "-bits.";
+    if (hyphens.checked) pass_id.innerHTML = pass.split(' ').join('-');
 }
 
 function generate_ninja() {
