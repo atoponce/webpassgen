@@ -18,14 +18,20 @@ function toggle_info(def, fyi) {
     }
     return false;
 }
+
 function toggle_hyphens(cbox, pass_div) {
     var pass_id = document.getElementById(pass_div);
     var pass = pass_id.innerHTML;
     var hyphens = document.getElementById(cbox);
 
-    if (hyphens.checked) pass_id.innerHTML = pass.split(' ').join('-');
-    else pass_id.innerHTML = pass.split('-').join(' ');
+    if (hyphens.checked) { pass_id.innerHTML = pass.replace(/ /g,'-'); }
+    else {
+        pass = pass.replace(/([^-])-/g, '$1 ');
+        pass = pass.replace(/-([^-])/g, ' $1');
+        pass_id.innerHTML = pass;
+    }
 }
+
 function get_entropy() {
     return parseInt(document.querySelector('input[name="entropy"]:checked').value);
 }
