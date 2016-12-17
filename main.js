@@ -24,12 +24,21 @@ function toggle_hyphens(cbox, pass_div) {
     var pass = pass_id.innerHTML;
     var hyphens = document.getElementById(cbox);
 
-    if (hyphens.checked) { pass_id.innerHTML = pass.replace(/ /g,'-'); }
-    else {
-        pass = pass.replace(/([^-])-/g, '$1 ');
-        pass = pass.replace(/-([^-])/g, ' $1');
-        pass_id.innerHTML = pass;
+    if (hyphens.checked) {
+        // some wordlists have words of only hyphens, such as '---'
+        // if 2+ show up consecutively, separate them with an underscore
+        // EG:
+        //      "ram virgil --- --- aqua jewish" would then become:
+        //      "ram-virgil----_----aqua-jewish"
+        pass = pass.replace(/- -/g, '-_-');
+        pass = pass.replace(/ /g,'-');
     }
+    else {
+        pass = pass.replace(/-_-/g, '- -');
+        pass = pass.replace(/([^- ])-/g, '$1 ');
+        pass = pass.replace(/-([^- ])/g, ' $1');
+    }
+    pass_id.innerHTML = pass;
 }
 
 function get_entropy() {
