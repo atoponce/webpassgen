@@ -234,6 +234,7 @@
         <script src="sjcl.js"></script>
         <script src="main.js"></script>
         <script type="text/javascript">
+            sjcl.random.startCollectors(); // start gathering entropy
             function load_passes() {
                 generate_passphrase('diceware');
                 generate_passphrase('eff');
