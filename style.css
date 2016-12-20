@@ -99,14 +99,16 @@ button {
     -moz-box-shadow: inset 0 2px 4px rgba(0,0,0,0.15),0 1px 2px rgba(0,0,0,0.05);
     box-shadow: inset 0 2px 4px rgba(0,0,0,0.15),0 1px 2px rgba(0,0,0,0.05);
     font-weight: bold;
+    text-decoration: underline;
     outline: 0;
 }
-#entropy-toolbar input[type="radio"] + label:nth-child(2) { background: #ff6961; }
-#entropy-toolbar input[type="radio"] + label:nth-child(4) { background: #ffb347; }
-#entropy-toolbar input[type="radio"] + label:nth-child(6) { background: #fdfd96; }
-#entropy-toolbar input[type="radio"] + label:nth-child(8) { background: #77dd77; }
-#entropy-toolbar input[type="radio"] + label:nth-child(10){ background: #77dd77; }
-#entropy-toolbar input[type="radio"] + label:nth-child(12){ background: #77dd77; }
+
+#entropy-55 { background: #ff6961; }
+#entropy-60 { background: #ffb347; }
+#entropy-65 { background: #fdfd96; }
+#entropy-70 { background: #77dd77; }
+#entropy-75 { background: #77dd77; }
+#entropy-80 { background: #77dd77; }
 
 #eff-fyi, #diceware-fyi, #alt-fyi, #pseudo-fyi, #base94-fyi, #base64-fyi,
 #base32-fyi, #base16-fyi, #base10-fyi {
@@ -135,9 +137,9 @@ button {
     #entropy-toolbar {
 	width: 215px;
     }
-    #entropy-toolbar input[type="radio"] + label:nth-child(8) { margin-top: 2px; }
-    #entropy-toolbar input[type="radio"] + label:nth-child(10){ margin-top: 2px; }
-    #entropy-toolbar input[type="radio"] + label:nth-child(12){ margin-top: 2px; }
+    #entropy-70 { margin-top: 2px; }
+    #entropy-75 { margin-top: 2px; }
+    #entropy-80 { margin-top: 2px; }
 }
 @media only screen and (max-width: 479px) {
     #container { width: 100%; }
@@ -145,7 +147,7 @@ button {
     #entropy-toolbar {
         width: 215px;
     }
-    #entropy-toolbar input[type="radio"] + label:nth-child(8) { margin-top: 2px; }
-    #entropy-toolbar input[type="radio"] + label:nth-child(10){ margin-top: 2px; }
-    #entropy-toolbar input[type="radio"] + label:nth-child(12){ margin-top: 2px; }
+    #entropy-70 { margin-top: 2px; }
+    #entropy-75 { margin-top: 2px; }
+    #entropy-80 { margin-top: 2px; }
 }
