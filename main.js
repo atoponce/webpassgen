@@ -114,6 +114,7 @@ function load_js(script_obj, source) {
             case "Simpsons": wordlists[s_list] = simpsons_wordlist; break;
             case "Spanish": wordlists[s_list] = spanish_wordlist; break;
             case "Swedish": wordlists[s_list] = swedish_wordlist; break;
+            case "Trump": wordlists[s_list] = trump_wordlist; break;
             case "Turkish": wordlists[s_list] = turkish_wordlist; break;
         }
         generate_passphrase(source);
