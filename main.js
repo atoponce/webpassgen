@@ -121,20 +121,25 @@ function load_js(script_obj, source) {
     };
 }
 
+/* Uniform, unbiased, secure, random number generator */
 function sec_rand(count) {
-    // provided by `Sc00bz' at: https://www.reddit.com/r/crypto/comments/4xe21s/
-    var skip = 0x7fffffff - 0x7fffffff % count;
-    var result;
-    var rand;
-    if (((count - 1) & count) === 0) {
-        rand = sjcl.random.randomWords(1);
-        return rand[0] & (count - 1);
-    }
+    var min;
+    var paranoia = 10; // for sjcl.random.randomWords()
+
+    // ensure `count' is a 32-bit integer
+    count >>>= 0;
+
+    // force the range of [`min', 2**32] to be a multiple of `count'
+    min = (-count >>> 0) % count;
+
     do {
-        rand = sjcl.random.randomWords(1);
-        result = rand[0] & 0x7fffffff;
-    } while (result >= skip);
-    return result % count;
+        // sjcl.random.randomWords() range = [-2147483648, 2147483647]
+        if(sjcl.random.isReady()) {
+            rand = sjcl.random.randomWords(1, paranoia)[0] & 0x7fffffff;
+        }
+    } while (rand < min);
+
+    return rand % count;
 }
 
 function generate_pass(len, set, spaces) {
