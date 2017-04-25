@@ -242,10 +242,40 @@ function generate_babble() {
     return [pass.join(""), (len+2)*5, Math.floor(tot_ent)];
 }
 
+function generate_cosby() {
+    // 32 unique words = 5 bits of entropy per word
+    var cosby = ['Bada','Badum','Bee','Bloo','Bop','Caw','Derp','Dip','Doo','Dub','Hip','Ka','Loo','Meep','Mim','Moom','Na','Naw','Nerp','Nup','Pa','Papa','Spee','Squee','Squoo','Woobly','Wop','Yee','Zap','Zip','Zop','Zoop','Zow'];
+    var entropy = get_entropy();
+    var len = Math.ceil(entropy/Math.log2(cosby.length));
+    var pass = "";
+    
+    for (i=0; i<len; i++) {
+        pass += cosby[sec_rand(len)];
+        if (i%3 == 2 && i!=len-1) pass += "-";
+    }
+    return [pass, cosby.length, Math.floor(len*Math.log2(cosby.length))];
+}
+
+function generate_kpop() {
+    // 64 unique words = 6 bits of entropy per word
+    var kpop = ['A','Ah','Bae','Bin','Bo','Choi','Chul','Da','Do','Dong','Eun','Gi','Gun','Ha','Hae','Hee','Ho','Hu','Hwa','Hwan','Hye','Hyo','Hyun','Il','In','Ja','Jae','Ji','Jin','Jong','Joo','Joon','Ju','Jun','Jung','Ki','Kun','Kyu','Lee','Mi','Min','Moon','Nam','Ok','Park','Rin','Seo','Seul','Shi','Sik','So','Song','Soo','Su','Sun','Sung','Won','Woo','Ye','Yeon','Yoo','Yu','Yul','Yun'];
+    var entropy = get_entropy();
+    var len = Math.ceil(entropy/Math.log2(kpop.length));
+    var pass = "";
+    
+    for (i=0; i<len; i++) {
+        pass += kpop[sec_rand(len)];
+        if (i%2 == 1 && i!=len-1) pass += "-";
+    }
+    return [pass, kpop.length, Math.floor(len*Math.log2(kpop.length))];
+}
+
 function generate_pseudowords() {
     var pseudo = document.querySelector('option[name="pseudowords"]:checked').value;
     if (pseudo == "Bubble Babble") var ret = generate_babble();
     else if (pseudo == "Secret Ninja") var ret = generate_ninja();
+    else if (pseudo == "Cosby Bebop") var ret = generate_cosby();
+    else if (pseudo == "Korean K-pop") var ret = generate_kpop();
     var pass = ret[0];
     var len = ret[1];
     var ent = ret[2];
