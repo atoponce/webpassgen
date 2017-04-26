@@ -89,9 +89,11 @@ function load_js(script_obj, source) {
 
     script_obj.onload = function () {
         switch(s_list) {
+            case "Basque": wordlists[s_list] = basque_wordlist; break;
             case "Beale": wordlists[s_list] = beale_wordlist; break;
             case "Bitcoin": wordlists[s_list] = bitcoin_wordlist; break;
             case "Catalan": wordlists[s_list] = catalan_wordlist; break;
+            case "Czech": wordlists[s_list] = czech_wordlist; break;
             case "Danish": wordlists[s_list] = danish_wordlist; break;
             case "Distant Words": wordlists[s_list] = eff_distant; break;
             case "Dutch": wordlists[s_list] = dutch_wordlist; break;
@@ -110,6 +112,7 @@ function load_js(script_obj, source) {
             case "PGP": wordlists[s_list] = pgp_wordlist; break;
             case "Polish": wordlists[s_list] = polish_wordlist; break;
             case "RockYou": wordlists[s_list] = rockyou_wordlist; break;
+            case "Russian": wordlists[s_list] = russian_wordlist; break;
             case "Short Words": wordlists[s_list] = eff_short; break;
             case "Simpsons": wordlists[s_list] = simpsons_wordlist; break;
             case "Spanish": wordlists[s_list] = spanish_wordlist; break;
