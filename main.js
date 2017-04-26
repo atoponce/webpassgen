@@ -92,6 +92,7 @@ function load_js(script_obj, source) {
             case "Basque": wordlists[s_list] = basque_wordlist; break;
             case "Beale": wordlists[s_list] = beale_wordlist; break;
             case "Bitcoin": wordlists[s_list] = bitcoin_wordlist; break;
+            case "Bulgarian": wordlists[s_list] = bulgarian_wordlist; break;
             case "Catalan": wordlists[s_list] = catalan_wordlist; break;
             case "Czech": wordlists[s_list] = czech_wordlist; break;
             case "Danish": wordlists[s_list] = danish_wordlist; break;
