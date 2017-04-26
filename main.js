@@ -112,6 +112,7 @@ function load_js(script_obj, source) {
             case "Norwegian": wordlists[s_list] = norwegian_wordlist; break;
             case "PGP": wordlists[s_list] = pgp_wordlist; break;
             case "Polish": wordlists[s_list] = polish_wordlist; break;
+            case "Portuguese": wordlists[s_list] = portuguese_wordlist; break;
             case "RockYou": wordlists[s_list] = rockyou_wordlist; break;
             case "Russian": wordlists[s_list] = russian_wordlist; break;
             case "Short Words": wordlists[s_list] = eff_short; break;
