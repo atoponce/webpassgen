@@ -1,3 +1,8 @@
+@font-face {
+    font-family: "Noto Emoji";
+    src: url(NotoEmoji-Regular.ttf);
+}
+
 /* body tags */
 body { margin: 0; }
 button {

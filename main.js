@@ -63,6 +63,10 @@ function get_source_list(source) {
 function generate_passphrase(source) {
     var s_list = get_source_list(source);
 
+    if (s_list == "Emoji") {
+        var alt = document.getElementById('alt-pass');
+        alt.style.fontFamily = "Noto Emoji";
+    }
     if (s_list == "Distant Words") { file = "eff_distant"; }
     else if (s_list == "Long Words") { file = "eff_long"; }
     else if (s_list == "Short Words") { file = "eff_short"; }
@@ -99,6 +103,7 @@ function load_js(script_obj, source) {
             case "Distant Words": wordlists[s_list] = eff_distant; break;
             case "Dutch": wordlists[s_list] = dutch_wordlist; break;
             case "Elvish": wordlists[s_list] = elvish_wordlist; break;
+            case "Emoji": wordlists[s_list] = emoji_wordlist; break;
             case "English": wordlists[s_list] = english_wordlist; break;
             case "Esperanto": wordlists[s_list] = esperanto_wordlist; break;
             case "Finnish": wordlists[s_list] = finnish_wordlist; break;
