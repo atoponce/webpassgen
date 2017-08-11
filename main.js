@@ -63,10 +63,6 @@ function get_source_list(source) {
 function generate_passphrase(source) {
     var s_list = get_source_list(source);
 
-    if (s_list == "Emoji") {
-        var alt = document.getElementById('alt-pass');
-        alt.style.fontFamily = "Noto Emoji";
-    }
     if (s_list == "Distant Words") { file = "eff_distant"; }
     else if (s_list == "Long Words") { file = "eff_long"; }
     else if (s_list == "Short Words") { file = "eff_short"; }
@@ -84,6 +80,11 @@ function generate_passphrase(source) {
             case 'eff': generate_eff(wordlists[s_list]); break;
             case 'alternate': generate_alternate(wordlists[s_list]); break;
         }
+    }
+
+    if (s_list == "Emoji") {
+        var alt = document.getElementById('alt-pass');
+        alt.style.fontFamily = "Noto Emoji";
     }
 }
 
