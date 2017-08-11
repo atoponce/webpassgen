@@ -66,6 +66,8 @@ function generate_passphrase(source) {
     if (s_list == "Distant Words") { file = "eff_distant"; }
     else if (s_list == "Long Words") { file = "eff_long"; }
     else if (s_list == "Short Words") { file = "eff_short"; }
+    else if (s_list == "Chinese (Pinyin)") { file = "pinyin"; }
+    else if (s_list == "Chinese (Wubi)") { file = "wubi"; }
     else file = s_list.toLowerCase();
 
     if (!wordlists.hasOwnProperty(s_list)) {
@@ -81,7 +83,6 @@ function generate_passphrase(source) {
             case 'alternate': generate_alternate(wordlists[s_list]); break;
         }
     }
-
 }
 
 function load_js(script_obj, source) {
@@ -95,6 +96,8 @@ function load_js(script_obj, source) {
             case "Bitcoin": wordlists[s_list] = bitcoin_wordlist; break;
             case "Bulgarian": wordlists[s_list] = bulgarian_wordlist; break;
             case "Catalan": wordlists[s_list] = catalan_wordlist; break;
+            case "Chinese (Pinyin)": wordlists[s_list] = pinyin_wordlist; break;
+            case "Chinese (Wubi)": wordlists[s_list] = wubi_wordlist; break;
             case "Czech": wordlists[s_list] = czech_wordlist; break;
             case "Danish": wordlists[s_list] = danish_wordlist; break;
             case "Distant Words": wordlists[s_list] = eff_distant; break;
