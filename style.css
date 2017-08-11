@@ -23,7 +23,8 @@ button {
 }
 .passphrase-separator {
     bottom: 5px;
-    right: 40px;
+    /*right: 40px;*/
+    right: 5px;
     position: absolute;
 }
 .optional {
@@ -39,7 +40,7 @@ button {
     margin: 5px;
     padding: 0px 4px;
     position: relative;
-    width: 400px;
+    width: 364px;
 }
 .password {
     font-family: "Dejavu Sans Mono", "Courier New", "Lucidia Console", Monaco, monospace;
@@ -59,7 +60,7 @@ button {
 #container {
     display: table;
     margin: 0 auto;
-    width: 1260px;
+    width: 768px;
 }
 #header {
     display: table;
@@ -107,6 +108,7 @@ button {
     text-decoration: underline;
     outline: 0;
 }
+#emoji-pass { font-family: "Noto Emoji"; }
 
 #entropy-55 { background: #ff6961; }
 #entropy-60 { background: #ffb347; }
@@ -132,16 +134,11 @@ button {
 #base32-fyi a:visited, #base16-fyi a:visited, #base10-fyi a:visited
 {color: yellow;}
 
-@media only screen and (max-width: 1259px) {
-    #container { width: 768px; }
-    .cell { width: 364px; }
-}
 @media only screen and (max-width: 767px) {
     #container { width: 480px; }
     .cell { width: 460px; }
-    #entropy-toolbar {
-	width: 215px;
-    }
+
+    #entropy-toolbar { width: 215px; }
     #entropy-70 { margin-top: 2px; }
     #entropy-75 { margin-top: 2px; }
     #entropy-80 { margin-top: 2px; }
@@ -149,9 +146,8 @@ button {
 @media only screen and (max-width: 479px) {
     #container { width: 100%; }
     .cell { width: 95%; }
-    #entropy-toolbar {
-        width: 215px;
-    }
+
+    #entropy-toolbar { width: 215px; }
     #entropy-70 { margin-top: 2px; }
     #entropy-75 { margin-top: 2px; }
     #entropy-80 { margin-top: 2px; }

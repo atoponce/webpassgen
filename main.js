@@ -82,10 +82,6 @@ function generate_passphrase(source) {
         }
     }
 
-    if (s_list == "Emoji") {
-        var alt = document.getElementById('alt-pass');
-        alt.style.fontFamily = "Noto Emoji";
-    }
 }
 
 function load_js(script_obj, source) {
@@ -104,7 +100,6 @@ function load_js(script_obj, source) {
             case "Distant Words": wordlists[s_list] = eff_distant; break;
             case "Dutch": wordlists[s_list] = dutch_wordlist; break;
             case "Elvish": wordlists[s_list] = elvish_wordlist; break;
-            case "Emoji": wordlists[s_list] = emoji_wordlist; break;
             case "English": wordlists[s_list] = english_wordlist; break;
             case "Esperanto": wordlists[s_list] = esperanto_wordlist; break;
             case "Finnish": wordlists[s_list] = finnish_wordlist; break;
@@ -161,7 +156,6 @@ function generate_pass(len, set, spaces) {
         if (spaces) {
             pass += pass_arr[sec_rand(set.length)];
             pass += " ";
-            
         }
         else pass += pass_arr[sec_rand(set.length)];
     }
@@ -298,16 +292,24 @@ function generate_pseudowords() {
     pass_entropy.innerHTML = "~" + ent + "-bits.";
 }
 
-function generate_base94() {
+function generate_random() {
     var s = '';
     var entropy = get_entropy();
-    var pass_id = document.getElementById('base94-pass');
-    var pass_length = document.getElementById('base94-length');
-    var pass_entropy = document.getElementById('base94-entropy');
-    for (i=0; i<94; i++) s += String.fromCharCode(33+i);
+    var pass_id = document.getElementById('random-pass');
+    var pass_length = document.getElementById('random-length');
+    var pass_entropy = document.getElementById('random-entropy');
+    var option = document.querySelector('option[name="random"]:checked').value;
+
+    if (option == "Base-94") { for (i=0; i<94; i++) s += String.fromCharCode(33+i); }
+    else if (option == "Base-64") { var s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/"; }
+    else if (option == "Base-32") { var s = "0123456789abcdefghjkmnpqrstvwxyz"; }
+    else if (option == "Base-16") { var s = "0123456789abcdef"; }
+    else if (option == "Base-10") { var s = "0123456789"; }
+
     var len = Math.ceil(entropy/Math.log2(s.length));
     var pass = generate_pass(len, s);
     pass_length.innerHTML = pass.length + " characters.";
+
     // fix HTML '&', '<', and '>'
     pass = pass.replace(/&/g, "&amp");
     pass = pass.replace(/</g, "&lt;");
@@ -316,54 +318,14 @@ function generate_base94() {
     pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(s.length)) + "-bits.";
 }
 
-function generate_base64() {
+function generate_emoji() {
     var entropy = get_entropy();
-    var s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/";
-    var len = Math.ceil(entropy/Math.log2(s.length));
-    var pass = generate_pass(len, s);
-    var pass_id = document.getElementById('base64-pass');
-    var pass_length = document.getElementById('base64-length');
-    var pass_entropy = document.getElementById('base64-entropy');
+    var pass_id = document.getElementById('emoji-pass');
+    var pass_length = document.getElementById('emoji-length');
+    var pass_entropy = document.getElementById('emoji-entropy');
+    var len = Math.ceil(entropy/Math.log2(emoji_wordlist.length));
+    var pass = generate_pass(len, emoji_wordlist);
+    pass_length.innerHTML = pass.length + " characters.";
     pass_id.innerHTML = pass;
-    pass_length.innerHTML = pass.replace(/-/g, '').length + " characters.";
-    pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(s.length)) + "-bits.";
-}
-
-function generate_base32() {
-    var entropy = get_entropy();
-    var s = "0123456789abcdefghjkmnpqrstvwxyz";
-    var len = Math.ceil(entropy/Math.log2(s.length));
-    var pass = generate_pass(len, s);
-    var pass_id = document.getElementById('base32-pass');
-    var pass_length = document.getElementById('base32-length');
-    var pass_entropy = document.getElementById('base32-entropy');
-    pass_id.innerHTML = pass;
-    pass_length.innerHTML = pass.replace(/-/g, '').length + " characters.";
-    pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(s.length)) + "-bits.";
-}
-
-function generate_base16() {
-    var entropy = get_entropy();
-    var s = "0123456789abcdef"
-    var len = Math.ceil(entropy/Math.log2(s.length));
-    var pass = generate_pass(len, s);
-    var pass_id = document.getElementById('base16-pass');
-    var pass_length = document.getElementById('base16-length');
-    var pass_entropy = document.getElementById('base16-entropy');
-    pass_id.innerHTML = pass;
-    pass_length.innerHTML = pass.replace(/-/g, '').length + " characters.";
-    pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(s.length)) + "-bits.";
-}
-
-function generate_base10() {
-    var entropy = get_entropy();
-    var s = "0123456789"
-    var len = Math.ceil(entropy/Math.log2(s.length));
-    var pass = generate_pass(len, s);
-    var pass_id = document.getElementById('base10-pass');
-    var pass_length = document.getElementById('base10-length');
-    var pass_entropy = document.getElementById('base10-entropy');
-    pass_id.innerHTML = pass;
-    pass_length.innerHTML = pass.replace(/-/g, '').length + " characters.";
-    pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(s.length)) + "-bits.";
+    pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(emoji_wordlist.length)) + "-bits.";
 }
