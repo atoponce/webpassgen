@@ -184,11 +184,17 @@ function generate_diceware(wordlist) {
     var pass_length = document.getElementById('diceware-length');
     var pass_entropy = document.getElementById('diceware-entropy');
     var hyphens = document.getElementById('hyphen8_1');
+
     pass = generate_pass(len, wordlist, true);
     pass_id.innerHTML = pass;
+
+    if (hyphens.checked) {
+        pass = pass.split(' ').join('-');
+        pass_id.innerHTML = pass;
+    }
+
     pass_length.innerHTML = "<span>" + pass.replace(/\s/g, '').length + "</span>" + " characters.";
     pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(wordlist.length)) + "-bits.";
-    if (hyphens.checked) pass_id.innerHTML = pass.split(' ').join('-');
 }
 
 function generate_eff(wordlist) {
@@ -198,11 +204,17 @@ function generate_eff(wordlist) {
     var pass_length = document.getElementById('eff-length');
     var pass_entropy = document.getElementById('eff-entropy');
     var hyphens = document.getElementById('hyphen8_2');
+
     pass = generate_pass(len, wordlist, true);
     pass_id.innerHTML = pass;
+
+    if (hyphens.checked) {
+        pass = pass.split(' ').join('-');
+        pass_id.innerHTML = pass;
+    }
+
     pass_length.innerHTML = "<span>" + pass.replace(/\s/g, '').length + "</span>" + " characters.";
     pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(wordlist.length)) + "-bits.";
-    if (hyphens.checked) pass_id.innerHTML = pass.split(' ').join('-');
 }
 
 function generate_alternate(wordlist) {
@@ -214,9 +226,14 @@ function generate_alternate(wordlist) {
     var hyphens = document.getElementById('hyphen8_3');
     pass = generate_pass(len, wordlist, true);
     pass_id.innerHTML = pass;
+
+    if (hyphens.checked) {
+        pass = pass.split(' ').join('-');
+        pass_id.innerHTML = pass;
+    }
+
     pass_length.innerHTML = "<span>" + pass.replace(/\s/g, '').length + "</span>" + " characters.";
     pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(wordlist.length)) + "-bits.";
-    if (hyphens.checked) pass_id.innerHTML = pass.split(' ').join('-');
 }
 
 function generate_ninja() {
