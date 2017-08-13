@@ -4,6 +4,7 @@ var spaces=false;
 
 String.prototype.rtrim = function() { return this.replace(/\s+$/g,""); }
 
+/*
 function toggle_info(def, fyi) {
     var div_default = document.getElementById(def);
     var div_fyi = document.getElementById(fyi);
@@ -18,11 +19,15 @@ function toggle_info(def, fyi) {
     }
     return false;
 }
+*/
 
 function toggle_hyphens(cbox, pass_div) {
     var pass_id = document.getElementById(pass_div);
-    var pass = pass_id.innerHTML;
+    var pass = pass_id.innerText;
     var hyphens = document.getElementById(cbox);
+    var parent_div = pass_id.parentNode;
+    var spans = parent_div.getElementsByTagName('span');
+    var pass_len = parseInt(spans[2].innerText);
 
     if (hyphens.checked) {
         // some wordlists have words of only hyphens, such as '---'
@@ -32,8 +37,18 @@ function toggle_hyphens(cbox, pass_div) {
         //      "ram-virgil----_----aqua-jewish"
         pass = pass.replace(/- -/g, '-_-');
         pass = pass.replace(/ /g,'-');
+
+        // increment the character count by the number of hyphens added
+        var hyphen_count = pass.match(/\-/g).length;
+        pass_len += hyphen_count;
+        spans[2].innerHTML = pass_len;
     }
     else {
+        // decrement the character count by the number of hyphens addeD
+        var hyphen_count = pass.match(/\-/g).length;
+        pass_len -= hyphen_count;
+        spans[2].innerText = pass_len;
+
         pass = pass.replace(/-_-/g, '- -');
         pass = pass.replace(/([^- ])-/g, '$1 ');
         pass = pass.replace(/-([^- ])/g, ' $1');
@@ -66,8 +81,6 @@ function generate_passphrase(source) {
     if (s_list == "Distant Words") { file = "eff_distant"; }
     else if (s_list == "Long Words") { file = "eff_long"; }
     else if (s_list == "Short Words") { file = "eff_short"; }
-    else if (s_list == "Chinese (Pinyin)") { file = "pinyin"; }
-    else if (s_list == "Chinese (Wubi)") { file = "wubi"; }
     else file = s_list.toLowerCase();
 
     if (!wordlists.hasOwnProperty(s_list)) {
@@ -96,8 +109,7 @@ function load_js(script_obj, source) {
             case "Bitcoin": wordlists[s_list] = bitcoin_wordlist; break;
             case "Bulgarian": wordlists[s_list] = bulgarian_wordlist; break;
             case "Catalan": wordlists[s_list] = catalan_wordlist; break;
-            case "Chinese (Pinyin)": wordlists[s_list] = pinyin_wordlist; break;
-            case "Chinese (Wubi)": wordlists[s_list] = wubi_wordlist; break;
+            case "Chinese": wordlists[s_list] = chinese_wordlist; break;
             case "Czech": wordlists[s_list] = czech_wordlist; break;
             case "Danish": wordlists[s_list] = danish_wordlist; break;
             case "Distant Words": wordlists[s_list] = eff_distant; break;
@@ -174,7 +186,7 @@ function generate_diceware(wordlist) {
     var hyphens = document.getElementById('hyphen8_1');
     pass = generate_pass(len, wordlist, true);
     pass_id.innerHTML = pass;
-    pass_length.innerHTML = pass.replace(/\s/g, '').length + " characters.";
+    pass_length.innerHTML = "<span>" + pass.replace(/\s/g, '').length + "</span>" + " characters.";
     pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(wordlist.length)) + "-bits.";
     if (hyphens.checked) pass_id.innerHTML = pass.split(' ').join('-');
 }
@@ -188,7 +200,7 @@ function generate_eff(wordlist) {
     var hyphens = document.getElementById('hyphen8_2');
     pass = generate_pass(len, wordlist, true);
     pass_id.innerHTML = pass;
-    pass_length.innerHTML = pass.replace(/\s/g, '').length + " characters.";
+    pass_length.innerHTML = "<span>" + pass.replace(/\s/g, '').length + "</span>" + " characters.";
     pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(wordlist.length)) + "-bits.";
     if (hyphens.checked) pass_id.innerHTML = pass.split(' ').join('-');
 }
@@ -202,7 +214,7 @@ function generate_alternate(wordlist) {
     var hyphens = document.getElementById('hyphen8_3');
     pass = generate_pass(len, wordlist, true);
     pass_id.innerHTML = pass;
-    pass_length.innerHTML = pass.replace(/\s/g, '').length + " characters.";
+    pass_length.innerHTML = "<span>" + pass.replace(/\s/g, '').length + "</span>" + " characters.";
     pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(wordlist.length)) + "-bits.";
     if (hyphens.checked) pass_id.innerHTML = pass.split(' ').join('-');
 }
@@ -311,7 +323,7 @@ function generate_random() {
 
     var len = Math.ceil(entropy/Math.log2(s.length));
     var pass = generate_pass(len, s);
-    pass_length.innerHTML = pass.length + " characters.";
+    pass_length.innerHTML = len + " characters.";
 
     // fix HTML '&', '<', and '>'
     pass = pass.replace(/&/g, "&amp");
@@ -328,7 +340,7 @@ function generate_emoji() {
     var pass_entropy = document.getElementById('emoji-entropy');
     var len = Math.ceil(entropy/Math.log2(emoji_wordlist.length));
     var pass = generate_pass(len, emoji_wordlist);
-    pass_length.innerHTML = pass.length + " characters.";
+    pass_length.innerHTML = len + " characters.";
     pass_id.innerHTML = pass;
     pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(emoji_wordlist.length)) + "-bits.";
 }
