@@ -133,6 +133,7 @@ function load_js(script_obj, source) {
             case "Russian": wordlists[s_list] = russian_wordlist; break;
             case "Short Words": wordlists[s_list] = eff_short; break;
             case "Simpsons": wordlists[s_list] = simpsons_wordlist; break;
+            case "Slovenian": wordlists[s_list] = slovenian_wordlist; break;
             case "Spanish": wordlists[s_list] = spanish_wordlist; break;
             case "Swedish": wordlists[s_list] = swedish_wordlist; break;
             case "Trump": wordlists[s_list] = trump_wordlist; break;
