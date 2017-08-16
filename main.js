@@ -31,11 +31,14 @@ function toggle_hyphens(cbox, pass_div) {
 
     if (hyphens.checked) {
         // some wordlists have words of only hyphens, such as '---'
-        // if 2+ show up consecutively, separate them with an underscore
+        // if they show up as a "word", sorround with underscores
         // EG:
         //      "ram virgil --- --- aqua jewish" would then become:
-        //      "ram-virgil----_----aqua-jewish"
+        //      "ram-virgil_---_---_aqua-jewish"
+        pass = pass.replace(/([^- ])-([^- ])/g, '$1_$2');
         pass = pass.replace(/- -/g, '-_-');
+        pass = pass.replace(/ -/g, '_-');
+        pass = pass.replace(/- /g, '-_');
         pass = pass.replace(/ /g,'-');
 
         // increment the character count by the number of hyphens added
@@ -44,14 +47,21 @@ function toggle_hyphens(cbox, pass_div) {
         spans[2].innerHTML = pass_len;
     }
     else {
-        // decrement the character count by the number of hyphens addeD
+        // decrement the character count by the number of hyphens added
         var hyphen_count = pass.match(/\-/g).length;
         pass_len -= hyphen_count;
         spans[2].innerText = pass_len;
 
+        // first replace any and all underscores surrounded by hyphens
         pass = pass.replace(/-_-/g, '- -');
-        pass = pass.replace(/([^- ])-/g, '$1 ');
-        pass = pass.replace(/-([^- ])/g, ' $1');
+        pass = pass.replace(/_-/g, ' -');
+        pass = pass.replace(/-_/g, '- ');
+
+        // get the other hyphens that adjacent to underscores
+        pass = pass.replace(/([^- ])-([^- ])/g, '$1 $2');
+
+        // convert my en dash back to a hyphen
+        pass = pass.replace(/_/g, '-');
     }
     pass_id.innerHTML = pass;
 }
