@@ -63,7 +63,7 @@ function toggle_hyphens(cbox, pass_div) {
         pass = pass.replace(/-_/g, '- ');
 
         // get the rest of the hyphens
-        pass = pass.replace(/([^- ])-([^- ])/g, '$1 $2');
+        pass = pass.replace(/-/g, ' ');
 
         // convert my underscored word back to a hyphenated word
         pass = pass.replace(/_/g, '-');
