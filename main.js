@@ -30,15 +30,20 @@ function toggle_hyphens(cbox, pass_div) {
     var pass_len = parseInt(spans[2].innerText);
 
     if (hyphens.checked) {
+        // convert hyphenated words containing to underscored
+        // EG: "m-16" in beale.js to "m_16"
+        pass = pass.replace(/([^- ])-([^- ])/g, '$1_$2');
+
         // some wordlists have words of only hyphens, such as '---'
         // if they show up as a "word", sorround with underscores
         // EG:
         //      "ram virgil --- --- aqua jewish" would then become:
         //      "ram-virgil_---_---_aqua-jewish"
-        pass = pass.replace(/([^- ])-([^- ])/g, '$1_$2');
         pass = pass.replace(/- -/g, '-_-');
         pass = pass.replace(/ -/g, '_-');
         pass = pass.replace(/- /g, '-_');
+
+        // replace spaces with the hyphen
         pass = pass.replace(/ /g,'-');
 
         // increment the character count by the number of hyphens added
@@ -57,10 +62,10 @@ function toggle_hyphens(cbox, pass_div) {
         pass = pass.replace(/_-/g, ' -');
         pass = pass.replace(/-_/g, '- ');
 
-        // get the other hyphens that adjacent to underscores
+        // get the rest of the hyphens
         pass = pass.replace(/([^- ])-([^- ])/g, '$1 $2');
 
-        // convert my en dash back to a hyphen
+        // convert my underscored word back to a hyphenated word
         pass = pass.replace(/_/g, '-');
     }
     pass_id.innerHTML = pass;
