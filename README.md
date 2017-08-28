@@ -8,7 +8,11 @@ sent to the server for logging. You should be able to download this code,
 and run it offline, if you're truly paranoid.
 
 ## Desktop Screenshot
-![Desktop Screenshot](https://cloud.githubusercontent.com/assets/699572/18068338/0f51a1cc-6dfe-11e6-842f-01d777538ef1.png)
+![Desktop Screenshot](https://user-images.githubusercontent.com/699572/29784004-b206058e-8bdf-11e7-8f90-b7d35dd8fb87.png)
 
 ## Mobile-Friendly
-![Mobile-Friendly](https://cloud.githubusercontent.com/assets/699572/18068339/0f533c4e-6dfe-11e6-9e10-c7f94611b997.png)
+<table><tr><td>
+<img alt="First mobile screenshot" src="https://user-images.githubusercontent.com/699572/29784148-3a24e322-8be0-11e7-96a4-4715b5a58e24.png" />
+</td><td>
+<img alt="second mobile screenshot" src="https://user-images.githubusercontent.com/699572/29784159-42fbb980-8be0-11e7-87fb-c91847ae5d43.png" />
+</td></tr></table>
