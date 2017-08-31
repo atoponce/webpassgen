@@ -4,23 +4,6 @@ var spaces=false;
 
 String.prototype.rtrim = function() { return this.replace(/\s+$/g,""); }
 
-/*
-function toggle_info(def, fyi) {
-    var div_default = document.getElementById(def);
-    var div_fyi = document.getElementById(fyi);
-
-    if (div_default.style.display == '') {
-        div_default.style.display = 'none';
-        div_fyi.style.display = 'table-cell';
-    }
-    else {
-        div_default.style.display = '';
-        div_fyi.style.display = '';
-    }
-    return false;
-}
-*/
-
 function toggle_hyphens(cbox, pass_div) {
     var pass_id = document.getElementById(pass_div);
     var pass = pass_id.innerText;

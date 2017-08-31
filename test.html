@@ -1,153 +1,122 @@
 <!doctype html>
 <html>
-    <head>
-        <link rel="shortcut icon" href="favicon.ico">
-        <link rel="stylesheet" href="style.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Test Password Entropy</title>
-        <script src="zxcvbn-async.js"></script>
-        <style type="text/css">
-            @import 'https://fonts.googleapis.com/css?family=Droid+Sans+Mono';
-            #password {
-                font-family: 'Droid Sans Mono';
-                font-size: 14px;
-                height: 25px;
-                width: 100%;
-            }
-            .align-center {
-                margin: 0 auto;
-                padding: 0 10px;
-                text-align: center;
-                width: 768px;
-            }
-            .justify-left {
-                text-align: left;
-            }
-            .gauge {
-                height: 300px;
-                width: 400px;
-            }
-            #g1 { margin: 0 auto; }
-            #show_me {
-                float: right;
-                height: 25px;
-                position: relative;
-                top: -28px;
-                width: 100px;
-            }
-            #show_me input {
-                cursor: pointer;
-                width: 20px;
-                height: 20px;
-            }
-            #show_me label {
-                position: absolute;
-                top: 5px;
-            }
-            .warning {
-                color: red;
-                font-weight: bold;
-            }
-            @media only screen and (max-width: 767px) {
-                .align-center { width: 480px; }
-            }
-            @media only screen and (max-width: 479px) {
-                .align-center { width: 100%; }
-            }
-        </style>
-    </head>
-    <body>
-        <div id="container">
-            <div id="header">
-                <h1>Passphrase and Password Generator</h1>
-                <ul id="navigation">
-                    <li><a href="index.html">Generate Passwords</a></li>
-                    <li><a href="what.html">What is entropy?</a></li>
-                    <li><a href="test.html">Entropy Testing Meter</a></li>
-                </ul>
-            </div>
-            <div class="align-center">
-		<p class="justify-left"><span class="warning">DO NOT ENTER YOUR ACTUAL PASSWORDS!</span> I promise I'm not logging them, but you can't prove that. This is meant as an exercise to show you weak or strong your intuition may be when creating passwords.</p>
-                <p class="justify-left">Below is a password meter that tests entropy using <a href="https://github.com/dropbox/zxcvbn">zxcvbn by Dropbox</a>. It tests for dictionary words, leet-speak, recognizable patterns, and other heuristics to give an educated guess at what the entropy could be.</p>
-                <p class="justify-left">Can you raise the needle above 55-bits of entropy? Can you reach the safety of 70-bits?</p>
-                <input type="password" id="password" name="password" type="text" size="48">
-                <div id="show_me">
-                    <input onclick="toggle_password_visibility()" id="checkbox" type="checkbox" name="checkbox" />
-                    <label for="checkbox">Show</label>
-                </div>
-                <div id="g1" class="gauge"></div>
-                <!--canvas id="brute_force"></canvas-->
-                <p class="justify-left"><strong>Disclaimer: This site is not logging entered passwords!</strong> If you don't believe me, check out the source code at <a href="https://github.com/atoponce/webpassgen">https://github.com/atoponce/webpassgen</a>, and run it locally in your browser, after disconnecting from the Internet.</p>
-            </div>
+  <head>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Test Password Entropy</title>
+    <script src="zxcvbn-async.js"></script>
+    <style type="text/css">
+      @import 'https://fonts.googleapis.com/css?family=Droid+Sans+Mono';
+      #password {
+        font-family: 'Droid Sans Mono';
+        font-size: 14px;
+        height: 25px;
+        width: 100%;
+      }
+      .align-center {
+        margin: 0 auto;
+        padding: 0 10px;
+        text-align: center;
+        width: 768px;
+      }
+      .justify-left {
+        text-align: left;
+      }
+      .gauge {
+        height: 300px;
+        width: 400px;
+      }
+      #g1 { margin: 0 auto; }
+      #show_me {
+        float: right;
+        height: 25px;
+        position: relative;
+        top: -28px;
+        width: 100px;
+      }
+      #show_me input {
+        cursor: pointer;
+        width: 20px;
+        height: 20px;
+      }
+      #show_me label {
+        position: absolute;
+        top: 5px;
+      }
+      .warning {
+        color: red;
+        font-weight: bold;
+      }
+      @media only screen and (max-width: 767px) {
+        .align-center { width: 480px; }
+      }
+      @media only screen and (max-width: 479px) {
+        .align-center { width: 100%; }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div id="header">
+        <h1>Passphrase and Password Generator</h1>
+        <ul id="navigation">
+          <li><a href="index.html">Generate Passwords</a></li>
+          <li><a href="what.html">What is entropy?</a></li>
+          <li><a href="test.html">Entropy Testing Meter</a></li>
+        </ul>
+      </div>
+      <div class="align-center">
+	<p class="justify-left"><span class="warning">DO NOT ENTER YOUR ACTUAL PASSWORDS!</span> I promise I'm not logging them, but you can't prove that. This is meant as an exercise to show you weak or strong your intuition may be when creating passwords.</p>
+        <p class="justify-left">Below is a password meter that tests entropy using <a href="https://github.com/dropbox/zxcvbn">zxcvbn by Dropbox</a>. It tests for dictionary words, leet-speak, recognizable patterns, and other heuristics to give an educated guess at what the entropy could be.</p>
+        <p class="justify-left">Can you raise the needle above 55-bits of entropy? Can you reach the safety of 70-bits?</p>
+        <input type="password" id="password" name="password" type="text" size="48">
+        <div id="show_me">
+          <input onclick="toggle_password_visibility()" id="checkbox" type="checkbox" name="checkbox" />
+          <label for="checkbox">Show</label>
         </div>
-        <script src="raphael-2.1.4.min.js"></script>
-        <script src="justgage.js"></script>
-        <!--script src="Chart.min.js"></script-->
-        <script>
-            function toggle_password_visibility() {
-                var input = document.getElementById("password");
-                var checkbox = document.getElementById("checkbox");
-                if (checkbox.checked) password.type = "text";
-                else password.type = "password";
-            }
-            var g1 = new JustGage({
-                id: "g1",
-                pointer: true,
-                value: 0,
-                min: 55,
-                max: 80,
-                title: "Entropy",
-                label: "bits",
-                gaugeWidthScale: 0.3,
-                donut: false,
-                customSectors: [{ color: "#ff0000", lo: 0,  hi: 59 },
-                                { color: "#ffa500", lo: 59, hi: 64 },
-                                { color: "#ffff00", lo: 64, hi: 69 },
-                                { color: "#00ff00", lo: 69, hi: 256 }],
-            });
-/*
-            var data = [];
-            var bar_data = {
-                type = "bar",
-                labels: ['Entropy'],
-                data: {
-                    datasets: [{
-                        label: 'Brute-force Cracking Template Example',
-                        backgroundColor: '#ffd1dc',
-                        data: data
-                    }]
-                },
-                options: {
-                    responsive: false,
-                    scales: {
-                        xAxes: [{
-                            type: 'linear',
-                            position: 'bottom',
-                        }],
-                        yAxes: [{
-                            type: 'logarithmic',
-                            position: 'left',
-                            scaleLabel: {
-                                display: true,
-                            }
-                        }]
-                    }
-                }
-            };
-
-            var ctx = document.getElementById("brute_force").getContext("2d");
-            var chartInstance = new Chart(ctx, bar_data);
-*/
-            password.addEventListener('input', function() {
-                var password = document.getElementById('password').value;
-                var entropy = Math.log2(zxcvbn(password).guesses);
-                //chartInstance.data.datasets[0].data = [Math.floor(2**(entropy-1)/1000000000)];
-
-                g1.refresh(Math.floor(entropy));
-                //chartInstance.update();
-
-            });
-        </script>
-    </body>
+        <div id="g1" class="gauge"></div>
+      </div>
+    </div>
+    <div id="footer">
+      <center>
+        <p><strong>Disclaimer: This is for demonstration puposes only and is not logging entered passwords!</strong></p>
+        <p>
+          <a href="https://github.com/atoponce/webpassgen"><img src="assets/github.png" /></a>
+          <a href="https://twitter.com/AaronToponce"><img src="assets/twitter.png" /></a>
+        </p>
+      </center>
+    </div>
+    <script src="raphael-2.1.4.min.js"></script>
+    <script src="justgage.js"></script>
+    <script>
+      function toggle_password_visibility() {
+        var input = document.getElementById("password");
+        var checkbox = document.getElementById("checkbox");
+        if (checkbox.checked) password.type = "text";
+        else password.type = "password";
+      }
+      var g1 = new JustGage({
+        id: "g1",
+        pointer: true,
+        value: 0,
+        min: 55,
+        max: 80,
+        title: "Entropy",
+        label: "bits",
+        gaugeWidthScale: 0.3,
+        donut: false,
+        customSectors: [{ color: "#ff0000", lo: 0,  hi: 59 },
+                { color: "#ffa500", lo: 59, hi: 64 },
+                { color: "#ffff00", lo: 64, hi: 69 },
+                { color: "#00ff00", lo: 69, hi: 256 }],
+      });
+      password.addEventListener('input', function() {
+        var password = document.getElementById('password').value;
+        var entropy = Math.log2(zxcvbn(password).guesses);
+        g1.refresh(Math.floor(entropy));
+      });
+    </script>
+  </body>
 </html>

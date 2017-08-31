@@ -1,240 +1,182 @@
 <!doctype html>
 <html>
-    <head>
-        <link rel="shortcut icon" href="favicon.ico">
-        <link rel="stylesheet" href="style.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Passphrase and Password Generator</title>
-    </head>
-    <body onload="load_passes()">
-        <div id="container">
-            <div id="header">
-            <h1>Passphrase and Password Generator</h1>
-                <ul id="navigation">
-                    <li><a href="index.html">Generate Passwords</a></li>
-                    <li><a href="what.html">What is entropy?</a></li>
-                    <li><a href="test.html">Entropy Testing Meter</a></li>
-                </ul>
-                <p>Select minimum entropy: </p>
-                <div id="entropy-toolbar">
-                    <input type="radio" name="entropy" value="55" id="rtb1" onclick="load_passes()"><label id="entropy-55" for="rtb1">55-bits</label>
-                    <input type="radio" name="entropy" value="60" id="rtb2" onclick="load_passes()"><label id="entropy-60" for="rtb2">60-bits</label>
-                    <input type="radio" name="entropy" value="65" id="rtb3" onclick="load_passes()"><label id="entropy-65" for="rtb3">65-bits</label>
-                    <input type="radio" name="entropy" value="70" id="rtb4" onclick="load_passes()" checked><label id="entropy-70" for="rtb4">70-bits</label>
-                    <input type="radio" name="entropy" value="75" id="rtb5" onclick="load_passes()"><label id="entropy-75" for="rtb5">75-bits</label>
-                    <input type="radio" name="entropy" value="80" id="rtb6" onclick="load_passes()"><label id="entropy-80" for="rtb6">80-bits</label>
-                </div>
-            </div>
-            <div id="table">
-                <div id="diceware-default" class="cell">
-                    <p class="cell-title"><strong>Diceware</strong></p>
-                    <div class="optional">
-                        <select>
-                            <option name="diceware_list" onclick="load_js('diceware');">Basque</option>
-                            <option name="diceware_list" onclick="load_js('diceware');">Beale</option>
-                            <option name="diceware_list" onclick="load_js('diceware');">Bulgarian</option>
-                            <option name="diceware_list" onclick="load_js('diceware');">Catalan</option>
-                            <option name="diceware_list" onclick="load_js('diceware');">Chinese</option>
-                            <option name="diceware_list" onclick="load_js('diceware');">Czech</option>
-                            <option name="diceware_list" onclick="load_js('diceware');">Danish</option>
-                            <option name="diceware_list" onclick="load_js('diceware');">Dutch</option>
-                            <option name="diceware_list" onclick="load_js('diceware');" selected="selected">English</option>
-                            <option name="diceware_list" onclick="load_js('diceware');">Esperanto</option>
-                            <option name="diceware_list" onclick="load_js('diceware');">Finnish</option>
-                            <option name="diceware_list" onclick="load_js('diceware');">French</option>
-                            <option name="diceware_list" onclick="load_js('diceware');">German</option>
-                            <option name="diceware_list" onclick="load_js('diceware');">Italian</option>
-                            <option name="diceware_list" onclick="load_js('diceware');">Japanese</option>
-                            <option name="diceware_list" onclick="load_js('diceware');">Maori</option>
-                            <option name="diceware_list" onclick="load_js('diceware');">Norwegian</option>
-                            <option name="diceware_list" onclick="load_js('diceware');">Polish</option>
-                            <option name="diceware_list" onclick="load_js('diceware');">Portuguese</option>
-                            <option name="diceware_list" onclick="load_js('diceware');">Russian</option>
-                            <option name="diceware_list" onclick="load_js('diceware');">Slovenian</option>
-                            <option name="diceware_list" onclick="load_js('diceware');">Spanish</option>
-                            <option name="diceware_list" onclick="load_js('diceware');">Swedish</option>
-                            <option name="diceware_list" onclick="load_js('diceware');">Turkish</option>
-                        </select>
-                    </div>
-                    <button value="Generate" onclick="generate_passphrase('diceware');">Generate</button>
-                    <div id="diceware-pass" class="password"></div>
-                    <div class="stats length">
-                        <span id="diceware-entropy"></span>
-                        <span id="diceware-length"></span>
-                    </div>
-                    <div class="passphrase-separator">
-                        <input type="checkbox" id="hyphen8_1" onclick="toggle_hyphens('hyphen8_1', 'diceware-pass')"><label for="hyphen8_1">Hyphenate</label>
-                    </div>
-                    <!--<div class="info-link"><a href="#" onclick="return toggle_info('diceware-default', 'diceware-fyi')">Info</a></div>-->
-                </div>
-                <!--
-                <div style="display:none;" id="diceware-fyi" class="cell">
-                    <p><a href="http://world.std.com/~reinhold/diceware.html">Diceware passphrases</a> uses many obscure English words and non-words such as numbers and punctuation. Each word list is 7,776 words long, and contains ~13-bits of entropy per word.</p>
-                    <div class="info-link"><a href="#" onclick="return toggle_info('diceware-default', 'diceware-fyi')">Close</a></div>
-                </div>
-                -->
-                <div id="eff-default" class="cell">
-                    <p class="cell-title"><strong>EFF</strong></p>
-                    <div class="optional">
-                        <select>
-                            <option name="eff_list" onclick="load_js('eff');">Distant Words</option>
-                            <option name="eff_list" onclick="load_js('eff');">Long Words</option>
-                            <option name="eff_list" onclick="load_js('eff');" selected="selected">Short Words</option>
-                        </select>
-                    </div>
-                    <button value="Generate" onclick="generate_passphrase('eff');">Generate</button>
-                    <div id="eff-pass" class="password"></div>
-                    <div class="stats length">
-                        <span id="eff-entropy"></span>
-                        <span id="eff-length"></span>
-                    </div>
-                    <div class="passphrase-separator">
-                        <input type="checkbox" id="hyphen8_2" onclick="toggle_hyphens('hyphen8_2', 'eff-pass')"><label for="hyphen8_2">Hyphenate</label>
-                    </div>
-                    <!--<div class="info-link"><a href="#" onclick="return toggle_info('eff-default', 'eff-fyi')">Info</a></div>-->
-                </div>
-                <!--
-                <div style="display:none;" id="eff-fyi" class="cell">
-                    <p>The <a href="https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases">EFF wordlists</a> are the easist to recall.
-                        <ul>
-                            <li>Distant- 1,296 words. ~10-bits/word.</li>
-                            <li>Long- 7,776 words. ~13-bits/word.</li>
-                            <li>Short- 1,296 words. ~10-bits/word.</li>
-                        </ul>
-                    </p>
-                    <div class="info-link"><a href="#" onclick="return toggle_info('eff-default', 'eff-fyi')">Close</a></div>
-                </div>
-                -->
-                <div id="alt-default" class="cell">
-                    <p class="cell-title"><strong>Alternate</strong></p>
-                    <div class="optional">
-                        <select>
-                            <option name="alternate_list" onclick="load_js('alternate');">Bitcoin</option>
-                            <option name="alternate_list" onclick="load_js('alternate');">Elvish</option>
-                            <option name="alternate_list" onclick="load_js('alternate');">Klingon</option>
-                            <option name="alternate_list" onclick="load_js('alternate');" selected="selected">PGP</option>
-                            <option name="alternate_list" onclick="load_js('alternate');">RockYou</option>
-                            <option name="alternate_list" onclick="load_js('alternate');">Simpsons</option>
-                            <option name="alternate_list" onclick="load_js('alternate');">Trump</option>
-                        </select>
-                    </div>
-                    <button value="Generate" onclick="generate_passphrase('alternate');">Generate</button>
-                    <div id="alt-pass" class="password"></div>
-                    <div class="stats length">
-                        <span id="alt-entropy"></span>
-                        <span id="alt-length"></span>
-                    </div>
-                    <div class="passphrase-separator">
-                        <input type="checkbox" id="hyphen8_3" onclick="toggle_hyphens('hyphen8_3', 'alt-pass')"><label for="hyphen8_3">Hyphenate</label>
-                    </div>
-                    <!--<div class="info-link"><a href="#" onclick="return toggle_info('alt-default', 'alt-fyi')">Info</a></div>-->
-                </div>
-                <!--
-                <div style="display:none"; id="alt-fyi" class="cell">
-                    <p>
-                        <ul>
-                            <li><a href="https://github.com/bitcoin/bips/blob/master/bip-0039/bip-0039-wordlists.md">Bitcoin</a>- 2,048 words, 11-bits/word.</li>
-                            <li><a href="http://www.eldamo.org/">Elvish</a>- 7,776 words. ~13-bits/word.</li>
-                            <li><a href="http://www.frathwiki.com/Klingon/lexicon">Klingon</a>- 2,604 words. ~11-bits/word.</li>
-                            <li><a href="https://en.wikipedia.org/wiki/PGP_word_list">PGP</a>- 512 words. 9-bits/word.</li>
-                            <li><a href="https://wiki.skullsecurity.org/index.php?title=Passwords">RockYou</a>- 7,776 words. ~13-bits/word.</li>
-                            <li><a href="https://github.com/PeerioTechnologies/peerio-web-passphrase-generator/tree/master/src/dict">Simpsons</a>- 5,000 words. ~12-bits/word.</li>
-                            <li><a href="https://twitter.com/realDonaldTrump">Trump</a>- 4,320 words. ~12-bits/word.</li>
-                        </ul>
-                    </p>
-                    <div class="info-link"><a href="#" onclick="return toggle_info('alt-default', 'alt-fyi')">Close</a></div>
-                </div>
-                -->
-                <div id="pseudo-default" class="cell">
-                    <p class="cell-title"><strong>Pseudowords</strong></p>
-                    <div class="optional">
-                        <select>
-                            <option name="pseudowords" selected="selected">Bubble Babble</option>
-                            <option name="pseudowords">Secret Ninja</option>
-                            <option name="pseudowords">Cosby Bebop</option>
-                            <option name="pseudowords">Korean K-pop</option>
-                        </select>
-                    </div>
-                    <button value="Generate" onclick="generate_pseudowords();">Generate</button>
-                    <p id="pseudo-pass" class="password"></p>
-                    <div class="stats length">
-                        <span id="pseudo-entropy"></span>
-                        <span id="pseudo-length"></span>
-                    </div>
-                    <!--<div class="info-link"><a href="#" onclick="return toggle_info('pseudo-default', 'pseudo-fyi')">Info</a></div>-->
-                </div>
-                <!--
-                <div id="pseudo-fyi" class="cell">
-                    <p>
-                        <ul>
-                            <li><a href="http://www.wiki.yak.net/589">Bubble Babble</a>- 6 vowels, 17 consonants. ~7-bits/pair.</li>
-                            <li><a href="http://i762.photobucket.com/albums/xx262/SteveStrummerGB/NINJA.png">Ninja Names</a>- 26 pseudowords. ~5-bits/pseudoword.</li>
-                        </ul>
-                    </p>
-                    <div class="info-link"><a href="#" onclick="return toggle_info('pseudo-default', 'pseudo-fyi')">Close</a></div>
-                </div>
-                -->
-                <div id="random-default" class="cell">
-                    <p class="cell-title"><strong>Random</strong></p>
-                    <div class="optional">
-                        <select>
-                            <option name="random" selected="selected">Base-94</option>
-                            <option name="random">Base-64</option>
-                            <option name="random">Base-32</option>
-                            <option name="random">Base-16</option>
-                            <option name="random">Base-10</option>
-                        </select>
-                    </div>
-                    <button value="Generate" onclick="generate_random();">Generate</button>
-                    <p id="random-pass" class="password"></p>
-                    <div class="stats length">
-                        <span id="random-entropy"></span>
-                        <span id="random-length"></span>
-                    </div>
-                    <!--<div class="info-link"><a href="#" onclick="return toggle_info('base94-default', 'base94-fyi')">Info</a></div>-->
-                </div>
-                <!--
-                <div id="base94-fyi" class="cell">
-                    <p>This password is built from 94 printable ASCII characters. It provides the most entropy per character, at ~7-bits/character. As such, it is the shortest ASCII password on this page.</p>
-                    <div clAss="info-link"><a href="#" onclick="return toggle_info('base94-default', 'base94-fyi')">Close</a></div>
-                </div>
-                -->
-                <div id="emoji-default" class="cell">
-                    <p class="cell-title"><strong>Emoji</strong></p>
-                    <button value="Generate" onclick="generate_emoji();">Generate</button>
-                    <p id="emoji-pass" class="password"></p>
-                    <div class="stats length">
-                        <span id="emoji-entropy"></span>
-                        <span id="emoji-length"></span>
-                    </div>
-                    <!--<div class="info-link"><a href="#" onclick="return toggle_info('base94-default', 'base94-fyi')">Info</a></div>-->
-                </div>
-                <!--
-                            <option name="alternate_list" onclick="load_js('alternate');">Emoji</option>
-                <div id="base94-fyi" class="cell">
-                    <p>This password is built from 94 printable ASCII characters. It provides the most entropy per character, at ~7-bits/character. As such, it is the shortest ASCII password on this page.</p>
-                    <div clAss="info-link"><a href="#" onclick="return toggle_info('base94-default', 'base94-fyi')">Close</a></div>
-                </div>
-                -->
-            </div>
-            <div id="footer">
-                <p><strong>Disclaimer: This site is for demonstration purposes only!</strong> If you want to use this for your passwords, you should check out the source code at <a href="https://github.com/atoponce/webpassgen">https://github.com/atoponce/webpassgen</a>, or download the latest release at <a href="https://github.com/atoponce/webpassgen/releases">https://github.com/atoponce/webpassgen/releases</a> and run it locally in your browser, after disconnecting from the Internet, and inspecting the source code.</p>
-            </div>
+  <head>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Passphrase and Password Generator</title>
+  </head>
+  <body onload="load_passes()">
+    <div id="container">
+      <div id="header">
+      <h1>Passphrase and Password Generator</h1>
+        <ul id="navigation">
+          <li><a href="index.html">Generate Passwords</a></li>
+          <li><a href="what.html">What is entropy?</a></li>
+          <li><a href="test.html">Entropy Testing Meter</a></li>
+        </ul>
+        <p>Select minimum entropy: </p>
+        <div id="entropy-toolbar">
+          <input type="radio" name="entropy" value="55" id="rtb1" onclick="load_passes()"><label id="entropy-55" for="rtb1">55-bits</label>
+          <input type="radio" name="entropy" value="60" id="rtb2" onclick="load_passes()"><label id="entropy-60" for="rtb2">60-bits</label>
+          <input type="radio" name="entropy" value="65" id="rtb3" onclick="load_passes()"><label id="entropy-65" for="rtb3">65-bits</label>
+          <input type="radio" name="entropy" value="70" id="rtb4" onclick="load_passes()" checked><label id="entropy-70" for="rtb4">70-bits</label>
+          <input type="radio" name="entropy" value="75" id="rtb5" onclick="load_passes()"><label id="entropy-75" for="rtb5">75-bits</label>
+          <input type="radio" name="entropy" value="80" id="rtb6" onclick="load_passes()"><label id="entropy-80" for="rtb6">80-bits</label>
         </div>
-        <script src="sjcl.js"></script>
-        <script src="main.js"></script>
-        <script src="lists/emoji.js"></script>
-        <script type="text/javascript">
-            sjcl.random.startCollectors(); // start gathering entropy
-            function load_passes() {
-                generate_passphrase('diceware');
-                generate_passphrase('eff');
-                generate_passphrase('alternate');
-                generate_pseudowords();
-                generate_random();
-                generate_emoji();
-            }
-        </script>
-    </body>
+      </div>
+      <div id="table">
+        <div id="diceware-default" class="cell">
+          <p class="cell-title"><strong>Diceware</strong></p>
+          <div class="optional">
+            <select>
+              <option name="diceware_list" onclick="load_js('diceware');">Basque</option>
+              <option name="diceware_list" onclick="load_js('diceware');">Beale</option>
+              <option name="diceware_list" onclick="load_js('diceware');">Bulgarian</option>
+              <option name="diceware_list" onclick="load_js('diceware');">Catalan</option>
+              <option name="diceware_list" onclick="load_js('diceware');">Chinese</option>
+              <option name="diceware_list" onclick="load_js('diceware');">Czech</option>
+              <option name="diceware_list" onclick="load_js('diceware');">Danish</option>
+              <option name="diceware_list" onclick="load_js('diceware');">Dutch</option>
+              <option name="diceware_list" onclick="load_js('diceware');" selected="selected">English</option>
+              <option name="diceware_list" onclick="load_js('diceware');">Esperanto</option>
+              <option name="diceware_list" onclick="load_js('diceware');">Finnish</option>
+              <option name="diceware_list" onclick="load_js('diceware');">French</option>
+              <option name="diceware_list" onclick="load_js('diceware');">German</option>
+              <option name="diceware_list" onclick="load_js('diceware');">Italian</option>
+              <option name="diceware_list" onclick="load_js('diceware');">Japanese</option>
+              <option name="diceware_list" onclick="load_js('diceware');">Maori</option>
+              <option name="diceware_list" onclick="load_js('diceware');">Norwegian</option>
+              <option name="diceware_list" onclick="load_js('diceware');">Polish</option>
+              <option name="diceware_list" onclick="load_js('diceware');">Portuguese</option>
+              <option name="diceware_list" onclick="load_js('diceware');">Russian</option>
+              <option name="diceware_list" onclick="load_js('diceware');">Slovenian</option>
+              <option name="diceware_list" onclick="load_js('diceware');">Spanish</option>
+              <option name="diceware_list" onclick="load_js('diceware');">Swedish</option>
+              <option name="diceware_list" onclick="load_js('diceware');">Turkish</option>
+            </select>
+          </div>
+          <button value="Generate" onclick="generate_passphrase('diceware');">Generate</button>
+          <div id="diceware-pass" class="password"></div>
+          <div class="stats length">
+            <span id="diceware-entropy"></span>
+            <span id="diceware-length"></span>
+          </div>
+          <div class="passphrase-separator">
+            <input type="checkbox" id="hyphen8_1" onclick="toggle_hyphens('hyphen8_1', 'diceware-pass')"><label for="hyphen8_1">Hyphenate</label>
+          </div>
+        </div>
+        <div id="eff-default" class="cell">
+          <p class="cell-title"><strong>EFF</strong></p>
+          <div class="optional">
+            <select>
+              <option name="eff_list" onclick="load_js('eff');">Distant Words</option>
+              <option name="eff_list" onclick="load_js('eff');">Long Words</option>
+              <option name="eff_list" onclick="load_js('eff');" selected="selected">Short Words</option>
+            </select>
+          </div>
+          <button value="Generate" onclick="generate_passphrase('eff');">Generate</button>
+          <div id="eff-pass" class="password"></div>
+          <div class="stats length">
+            <span id="eff-entropy"></span>
+            <span id="eff-length"></span>
+          </div>
+          <div class="passphrase-separator">
+            <input type="checkbox" id="hyphen8_2" onclick="toggle_hyphens('hyphen8_2', 'eff-pass')"><label for="hyphen8_2">Hyphenate</label>
+          </div>
+        </div>
+        <div id="alt-default" class="cell">
+          <p class="cell-title"><strong>Alternate</strong></p>
+          <div class="optional">
+            <select>
+              <option name="alternate_list" onclick="load_js('alternate');">Bitcoin</option>
+              <option name="alternate_list" onclick="load_js('alternate');">Elvish</option>
+              <option name="alternate_list" onclick="load_js('alternate');">Klingon</option>
+              <option name="alternate_list" onclick="load_js('alternate');" selected="selected">PGP</option>
+              <option name="alternate_list" onclick="load_js('alternate');">RockYou</option>
+              <option name="alternate_list" onclick="load_js('alternate');">Simpsons</option>
+              <option name="alternate_list" onclick="load_js('alternate');">Trump</option>
+            </select>
+          </div>
+          <button value="Generate" onclick="generate_passphrase('alternate');">Generate</button>
+          <div id="alt-pass" class="password"></div>
+          <div class="stats length">
+            <span id="alt-entropy"></span>
+            <span id="alt-length"></span>
+          </div>
+          <div class="passphrase-separator">
+            <input type="checkbox" id="hyphen8_3" onclick="toggle_hyphens('hyphen8_3', 'alt-pass')"><label for="hyphen8_3">Hyphenate</label>
+          </div>
+        </div>
+        <div id="pseudo-default" class="cell">
+          <p class="cell-title"><strong>Pseudowords</strong></p>
+          <div class="optional">
+            <select>
+              <option name="pseudowords" selected="selected">Bubble Babble</option>
+              <option name="pseudowords">Secret Ninja</option>
+              <option name="pseudowords">Cosby Bebop</option>
+              <option name="pseudowords">Korean K-pop</option>
+            </select>
+          </div>
+          <button value="Generate" onclick="generate_pseudowords();">Generate</button>
+          <p id="pseudo-pass" class="password"></p>
+          <div class="stats length">
+            <span id="pseudo-entropy"></span>
+            <span id="pseudo-length"></span>
+          </div>
+        </div>
+        <div id="random-default" class="cell">
+          <p class="cell-title"><strong>Random</strong></p>
+          <div class="optional">
+            <select>
+              <option name="random" selected="selected">Base-94</option>
+              <option name="random">Base-64</option>
+              <option name="random">Base-32</option>
+              <option name="random">Base-16</option>
+              <option name="random">Base-10</option>
+            </select>
+          </div>
+          <button value="Generate" onclick="generate_random();">Generate</button>
+          <p id="random-pass" class="password"></p>
+          <div class="stats length">
+            <span id="random-entropy"></span>
+            <span id="random-length"></span>
+          </div>
+        </div>
+        <div id="emoji-default" class="cell">
+          <p class="cell-title"><strong>Emoji</strong></p>
+          <button value="Generate" onclick="generate_emoji();">Generate</button>
+          <p id="emoji-pass" class="password"></p>
+          <div class="stats length">
+            <span id="emoji-entropy"></span>
+            <span id="emoji-length"></span>
+          </div>
+        </div>
+      </div>
+      <div id="footer">
+        <center>
+	  <p><strong>Disclaimer: This is for demonstration puposes only and is not logging entered passwords!</strong></p>
+            <p>
+              <a href="https://github.com/atoponce/webpassgen"><img src="assets/github.png" /></a>
+              <a href="https://twitter.com/AaronToponce"><img src="assets/twitter.png" /></a>
+            </p>
+        </center>
+      </div>
+    </div>
+    <script src="sjcl.js"></script>
+    <script src="main.js"></script>
+    <script src="lists/emoji.js"></script>
+    <script type="text/javascript">
+      sjcl.random.startCollectors(); // start gathering entropy
+      function load_passes() {
+        generate_passphrase('diceware');
+        generate_passphrase('eff');
+        generate_passphrase('alternate');
+        generate_pseudowords();
+        generate_random();
+        generate_emoji();
+      }
+    </script>
+  </body>
 </html>
