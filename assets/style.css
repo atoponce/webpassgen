@@ -1,6 +1,6 @@
 @font-face {
     font-family: "Noto Emoji";
-    src: url(NotoEmoji-Regular.ttf);
+    src: url(assets/NotoEmoji-Regular.ttf);
 }
 
 /* body tags */
@@ -117,22 +117,14 @@ button {
 #entropy-75 { background: #77dd77; }
 #entropy-80 { background: #77dd77; }
 
-#eff-fyi, #diceware-fyi, #alt-fyi, #pseudo-fyi, #base94-fyi, #base64-fyi,
-#base32-fyi, #base16-fyi, #base10-fyi {
-    background: black;
-    color: white;
-    display: none;
+#release {
+    border: 1px solid #77dd77;
+    display: inline-block;
+    padding: 4px 8px;
+    font-size: 14px;
+    font-weight: 600;
+    height: 32px;
 }
-
-#eff-fyi a:link, #diceware-fyi a:link, #alt-fyi a:link, #pseudo-fyi a:link,
-#base94-fyi a:link, #base64-fyi a:link, #base32-fyi a:link, #base16-fyi a:link,
-#base10-fyi a:link
-{color: orange;} 
-
-#eff-fyi a:visited, #diceware-fyi a:visited, #alt-fyi a:visited,
-#pseudo-fyi a:visited, #base94-fyi a:visited, #base64-fyi a:visited,
-#base32-fyi a:visited, #base16-fyi a:visited, #base10-fyi a:visited
-{color: yellow;}
 
 @media only screen and (max-width: 767px) {
     #container { width: 480px; }

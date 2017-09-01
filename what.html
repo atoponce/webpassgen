@@ -2,7 +2,7 @@
 <html>
   <head>
     <link rel="shortcut icon" href="favicon.ico">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Passphrase and Password Generator</title>
@@ -19,7 +19,7 @@
       </div>
       <div id="content">
         <h3>The quick read</h3>
-        <img src="img/needle-haystack.jpg" align="right" style="margin: 5px;"/>
+        <img src="assets/needle-haystack.jpg" align="right" style="margin: 5px;"/>
         <p>Passwords can be thought of as a needle in a haystack. Your password is the needle. Every possible combination your password could be is the haystack. The larger the haystack, the more "entropy" your password has. So, when we say "a password contains 70-bits of entropy", what we're saying is, your password is one is 2<sup>70</sup> possibilities (a large haystack).</p>
         <h3>Additional detail</h3>
         <p>It turns out entropy is a bit more tricky than that. <a href="https://en.wikipedia.org/wiki/Entropy_(information_theory)">Entropy as defined by Claude Shannon</a> requires two very important principles:
@@ -33,9 +33,9 @@
         <h3>Brute force searching</h3>
         <p>Suppose they can try one trillion passwords per second on that leaked hashed password database. They don't need to completely exhaust the search space- they only need to try one-half to have a 50% chance of finding the password. So, instead of trying all of 2<sup>70</sup> = 1,180,591,620,717,411,303,424 possibilities, they only need to make 2<sup>69</sup> = 590,295,810,358,705,651,712 guesses at having a 50% chance of finding your password.</p>
         <p>At one trillion guesses per second, for 70-bits of entropy, it would take the attacker about 18 years and 9 months to reach that 50% target. This is considered a safe security margin for hashed password databases that are leaked online.</p>
-        <center><img src="img/entropy-toolbar-1.png" /><img src="img/entropy-toolbar-2.png" /></center>
+        <center><img src="assets/entropy-toolbar-1.png" /><img src="assets/entropy-toolbar-2.png" /></center>
         <p>Knowing this, let's look at the entropy selection at the top of the home page. For at attacker to reach 50% possibility that they have found your password, at one trillion guesses per second, it would take:
-        <img src="img/exponential.gif" align="right" style="margin: 5px;" />
+        <img src="assets/exponential.gif" align="right" style="margin: 5px;" />
           <ul>
             <li>55-bits: ~ 5 hours.</li>
             <li>60-bits: ~ 7 days,</li>
@@ -54,8 +54,9 @@
       <center>
         <p><strong>Disclaimer: This is for demonstration puposes only and is not logging passwords!</strong></p>
         <p>
-          <a href="https://github.com/atoponce/webpassgen"><img src="assets/github.png" /></a>
-          <a href="https://twitter.com/AaronToponce"><img src="assets/twitter.png" /></a>
+          <a href="https://github.com/atoponce/webpassgen"><img title="Get the source code" src="assets/github.png" /></a>
+          <a href="https://github.com/atoponce/webpassgen/releases/latest"><img title="Download latest release" src="assets/download.png" /></a>
+          <a href="https://twitter.com/AaronToponce"><img title="Meet the author" src="assets/twitter.png" /></a>
         </p>
       </center>
     </div>

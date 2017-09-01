@@ -3,7 +3,7 @@
 
 (function() {
 
-  var ZXCVBN_SRC = 'zxcvbn.js';
+  var ZXCVBN_SRC = 'js/zxcvbn.js';
 
   var async_load = function() {
     var first, s;
