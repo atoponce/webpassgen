@@ -1,5 +1,3 @@
-var wordlists = {};
-var script_obj='';
 var spaces=false;
 
 String.prototype.rtrim = function() { return this.replace(/\s+$/g,""); }
@@ -77,76 +75,20 @@ function get_source_list(source) {
 
 function generate_passphrase(source) {
     var s_list = get_source_list(source);
-
-    if (s_list == "Distant Words") { file = "eff_distant"; }
-    else if (s_list == "Long Words") { file = "eff_long"; }
-    else if (s_list == "Short Words") { file = "eff_short"; }
-    else file = s_list.toLowerCase();
-
-    if (!wordlists.hasOwnProperty(s_list)) {
-        var script_obj = document.createElement("script");
-        script_obj.src = "lists/" + file + ".js";
-        document.body.appendChild(script_obj);
-        load_js(script_obj, source);
+    switch(source) {
+        case 'diceware': generate_diceware(s_list); break;
+        case 'eff': generate_eff(s_list); break;
+        case 'alternate': generate_alternate(s_list); break;
     }
-    else {
-        switch(source) {
-            case 'diceware': generate_diceware(wordlists[s_list]); break;
-            case 'eff': generate_eff(wordlists[s_list]); break;
-            case 'alternate': generate_alternate(wordlists[s_list]); break;
-        }
-    }
-}
-
-function load_js(script_obj, source) {
-    var file = "";
-    var s_list = get_source_list(source);
-
-    script_obj.onload = function () {
-        switch(s_list) {
-            case "Basque": wordlists[s_list] = basque_wordlist; break;
-            case "Beale": wordlists[s_list] = beale_wordlist; break;
-            case "Bitcoin": wordlists[s_list] = bitcoin_wordlist; break;
-            case "Bulgarian": wordlists[s_list] = bulgarian_wordlist; break;
-            case "Catalan": wordlists[s_list] = catalan_wordlist; break;
-            case "Chinese": wordlists[s_list] = chinese_wordlist; break;
-            case "Czech": wordlists[s_list] = czech_wordlist; break;
-            case "Danish": wordlists[s_list] = danish_wordlist; break;
-            case "Distant Words": wordlists[s_list] = eff_distant; break;
-            case "Dutch": wordlists[s_list] = dutch_wordlist; break;
-            case "Elvish": wordlists[s_list] = elvish_wordlist; break;
-            case "English": wordlists[s_list] = english_wordlist; break;
-            case "Esperanto": wordlists[s_list] = esperanto_wordlist; break;
-            case "Finnish": wordlists[s_list] = finnish_wordlist; break;
-            case "French": wordlists[s_list] = french_wordlist; break;
-            case "German": wordlists[s_list] = german_wordlist; break;
-            case "Italian": wordlists[s_list] = italian_wordlist; break;
-            case "Japanese": wordlists[s_list] = japanese_wordlist; break;
-            case "Klingon": wordlists[s_list] = klingon_wordlist; break;
-            case "Long Words": wordlists[s_list] = eff_long; break;
-            case "Maori": wordlists[s_list] = maori_wordlist; break;
-            case "Norwegian": wordlists[s_list] = norwegian_wordlist; break;
-            case "PGP": wordlists[s_list] = pgp_wordlist; break;
-            case "Polish": wordlists[s_list] = polish_wordlist; break;
-            case "Portuguese": wordlists[s_list] = portuguese_wordlist; break;
-            case "RockYou": wordlists[s_list] = rockyou_wordlist; break;
-            case "Russian": wordlists[s_list] = russian_wordlist; break;
-            case "Short Words": wordlists[s_list] = eff_short; break;
-            case "Simpsons": wordlists[s_list] = simpsons_wordlist; break;
-            case "Slovenian": wordlists[s_list] = slovenian_wordlist; break;
-            case "Spanish": wordlists[s_list] = spanish_wordlist; break;
-            case "Swedish": wordlists[s_list] = swedish_wordlist; break;
-            case "Trump": wordlists[s_list] = trump_wordlist; break;
-            case "Turkish": wordlists[s_list] = turkish_wordlist; break;
-        }
-        generate_passphrase(source);
-    };
 }
 
 /* Uniform, unbiased, secure, random number generator */
 function sec_rand(count) {
     var min;
-    var paranoia = 10; // for sjcl.random.randomWords()
+    var rand_array = new Uint32Array(1);
+
+    const my_crypto = window.crypto || window.msCrypto;
+    my_crypto.getRandomValues(rand_array);
 
     // ensure `count' is a 32-bit integer
     count >>>= 0;
@@ -155,10 +97,7 @@ function sec_rand(count) {
     min = (-count >>> 0) % count;
 
     do {
-        // sjcl.random.randomWords() range = [-2147483648, 2147483647]
-        if(sjcl.random.isReady()) {
-            rand = sjcl.random.randomWords(1, paranoia)[0] & 0x7fffffff;
-        }
+        rand = rand_array[0] & 0x7fffffff;
     } while (rand < min);
 
     return rand % count;
@@ -178,7 +117,35 @@ function generate_pass(len, set, spaces) {
     return pass.rtrim();
 }
 
-function generate_diceware(wordlist) {
+function generate_diceware(selection) {
+    var wordlist = [];
+    switch(selection) {
+        case "Basque": wordlist = diceware_eu; break;
+        case "Beale": wordlist = diceware_beale; break;
+        case "Bulgarian": wordlist = diceware_bg; break;
+        case "Catalan": wordlist = diceware_ca; break;
+        case "Chinese": wordlist = diceware_cn; break;
+        case "Czech": wordlist = diceware_cz; break;
+        case "Danish": wordlist = diceware_da; break;
+        case "Dutch": wordlist = diceware_nl; break;
+        case "English": wordlist = diceware_en; break;
+        case "Esperanto": wordlist = diceware_eo; break;
+        case "Finnish": wordlist = diceware_fi; break;
+        case "French": wordlist = diceware_fr; break;
+        case "German": wordlist = diceware_de; break;
+        case "Italian": wordlist = diceware_it; break;
+        case "Japanese": wordlist = diceware_jp; break;
+        case "Maori": wordlist = diceware_mi; break;
+        case "Norwegian": wordlist = diceware_no; break;
+        case "Polish": wordlist = diceware_pl; break;
+        case "Portuguese": wordlist = diceware_pt; break;
+        case "Russian": wordlist = diceware_ru; break;
+        case "Slovenian": wordlist = diceware_sl; break;
+        case "Spanish": wordlist = diceware_es; break;
+        case "Swedish": wordlist = diceware_sv; break;
+        case "Turkish": wordlist = diceware_tr; break;
+    }
+
     var entropy = get_entropy();
     var len = Math.ceil(entropy/Math.log2(wordlist.length));
     var pass_id = document.getElementById('diceware-pass');
@@ -198,7 +165,14 @@ function generate_diceware(wordlist) {
     pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(wordlist.length)) + "-bits.";
 }
 
-function generate_eff(wordlist) {
+function generate_eff(selection) {
+    var wordlist = [];
+    switch(selection) {
+        case "Distant Words": wordlist = eff_distant; break;
+        case "Short Words": wordlist = eff_short; break;
+        case "Long Words": wordlist = eff_long; break;
+    }
+
     var entropy = get_entropy();
     var len = Math.ceil(entropy/Math.log2(wordlist.length));
     var pass_id = document.getElementById('eff-pass');
@@ -218,7 +192,18 @@ function generate_eff(wordlist) {
     pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(wordlist.length)) + "-bits.";
 }
 
-function generate_alternate(wordlist) {
+function generate_alternate(selection) {
+    var wordlist = [];
+    switch(selection) {
+        case "Bitcoin": wordlist = alternate_bitcoin; break;
+        case "Elvish": wordlist = alternate_elvish; break;
+        case "Klingon": wordlist = alternate_klingon; break;
+        case "PGP": wordlist = alternate_pgp; break;
+        case "RockYou": wordlist = alternate_rockyou; break;
+        case "Simpsons": wordlist = alternate_simpsons; break;
+        case "Trump": wordlist = alternate_trump; break;
+    }
+
     var entropy = get_entropy();
     var len = Math.ceil(entropy/Math.log2(wordlist.length));
     var pass_id = document.getElementById('alt-pass');
@@ -356,9 +341,9 @@ function generate_emoji() {
     var pass_id = document.getElementById('emoji-pass');
     var pass_length = document.getElementById('emoji-length');
     var pass_entropy = document.getElementById('emoji-entropy');
-    var len = Math.ceil(entropy/Math.log2(emoji_wordlist.length));
-    var pass = generate_pass(len, emoji_wordlist);
+    var len = Math.ceil(entropy/Math.log2(random_emoji.length));
+    var pass = generate_pass(len, random_emoji);
     pass_length.innerHTML = len + " characters.";
     pass_id.innerHTML = pass;
-    pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(emoji_wordlist.length)) + "-bits.";
+    pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(random_emoji.length)) + "-bits.";
 }
