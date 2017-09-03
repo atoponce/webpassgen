@@ -30,7 +30,7 @@ function toggle_hyphens(cbox, pass_div) {
         // increment the character count by the number of hyphens added
         var hyphen_count = pass.match(/\-/g).length;
         pass_len += hyphen_count;
-        spans[2].innerHTML = pass_len;
+        spans[2].innerText = pass_len;
     }
     else {
         // decrement the character count by the number of hyphens added
@@ -51,7 +51,7 @@ function toggle_hyphens(cbox, pass_div) {
         // convert my underscored word back to a hyphenated word
         pass = pass.replace(/_/g, '-');
     }
-    pass_id.innerHTML = pass;
+    pass_id.innerText = pass;
 }
 
 function get_entropy() {
@@ -69,6 +69,9 @@ function get_source_list(source) {
         case "alternate":
             var s_list = document.querySelector('option[name="alternate_list"]:checked').value;
             break;
+        case "bitcoin":
+            var s_list = document.querySelector('option[name="bitcoin_list"]:checked').value;
+            break;
     }
     return s_list;
 }
@@ -79,6 +82,7 @@ function generate_passphrase(source) {
         case 'diceware': generate_diceware(s_list); break;
         case 'eff': generate_eff(s_list); break;
         case 'alternate': generate_alternate(s_list); break;
+        case 'bitcoin': generate_bitcoin(s_list); break;
     }
 }
 
@@ -154,11 +158,11 @@ function generate_diceware(selection) {
     var hyphens = document.getElementById('hyphen8_1');
 
     pass = generate_pass(len, wordlist, true);
-    pass_id.innerHTML = pass;
+    pass_id.innerText = pass;
 
     if (hyphens.checked) {
         pass = pass.split(' ').join('-');
-        pass_id.innerHTML = pass;
+        pass_id.innerText = pass;
     }
 
     pass_length.innerHTML = "<span>" + pass.replace(/\s/g, '').length + "</span>" + " characters.";
@@ -181,11 +185,11 @@ function generate_eff(selection) {
     var hyphens = document.getElementById('hyphen8_2');
 
     pass = generate_pass(len, wordlist, true);
-    pass_id.innerHTML = pass;
+    pass_id.innerText = pass;
 
     if (hyphens.checked) {
         pass = pass.split(' ').join('-');
-        pass_id.innerHTML = pass;
+        pass_id.innerText = pass;
     }
 
     pass_length.innerHTML = "<span>" + pass.replace(/\s/g, '').length + "</span>" + " characters.";
@@ -211,11 +215,45 @@ function generate_alternate(selection) {
     var pass_entropy = document.getElementById('alt-entropy');
     var hyphens = document.getElementById('hyphen8_3');
     pass = generate_pass(len, wordlist, true);
-    pass_id.innerHTML = pass;
+    pass_id.innerText = pass;
 
     if (hyphens.checked) {
         pass = pass.split(' ').join('-');
-        pass_id.innerHTML = pass;
+        pass_id.innerText = pass;
+    }
+
+    pass_length.innerHTML = "<span>" + pass.replace(/\s/g, '').length + "</span>" + " characters.";
+    pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(wordlist.length)) + "-bits.";
+}
+
+function generate_bitcoin(selection) {
+    var wordlist = [];
+    console.log(selection);
+    switch(selection) {
+        case "Chinese (Simp)": wordlist = bitcoin_cn_simp; break;
+        case "Chinese (Trad)": wordlist = bitcoin_cn_trad; break;
+        case "English": wordlist = bitcoin_en; break;
+        case "French": wordlist = bitcoin_fr; break;
+        case "Italian": wordlist = bitcoin_it; break;
+        case "Japanese": wordlist = bitcoin_jp; break;
+        case "Korean": wordlist = bitcoin_kr; break;
+        case "Spanish": wordlist = bitcoin_es; break;
+    }
+
+    console.log(wordlist.length);
+
+    var entropy = get_entropy();
+    var len = Math.ceil(entropy/Math.log2(wordlist.length));
+    var pass_id = document.getElementById('btc-pass');
+    var pass_length = document.getElementById('btc-length');
+    var pass_entropy = document.getElementById('btc-entropy');
+    var hyphens = document.getElementById('hyphen8_4');
+    pass = generate_pass(len, wordlist, true);
+    pass_id.innerText = pass;
+
+    if (hyphens.checked) {
+        pass = pass.split(' ').join('-');
+        pass_id.innerText = pass;
     }
 
     pass_length.innerHTML = "<span>" + pass.replace(/\s/g, '').length + "</span>" + " characters.";
@@ -305,7 +343,7 @@ function generate_pseudowords() {
     var pass_id = document.getElementById('pseudo-pass');
     var pass_length = document.getElementById('pseudo-length');
     var pass_entropy = document.getElementById('pseudo-entropy');
-    pass_id.innerHTML = pass;
+    pass_id.innerText = pass;
     pass_length.innerHTML = pass.replace(/-/g, '').length + " characters.";
     pass_entropy.innerHTML = "~" + ent + "-bits.";
 }
@@ -323,27 +361,30 @@ function generate_random() {
     else if (option == "Base-32") { var s = "0123456789abcdefghjkmnpqrstvwxyz"; }
     else if (option == "Base-16") { var s = "0123456789abcdef"; }
     else if (option == "Base-10") { var s = "0123456789"; }
+    else if (option == "Emoji") { return generate_emoji(); }
 
     var len = Math.ceil(entropy/Math.log2(s.length));
     var pass = generate_pass(len, s);
     pass_length.innerHTML = len + " characters.";
 
     // fix HTML '&', '<', and '>'
-    pass = pass.replace(/&/g, "&amp");
+    //pass = pass.replace(/&/g, "&amp;");
     pass = pass.replace(/</g, "&lt;");
     pass = pass.replace(/>/g, "&gt;");
-    pass_id.innerHTML = pass;
+    pass_id.innerText = pass;
     pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(s.length)) + "-bits.";
 }
 
 function generate_emoji() {
     var entropy = get_entropy();
-    var pass_id = document.getElementById('emoji-pass');
-    var pass_length = document.getElementById('emoji-length');
-    var pass_entropy = document.getElementById('emoji-entropy');
+    var pass_id = document.getElementById('random-pass');
+    var pass_length = document.getElementById('random-length');
+    var pass_entropy = document.getElementById('random-entropy');
+
     var len = Math.ceil(entropy/Math.log2(random_emoji.length));
     var pass = generate_pass(len, random_emoji);
     pass_length.innerHTML = len + " characters.";
-    pass_id.innerHTML = pass;
+
+    pass_id.innerText = pass;
     pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(random_emoji.length)) + "-bits.";
 }

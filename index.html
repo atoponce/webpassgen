@@ -27,34 +27,80 @@
         </div>
       </div>
       <div id="table">
+        <div id="alt-default" class="cell">
+          <p class="cell-title"><strong>Alternate</strong></p>
+          <div class="optional">
+            <select>
+              <option name="alternate_list">Elvish</option>
+              <option name="alternate_list">Klingon</option>
+              <option name="alternate_list" selected="selected">PGP</option>
+              <option name="alternate_list">RockYou</option>
+              <option name="alternate_list">Simpsons</option>
+              <option name="alternate_list">Trump</option>
+            </select>
+          </div>
+          <button value="Generate" onclick="generate_passphrase('alternate');">Generate</button>
+          <div id="alt-pass" class="password"></div>
+          <div class="stats length">
+            <span id="alt-entropy"></span>
+            <span id="alt-length"></span>
+          </div>
+          <div class="passphrase-separator">
+            <input type="checkbox" id="hyphen8_3" onclick="toggle_hyphens('hyphen8_3', 'alt-pass')"><label for="hyphen8_3">Hyphenate</label>
+          </div>
+        </div>
+        <div id="btc-default" class="cell">
+          <p class="cell-title"><strong>Bitcoin</strong></p>
+          <div class="optional">
+            <select>
+              <option name="bitcoin_list">Chinese (Simp)</option>
+              <option name="bitcoin_list">Chinese (Trad)</option>
+              <option name="bitcoin_list" selected="selected">English</option>
+              <option name="bitcoin_list">French</option>
+              <option name="bitcoin_list">Italian</option>
+              <option name="bitcoin_list">Japanese</option>
+              <option name="bitcoin_list">Korean</option>
+              <option name="bitcoin_list">Spanish</option>
+            </select>
+          </div>
+          <button value="Generate" onclick="generate_passphrase('bitcoin');">Generate</button>
+          <div id="btc-pass" class="password"></div>
+          <div class="stats length">
+            <span id="btc-entropy"></span>
+            <span id="btc-length"></span>
+          </div>
+          <div class="passphrase-separator">
+            <input type="checkbox" id="hyphen8_4" onclick="toggle_hyphens('hyphen8_4', 'btc-pass')"><label for="hyphen8_4">Hyphenate</label>
+          </div>
+        </div>
         <div id="diceware-default" class="cell">
           <p class="cell-title"><strong>Diceware</strong></p>
           <div class="optional">
             <select>
-              <option name="diceware_list" onclick="load_js('diceware');">Basque</option>
-              <option name="diceware_list" onclick="load_js('diceware');">Beale</option>
-              <option name="diceware_list" onclick="load_js('diceware');">Bulgarian</option>
-              <option name="diceware_list" onclick="load_js('diceware');">Catalan</option>
-              <option name="diceware_list" onclick="load_js('diceware');">Chinese</option>
-              <option name="diceware_list" onclick="load_js('diceware');">Czech</option>
-              <option name="diceware_list" onclick="load_js('diceware');">Danish</option>
-              <option name="diceware_list" onclick="load_js('diceware');">Dutch</option>
-              <option name="diceware_list" onclick="load_js('diceware');" selected="selected">English</option>
-              <option name="diceware_list" onclick="load_js('diceware');">Esperanto</option>
-              <option name="diceware_list" onclick="load_js('diceware');">Finnish</option>
-              <option name="diceware_list" onclick="load_js('diceware');">French</option>
-              <option name="diceware_list" onclick="load_js('diceware');">German</option>
-              <option name="diceware_list" onclick="load_js('diceware');">Italian</option>
-              <option name="diceware_list" onclick="load_js('diceware');">Japanese</option>
-              <option name="diceware_list" onclick="load_js('diceware');">Maori</option>
-              <option name="diceware_list" onclick="load_js('diceware');">Norwegian</option>
-              <option name="diceware_list" onclick="load_js('diceware');">Polish</option>
-              <option name="diceware_list" onclick="load_js('diceware');">Portuguese</option>
-              <option name="diceware_list" onclick="load_js('diceware');">Russian</option>
-              <option name="diceware_list" onclick="load_js('diceware');">Slovenian</option>
-              <option name="diceware_list" onclick="load_js('diceware');">Spanish</option>
-              <option name="diceware_list" onclick="load_js('diceware');">Swedish</option>
-              <option name="diceware_list" onclick="load_js('diceware');">Turkish</option>
+              <option name="diceware_list">Basque</option>
+              <option name="diceware_list">Beale</option>
+              <option name="diceware_list">Bulgarian</option>
+              <option name="diceware_list">Catalan</option>
+              <option name="diceware_list">Chinese</option>
+              <option name="diceware_list">Czech</option>
+              <option name="diceware_list">Danish</option>
+              <option name="diceware_list">Dutch</option>
+              <option name="diceware_list" selected="selected">English</option>
+              <option name="diceware_list">Esperanto</option>
+              <option name="diceware_list">Finnish</option>
+              <option name="diceware_list">French</option>
+              <option name="diceware_list">German</option>
+              <option name="diceware_list">Italian</option>
+              <option name="diceware_list">Japanese</option>
+              <option name="diceware_list">Maori</option>
+              <option name="diceware_list">Norwegian</option>
+              <option name="diceware_list">Polish</option>
+              <option name="diceware_list">Portuguese</option>
+              <option name="diceware_list">Russian</option>
+              <option name="diceware_list">Slovenian</option>
+              <option name="diceware_list">Spanish</option>
+              <option name="diceware_list">Swedish</option>
+              <option name="diceware_list">Turkish</option>
             </select>
           </div>
           <button value="Generate" onclick="generate_passphrase('diceware');">Generate</button>
@@ -71,9 +117,9 @@
           <p class="cell-title"><strong>EFF</strong></p>
           <div class="optional">
             <select>
-              <option name="eff_list" onclick="load_js('eff');">Distant Words</option>
-              <option name="eff_list" onclick="load_js('eff');">Long Words</option>
-              <option name="eff_list" onclick="load_js('eff');" selected="selected">Short Words</option>
+              <option name="eff_list">Distant Words</option>
+              <option name="eff_list">Long Words</option>
+              <option name="eff_list" selected="selected">Short Words</option>
             </select>
           </div>
           <button value="Generate" onclick="generate_passphrase('eff');">Generate</button>
@@ -84,29 +130,6 @@
           </div>
           <div class="passphrase-separator">
             <input type="checkbox" id="hyphen8_2" onclick="toggle_hyphens('hyphen8_2', 'eff-pass')"><label for="hyphen8_2">Hyphenate</label>
-          </div>
-        </div>
-        <div id="alt-default" class="cell">
-          <p class="cell-title"><strong>Alternate</strong></p>
-          <div class="optional">
-            <select>
-              <option name="alternate_list" onclick="load_js('alternate');">Bitcoin</option>
-              <option name="alternate_list" onclick="load_js('alternate');">Elvish</option>
-              <option name="alternate_list" onclick="load_js('alternate');">Klingon</option>
-              <option name="alternate_list" onclick="load_js('alternate');" selected="selected">PGP</option>
-              <option name="alternate_list" onclick="load_js('alternate');">RockYou</option>
-              <option name="alternate_list" onclick="load_js('alternate');">Simpsons</option>
-              <option name="alternate_list" onclick="load_js('alternate');">Trump</option>
-            </select>
-          </div>
-          <button value="Generate" onclick="generate_passphrase('alternate');">Generate</button>
-          <div id="alt-pass" class="password"></div>
-          <div class="stats length">
-            <span id="alt-entropy"></span>
-            <span id="alt-length"></span>
-          </div>
-          <div class="passphrase-separator">
-            <input type="checkbox" id="hyphen8_3" onclick="toggle_hyphens('hyphen8_3', 'alt-pass')"><label for="hyphen8_3">Hyphenate</label>
           </div>
         </div>
         <div id="pseudo-default" class="cell">
@@ -135,6 +158,7 @@
               <option name="random">Base-32</option>
               <option name="random">Base-16</option>
               <option name="random">Base-10</option>
+              <option name="random">Emoji</option>
             </select>
           </div>
           <button value="Generate" onclick="generate_random();">Generate</button>
@@ -144,6 +168,7 @@
             <span id="random-length"></span>
           </div>
         </div>
+        <!--
         <div id="emoji-default" class="cell">
           <p class="cell-title"><strong>Emoji</strong></p>
           <button value="Generate" onclick="generate_emoji();">Generate</button>
@@ -153,6 +178,7 @@
             <span id="emoji-length"></span>
           </div>
         </div>
+        -->
       </div>
       <div id="footer">
         <center>
@@ -167,7 +193,7 @@
     </div>
 
     <!-- core functions -->
-    <script integrity="sha256-ZkVias2hJgkTovp2KLB4KS8V8t3Y/uN5fn6NueCkJGo=" crossorigin="anonymous" src="js/main.js"></script>
+    <script integrity="sha256-JNHkAmXoIoaPjxz/vBxOv7JIO+nLTm+cpXt65GRcDJE=" crossorigin="anonymous" src="js/main.js"></script>
 
     <!--
         Because the word lists are static, and not changing, the filename is given a SHA-224 digest of its content. The web server can then be
@@ -196,15 +222,27 @@
     <script integrity="sha256-KB54BgbvhSxvA0j+1OLLZ75oPGzLsZYpRxidAR/kezc=" crossorigin="anonymous" src="lists/diceware_en.dfe2b6c65be6c6742a6cdcd324a3e0e8b954ba3d0928be6de622c103.js"></script>
     <script integrity="sha256-QKCnczMYqziWvkZtXgvH8HPCEzCDbkBiQYmqKRLf6RY=" crossorigin="anonymous" src="lists/eff_short.ff64651f91df8af720f089df15d0128946ebfabce386f6e24346ac2a.js"></script>
     <script integrity="sha256-AOaWJIyzaksIVdEza5z2daHul9b5bCIIul2nxxmV1rQ=" crossorigin="anonymous" src="lists/alternate_pgp.9408ae5448225fe9f6363d9a56ed4a2ca672790af688fea9fd3b306b.js"></script>
+    <script integrity="sha256-KpKgxEAXTDpiqa8ny2c1LcPol5c1upROsZbD6hgfx3E=" crossorigin="anonymous" src="lists/bitcoin_en.9b755edd1237120b318a0a870dcc6ee25614cab79b3613d7162a1e05.js"></script>
     <script integrity="sha256-PD2QHMDDpd0k7BbMx+XjSZ0gQNxFdUhz7oF+/Y0WTeg=" crossorigin="anonymous" src="lists/random_emoji.d0bef8fb50e74bec87a8b96b8087c020d9ed707f85b2fa8f34facd87.js"></script>
 
     <!-- load the other word lists asynchronously -->
-    <script async integrity="sha256-bFElQImL2vOzqDNSobJRD1Td0TpIbWMViE75Au+CT9s=" crossorigin="anonymous" src="lists/alternate_bitcoin.dc76b475db1dee0cafcb52c2912cfae802749091dede6326d90d3c6c.js"></script>
+    <!-- alternate passphrase generator -->
     <script async integrity="sha256-jLj4ANLLEAPsBcxKTfN6+VlbAPsGRxDwRPD3QGj+tB4=" crossorigin="anonymous" src="lists/alternate_elvish.6e050ba74c9e95152d34c8ccec06c3de911b4162c6ff4823c627be80.js"></script>
     <script async integrity="sha256-zB6XiJSvafdgaQi7VeZq7EPS6Vv2P3kAZszIT+NV3Ug=" crossorigin="anonymous" src="lists/alternate_klingon.a962fde40acd05c7bcbed20513f82686319a885b38578f1ee2aa257c.js"></script>
     <script async integrity="sha256-GsvFmDxxPe6F+wXRwQb7BxPoo8cYd09dZeGpVPl0c4w=" crossorigin="anonymous" src="lists/alternate_rockyou.1d3b44e6afe24f0f293bea833b2811094ee3a2c73b7456b455070e3c.js"></script>
     <script async integrity="sha256-Kk2rVLBxEqjXvCepYHaUcWeeEEQOSQv6RFz28P/CyfQ=" crossorigin="anonymous" src="lists/alternate_simpsons.e573723b72d67052207a6ee30d6edf819f6a3b83c5bf5df3418387b5.js"></script>
     <script async integrity="sha256-RgM2NNM1aKrtgqoTaIRnk72GkwNRvMrOV/HPzbsyu8E=" crossorigin="anonymous" src="lists/alternate_trump.c385e5a6478b05b87fad2391b2aff84a48bb51e7bb7bf6af44837073.js"></script>
+
+    <!-- bitcoin passphrase generator -->
+    <script async integrity="sha256-Wj5BYW4cDxKSuSE3qp7+wxNbe/lXGg4l+gxnq8BIVQc=" crossorigin="anonymous" src="lists/bitcoin_cn_simp.6ee793f3fc359fdd5496d2de6535592af2c3267348c74c48f98d1c03.js"></script>
+    <script async integrity="sha256-ESemM0FZrv05GU7Qg1ZlVnfz4wUwBRITrv0jaZSevTw=" crossorigin="anonymous" src="lists/bitcoin_cn_trad.74e468275c411114f0a42638009b734f9f5ed519f849acb600add9a0.js"></script>
+    <script async integrity="sha256-N2a+5UVdInGOmytxccy65RkL+mYwbs0GNH2lwVVw2eM=" crossorigin="anonymous" src="lists/bitcoin_fr.d60d03178099cdf9ad9032f7e41d8bfb3322526e1adee143c930e1d8.js"></script>
+    <script async integrity="sha256-AkrArV9HDlLIKAFV77iZTxNDnVjBeVKfdj4Al/SUvX8=" crossorigin="anonymous" src="lists/bitcoin_it.59ae9b2c839f62a054baaffda622ca9191e2db34e6d3948b64437a95.js"></script>
+    <script async integrity="sha256-9XkfEsUqUxl7wBZG553sBKDaoNrkfLnCc1v/cPldsVg=" crossorigin="anonymous" src="lists/bitcoin_jp.5bbbe058fea2df37cf78793398fc56ea6ab5ba8fb710eeb6bdd7b35c.js"></script>
+    <script async integrity="sha256-Gt1vRRt0tcywcQiUfBapkKovNUE2G39IRotpjiczf4M=" crossorigin="anonymous" src="lists/bitcoin_kr.4310dfa94004c758aa172f43e9212616ef22dc8fd588716f91c72f01.js"></script>
+    <script async integrity="sha256-NspsGArnR4sf+AdlKTrN3KtT1SVy1yjrzi59kdIdAn4=" crossorigin="anonymous" src="lists/bitcoin_es.3999ee34039d34baa9212e5e425006b6954f9e9cc053449f42d66309.js"></script>
+
+    <!-- diceware passphrase generator -->
     <script async integrity="sha256-VvBBeib1YfxJ/XD+aUmdUqCwYahz/NdPPBQQrywrrEw=" crossorigin="anonymous" src="lists/diceware_beale.025c4e954c35f260f557bd23ee74705ab7aaa5033443a5f27debd382.js"></script>
     <script async integrity="sha256-HShFs4JptN4tSbu/D3caAbPHMIoimOneR8dJERjlU5A=" crossorigin="anonymous" src="lists/diceware_bg.ef023d178eee1f6fd275ca2996d4b54264e18105570f9001f9b258dd.js"></script>
     <script async integrity="sha256-xba1oZ2z5tWiUbvilIxZUHCAJBakGc5V8xtlc7NdfdM=" crossorigin="anonymous" src="lists/diceware_ca.b3beb0711eb2c0758506ea8bcc179defda1fce10852fce6e0e5aa4e8.js"></script>
@@ -228,6 +266,8 @@
     <script async integrity="sha256-OlS48S2xvw3O47VJxO4AUMUB72yASXBrnNLIz8OhsPg=" crossorigin="anonymous" src="lists/diceware_sl.14fbe56a3b36024e2d7f5c99159b7885e3ebfbad2f59cd11949c8d5d.js"></script>
     <script async integrity="sha256-SndkNihFglT/ms4oukFW60W1vCnEUuzVcHXhQJk2QCI=" crossorigin="anonymous" src="lists/diceware_sv.ad56e12e462c6b05ac183da17f08efec45132dac0d9088cc8c53f6ac.js"></script>
     <script async integrity="sha256-Q2ddP4gcVyWdrQE8Q5MgiQHPffh32Q+PC8AZURbAqvY=" crossorigin="anonymous" src="lists/diceware_tr.44694be863d3385461eed1defbb74fe982db0dd2a43fc08566ca49df.js"></script>
+
+    <!-- eff passphrase generator -->
     <script async integrity="sha256-58u1Cfc06msA8iMc8v9nhLT/SFlZBZgYD6N63lm2R0k=" crossorigin="anonymous" src="lists/eff_distant.cab3cc61a825f97cd0599e40f52ea8b2fb6c02d2e3326d27b3f7d834.js"></script>
     <script async integrity="sha256-kVnFLZjTXywCECRRHjKIIR80o0/CzZu28IBUQ3oShKk=" crossorigin="anonymous" src="lists/eff_long.492a4ac0a467083508f2d1c1c2524b25693b3b581c79b4ab4b9c1957.js"></script>
 
@@ -236,9 +276,9 @@
         generate_passphrase('diceware');
         generate_passphrase('eff');
         generate_passphrase('alternate');
+        generate_passphrase('bitcoin');
         generate_pseudowords();
         generate_random();
-        generate_emoji();
       }
     </script>
   </body>
