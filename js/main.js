@@ -228,7 +228,6 @@ function generate_alternate(selection) {
 
 function generate_bitcoin(selection) {
     var wordlist = [];
-    console.log(selection);
     switch(selection) {
         case "Chinese (Simp)": wordlist = bitcoin_cn_simp; break;
         case "Chinese (Trad)": wordlist = bitcoin_cn_trad; break;
@@ -239,8 +238,6 @@ function generate_bitcoin(selection) {
         case "Korean": wordlist = bitcoin_kr; break;
         case "Spanish": wordlist = bitcoin_es; break;
     }
-
-    console.log(wordlist.length);
 
     var entropy = get_entropy();
     var len = Math.ceil(entropy/Math.log2(wordlist.length));
