@@ -1,6 +1,6 @@
 @font-face {
     font-family: "Noto Emoji";
-    src: url(NotoEmoji-Regular.ttf);
+    src: url("NotoEmoji-Regular.ttf");
 }
 
 /* body tags */
@@ -108,7 +108,6 @@ button {
     text-decoration: underline;
     outline: 0;
 }
-#emoji-pass { font-family: "Noto Emoji"; }
 
 #entropy-55 { background: #ff6961; }
 #entropy-60 { background: #ffb347; }

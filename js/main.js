@@ -382,6 +382,7 @@ function generate_emoji() {
     var pass = generate_pass(len, random_emoji);
     pass_length.innerHTML = len + " characters.";
 
+    pass_id.style.fontFamily = "Noto Emoji";
     pass_id.innerText = pass;
     pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(random_emoji.length)) + "-bits.";
 }
