@@ -368,6 +368,7 @@ function generate_random() {
     //pass = pass.replace(/&/g, "&amp;");
     pass = pass.replace(/</g, "&lt;");
     pass = pass.replace(/>/g, "&gt;");
+    pass_id.removeAttribute("style");
     pass_id.innerText = pass;
     pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(s.length)) + "-bits.";
 }
