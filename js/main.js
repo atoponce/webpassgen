@@ -92,7 +92,6 @@ function sec_rand(count) {
     var rand_array = new Uint32Array(1);
 
     const my_crypto = window.crypto || window.msCrypto;
-    my_crypto.getRandomValues(rand_array);
 
     // ensure `count' is a 32-bit integer
     count >>>= 0;
@@ -101,10 +100,10 @@ function sec_rand(count) {
     min = (-count >>> 0) % count;
 
     do {
-        rand = rand_array[0] & 0x7fffffff;
-    } while (rand < min);
+        rand = my_crypto.getRandomValues(rand_array);
+    } while (rand[0] < min);
 
-    return rand % count;
+    return rand[0] % count;
 }
 
 function generate_pass(len, set, spaces) {
