@@ -100,10 +100,10 @@ function sec_rand(count) {
     min = (-count >>> 0) % count;
 
     do {
-        rand = my_crypto.getRandomValues(rand_array);
-    } while (rand[0] < min);
+        my_crypto.getRandomValues(rand_array);
+    } while (rand_array[0] < min);
 
-    return rand[0] % count;
+    return rand_array[0] % count;
 }
 
 function generate_pass(len, set, spaces) {
