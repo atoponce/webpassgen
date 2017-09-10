@@ -5,10 +5,36 @@
 
 /* body tags */
 body { margin: 0; }
+select {
+    -moz-appearance: none;  
+    -webkit-appearance: none; 
+    background-color: white;
+    border:1px solid black;
+    color: black;
+    cursor: pointer;
+    font-size: 12px;
+    padding: 5px 22px 5px 6px;
+    width: 120px;
+}
+select option {
+    background-color: white;
+    color :black;
+}
+select::-ms-expand{
+    display:none;
+}
 button {
+    -moz-appearance: none;  
+    -webkit-appearance: none; 
+    background: #fff;
+    border:1px solid black;
     position: absolute;
     right: 10px;
-    top: 10px;
+    top: 40px;
+    color: black;
+    cursor: pointer;
+    font-size: 12px;
+    padding: 5px 10px;
 }
 /* classes */
 .stats {
@@ -23,38 +49,54 @@ button {
 }
 .passphrase-separator {
     bottom: 5px;
-    /*right: 40px;*/
     right: 5px;
     position: absolute;
-}
-.optional {
-    left: 10px;
-    position: absolute;
-    top: 10px;
 }
 .cell {
     border: 1px solid black;
     display: table-cell;
     float: left;
-    height: 150px;
+    height: 180px;
     margin: 5px;
-    padding: 0px 4px;
     position: relative;
     width: 364px;
 }
 .password {
     font-family: "Dejavu Sans Mono", "Courier New", "Lucidia Console", Monaco, monospace;
     font-size: 18px;
+    margin: 50px 10px 0px 10px;
     text-align: center;
 }
 .cell-title {
-    margin-top: 25px;
+    background-color: #3385ff;
+    border-bottom: 1px solid black;
+    color: white;
+    margin-top: 0px;
+    padding: 5px;
     text-align: center;
 }
 .info-link {
     position: absolute;
     bottom: 5px;
     right: 5px;
+}
+.optional {
+    left: 10px;
+    position: absolute;
+    top: 40px;
+}
+.optional:after {
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    bottom: 3px;
+    color: black;
+    content: '⊳';
+    font-size: 18px;
+    left: 100px;
+    pointer-events: none;
+    position: absolute;
+    transform: rotate(90deg);
 }
 /* ids */
 #container {
