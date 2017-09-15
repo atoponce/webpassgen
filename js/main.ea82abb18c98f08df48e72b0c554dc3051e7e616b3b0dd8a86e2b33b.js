@@ -2,58 +2,6 @@ var spaces=false;
 
 String.prototype.rtrim = function() { return this.replace(/\s+$/g,""); }
 
-function toggle_hyphens(cbox, pass_div) {
-    var pass_id = document.getElementById(pass_div);
-    var pass = pass_id.innerText;
-    var hyphens = document.getElementById(cbox);
-    var parent_div = pass_id.parentNode;
-    var spans = parent_div.getElementsByTagName('span');
-    var pass_len = parseInt(spans[2].innerText);
-
-    if (hyphens.checked) {
-        // convert hyphenated words containing to underscored
-        // EG: "m-16" in beale.js to "m_16"
-        pass = pass.replace(/([^- ])-([^- ])/g, '$1_$2');
-
-        // some wordlists have words of only hyphens, such as '---'
-        // if they show up as a "word", sorround with underscores
-        // EG:
-        //      "ram virgil --- --- aqua jewish" would then become:
-        //      "ram-virgil_---_---_aqua-jewish"
-        pass = pass.replace(/- -/g, '-_-');
-        pass = pass.replace(/ -/g, '_-');
-        pass = pass.replace(/- /g, '-_');
-
-        // replace spaces with the hyphen
-        pass = pass.replace(/ /g,'-');
-
-        // increment the character count by the number of hyphens added
-        var hyphen_count = pass.match(/\-/g).length;
-        pass_len += hyphen_count;
-        spans[2].innerText = pass_len;
-    }
-    else {
-        // decrement the character count by the number of hyphens added
-        var hyphen_count = pass.match(/\-/g).length;
-        pass_len -= hyphen_count;
-        spans[2].innerText = pass_len;
-
-        // first replace any and all underscores surrounded by hyphens
-        pass = pass.replace(/-_-/g, '- -');
-        pass = pass.replace(/_-/g, ' -');
-        pass = pass.replace(/-_/g, '- ');
-
-        // get the rest of the hyphens
-        // must happen in two steps, in the event of word-wrapping
-        pass = pass.replace(/([^- ])-/g, '$1 ');
-        pass = pass.replace(/-([^- ])/g, ' $1');
-
-        // convert my underscored word back to a hyphenated word
-        pass = pass.replace(/_/g, '-');
-    }
-    pass_id.innerText = pass;
-}
-
 function get_entropy() {
     return parseInt(document.querySelector('input[name="entropy"]:checked').value);
 }
@@ -154,15 +102,9 @@ function generate_diceware(selection) {
     var pass_id = document.getElementById('diceware-pass');
     var pass_length = document.getElementById('diceware-length');
     var pass_entropy = document.getElementById('diceware-entropy');
-    var hyphens = document.getElementById('hyphen8_1');
 
     pass = generate_pass(len, wordlist, true);
     pass_id.innerText = pass;
-
-    if (hyphens.checked) {
-        pass = pass.split(' ').join('-');
-        pass_id.innerText = pass;
-    }
 
     pass_length.innerHTML = "<span>" + pass.replace(/\s/g, '').length + "</span>" + " characters.";
     pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(wordlist.length)) + "-bits.";
@@ -181,15 +123,9 @@ function generate_eff(selection) {
     var pass_id = document.getElementById('eff-pass');
     var pass_length = document.getElementById('eff-length');
     var pass_entropy = document.getElementById('eff-entropy');
-    var hyphens = document.getElementById('hyphen8_2');
 
     pass = generate_pass(len, wordlist, true);
     pass_id.innerText = pass;
-
-    if (hyphens.checked) {
-        pass = pass.split(' ').join('-');
-        pass_id.innerText = pass;
-    }
 
     pass_length.innerHTML = "<span>" + pass.replace(/\s/g, '').length + "</span>" + " characters.";
     pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(wordlist.length)) + "-bits.";
@@ -198,7 +134,7 @@ function generate_eff(selection) {
 function generate_alternate(selection) {
     var wordlist = [];
     switch(selection) {
-        case "Bitcoin": wordlist = alternate_bitcoin; break;
+        case "Colors": return generate_colors(); break;
         case "Elvish": wordlist = alternate_elvish; break;
         case "Klingon": wordlist = alternate_klingon; break;
         case "PGP": wordlist = alternate_pgp; break;
@@ -212,17 +148,51 @@ function generate_alternate(selection) {
     var pass_id = document.getElementById('alt-pass');
     var pass_length = document.getElementById('alt-length');
     var pass_entropy = document.getElementById('alt-entropy');
-    var hyphens = document.getElementById('hyphen8_3');
+
     pass = generate_pass(len, wordlist, true);
     pass_id.innerText = pass;
 
-    if (hyphens.checked) {
-        pass = pass.split(' ').join('-');
-        pass_id.innerText = pass;
-    }
-
     pass_length.innerHTML = "<span>" + pass.replace(/\s/g, '').length + "</span>" + " characters.";
     pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(wordlist.length)) + "-bits.";
+}
+
+function is_too_light(hex) {
+    var rgb = parseInt(hex, 16);
+    var r = (rgb >> 16) &0xff;
+    var g = (rgb >> 8) &0xff;
+    var b = (rgb >> 0) &0xff;
+    var l = (0.299*r) + (0.587*g) + (0.114*b);
+    if (l<176) {return false;} return true;
+}
+
+function generate_colors() {
+    var tmp = "";
+    var color_keys = Object.keys(alternate_colors);
+    var entropy = get_entropy();
+    var len = Math.ceil(entropy/Math.log2(color_keys.length));
+    var pass_id = document.getElementById('alt-pass');
+    var pass_length = document.getElementById('alt-length');
+    var pass_entropy = document.getElementById('alt-entropy');
+    var pass = generate_pass(len, color_keys, true).split(" ");
+
+
+    for (var i=0; i<len; i++) {
+        var hex = alternate_colors[pass[i]];
+        if (is_too_light(hex)) {
+            tmp += "<span class='bold contrast' style='color:#" + hex + ";'>" + pass[i] + "</span> ";
+        }
+        else {
+            tmp += "<span class='bold' style='color:#" + hex + ";'>" + pass[i] + "</span> ";
+        }
+    }
+
+    pass_id.innerHTML = tmp;
+    tmp = "";
+    for (var i=0; i<len; i++) { tmp += pass[i] }
+    pass = tmp;
+
+    pass_length.innerHTML = "<span>" + pass.replace(/\s/g, '').length + "</span>" + " characters.";
+    pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(color_keys.length)) + "-bits.";
 }
 
 function generate_bitcoin(selection) {
@@ -243,14 +213,9 @@ function generate_bitcoin(selection) {
     var pass_id = document.getElementById('btc-pass');
     var pass_length = document.getElementById('btc-length');
     var pass_entropy = document.getElementById('btc-entropy');
-    var hyphens = document.getElementById('hyphen8_4');
+
     pass = generate_pass(len, wordlist, true);
     pass_id.innerText = pass;
-
-    if (hyphens.checked) {
-        pass = pass.split(' ').join('-');
-        pass_id.innerText = pass;
-    }
 
     pass_length.innerHTML = "<span>" + pass.replace(/\s/g, '').length + "</span>" + " characters.";
     pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(wordlist.length)) + "-bits.";
@@ -363,11 +328,7 @@ function generate_random() {
     var pass = generate_pass(len, s);
     pass_length.innerHTML = len + " characters.";
 
-    // fix HTML '&', '<', and '>'
-    //pass = pass.replace(/&/g, "&amp;");
-    pass = pass.replace(/</g, "&lt;");
-    pass = pass.replace(/>/g, "&gt;");
-    pass_id.removeAttribute("style");
+    pass_id.removeAttribute("style"); // from emoji
     pass_id.innerText = pass;
     pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(s.length)) + "-bits.";
 }

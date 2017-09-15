@@ -2,41 +2,96 @@
     font-family: "Noto Emoji";
     src: url("NotoEmoji-Regular.ttf");
 }
-
 /* body tags */
 body { margin: 0; }
 select {
+    /* get consistency across all browsers */
     -moz-appearance: none;  
+    -moz-border-radius: 2px;
     -webkit-appearance: none; 
-    background-color: white;
+    background-image: -webkit-gradient(
+        linear, left bottom, left top,
+        color-stop(0.16, rgb(207,207,207)), color-stop(0.79, rgb(252,252,252))
+    );
+    background-image: -moz-linear-gradient(
+        center bottom, rgb(207,207,207) 16%, rgb(252,252,252) 79%
+    );
     border:1px solid black;
+    border-radius: 2px;
     color: black;
     cursor: pointer;
     font-size: 12px;
-    padding: 5px 22px 5px 6px;
+    padding: 3px 22px 3px 6px;
     width: 120px;
 }
 select option {
-    background-color: white;
+    background-color: #DDD;
     color :black;
 }
 select::-ms-expand{
     display:none;
 }
+select:hover {
+    -moz-box-shadow: 1px 1px 0px #CCC;
+    -webkit-box-shadow: 1px 1px 0px #CCC;
+    box-shadow: 1px 1px 0px #CCC;
+}
+select:active, select:focus {
+    background-image: -webkit-gradient(
+        linear, left top, left bottom,
+        color-stop(0.16, rgb(207,207,207)), color-stop(0.79, rgb(252,252,252))
+    );
+    background-image: -moz-linear-gradient(
+        center top, rgb(207,207,207) 16%, rgb(252,252,252) 79%
+    );
+}
 button {
+    /* get consistency across all browsers */
     -moz-appearance: none;  
+    -moz-border-radius: 2px;
     -webkit-appearance: none; 
-    background: #fff;
+    background-image: -webkit-gradient(
+        linear, left bottom, left top,
+        color-stop(0.16, rgb(207,207,207)), color-stop(0.79, rgb(252,252,252))
+    );
+    background-image: -moz-linear-gradient(
+        center bottom, rgb(207,207,207) 16%, rgb(252,252,252) 79%
+    );
     border:1px solid black;
-    position: absolute;
-    right: 10px;
-    top: 40px;
+    border-radius: 2px;
     color: black;
     cursor: pointer;
     font-size: 12px;
-    padding: 5px 10px;
+    padding: 3px 10px;
+    position: absolute;
+    right: 10px;
+    top: 40px;
+}
+button:active {
+    background-image: -webkit-gradient(
+        linear, left top, left bottom,
+        color-stop(0.16, rgb(207,207,207)), color-stop(0.79, rgb(252,252,252))
+    );
+    background-image: -moz-linear-gradient(
+        center top, rgb(207,207,207) 16%, rgb(252,252,252) 79%
+    );
+}
+button:hover {
+    -moz-box-shadow: 1px 1px 0px #CCC;
+    -webkit-box-shadow: 1px 1px 0px #CCC;
+    box-shadow: 1px 1px 0px #CCC;
 }
 /* classes */
+.contrast {
+    text-shadow:
+        -1px -1px 0 #444,  0px -1px 0 #444,
+         1px -1px 0 #444, -1px  0px 0 #444,
+        -1px  1px 0 #444,  0px  1px 0 #444,
+         1px  1px 0 #444,  1px  0px #444;
+}
+.bold {
+    font-weight: bold;
+}
 .stats {
     bottom: 5px;
     left: 5px;
@@ -91,8 +146,8 @@ button {
     -webkit-transform: rotate(90deg);
     bottom: 3px;
     color: black;
-    content: '⊳';
-    font-size: 18px;
+    content: '▶';
+    font-size: 13px;
     left: 100px;
     pointer-events: none;
     position: absolute;

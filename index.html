@@ -2,7 +2,7 @@
 <html>
   <head>
     <link rel="shortcut icon" href="favicon.ico">
-    <link integrity="sha256-DwMZFBA9D9hwt+Xd8LCz3zdinwlkpOF99hzgH1WUSIY=" crossorigin="anonymous" rel="stylesheet" href="assets/style.css">
+    <link integrity="sha256-9/9KxqnFd4t2SFFARr7bsUEykjpVcxMrBrSXHegok/o=" crossorigin="anonymous" rel="stylesheet" href="assets/style.b61a1f0bbbe2b5a8a9d161cb899d256198f0084279d37db1d3a3f14d.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Passphrase and Password Generator</title>
@@ -31,12 +31,13 @@
           <p class="cell-title"><strong>Alternate</strong></p>
           <div class="optional">
             <select>
+              <option name="alternate_list" selected>Colors</option>
               <option name="alternate_list">Elvish</option>
               <option name="alternate_list">Klingon</option>
               <option name="alternate_list">PGP</option>
               <option name="alternate_list">RockYou</option>
               <option name="alternate_list">Simpsons</option>
-              <option name="alternate_list" selected="selected">Trump</option>
+              <option name="alternate_list">Trump</option>
             </select>
           </div>
           <button value="Generate" onclick="generate_passphrase('alternate');">Generate</button>
@@ -44,9 +45,6 @@
           <div class="stats length">
             <span id="alt-entropy"></span>
             <span id="alt-length"></span>
-          </div>
-          <div class="passphrase-separator">
-            <input type="checkbox" id="hyphen8_3" onclick="toggle_hyphens('hyphen8_3', 'alt-pass')"><label for="hyphen8_3">Hyphenate</label>
           </div>
         </div>
         <div id="btc-default" class="cell">
@@ -68,9 +66,6 @@
           <div class="stats length">
             <span id="btc-entropy"></span>
             <span id="btc-length"></span>
-          </div>
-          <div class="passphrase-separator">
-            <input type="checkbox" id="hyphen8_4" onclick="toggle_hyphens('hyphen8_4', 'btc-pass')"><label for="hyphen8_4">Hyphenate</label>
           </div>
         </div>
         <div id="diceware-default" class="cell">
@@ -109,9 +104,6 @@
             <span id="diceware-entropy"></span>
             <span id="diceware-length"></span>
           </div>
-          <div class="passphrase-separator">
-            <input type="checkbox" id="hyphen8_1" onclick="toggle_hyphens('hyphen8_1', 'diceware-pass')"><label for="hyphen8_1">Hyphenate</label>
-          </div>
         </div>
         <div id="eff-default" class="cell">
           <p class="cell-title"><strong>EFF</strong></p>
@@ -128,18 +120,15 @@
             <span id="eff-entropy"></span>
             <span id="eff-length"></span>
           </div>
-          <div class="passphrase-separator">
-            <input type="checkbox" id="hyphen8_2" onclick="toggle_hyphens('hyphen8_2', 'eff-pass')"><label for="hyphen8_2">Hyphenate</label>
-          </div>
         </div>
         <div id="pseudo-default" class="cell">
           <p class="cell-title"><strong>Pseudowords</strong></p>
           <div class="optional">
             <select>
               <option name="pseudowords" selected="selected">Bubble Babble</option>
-              <option name="pseudowords">Secret Ninja</option>
               <option name="pseudowords">Cosby Bebop</option>
               <option name="pseudowords">Korean K-pop</option>
+              <option name="pseudowords">Secret Ninja</option>
             </select>
           </div>
           <button value="Generate" onclick="generate_pseudowords();">Generate</button>
@@ -168,17 +157,6 @@
             <span id="random-length"></span>
           </div>
         </div>
-        <!--
-        <div id="emoji-default" class="cell">
-          <p class="cell-title"><strong>Emoji</strong></p>
-          <button value="Generate" onclick="generate_emoji();">Generate</button>
-          <p id="emoji-pass" class="password"></p>
-          <div class="stats length">
-            <span id="emoji-entropy"></span>
-            <span id="emoji-length"></span>
-          </div>
-        </div>
-        -->
       </div>
       <div id="footer">
         <center>
@@ -193,7 +171,7 @@
     </div>
 
     <!-- core functions -->
-    <script integrity="sha256-FGwlubgnj4DJa4xL0Rhz614SCk43FK0l2itUoGyMHtg=" crossorigin="anonymous" src="js/main.js"></script>
+    <script integrity="sha256-KrWb60zdn6V44md6ooFZsRQHoF67TTCVaViSl4+GEvg=" crossorigin="anonymous" src="js/main.ea82abb18c98f08df48e72b0c554dc3051e7e616b3b0dd8a86e2b33b.js"></script>
 
     <!--
         Because the word lists are static, and not changing, the filename is given a SHA-224 digest of its content. The web server can then be
@@ -219,6 +197,7 @@
     -->
 
     <!-- alternate passphrase generator -->
+    <script async integrity="sha256-nznH+wsyyEvNGfN+usQJQcXUdjE4HdQeefzDI62EjpU=" crossorigin="anonymous" src="lists/alternate_colors.839a0fa52f90cad21ec4b8d3c4a13050a3de8679bd8fe4255bbb3648.js"></script>
     <script async integrity="sha256-jLj4ANLLEAPsBcxKTfN6+VlbAPsGRxDwRPD3QGj+tB4=" crossorigin="anonymous" src="lists/alternate_elvish.6e050ba74c9e95152d34c8ccec06c3de911b4162c6ff4823c627be80.js"></script>
     <script async integrity="sha256-zB6XiJSvafdgaQi7VeZq7EPS6Vv2P3kAZszIT+NV3Ug=" crossorigin="anonymous" src="lists/alternate_klingon.a962fde40acd05c7bcbed20513f82686319a885b38578f1ee2aa257c.js"></script>
     <script async integrity="sha256-AOaWJIyzaksIVdEza5z2daHul9b5bCIIul2nxxmV1rQ=" crossorigin="anonymous" src="lists/alternate_pgp.9408ae5448225fe9f6363d9a56ed4a2ca672790af688fea9fd3b306b.js"></script>
