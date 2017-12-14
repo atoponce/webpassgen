@@ -319,10 +319,21 @@ function generate_random() {
     var option = document.querySelector('option[name="random"]:checked').value;
 
     if (option == "Base-94") { for (i=0; i<94; i++) s += String.fromCharCode(33+i); }
-    else if (option == "Base-64") { var s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/"; }
+    else if (option == "Base-85") { var s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!#$%&()*+-;<=>?@^_`{|}~"; }
+    else if (option == "Base-64 (+/)") { var s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/"; }
+    else if (option == "Base-64 (-_)") { var s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_"; }
+    else if (option == "Base-62") { var s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"; }
+    else if (option == "Base-58 (Bitcoin)") { var s = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"; }
+    else if (option == "Base-52") { var s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"; }
+    else if (option == "Base-36") { var s = "0123456789abcdefghijklmnopqrstuvwxyz"; }
     else if (option == "Base-32") { var s = "0123456789abcdefghjkmnpqrstvwxyz"; }
+    else if (option == "Base-26") { var s = "abcdefghijklmnopqrstuvwxyz"; }
     else if (option == "Base-16") { var s = "0123456789abcdef"; }
     else if (option == "Base-10") { var s = "0123456789"; }
+    else if (option == "Base-8") { var s = "01234567"; }
+    else if (option == "Base-2") { var s = "01"; }
+    else if (option == "Coin Flips") { var s = "HT"; }
+    else if (option == "DNA Sequence") { var s = "ACGT"; }
     else if (option == "Emoji") { return generate_emoji(); }
 
     var len = Math.ceil(entropy/Math.log2(s.length));

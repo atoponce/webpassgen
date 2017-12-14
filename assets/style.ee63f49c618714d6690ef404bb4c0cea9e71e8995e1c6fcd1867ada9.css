@@ -172,6 +172,9 @@ button:hover {
 #content {
     padding: 10px;
 }
+#random-pass {
+    word-wrap: break-word;
+}
 #footer { clear: both; }
 #entropy-toolbar { margin: 10px auto; }
 #entropy-toolbar input[type="radio"] { display: none; }
