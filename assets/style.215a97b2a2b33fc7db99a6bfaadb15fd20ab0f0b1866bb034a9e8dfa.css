@@ -173,7 +173,7 @@ button:hover {
     padding: 10px;
 }
 #random-pass {
-    word-wrap: break-word;
+    word-break: break-all;
 }
 #footer { clear: both; }
 #entropy-toolbar { margin: 10px auto; }
