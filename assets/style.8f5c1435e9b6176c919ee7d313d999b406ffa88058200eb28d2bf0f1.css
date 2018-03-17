@@ -82,6 +82,7 @@ button:hover {
     box-shadow: 1px 1px 0px #CCC;
 }
 /* classes */
+.clear { clear: both; }
 .contrast {
     text-shadow:
         -1px -1px 0 #444,  0px -1px 0 #444,
@@ -114,7 +115,7 @@ button:hover {
     height: 180px;
     margin: 5px;
     position: relative;
-    width: 364px;
+    width: 372px;
 }
 .password {
     font-family: "Dejavu Sans Mono", "Courier New", "Lucidia Console", Monaco, monospace;
@@ -155,14 +156,16 @@ button:hover {
 }
 /* ids */
 #container {
-    display: table;
     margin: 0 auto;
     width: 768px;
 }
 #header {
-    display: table;
+    display: inline-block;
     text-align: center;
     width: 100%;
+}
+#table {
+    display: table;
 }
 #navigation li {
     display: inline;
@@ -175,7 +178,6 @@ button:hover {
 #random-pass {
     word-break: break-all;
 }
-#footer { clear: both; }
 #entropy-toolbar { margin: 10px auto; }
 #entropy-toolbar input[type="radio"] { display: none; }
 #entropy-toolbar input[type="radio"] + label {
@@ -197,6 +199,7 @@ button:hover {
     padding: 4px 12px;
     text-align: center;
     text-shadow: 0 1px 1px rgba(255,255,255,0.75);
+    width: 45px;
     vertical-align: middle;
 }
 #entropy-toolbar input[type="radio"]:checked + label {
@@ -227,7 +230,7 @@ button:hover {
 
 @media only screen and (max-width: 767px) {
     #container { width: 480px; }
-    .cell { width: 460px; }
+    .cell { margin: 5px 10px; width: 460px; }
 
     #entropy-toolbar { width: 215px; }
     #entropy-70 { margin-top: 2px; }

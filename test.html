@@ -2,7 +2,7 @@
 <html>
   <head>
     <link rel="shortcut icon" href="favicon.ico">
-    <link integrity="sha256-TVOqEpZijRKUeFLJRrQKYRaq3iSr9ADFkP9ySevcW0M=" crossorigin="anonymous" rel="stylesheet" href="assets/style.215a97b2a2b33fc7db99a6bfaadb15fd20ab0f0b1866bb034a9e8dfa.css">
+    <link integrity="sha256-7vL97ADtkCINWqKPjILiiocJirMVMBCUeUeNPSlhf1w=" crossorigin="anonymous" rel="stylesheet" href="assets/style.8f5c1435e9b6176c919ee7d313d999b406ffa88058200eb28d2bf0f1.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Test Password Entropy</title>
@@ -28,6 +28,8 @@
         height: 300px;
         width: 300px;
         display: inline-block;
+        margin: 0 auto;
+        overflow: hidden;
       }
       #show_me {
         float: right;
@@ -45,6 +47,7 @@
         position: absolute;
         top: 5px;
       }
+      .clear { clear: both; }
       .warning {
         color: red;
         font-weight: bold;
@@ -77,11 +80,12 @@
           <input onclick="toggle_password_visibility()" id="checkbox" type="checkbox" name="checkbox" />
           <label for="checkbox">Show</label>
         </div>
+        <div class="clear"></div>
         <div id="g1" class="gauge"></div>
         <div id="g2" class="gauge"></div>
       </div>
     </div>
-    <div id="footer">
+    <div id="footer" class="clear">
       <center>
         <p><strong>Disclaimer: This is for demonstration purposes only and is not logging passwords!</strong></p>
         <p>
@@ -104,7 +108,7 @@
         id: "g1",
         pointer: true,
         value: 0,
-        min: 55,
+        min: 43,
         max: 80,
         title: "Entropy",
         label: "bits",
@@ -119,16 +123,16 @@
         id: "g2",
         pointer: true,
         value: 0,
-        min: 8,
-        max: 24,
+        min: 13,
+        max: 26,
         title: "Length",
         label: "characters",
         gaugeWidthScale: 0.3,
         donut: false,
-        customSectors: [{ color: "#ff0000", lo: 0,  hi: 9 },
-                { color: "#ffa500", lo: 9, hi: 12 },
-                { color: "#ffff00", lo: 12, hi: 16 },
-                { color: "#00ff00", lo: 16, hi: 100 }],
+        customSectors: [{ color: "#ff0000", lo: 0,  hi: 18 },
+                { color: "#ffa500", lo: 18, hi: 20 },
+                { color: "#ffff00", lo: 20, hi: 21 },
+                { color: "#00ff00", lo: 21, hi: 26 }],
       });
       password.addEventListener('input', function() {
         var password = document.getElementById('password').value;
