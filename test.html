@@ -108,7 +108,7 @@
         id: "g1",
         pointer: true,
         value: 0,
-        min: 43,
+        min: 40,
         max: 80,
         title: "Entropy",
         label: "bits",
@@ -123,8 +123,8 @@
         id: "g2",
         pointer: true,
         value: 0,
-        min: 13,
-        max: 26,
+        min: 12,
+        max: 24,
         title: "Length",
         label: "characters",
         gaugeWidthScale: 0.3,
@@ -132,7 +132,7 @@
         customSectors: [{ color: "#ff0000", lo: 0,  hi: 18 },
                 { color: "#ffa500", lo: 18, hi: 20 },
                 { color: "#ffff00", lo: 20, hi: 21 },
-                { color: "#00ff00", lo: 21, hi: 26 }],
+                { color: "#00ff00", lo: 21, hi: 100 }],
       });
       password.addEventListener('input', function() {
         var password = document.getElementById('password').value;
