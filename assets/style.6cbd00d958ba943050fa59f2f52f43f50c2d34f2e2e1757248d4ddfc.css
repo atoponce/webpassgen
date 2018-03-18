@@ -194,12 +194,13 @@ button:hover {
     filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff',endColorstr='#ffe6e6e6',GradientType=0);
     font-size: 14px;
+    height: 20px;
     line-height: 20px;
     margin: -2px;
     padding: 4px 12px;
     text-align: center;
     text-shadow: 0 1px 1px rgba(255,255,255,0.75);
-    width: 45px;
+    width: 55px;
     vertical-align: middle;
 }
 #entropy-toolbar input[type="radio"]:checked + label {
