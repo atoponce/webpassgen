@@ -2,33 +2,11 @@
 <html>
   <head>
     <link rel="shortcut icon" href="favicon.ico">
-    <link integrity="sha256-QgGLMNBwk5Q2T3v/UkW1bl7SHolOWySNcvohUCPu2t0=" crossorigin="anonymous" rel="stylesheet" href="assets/style.6cbd00d958ba943050fa59f2f52f43f50c2d34f2e2e1757248d4ddfc.css">
+    <link integrity="sha256-S1Xk3rxtOaD/MXMZqWLlIzl3mmz1ahQDZ75U2ldkvdo=" crossorigin="anonymous" rel="stylesheet" href="assets/style.2c2dcf0fed7d8edba17206a66156420e07f80fa621ce35301bfaa400.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Passphrase and Password Generator</title>
     <script type="application/javascript">
-        function swap_stylesheet() {
-            var choose_theme = document.getElementById("theme_switcher");
-            var theme = choose_theme.innerText;
-            if(theme == "Night Theme") {
-                document.body.style.backgroundColor = "black";
-                document.body.style.color = "white";
-                cells = document.getElementsByClassName("cell");
-                for(var i=0; i<cells.length; i++) {
-                    cells[i].style.borderColor = "white";
-                }
-                choose_theme.innerText = "Light Theme";
-            }
-            else {
-                document.body.style.backgroundColor = "white";
-                document.body.style.color = "black";
-                cells = document.getElementsByClassName("cell");
-                for(var i=0; i<cells.length; i++) {
-                    cells[i].style.borderColor = "black";
-                }
-                choose_theme.innerText = "Night Theme";
-            }
-        }
     </script>
   </head>
   <body onload="load_passes()">
@@ -39,7 +17,7 @@
           <li><a href="index.html">Generate Passwords</a></li>
           <li><a href="what.html">What is entropy?</a></li>
           <li><a href="test.html">Entropy Testing Meter</a></li>
-          <li><a href="#" onclick="swap_stylesheet()" id="theme_switcher">Night Theme</a></li>
+          <li><a href="#" onclick="swap_stylesheet()" id="theme_switcher">Dark Theme</a></li>
         </ul>
         <p>Select minimum entropy: </p>
         <div id="entropy-toolbar">
@@ -209,7 +187,10 @@
     </div>
 
     <!-- core functions -->
-    <script integrity="sha256-as/r5dsIJGMGkiypzw/lKS/wpxZUxLqYXvCqvOS6vlU=" crossorigin="anonymous" src="js/main.da7172898fe2c6fc79c7724523b05644a04f05777632ee1d5e1fac08.js"></script>
+<!--
+    <script integrity="sha256-CFcRL3leJhjV6j9ajqKl2RljH8C8/N25yUldjOMlbIQ=" crossorigin="anonymous" src="js/main.ebe3535cf1df76a4404a34c88d9bdcec4fa31f4459df8a1e3b4437a6.js"></script>
+-->
+    <script src="js/main.ebe3535cf1df76a4404a34c88d9bdcec4fa31f4459df8a1e3b4437a6.js"></script>
 
     <!--
         Because the word lists are static, and not changing, the filename is given a SHA-224 digest of its content. The web server can then be
@@ -291,6 +272,8 @@
 
     <script type="text/javascript">
       function load_passes() {
+        //if(localStorage.theme == "dark") { set_dark_theme(); }
+        if(window.name == "dark") { set_dark_theme(); }
         generate_passphrase('diceware');
         generate_passphrase('eff');
         generate_passphrase('alternate');

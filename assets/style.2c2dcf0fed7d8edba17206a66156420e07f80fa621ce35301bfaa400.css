@@ -9,13 +9,14 @@ select {
     -moz-appearance: none;  
     -moz-border-radius: 2px;
     -webkit-appearance: none; 
-    background-image: -webkit-gradient(
+    /*background-image: -webkit-gradient(
         linear, left bottom, left top,
         color-stop(0.16, rgb(207,207,207)), color-stop(0.79, rgb(252,252,252))
     );
     background-image: -moz-linear-gradient(
         center bottom, rgb(207,207,207) 16%, rgb(252,252,252) 79%
-    );
+    );*/
+    background-color: #dddddd;
     border:1px solid black;
     border-radius: 2px;
     color: black;
@@ -25,62 +26,45 @@ select {
     width: 120px;
 }
 select option {
-    background-color: #DDD;
+    background-color: #dddddd;
     color :black;
 }
 select::-ms-expand{
     display:none;
 }
 select:hover {
-    -moz-box-shadow: 1px 1px 0px #CCC;
-    -webkit-box-shadow: 1px 1px 0px #CCC;
-    box-shadow: 1px 1px 0px #CCC;
-}
-select:active, select:focus {
-    background-image: -webkit-gradient(
-        linear, left top, left bottom,
-        color-stop(0.16, rgb(207,207,207)), color-stop(0.79, rgb(252,252,252))
-    );
-    background-image: -moz-linear-gradient(
-        center top, rgb(207,207,207) 16%, rgb(252,252,252) 79%
-    );
+    background-color: #cccccc;
 }
 button {
-    /* get consistency across all browsers */
-    -moz-appearance: none;  
     -moz-border-radius: 2px;
-    -webkit-appearance: none; 
-    background-image: -webkit-gradient(
-        linear, left bottom, left top,
-        color-stop(0.16, rgb(207,207,207)), color-stop(0.79, rgb(252,252,252))
-    );
-    background-image: -moz-linear-gradient(
-        center bottom, rgb(207,207,207) 16%, rgb(252,252,252) 79%
-    );
-    border:1px solid black;
+    -webkit-border-radius: 2px;
+    background-color: #9b5ec5; /* purple */
+    border: #9b5ec5; /* purple */
     border-radius: 2px;
-    color: black;
+    color: #FFFFFF;
     cursor: pointer;
-    font-size: 12px;
-    padding: 3px 10px;
+    display: inline-block;
+    font-size: 14px;
+    height: 25px;
+    line-height: 25px;
+    padding: 0px;
     position: absolute;
     right: 10px;
+    text-decoration: none;
     top: 40px;
+    width: 80px;
 }
-button:active {
-    background-image: -webkit-gradient(
-        linear, left top, left bottom,
-        color-stop(0.16, rgb(207,207,207)), color-stop(0.79, rgb(252,252,252))
-    );
-    background-image: -moz-linear-gradient(
-        center top, rgb(207,207,207) 16%, rgb(252,252,252) 79%
-    );
+
+button:hover {
+   background: #7f34b1; /* purple */
+   text-decoration: none;
 }
 button:hover {
     -moz-box-shadow: 1px 1px 0px #CCC;
     -webkit-box-shadow: 1px 1px 0px #CCC;
     box-shadow: 1px 1px 0px #CCC;
 }
+
 /* classes */
 .clear { clear: both; }
 .contrast {
@@ -124,7 +108,7 @@ button:hover {
     text-align: center;
 }
 .cell-title {
-    background-color: #3385ff;
+    background-color: #6280c5; /* blue */
     border-bottom: 1px solid black;
     color: white;
     margin-top: 0px;
@@ -209,16 +193,21 @@ button:hover {
     -moz-box-shadow: inset 0 2px 4px rgba(0,0,0,0.15),0 1px 2px rgba(0,0,0,0.05);
     box-shadow: inset 0 2px 4px rgba(0,0,0,0.15),0 1px 2px rgba(0,0,0,0.05);
     font-weight: bold;
-    text-decoration: underline;
     outline: 0;
 }
 
-#entropy-55 { background: #ff6961; }
-#entropy-60 { background: #ffb347; }
-#entropy-65 { background: #fdfd96; }
-#entropy-70 { background: #77dd77; }
-#entropy-75 { background: #77dd77; }
-#entropy-80 { background: #77dd77; }
+#entropy-55 { background: #ff7171; } /* red */
+#entropy-55:hover, #entropy-toolbar input[type="radio"]:checked + #entropy-55 { background: #ff3f3f; } /* red */
+#entropy-60 { background: #ffcd71; } /* orange */
+#entropy-60:hover, #entropy-toolbar input[type="radio"]:checked + #entropy-60 { background: #ffbc3f; } /* orange */
+#entropy-65 { background: #ffff71; } /* yellow */
+#entropy-65:hover, #entropy-toolbar input[type="radio"]:checked + #entropy-65 { background: #ffff3f; } /* yellow */
+#entropy-70 { background: #74e163; } /* green */
+#entropy-70:hover, #entropy-toolbar input[type="radio"]:checked + #entropy-70 { background: #4db635; } /* green */
+#entropy-75 { background: #74e163; } /* green */
+#entropy-75:hover, #entropy-toolbar input[type="radio"]:checked + #entropy-75 { background: #4db635; } /* green */
+#entropy-80 { background: #74e163; } /* green */
+#entropy-80:hover, #entropy-toolbar input[type="radio"]:checked + #entropy-80 { background: #4db635; } /* green */
 
 #release {
     border: 1px solid #77dd77;
@@ -233,7 +222,7 @@ button:hover {
     #container { width: 480px; }
     .cell { margin: 5px 10px; width: 460px; }
 
-    #entropy-toolbar { width: 215px; }
+    #entropy-toolbar { width: 240px; }
     #entropy-70 { margin-top: 2px; }
     #entropy-75 { margin-top: 2px; }
     #entropy-80 { margin-top: 2px; }
@@ -242,7 +231,7 @@ button:hover {
     #container { width: 100%; }
     .cell { width: 95%; }
 
-    #entropy-toolbar { width: 215px; }
+    #entropy-toolbar { width: 240px; }
     #entropy-70 { margin-top: 2px; }
     #entropy-75 { margin-top: 2px; }
     #entropy-80 { margin-top: 2px; }

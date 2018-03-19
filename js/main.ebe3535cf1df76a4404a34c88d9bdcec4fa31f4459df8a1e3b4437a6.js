@@ -2,6 +2,37 @@ var spaces=false;
 
 String.prototype.rtrim = function() { return this.replace(/\s+$/g,""); }
 
+function set_light_theme() {
+    var css = document.styleSheets[0];
+    var theme_switcher = document.getElementById("theme_switcher");
+    theme_switcher.innerText = "Dark Theme";
+    for(var i=0; i<3; i++) { css.deleteRule(0); }
+}
+
+function set_dark_theme() {
+    var css = document.styleSheets[0];
+    var theme_switcher = document.getElementById("theme_switcher");
+    theme_switcher.innerText = "Light Theme";
+    css.insertRule("a {color: yellow;}");
+    css.insertRule("a:visited {color: orange;}");
+    css.insertRule("body {color: white; background-color: black;}");
+}
+
+function swap_stylesheet() {
+    var chosen_theme = document.getElementById("theme_switcher").innerText;
+    if(chosen_theme == "Dark Theme") {
+        //localStorage.setItem("theme", "dark");
+        window.location = "index.html"
+        window.name = "dark";
+        set_dark_theme();
+    }
+    else {
+        //localStorage.removeItem("theme");
+        window.name = "";
+        set_light_theme();
+    }
+}
+
 function get_entropy() {
     return parseInt(document.querySelector('input[name="entropy"]:checked').value);
 }
