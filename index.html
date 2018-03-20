@@ -269,8 +269,7 @@
 
     <script type="text/javascript">
       function load_passes() {
-        //if(localStorage.theme == "dark") { set_dark_theme(); }
-        if(window.name == "dark") { set_dark_theme(); }
+        if(localStorage.theme == "dark") { set_dark_theme(); }
         generate_passphrase('diceware');
         generate_passphrase('eff');
         generate_passphrase('alternate');
