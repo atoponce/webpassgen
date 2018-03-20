@@ -5,17 +5,26 @@ String.prototype.rtrim = function() { return this.replace(/\s+$/g,""); }
 function set_light_theme() {
     var css = document.styleSheets[0];
     var theme_switcher = document.getElementById("theme_switcher");
+    var cells = document.getElementsByClassName("cell");
     theme_switcher.innerText = "Dark Theme";
-    for(var i=0; i<3; i++) { css.deleteRule(0); }
+    for(var i=0; i<4; i++) { css.deleteRule(0); }
+    for(var i=0; i<cells.length; i++) {
+        cells[i].style.borderColor = "#000";
+    }
 }
 
 function set_dark_theme() {
     var css = document.styleSheets[0];
     var theme_switcher = document.getElementById("theme_switcher");
+    var cells = document.getElementsByClassName("cell");
     theme_switcher.innerText = "Light Theme";
     css.insertRule("a {color: yellow;}");
     css.insertRule("a:visited {color: orange;}");
     css.insertRule("body {color: white; background-color: black;}");
+    css.insertRule("img {filter: invert(1);}");
+    for(var i=0; i<cells.length; i++) {
+        cells[i].style.borderColor = "#fff";
+    }
 }
 
 function swap_stylesheet() {
@@ -186,6 +195,15 @@ function generate_alternate(selection) {
     pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(wordlist.length)) + "-bits.";
 }
 
+function is_too_dark(hex) {
+    var rgb = parseInt(hex, 16);
+    var r = (rgb >> 16) &0xff;
+    var g = (rgb >> 8) &0xff;
+    var b = (rgb >> 0) &0xff;
+    var l = (0.299*r) + (0.587*g) + (0.114*b);
+    if (l>79) {return false;} return true;
+}
+
 function is_too_light(hex) {
     var rgb = parseInt(hex, 16);
     var r = (rgb >> 16) &0xff;
@@ -204,15 +222,25 @@ function generate_colors() {
     var pass_length = document.getElementById('alt-length');
     var pass_entropy = document.getElementById('alt-entropy');
     var pass = generate_pass(len, color_keys, true).split(" ");
-
+    var chosen_theme = localStorage.theme;
 
     for (var i=0; i<len; i++) {
         var hex = alternate_colors[pass[i]];
-        if (is_too_light(hex)) {
-            tmp += "<span class='bold contrast' style='color:#" + hex + ";'>" + pass[i] + "</span> ";
+        if(chosen_theme == undefined) {
+            if (is_too_light(hex)) {
+                tmp += "<span class='bold light_contrast' style='color:#" + hex + ";'>" + pass[i] + "</span> ";
+            }
+            else {
+                tmp += "<span class='bold' style='color:#" + hex + ";'>" + pass[i] + "</span> ";
+            }
         }
-        else {
-            tmp += "<span class='bold' style='color:#" + hex + ";'>" + pass[i] + "</span> ";
+        else if(chosen_theme == "dark") {
+            if (is_too_dark(hex)) {
+                tmp += "<span class='bold dark_contrast' style='color:#" + hex + ";'>" + pass[i] + "</span> ";
+            }
+            else {
+                tmp += "<span class='bold' style='color:#" + hex + ";'>" + pass[i] + "</span> ";
+            }
         }
     }
 

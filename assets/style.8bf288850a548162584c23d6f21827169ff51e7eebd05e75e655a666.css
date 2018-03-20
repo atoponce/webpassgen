@@ -5,23 +5,16 @@
 /* body tags */
 body { margin: 0; }
 select {
-    /* get consistency across all browsers */
     -moz-appearance: none;  
     -moz-border-radius: 2px;
     -webkit-appearance: none; 
-    /*background-image: -webkit-gradient(
-        linear, left bottom, left top,
-        color-stop(0.16, rgb(207,207,207)), color-stop(0.79, rgb(252,252,252))
-    );
-    background-image: -moz-linear-gradient(
-        center bottom, rgb(207,207,207) 16%, rgb(252,252,252) 79%
-    );*/
     background-color: #dddddd;
     border:1px solid black;
     border-radius: 2px;
     color: black;
     cursor: pointer;
     font-size: 12px;
+    height: 25px;
     padding: 3px 22px 3px 6px;
     width: 120px;
 }
@@ -67,7 +60,14 @@ button:hover {
 
 /* classes */
 .clear { clear: both; }
-.contrast {
+.dark_contrast {
+    text-shadow:
+        -1px -1px 0 #bbb,  0px -1px 0 #bbb,
+         1px -1px 0 #bbb, -1px  0px 0 #bbb,
+        -1px  1px 0 #bbb,  0px  1px 0 #bbb,
+         1px  1px 0 #bbb,  1px  0px #bbb;
+}
+.light_contrast {
     text-shadow:
         -1px -1px 0 #444,  0px -1px 0 #444,
          1px -1px 0 #444, -1px  0px 0 #444,
