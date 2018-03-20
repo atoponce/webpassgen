@@ -21,14 +21,11 @@ function set_dark_theme() {
 function swap_stylesheet() {
     var chosen_theme = document.getElementById("theme_switcher").innerText;
     if(chosen_theme == "Dark Theme") {
-        //localStorage.setItem("theme", "dark");
-        window.location = "index.html"
-        window.name = "dark";
+        localStorage.setItem("theme", "dark");
         set_dark_theme();
     }
     else {
-        //localStorage.removeItem("theme");
-        window.name = "";
+        localStorage.removeItem("theme");
         set_light_theme();
     }
 }
