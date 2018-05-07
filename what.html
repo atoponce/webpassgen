@@ -1,8 +1,8 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
     <link rel="shortcut icon" href="favicon.ico">
-    <link integrity="sha256-GHhcJoCyGl6XLAqBdemCCsYbBMNBFDG21zmtZASORNE=" crossorigin="anonymous" rel="stylesheet" href="assets/style.8bf288850a548162584c23d6f21827169ff51e7eebd05e75e655a666.css">
+    <link rel="stylesheet" href="assets/style.059aa564.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Passphrase and Password Generator</title>
@@ -19,46 +19,45 @@
       </div>
       <div id="content">
         <h3>The quick read</h3>
-        <img src="assets/needle-haystack.jpg" align="right" style="margin: 5px;"/>
+        <img alt="Image showing a needle in a haystack" src="assets/needle-haystack.jpg" style="margin: 5px; float: right;"/>
         <p>Passwords can be thought of as a needle in a haystack. Your password is the needle. Every possible combination your password could be is the haystack. The larger the haystack, the more "entropy" your password has. So, when we say "a password contains 70-bits of entropy", what we're saying is, your password is one of 2<sup>70</sup> possibilities (a large haystack).</p>
         <h3>Additional detail</h3>
-        <p>It turns out entropy is a bit more tricky than that. <a href="https://en.wikipedia.org/wiki/Entropy_(information_theory)">Entropy as defined by Claude Shannon</a> requires two very important principles:
-          <ol>
-            <li>The result must be chosen from a random function.</li>
-            <li>The random function must be uniform (it can't be biased).</li>
-          </ol>
-        </p>
+        <p>It turns out entropy is a bit more tricky than that. <a href="https://en.wikipedia.org/wiki/Entropy_(information_theory)">Entropy as defined by Claude Shannon</a> requires two very important principles:</p>
+        <ol>
+          <li>The result must be chosen from a random function.</li>
+          <li>The random function must be uniform (it can't be biased).</li>
+        </ol>
         <p>If these two goals are met, then we say that the outcome has "maximum entropy". If one or both of those goals are not met, then the entropy is not maximized. In other words, we have fewer possibilities than is possible.</p>
         <p>Is this a bad thing? Well, suppose for a moment that your password comes from a haystack of 70-bits of entropy, or 2<sup>70</sup> total possibilities. Further, suppose a password database has been leaked to the Internet, but all passwords have been protected with some hashing function that can't be reversed. If an attacker tries everything possible to discover your password, and fails, then they will revert to a brute force search.</p>
         <h3>Brute force searching</h3>
         <p>Suppose they can try one trillion passwords per second on that leaked hashed password database. They don't need to completely exhaust the search space- they only need to try one-half to have a 50% chance of finding the password. So, instead of trying all of 2<sup>70</sup> = 1,180,591,620,717,411,303,424 possibilities, they only need to make 2<sup>69</sup> = 590,295,810,358,705,651,712 guesses at having a 50% chance of finding your password.</p>
         <p>At one trillion guesses per second, for 70-bits of entropy, it would take the attacker about 18 years and 9 months to reach that 50% target. This is considered a safe security margin for hashed password databases that are leaked online.</p>
-        <center><img src="assets/entropy-toolbar-1.png" /><img src="assets/entropy-toolbar-2.png" /></center>
+        <div style="text-align: center;">
+          <img alt="Screenshot of part of the entropy toolbar on index.html" src="assets/entropy-toolbar-1.png" /><img alt="Screenshot of part of the entropy toolbar on index.html" src="assets/entropy-toolbar-2.png" />
+        </div>
         <p>Knowing this, let's look at the entropy selection at the top of the home page. For at attacker to reach 50% possibility that they have found your password, at one trillion guesses per second, it would take:
-        <img src="assets/exponential.gif" align="right" style="margin: 5px;" />
-          <ul>
-            <li>55-bits: ~ 5 hours.</li>
-            <li>60-bits: ~ 7 days.</li>
-            <li>65-bits: ~ 7 months.</li>
-            <li>70-bits: ~ 19 years.</li>
-            <li>75-bits: ~ 600 years.</li>
-            <li>80-bits: ~ 19 millennia.</li>
-          </ul>
+          <img alt="Graph showing the exponential curve." src="assets/exponential.gif" style="margin: 5px; float: right;" />
         </p>
+        <ul>
+          <li>55-bits: ~ 5 hours.</li>
+          <li>60-bits: ~ 7 days.</li>
+          <li>65-bits: ~ 7 months.</li>
+          <li>70-bits: ~ 19 years.</li>
+          <li>75-bits: ~ 600 years.</li>
+          <li>80-bits: ~ 19 millennia.</li>
+        </ul>
         <p>As you can see, this follows an exponential curve. Further, you can see that the graph gets nearly vertical very quickly. This is known as the "exponential wall". Eventually, it just gets too expensive for an attacker to make the brute force search successful.</p>
         <h3>The conclusion</h3>
         <p>For a targeted offline brute force search, I believe it becomes too difficult and outside the capabilities of a professional password cracker to find your password at 70-bits of entropy.</p>
       </div>
     </div>
     <div id="footer" class="clear">
-      <center>
-        <p><strong>Disclaimer: This is for demonstration purposes only and is not logging passwords!</strong></p>
-        <p>
-          <a href="https://github.com/atoponce/webpassgen"><img title="Get the source code" src="assets/github.png" /></a>
-          <a href="https://github.com/atoponce/webpassgen/releases/latest"><img title="Download latest release" src="assets/download.png" /></a>
-          <a href="https://twitter.com/AaronToponce"><img title="Meet the author" src="assets/twitter.png" /></a>
-        </p>
-      </center>
+      <p><strong>Disclaimer: This is for demonstration purposes only and is not logging passwords!</strong></p>
+      <p>
+        <a href="https://github.com/atoponce/webpassgen"><img alt="Github logo" title="Get the source code" src="assets/github.png" /></a>
+        <a href="https://github.com/atoponce/webpassgen/releases/latest"><img alt="Download icon" title="Download latest release" src="assets/download.png" /></a>
+        <a href="https://twitter.com/AaronToponce"><img alt="Twitter logo" title="Meet the author" src="assets/twitter.png" /></a>
+      </p>
     </div>
   </body>
 </html>

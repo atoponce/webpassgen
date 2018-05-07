@@ -1,14 +1,16 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
     <link rel="shortcut icon" href="favicon.ico">
-    <link integrity="sha256-GHhcJoCyGl6XLAqBdemCCsYbBMNBFDG21zmtZASORNE=" crossorigin="anonymous" rel="stylesheet" href="assets/style.8bf288850a548162584c23d6f21827169ff51e7eebd05e75e655a666.css">
+    <link rel="stylesheet" href="assets/style.059aa564.css">
+    <link integrity="sha256-PEU8BQITd4wJPJZZ9FtkTme+SS6MawzhNGpxHifVNxU=" crossorigin="anonymous" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Sans+Mono">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Test Password Entropy</title>
-    <script integrity="sha256-nhc0YqLx/ngDlJG0LJyvdBgoOlwJupmPI+QbYlp8gHs=" crossorigin="anonymous" src="js/zxcvbn-async.js"></script>
-    <style type="text/css">
-      @import 'https://fonts.googleapis.com/css?family=Droid+Sans+Mono';
+
+
+    <script src="js/zxcvbn-async.138fd1f8.js"></script>
+    <style>
       #password {
         font-family: 'Droid Sans Mono';
         font-size: 14px;
@@ -74,7 +76,7 @@
         <p class="justify-left">Below is a password meter that tests entropy using <a href="https://github.com/dropbox/zxcvbn">zxcvbn by Dropbox</a>. It tests for dictionary words, leet-speak, recognizable patterns, and other heuristics to give an educated guess at what the entropy could be.</p>
         <p class="justify-left">If you are pasting passwords from the generator, you will notice disagreements. This tester is a <em>blind entropy</em> guess. It doesn't know the set of elements your password is from, nor does it know if a random function was used. So, the guess may be higher or lower than what you know it to be.</p>
         <p class="justify-left">Can you raise the needle above 55-bits of entropy? Can you reach the safety of 70-bits?</p>
-        <input type="password" id="password" name="password" type="text" size="48">
+        <input type="password" id="password" name="password" size="48">
         <div id="show_me">
           <input onclick="toggle_password_visibility()" id="checkbox" type="checkbox" name="checkbox" />
           <label for="checkbox">Show</label>
@@ -84,18 +86,16 @@
         <div id="g2" class="gauge"></div>
       </div>
     </div>
-    <div id="footer" class="clear">
-      <center>
-        <p><strong>Disclaimer: This is for demonstration purposes only and is not logging passwords!</strong></p>
-        <p>
-          <a href="https://github.com/atoponce/webpassgen"><img title="Get the source code" src="assets/github.png" /></a>
-          <a href="https://github.com/atoponce/webpassgen/releases/latest"><img title="Download latest release" src="assets/download.png" /></a>
-          <a href="https://twitter.com/AaronToponce"><img title="Meet the author" src="assets/twitter.png" /></a>
-        </p>
-      </center>
+    <div style="text-align: center;" id="footer" class="clear">
+      <p><strong>Disclaimer: This is for demonstration purposes only and is not logging passwords!</strong></p>
+      <p>
+        <a href="https://github.com/atoponce/webpassgen"><img alt="Github logo" title="Get the source code" src="assets/github.png" /></a>
+        <a href="https://github.com/atoponce/webpassgen/releases/latest"><img alt="Download icon" title="Download latest release" src="assets/download.png" /></a>
+        <a href="https://twitter.com/AaronToponce"><img alt="Twitter logo" title="Meet the author" src="assets/twitter.png" /></a>
+      </p>
     </div>
-    <script integrity="sha256-xkPnL6FqCpvOQTxQR88hb9ooHutKR6xTiAdiDFqWRDk=" crossorigin="anonymous" src="js/raphael-2.1.4.min.js"></script>
-    <script integrity="sha256-s+qB1VKhos4lYcVV8hIsZ5JoFYpG3HC4JJ1H/EWUTcs=" crossorigin="anonymous" src="js/justgage.js"></script>
+    <script src="js/raphael-2.1.4.fd987565.js"></script>
+    <script src="js/justgage.js.0ca0a07f.js"></script>
     <script>
       function toggle_password_visibility() {
         var input = document.getElementById("password");

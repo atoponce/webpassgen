@@ -148,6 +148,9 @@ button:hover {
     text-align: center;
     width: 100%;
 }
+#footer {
+    text-align: center;
+}
 #table {
     display: table;
 }

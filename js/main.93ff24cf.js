@@ -46,16 +46,16 @@ function get_entropy() {
 function get_source_list(source) {
     switch(source) {
         case "diceware":
-            var s_list = document.querySelector('option[name="diceware_list"]:checked').value;
+            var s_list = document.getElementById('diceware-options').value;
             break;
         case "eff":
-            var s_list = document.querySelector('option[name="eff_list"]:checked').value;
+            var s_list = document.getElementById('eff-options').value;
             break;
         case "alternate":
-            var s_list = document.querySelector('option[name="alternate_list"]:checked').value;
+            var s_list = document.getElementById('alt-options').value;
             break;
         case "bitcoin":
-            var s_list = document.querySelector('option[name="bitcoin_list"]:checked').value;
+            var s_list = document.getElementById('bitcoin-options').value;
             break;
     }
     return s_list;
@@ -322,20 +322,6 @@ function generate_babble() {
     return [pass.join(""), (len+2)*5, Math.floor(tot_ent)];
 }
 
-function generate_cosby() {
-    // 32 unique words = 5 bits of entropy per word
-    var cosby = ['Bada','Badum','Bee','Bloo','Bop','Caw','Derp','Dip','Doo','Dub','Hip','Ka','Loo','Meep','Mim','Moom','Na','Naw','Nerp','Nup','Pa','Papa','Spee','Squee','Squoo','Woobly','Wop','Yee','Zap','Zip','Zop','Zoop','Zow'];
-    var entropy = get_entropy();
-    var len = Math.ceil(entropy/Math.log2(cosby.length));
-    var pass = "";
-    
-    for (i=0; i<len; i++) {
-        pass += cosby[sec_rand(len)];
-        if (i%3 == 2 && i!=len-1) pass += "-";
-    }
-    return [pass, cosby.length, Math.floor(len*Math.log2(cosby.length))];
-}
-
 function generate_kpop() {
     // 64 unique words = 6 bits of entropy per word
     var kpop = ['A','Ah','Bae','Bin','Bo','Choi','Chul','Da','Do','Dong','Eun','Gi','Gun','Ha','Hae','Hee','Ho','Hu','Hwa','Hwan','Hye','Hyo','Hyun','Il','In','Ja','Jae','Ji','Jin','Jong','Joo','Joon','Ju','Jun','Jung','Ki','Kun','Kyu','Lee','Mi','Min','Moon','Nam','Ok','Park','Rin','Seo','Seul','Shi','Sik','So','Song','Soo','Su','Sun','Sung','Won','Woo','Ye','Yeon','Yoo','Yu','Yul','Yun'];
@@ -351,10 +337,9 @@ function generate_kpop() {
 }
 
 function generate_pseudowords() {
-    var pseudo = document.querySelector('option[name="pseudowords"]:checked').value;
+    var pseudo = document.getElementById('pseudo-options').value;
     if (pseudo == "Bubble Babble") var ret = generate_babble();
     else if (pseudo == "Secret Ninja") var ret = generate_ninja();
-    else if (pseudo == "Cosby Bebop") var ret = generate_cosby();
     else if (pseudo == "Korean K-pop") var ret = generate_kpop();
     var pass = ret[0];
     var len = ret[1];
@@ -373,7 +358,7 @@ function generate_random() {
     var pass_id = document.getElementById('random-pass');
     var pass_length = document.getElementById('random-length');
     var pass_entropy = document.getElementById('random-entropy');
-    var option = document.querySelector('option[name="random"]:checked').value;
+    var option = document.getElementById('random-options').value;
 
     if (option == "Base-94") { for (i=0; i<94; i++) s += String.fromCharCode(33+i); }
     else if (option == "Base-85") { var s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!#$%&()*+-;<=>?@^_`{|}~"; }
