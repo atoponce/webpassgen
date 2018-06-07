@@ -1,6 +1,6 @@
 @font-face {
-    font-family: "Noto Emoji";
-    src: url("NotoEmoji-Regular.ttf");
+    font-family: "Emoji";
+    src: url("./twemoji.woff2") format("woff2");
 }
 /* body tags */
 body { margin: 0; }
