@@ -2,6 +2,13 @@ var spaces=false;
 
 String.prototype.rtrim = function() { return this.replace(/\s+$/g,""); }
 
+function emoji_warn() {
+    if(localStorage.getItem("emoji_warned") === null) {
+        document.getElementById("overlay").style.display = "block";
+        localStorage.setItem("emoji_warned", true);
+    }
+}
+
 function set_light_theme() {
     var css = document.styleSheets[0];
     var theme_switcher = document.getElementById("theme_switcher");
@@ -388,6 +395,7 @@ function generate_random() {
 }
 
 function generate_emoji() {
+    emoji_warn();
     var entropy = get_entropy();
     var pass_id = document.getElementById('random-pass');
     var pass_length = document.getElementById('random-length');
