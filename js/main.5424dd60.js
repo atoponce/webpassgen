@@ -150,9 +150,10 @@ function generate_diceware(selection) {
     var pass_entropy = document.getElementById('diceware-entropy');
 
     pass = generate_pass(len, wordlist, true);
+    pass = pass.replace(/ /g,"-");
     pass_id.innerText = pass;
 
-    pass_length.innerHTML = "<span>" + pass.replace(/\s/g, '').length + "</span>" + " characters.";
+    pass_length.innerHTML = "<span>" + pass.length + "</span>" + " characters.";
     pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(wordlist.length)) + "-bits.";
 }
 
@@ -171,9 +172,10 @@ function generate_eff(selection) {
     var pass_entropy = document.getElementById('eff-entropy');
 
     pass = generate_pass(len, wordlist, true);
+    pass = pass.replace(/ /g,"-");
     pass_id.innerText = pass;
 
-    pass_length.innerHTML = "<span>" + pass.replace(/\s/g, '').length + "</span>" + " characters.";
+    pass_length.innerHTML = "<span>" + pass.length + "</span>" + " characters.";
     pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(wordlist.length)) + "-bits.";
 }
 
@@ -196,9 +198,10 @@ function generate_alternate(selection) {
     var pass_entropy = document.getElementById('alt-entropy');
 
     pass = generate_pass(len, wordlist, true);
+    pass = pass.replace(/ /g,"-");
     pass_id.innerText = pass;
 
-    pass_length.innerHTML = "<span>" + pass.replace(/\s/g, '').length + "</span>" + " characters.";
+    pass_length.innerHTML = "<span>" + pass.length + "</span>" + " characters.";
     pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(wordlist.length)) + "-bits.";
 }
 
@@ -251,12 +254,13 @@ function generate_colors() {
         }
     }
 
-    pass_id.innerHTML = tmp;
+    pass_id.innerHTML = tmp.replace(/> </g, ">-<").rtrim();
     tmp = "";
     for (var i=0; i<len; i++) { tmp += pass[i] }
     pass = tmp;
 
-    pass_length.innerHTML = "<span>" + pass.replace(/\s/g, '').length + "</span>" + " characters.";
+    total_len = pass.length + (len-1);
+    pass_length.innerHTML = "<span>" + total_len + "</span>" + " characters.";
     pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(color_keys.length)) + "-bits.";
 }
 
@@ -280,9 +284,10 @@ function generate_bitcoin(selection) {
     var pass_entropy = document.getElementById('btc-entropy');
 
     pass = generate_pass(len, wordlist, true);
+    pass = pass.replace(/ /g,"-");
     pass_id.innerText = pass;
 
-    pass_length.innerHTML = "<span>" + pass.replace(/\s/g, '').length + "</span>" + " characters.";
+    pass_length.innerHTML = "<span>" + pass.length + "</span>" + " characters.";
     pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(wordlist.length)) + "-bits.";
 }
 
@@ -355,7 +360,7 @@ function generate_pseudowords() {
     var pass_length = document.getElementById('pseudo-length');
     var pass_entropy = document.getElementById('pseudo-entropy');
     pass_id.innerText = pass;
-    pass_length.innerHTML = pass.replace(/-/g, '').length + " characters.";
+    pass_length.innerHTML = pass.length + " characters.";
     pass_entropy.innerHTML = "~" + ent + "-bits.";
 }
 
