@@ -126,6 +126,7 @@ function generate_diceware(selection) {
         case "Dutch (Alt)": wordlist = diceware_nl_alt; break;
         case "English": wordlist = diceware_en; break;
         case "Esperanto": wordlist = diceware_eo; break;
+        case "Estonian": wordlist = diceware_et; break;
         case "Finnish": wordlist = diceware_fi; break;
         case "French": wordlist = diceware_fr; break;
         case "German": wordlist = diceware_de; break;
