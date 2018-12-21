@@ -116,7 +116,6 @@ function generate_diceware(selection) {
     var wordlist = [];
     switch(selection) {
         case "Basque": wordlist = diceware_eu; break;
-        case "Beale": wordlist = diceware_beale; break;
         case "Bulgarian": wordlist = diceware_bg; break;
         case "Catalan": wordlist = diceware_ca; break;
         case "Chinese": wordlist = diceware_cn; break;
@@ -125,6 +124,7 @@ function generate_diceware(selection) {
         case "Dutch": wordlist = diceware_nl; break;
         case "Dutch (Alt)": wordlist = diceware_nl_alt; break;
         case "English": wordlist = diceware_en; break;
+        case "English (Beale)": wordlist = diceware_beale; break;
         case "Esperanto": wordlist = diceware_eo; break;
         case "Estonian": wordlist = diceware_et; break;
         case "Finnish": wordlist = diceware_fi; break;
