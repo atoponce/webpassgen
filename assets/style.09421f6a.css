@@ -182,6 +182,9 @@ button:hover {
 #content {
     padding: 10px;
 }
+#alt-pass, #btc-pass, #diceware-pass, #eff-pass, #pseudo-pass {
+    word-break: break-word;
+}
 #random-pass {
     word-break: break-all;
 }
