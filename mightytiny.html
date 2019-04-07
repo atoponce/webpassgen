@@ -34,22 +34,23 @@
     <p><small><i>(More bits = more security. 70-bits is the recommended minimum. 128-bits for password-based encryption.)</i></small></p>
     <strong>2) Select an output format:</strong>
     <select id="base-options">
-      <option onclick="generate_random()">Base-94          </option>
-      <option onclick="generate_random()">Base-85          </option>
-      <option onclick="generate_random()">Base-64 (+/)     </option>
-      <option onclick="generate_random()">Base-64 (-_)     </option>
-      <option onclick="generate_random()">Base-62          </option>
-      <option onclick="generate_random()">Base-58 (Bitcoin)</option>
-      <option onclick="generate_random()">Base-52          </option>
-      <option onclick="generate_random()">Base-36          </option>
-      <option onclick="generate_random()">Base-32          </option>
-      <option onclick="generate_random()">Base-26          </option>
-      <option onclick="generate_random()">Base-16          </option>
-      <option onclick="generate_random()">Base-10          </option>
-      <option onclick="generate_random()">Base-8           </option>
-      <option onclick="generate_random()">Base-2           </option>
-      <option onclick="generate_random()">Coin Flips       </option>
-      <option onclick="generate_random()">DNA Sequence     </option>
+      <option onclick="generate_random()">                    Base-188 (ISO 8859-1)</option>
+      <option onclick="generate_random()" selected="selected">Base-94          </option>
+      <option onclick="generate_random()">                    Base-85          </option>
+      <option onclick="generate_random()">                    Base-64 (+/)     </option>
+      <option onclick="generate_random()">                    Base-64 (-_)     </option>
+      <option onclick="generate_random()">                    Base-62          </option>
+      <option onclick="generate_random()">                    Base-58 (Bitcoin)</option>
+      <option onclick="generate_random()">                    Base-52          </option>
+      <option onclick="generate_random()">                    Base-36          </option>
+      <option onclick="generate_random()">                    Base-32          </option>
+      <option onclick="generate_random()">                    Base-26          </option>
+      <option onclick="generate_random()">                    Base-16          </option>
+      <option onclick="generate_random()">                    Base-10          </option>
+      <option onclick="generate_random()">                    Base-8           </option>
+      <option onclick="generate_random()">                    Base-2           </option>
+      <option onclick="generate_random()">                    Coin Flips       </option>
+      <option onclick="generate_random()">                    DNA Sequence     </option>
     </select>
     <p><small>(All output formats deliver aproximately the same password strength.)</small></p>
     <strong>3)</strong> 
@@ -94,7 +95,12 @@
         var pass_length  = document.getElementById('random-length');
         var pass_entropy = document.getElementById('random-entropy');
         var option       = document.getElementById('base-options').value;
-        if (option == "Base-94") { for (i=0; i<94; i++) s += String.fromCharCode(33+i); }
+        if (option == "Base-188 (ISO 8859-1)") { 
+            for (i=0; i<94; i++) s += String.fromCharCode(33+i);
+            for (i=0; i<95; i++) s += String.fromCharCode(161+i);
+            s = s.replace(String.fromCharCode(173),''); // soft-hyphen isn't graphical
+        }
+        else if (option == "Base-94") { for (i=0; i<94; i++) s += String.fromCharCode(33+i); }
         else if (option == "Base-85"          ) { var s = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!#$%&()*+-;<=>?@^_`{|}~"; }
         else if (option == "Base-64 (+/)"     ) { var s = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+/"; }
         else if (option == "Base-64 (-_)"     ) { var s = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_"; }
