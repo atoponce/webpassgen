@@ -375,7 +375,12 @@ function generate_random() {
     var pass_entropy = document.getElementById('random-entropy');
     var option = document.getElementById('random-options').value;
 
-    if (option == "Base-94") { for (i=0; i<94; i++) s += String.fromCharCode(33+i); }
+    if (option == "Base-188 (ISO 8859-1)") { 
+        for (i=0; i<94; i++) s += String.fromCharCode(33+i);
+        for (i=0; i<95; i++) s += String.fromCharCode(161+i);
+        s = s.replace(String.fromCharCode(173),''); // soft-hyphen isn't graphical
+    }
+    else if (option == "Base-94") { for (i=0; i<94; i++) s += String.fromCharCode(33+i); }
     else if (option == "Base-85") { var s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!#$%&()*+-;<=>?@^_`{|}~"; }
     else if (option == "Base-64 (+/)") { var s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/"; }
     else if (option == "Base-64 (-_)") { var s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_"; }
