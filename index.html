@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <link rel="shortcut icon" href="favicon.ico">
-    <link rel="stylesheet" href="assets/style.52ffcf89.css">
+    <link rel="stylesheet" href="assets/style.5a0efc81.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Passphrase and Password Generator</title>
@@ -184,8 +184,19 @@
         </p>
       </div>
     </div>
-    <div id="overlay" onclick="document.getElementById('overlay').style.display='none';">
-        <div id="overlay_text">
+    <div id="iso8859_overlay" onclick="document.getElementById('iso8859_overlay').style.display='none';">
+        <div id="iso8859_overlay_text">
+            <p>🔥🔥🔥🔥🔥</p>
+            <p>Using extended ASCII characters for your password can be dangerous!</p>
+            <p>Windows-1252 and ISO 8859-1 are mostly similar, but vary by 27 characters.</p>
+            <p>So it's possible the service you're using interprets them differently than you!</p>
+            <p>Use with caution.</p>
+            <p>Click anywhere to continue.</p>
+            <p>🔥🔥🔥🔥🔥</p>
+        </div>
+    </div>
+    <div id="emoji_overlay" onclick="document.getElementById('emoji_overlay').style.display='none';">
+        <div id="emoji_overlay_text">
             <p>🔥🔥🔥🔥🔥</p>
             <p>Using emojis for your password is <a href="https://apple.stackexchange.com/questions/202143/i-included-emoji-in-my-password-and-now-i-cant-log-in-to-my-account-on-yosemite">dangerous</a>!</p>
             <p>Use Firefox if you want color.</p>
@@ -195,7 +206,7 @@
     </div>
 
     <!-- core functions -->
-    <script src="js/main.de10b85a.js"></script>
+    <script src="js/main.9d2af8e5.js"></script>
 
     <!--
         Because the word lists are static, and not changing, the filename is

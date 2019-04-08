@@ -151,7 +151,7 @@ button:hover {
 #footer {
     text-align: center;
 }
-#overlay {
+#iso8859_overlay, #emoji_overlay {
     position: fixed;
     display: none;
     width: 100%;
@@ -161,7 +161,7 @@ button:hover {
     z-index: 1;
     cursor: pointer;
 }
-#overlay_text {
+#iso8859_overlay_text, #emoji_overlay_text {
     position: absolute;
     top: 50%;
     left: 50%;

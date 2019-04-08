@@ -2,9 +2,16 @@ var spaces=false;
 
 String.prototype.rtrim = function() { return this.replace(/\s+$/g,""); }
 
+function iso8859_warn() {
+    if(localStorage.getItem("iso8859_warned") === null) {
+        document.getElementById("iso8859_overlay").style.display = "block";
+        localStorage.setItem("iso8859_warned", true);
+    }
+}
+
 function emoji_warn() {
     if(localStorage.getItem("emoji_warned") === null) {
-        document.getElementById("overlay").style.display = "block";
+        document.getElementById("emoji_overlay").style.display = "block";
         localStorage.setItem("emoji_warned", true);
     }
 }
@@ -376,6 +383,7 @@ function generate_random() {
     var option = document.getElementById('random-options').value;
 
     if (option == "Base-188 (ISO 8859-1)") { 
+        iso8859_warn();
         for (i=0; i<94; i++) s += String.fromCharCode(33+i);
         for (i=0; i<95; i++) s += String.fromCharCode(161+i);
         s = s.replace(String.fromCharCode(173),''); // soft-hyphen isn't graphical
