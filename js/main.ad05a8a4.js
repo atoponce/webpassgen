@@ -2,9 +2,16 @@ var spaces=false;
 
 String.prototype.rtrim = function() { return this.replace(/\s+$/g,""); }
 
+function braille_warn() {
+    if(localStorage.getItem("braille_warned") === null) {
+        document.getElementById("overlay").style.display = "block";
+        localStorage.setItem("braille_warned", true);
+    }
+}
+
 function iso8859_warn() {
     if(localStorage.getItem("iso8859_warned") === null) {
-        document.getElementById("iso8859_overlay").style.display = "block";
+        document.getElementById("overlay").style.display = "block";
         localStorage.setItem("iso8859_warned", true);
     }
 }
@@ -382,28 +389,35 @@ function generate_random() {
     var pass_entropy = document.getElementById('random-entropy');
     var option = document.getElementById('random-options').value;
 
-    if (option == "Base-188 (ISO 8859-1)") { 
+    if (option == "Base-256 (Braille)") {
+        braille_warn();
+        s = " ⠁⠂⠃⠄⠅⠆⠇⠈⠉⠊⠋⠌⠍⠎⠏⠐⠑⠒⠓⠔⠕⠖⠗⠘⠙⠚⠛⠜⠝⠞⠟⠠⠡⠢⠣⠤⠥⠦⠧⠨⠩⠪⠫⠬⠭⠮⠯⠰⠱⠲⠳⠴⠵⠶⠷⠸⠹⠺⠻⠼⠽⠾⠿";
+        s+= "⡀⡁⡂⡃⡄⡅⡆⡇⡈⡉⡊⡋⡌⡍⡎⡏⡐⡑⡒⡓⡔⡕⡖⡗⡘⡙⡚⡛⡜⡝⡞⡟⡠⡡⡢⡣⡤⡥⡦⡧⡨⡩⡪⡫⡬⡭⡮⡯⡰⡱⡲⡳⡴⡵⡶⡷⡸⡹⡺⡻⡼⡽⡾⡿";
+        s+= "⢀⢁⢂⢃⢄⢅⢆⢇⢈⢉⢊⢋⢌⢍⢎⢏⢐⢑⢒⢓⢔⢕⢖⢗⢘⢙⢚⢛⢜⢝⢞⢟⢠⢡⢢⢣⢤⢥⢦⢧⢨⢩⢪⢫⢬⢭⢮⢯⢰⢱⢲⢳⢴⢵⢶⢷⢸⢹⢺⢻⢼⢽⢾⢿";
+        s+= "⣀⣁⣂⣃⣄⣅⣆⣇⣈⣉⣊⣋⣌⣍⣎⣏⣐⣑⣒⣓⣔⣕⣖⣗⣘⣙⣚⣛⣜⣝⣞⣟⣠⣡⣢⣣⣤⣥⣦⣧⣨⣩⣪⣫⣬⣭⣮⣯⣰⣱⣲⣳⣴⣵⣶⣷⣸⣹⣺⣻⣼⣽⣾⣿";
+    }
+    else if (option == "Base-188 (ISO 8859-1)") { 
         iso8859_warn();
         for (i=0; i<94; i++) s += String.fromCharCode(33+i);
         for (i=0; i<95; i++) s += String.fromCharCode(161+i);
         s = s.replace(String.fromCharCode(173),''); // soft-hyphen isn't graphical
     }
     else if (option == "Base-94") { for (i=0; i<94; i++) s += String.fromCharCode(33+i); }
-    else if (option == "Base-85") { var s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!#$%&()*+-;<=>?@^_`{|}~"; }
-    else if (option == "Base-64 (+/)") { var s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/"; }
-    else if (option == "Base-64 (-_)") { var s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_"; }
-    else if (option == "Base-62") { var s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"; }
-    else if (option == "Base-58 (Bitcoin)") { var s = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"; }
-    else if (option == "Base-52") { var s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"; }
-    else if (option == "Base-36") { var s = "0123456789abcdefghijklmnopqrstuvwxyz"; }
-    else if (option == "Base-32") { var s = "0123456789abcdefghjkmnpqrstvwxyz"; }
-    else if (option == "Base-26") { var s = "abcdefghijklmnopqrstuvwxyz"; }
-    else if (option == "Base-16") { var s = "0123456789abcdef"; }
-    else if (option == "Base-10") { var s = "0123456789"; }
-    else if (option == "Base-8") { var s = "01234567"; }
-    else if (option == "Base-2") { var s = "01"; }
-    else if (option == "Coin Flips") { var s = "HT"; }
-    else if (option == "DNA Sequence") { var s = "ACGT"; }
+    else if (option == "Base-85") { s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!#$%&()*+-;<=>?@^_`{|}~"; }
+    else if (option == "Base-64 (+/)") { s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/"; }
+    else if (option == "Base-64 (-_)") { s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_"; }
+    else if (option == "Base-62") { s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"; }
+    else if (option == "Base-58 (Bitcoin)") { s = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"; }
+    else if (option == "Base-52") { s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"; }
+    else if (option == "Base-36") { s = "0123456789abcdefghijklmnopqrstuvwxyz"; }
+    else if (option == "Base-32") { s = "0123456789abcdefghjkmnpqrstvwxyz"; }
+    else if (option == "Base-26") { s = "abcdefghijklmnopqrstuvwxyz"; }
+    else if (option == "Base-16") { s = "0123456789abcdef"; }
+    else if (option == "Base-10") { s = "0123456789"; }
+    else if (option == "Base-8") { s = "01234567"; }
+    else if (option == "Base-2") { s = "01"; }
+    else if (option == "Coin Flips") { s = "HT"; }
+    else if (option == "DNA Sequence") { s = "ACGT"; }
     else if (option == "Emoji") { return generate_emoji(); }
 
     var len = Math.ceil(entropy/Math.log2(s.length));

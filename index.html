@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <link rel="shortcut icon" href="favicon.ico">
-    <link rel="stylesheet" href="assets/style.5a0efc81.css">
+    <link rel="stylesheet" href="assets/style.52ffcf89.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Passphrase and Password Generator</title>
@@ -147,24 +147,29 @@
           <p class="cell-title"><strong>Random</strong></p>
           <div class="optional">
             <select id="random-options">
-              <option>Base-188 (ISO 8859-1)</option>
-              <option selected="selected">Base-94</option>
-              <option>Base-85</option>
-              <option>Base-64 (+/)</option>
-              <option>Base-64 (-_)</option>
-              <option>Base-62</option>
-              <option>Base-58 (Bitcoin)</option>
-              <option>Base-52</option>
-              <option>Base-36</option>
-              <option>Base-32</option>
-              <option>Base-26</option>
-              <option>Base-16</option>
-              <option>Base-10</option>
-              <option>Base-8</option>
-              <option>Base-2</option>
-              <option>Coin Flips</option>
-              <option>DNA Sequence</option>
-              <option>Emoji</option>
+              <optgroup label="ASCII">
+                <option selected="selected">Base-94</option>
+                <option>Base-85</option>
+                <option>Base-64 (+/)</option>
+                <option>Base-64 (-_)</option>
+                <option>Base-62</option>
+                <option>Base-58 (Bitcoin)</option>
+                <option>Base-52</option>
+                <option>Base-36</option>
+                <option>Base-32</option>
+                <option>Base-26</option>
+                <option>Base-16</option>
+                <option>Base-10</option>
+                <option>Base-8</option>
+                <option>Base-2</option>
+                <option>Coin Flips</option>
+                <option>DNA Sequence</option>
+              </optgroup>
+              <optgroup label="Unicode">
+                <option>Base-256 (Braille)</option>
+                <option>Base-188 (ISO 8859-1)</option>
+                <option>Emoji</option>
+              </optgroup>
             </select>
           </div>
           <button value="Generate" onclick="generate_random();">Generate</button>
@@ -184,29 +189,19 @@
         </p>
       </div>
     </div>
-    <div id="iso8859_overlay" onclick="document.getElementById('iso8859_overlay').style.display='none';">
-        <div id="iso8859_overlay_text">
+    <div id="overlay" onclick="document.getElementById('overlay').style.display='none';">
+        <div id="overlay_text">
             <p>🔥🔥🔥🔥🔥</p>
-            <p>Using extended ASCII characters for your password can be dangerous!</p>
-            <p>Windows-1252 and ISO 8859-1 are mostly similar, but vary by 27 characters.</p>
-            <p>So it's possible the service you're using interprets them differently than you!</p>
-            <p>Use with caution.</p>
+            <p>Here be dragons!</p>
+            <p>Using non-ASCII Unicode characters could <a href="https://apple.stackexchange.com/questions/202143/i-included-emoji-in-my-password-and-now-i-cant-log-in-to-my-account-on-yosemite">lock you out of your account</a>!</p>
+            <p>Use with caution. Firefox has color emoji.</p>
             <p>Click anywhere to continue.</p>
-            <p>🔥🔥🔥🔥🔥</p>
-        </div>
-    </div>
-    <div id="emoji_overlay" onclick="document.getElementById('emoji_overlay').style.display='none';">
-        <div id="emoji_overlay_text">
-            <p>🔥🔥🔥🔥🔥</p>
-            <p>Using emojis for your password is <a href="https://apple.stackexchange.com/questions/202143/i-included-emoji-in-my-password-and-now-i-cant-log-in-to-my-account-on-yosemite">dangerous</a>!</p>
-            <p>Use Firefox if you want color.</p>
-            <p>Click anywhere to continue.</p>
-            <p>🔥🔥🔥🔥🔥</p>
+            <p>🐉🐉🐉🐉🐉</p>
         </div>
     </div>
 
     <!-- core functions -->
-    <script src="js/main.9d2af8e5.js"></script>
+    <script src="js/main.ad05a8a4.js"></script>
 
     <!--
         Because the word lists are static, and not changing, the filename is
