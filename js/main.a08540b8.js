@@ -18,7 +18,7 @@ function iso8859_warn() {
 
 function emoji_warn() {
     if(localStorage.getItem("emoji_warned") === null) {
-        document.getElementById("emoji_overlay").style.display = "block";
+        document.getElementById("overlay").style.display = "block";
         localStorage.setItem("emoji_warned", true);
     }
 }
