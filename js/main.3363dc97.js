@@ -2,24 +2,10 @@ var spaces=false;
 
 String.prototype.rtrim = function() { return this.replace(/\s+$/g,""); }
 
-function braille_warn() {
-    if(localStorage.getItem("braille_warned") === null) {
+function unicode_warn() {
+    if(localStorage.getItem("unicode_warned") === null) {
         document.getElementById("overlay").style.display = "block";
-        localStorage.setItem("braille_warned", true);
-    }
-}
-
-function iso8859_warn() {
-    if(localStorage.getItem("iso8859_warned") === null) {
-        document.getElementById("overlay").style.display = "block";
-        localStorage.setItem("iso8859_warned", true);
-    }
-}
-
-function emoji_warn() {
-    if(localStorage.getItem("emoji_warned") === null) {
-        document.getElementById("overlay").style.display = "block";
-        localStorage.setItem("emoji_warned", true);
+        localStorage.setItem("unicode_warned", true);
     }
 }
 
@@ -388,21 +374,8 @@ function generate_random() {
     var pass_length = document.getElementById('random-length');
     var pass_entropy = document.getElementById('random-entropy');
     var option = document.getElementById('random-options').value;
-
-    if (option == "Base-256 (Braille)") {
-        braille_warn();
-        s = " ⠁⠂⠃⠄⠅⠆⠇⠈⠉⠊⠋⠌⠍⠎⠏⠐⠑⠒⠓⠔⠕⠖⠗⠘⠙⠚⠛⠜⠝⠞⠟⠠⠡⠢⠣⠤⠥⠦⠧⠨⠩⠪⠫⠬⠭⠮⠯⠰⠱⠲⠳⠴⠵⠶⠷⠸⠹⠺⠻⠼⠽⠾⠿";
-        s+= "⡀⡁⡂⡃⡄⡅⡆⡇⡈⡉⡊⡋⡌⡍⡎⡏⡐⡑⡒⡓⡔⡕⡖⡗⡘⡙⡚⡛⡜⡝⡞⡟⡠⡡⡢⡣⡤⡥⡦⡧⡨⡩⡪⡫⡬⡭⡮⡯⡰⡱⡲⡳⡴⡵⡶⡷⡸⡹⡺⡻⡼⡽⡾⡿";
-        s+= "⢀⢁⢂⢃⢄⢅⢆⢇⢈⢉⢊⢋⢌⢍⢎⢏⢐⢑⢒⢓⢔⢕⢖⢗⢘⢙⢚⢛⢜⢝⢞⢟⢠⢡⢢⢣⢤⢥⢦⢧⢨⢩⢪⢫⢬⢭⢮⢯⢰⢱⢲⢳⢴⢵⢶⢷⢸⢹⢺⢻⢼⢽⢾⢿";
-        s+= "⣀⣁⣂⣃⣄⣅⣆⣇⣈⣉⣊⣋⣌⣍⣎⣏⣐⣑⣒⣓⣔⣕⣖⣗⣘⣙⣚⣛⣜⣝⣞⣟⣠⣡⣢⣣⣤⣥⣦⣧⣨⣩⣪⣫⣬⣭⣮⣯⣰⣱⣲⣳⣴⣵⣶⣷⣸⣹⣺⣻⣼⣽⣾⣿";
-    }
-    else if (option == "Base-188 (ISO 8859-1)") { 
-        iso8859_warn();
-        for (i=0; i<94; i++) s += String.fromCharCode(33+i);
-        for (i=0; i<95; i++) s += String.fromCharCode(161+i);
-        s = s.replace(String.fromCharCode(173),''); // soft-hyphen isn't graphical
-    }
-    else if (option == "Base-94") { for (i=0; i<94; i++) s += String.fromCharCode(33+i); }
+    // ASCII optgroup
+         if (option == "Base-94") { for (i=0; i<94; i++) s += String.fromCharCode(33+i); }
     else if (option == "Base-85") { s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!#$%&()*+-;<=>?@^_`{|}~"; }
     else if (option == "Base-64 (+/)") { s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/"; }
     else if (option == "Base-64 (-_)") { s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_"; }
@@ -418,6 +391,28 @@ function generate_random() {
     else if (option == "Base-2") { s = "01"; }
     else if (option == "Coin Flips") { s = "HT"; }
     else if (option == "DNA Sequence") { s = "ACGT"; }
+    // Unicode optgroup
+    else if (option == "Base-256") {
+        unicode_warn();
+        s = "ḀḁḂḃḄḅḆḇḈḉḊḋḌḍḎḏḐḑḒḓḔḕḖḗḘḙḚḛḜḝḞḟḠḡḢḣḤḥḦḧḨḩḪḫḬḭḮḯḰḱḲḳḴḵḶḷḸḹḺḻḼḽḾḿ";
+        s+= "ṀṁṂṃṄṅṆṇṈṉṊṋṌṍṎṏṐṑṒṓṔṕṖṗṘṙṚṛṜṝṞṟṠṡṢṣṤṥṦṧṨṩṪṫṬṭṮṯṰṱṲṳṴṵṶṷṸṹṺṻṼṽṾṿ";
+        s+= "ẀẁẂẃẄẅẆẇẈẉẊẋẌẍẎẏẐẑẒẓẔẕẖẗẘẙẚẛẜẝẞẟẠạẢảẤấẦầẨẩẪẫẬậẮắẰằẲẳẴẵẶặẸẹẺẻẼẽẾế";
+        s+= "ỀềỂểỄễỆệỈỉỊịỌọỎỏỐốỒồỔổỖỗỘộỚớỜờỞởỠỡỢợỤụỦủỨứỪừỬửỮữỰựỲỳỴỵỶỷỸỹỺỻỼỽỾỿ";
+    }
+    else if (option == "Base-256 (Braille)") {
+        unicode_warn();
+        // first character is not an ASCII space, but could still break lines
+        s = " ⠁⠂⠃⠄⠅⠆⠇⠈⠉⠊⠋⠌⠍⠎⠏⠐⠑⠒⠓⠔⠕⠖⠗⠘⠙⠚⠛⠜⠝⠞⠟⠠⠡⠢⠣⠤⠥⠦⠧⠨⠩⠪⠫⠬⠭⠮⠯⠰⠱⠲⠳⠴⠵⠶⠷⠸⠹⠺⠻⠼⠽⠾⠿";
+        s+= "⡀⡁⡂⡃⡄⡅⡆⡇⡈⡉⡊⡋⡌⡍⡎⡏⡐⡑⡒⡓⡔⡕⡖⡗⡘⡙⡚⡛⡜⡝⡞⡟⡠⡡⡢⡣⡤⡥⡦⡧⡨⡩⡪⡫⡬⡭⡮⡯⡰⡱⡲⡳⡴⡵⡶⡷⡸⡹⡺⡻⡼⡽⡾⡿";
+        s+= "⢀⢁⢂⢃⢄⢅⢆⢇⢈⢉⢊⢋⢌⢍⢎⢏⢐⢑⢒⢓⢔⢕⢖⢗⢘⢙⢚⢛⢜⢝⢞⢟⢠⢡⢢⢣⢤⢥⢦⢧⢨⢩⢪⢫⢬⢭⢮⢯⢰⢱⢲⢳⢴⢵⢶⢷⢸⢹⢺⢻⢼⢽⢾⢿";
+        s+= "⣀⣁⣂⣃⣄⣅⣆⣇⣈⣉⣊⣋⣌⣍⣎⣏⣐⣑⣒⣓⣔⣕⣖⣗⣘⣙⣚⣛⣜⣝⣞⣟⣠⣡⣢⣣⣤⣥⣦⣧⣨⣩⣪⣫⣬⣭⣮⣯⣰⣱⣲⣳⣴⣵⣶⣷⣸⣹⣺⣻⣼⣽⣾⣿";
+    }
+    else if (option == "Base-188 (ISO 8859-1)") { 
+        unicode_warn();
+        for (i=0; i<94; i++) s += String.fromCharCode(33+i);
+        for (i=0; i<95; i++) s += String.fromCharCode(161+i);
+        s = s.replace(String.fromCharCode(173),''); // soft-hyphen isn't graphical
+    }
     else if (option == "Emoji") { return generate_emoji(); }
 
     var len = Math.ceil(entropy/Math.log2(s.length));
