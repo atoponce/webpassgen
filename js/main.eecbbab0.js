@@ -425,7 +425,7 @@ function generate_random() {
 }
 
 function generate_emoji() {
-    emoji_warn();
+    unicode_warn();
     var entropy = get_entropy();
     var pass_id = document.getElementById('random-pass');
     var pass_length = document.getElementById('random-length');
