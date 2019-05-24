@@ -307,6 +307,67 @@ function generate_ninja() {
     return [pass, ninja.length, Math.floor(len*Math.log2(ninja.length))];
 }
 
+function generate_apple() {
+    function _apple(n) {
+        /*
+            See the Twitter thread at https://twitter.com/AaronToponce/status/1131406726069084160 for full analysis.
+
+            For n ≥ 1 blocks, the entropy in bits per block is:
+                log2(
+                    (6n-1) *    //  One lowercase alphabetic character is randomly capitalized
+                    19^(4n-1) * //  The total possible combinations of consonants
+                    6^(2n) *    //  The total possible combinations of vowels
+                    10 * 2n     //  An "edge" character is a random digit
+                )
+
+            E.G.:
+                DVccvc:                      log2( 5 * 19^3  * 6^2 * 10 * 2) ~=  24.558 bits
+                cvCcvD-cvccvc:               log2(11 * 19^7  * 6^4 * 10 * 4) ~=  48.857 bits
+                cvcCvc-Dvccvc-cvccvc:        log2(17 * 19^11 * 6^6 * 10 * 6) ~=  72.231 bits
+                cvccVc-cvccvD-cvccvc-cvccvc: log2(23 * 19^15 * 6^8 * 10 * 8) ~=  95.244 bits
+                et cetera, et cetera, et cetera.
+        */
+        return Math.floor(Math.log2((6*n-1)*19**(4*n-1)*6**(2*n)*20*n));
+    }
+
+    var pass = [];
+    var digits = "0123456789";
+    var vowels = "aeiouy";
+    var consonants = "bcdfghjkmnpqrstvwxz";
+    var entropy = get_entropy();
+    var v_ent = Math.log2(vowels.length);
+    var c_ent = Math.log2(consonants.length);
+
+    var n = 1; // number of blocks
+    while (_apple(n) <= entropy) { n++; };
+    for (let i = 0; i < n; i++) {
+        pass[6*i]   = generate_pass(1, consonants);
+        pass[6*i+1] = generate_pass(1, vowels);
+        pass[6*i+2] = generate_pass(1, consonants);
+        pass[6*i+3] = generate_pass(1, consonants);
+        pass[6*i+4] = generate_pass(1, vowels);
+        pass[6*i+5] = generate_pass(1, consonants);
+    }
+
+    var d_loc = 0;
+    var c_loc = 0;
+    var edge = sec_rand(2*n); // [0, 2n)
+    var digit = generate_pass(1, digits);
+
+    if (edge % 2 == 0) { d_loc = 3*edge; }
+    else { d_loc = 3*edge+2; }
+    pass[d_loc] = digit;
+
+    do { c_loc = sec_rand(pass.length); } while (c_loc == d_loc);
+    pass[c_loc] = pass[c_loc].toUpperCase();
+
+    for (let i = n-1; i > 0; i-- ) {
+        pass.splice(6*i, 0, "-");
+    }
+
+    return [pass.join(""), pass.length, _apple(n)];
+}
+
 function generate_babble() {
     var pass = [];
     var vowels = "aeiouy";
@@ -353,7 +414,8 @@ function generate_kpop() {
 
 function generate_pseudowords() {
     var pseudo = document.getElementById('pseudo-options').value;
-    if (pseudo == "Bubble Babble") var ret = generate_babble();
+    if (pseudo == "Apple, Inc.") var ret = generate_apple();
+    else if (pseudo == "Bubble Babble") var ret = generate_babble();
     else if (pseudo == "Secret Ninja") var ret = generate_ninja();
     else if (pseudo == "Korean K-pop") var ret = generate_kpop();
     var pass = ret[0];
