@@ -115,9 +115,16 @@
           <p class="cell-title"><strong>EFF</strong></p>
           <div class="optional">
             <select id="eff-options">
-              <option>Distant Words</option>
-              <option>Long Words</option>
-              <option selected="selected">Short Words</option>
+              <optgroup label="Official">
+                <option>Distant Words</option>
+                <option>Long Words</option>
+                <option selected="selected">Short Words</option>
+              </optgroup>
+              <optgroup label="Unofficial">
+                <option>Game of Thrones</option>
+                <option>Harry Potter</option>
+                <option>Star Trek</option>
+                <option>Star Wars</option>
             </select>
           </div>
           <button value="Generate" onclick="generate_passphrase('eff');">Generate</button>
@@ -203,7 +210,7 @@
     </div>
 
     <!-- core functions -->
-    <script src="js/main.f6cda445.js"></script>
+    <script src="js/main.d3f9246c.js"></script>
 
     <!--
         Because the word lists are static, and not changing, the filename is
@@ -272,6 +279,10 @@
     <script src="lists/eff_distant.e5c921bf.js"></script>
     <script src="lists/eff_long.fedffa81.js"></script>
     <script src="lists/eff_short.8670fe26.js"></script>
+    <script src="lists/eff_gameofthrones.2f13206e.js"></script>
+    <script src="lists/eff_harrypotter.a45f3af8.js"></script>
+    <script src="lists/eff_startrek.dbea1102.js"></script>
+    <script src="lists/eff_starwars.caa65a78.js"></script>
 
     <!-- emoji - on its own -->
     <script src="lists/random_emoji.667fd64c.js"></script>

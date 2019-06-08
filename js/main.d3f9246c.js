@@ -166,6 +166,10 @@ function generate_eff(selection) {
         case "Distant Words": wordlist = eff_distant; break;
         case "Short Words": wordlist = eff_short; break;
         case "Long Words": wordlist = eff_long; break;
+        case "Game of Thrones": wordlist = eff_gameofthrones; break;
+        case "Harry Potter": wordlist = eff_harrypotter; break;
+        case "Star Trek": wordlist = eff_startrek; break;
+        case "Star Wars": wordlist = eff_starwars; break;
     }
 
     var entropy = get_entropy();
