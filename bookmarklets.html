@@ -1,0 +1,860 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="assets/style.52ffcf89.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Passphrase and Password Generator</title>
+    <style>
+      /* might need later */
+      .bookmarklet { }
+      table {
+        width: 100%;
+      }
+      td {
+        padding: 5px;
+        width: 25%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div id="header">
+        <h1>Passphrase and Password Generator</h1>
+        <ul id="navigation">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="bookmarklets.html">Bookmarklets</a></li>
+          <li><a href="what.html">What is entropy?</a></li>
+          <li><a href="test.html">Testing Meter</a></li>
+        </ul>
+      </div>
+      <div id="content">
+        <h3>Bookmarklets</h3>
+        <p>These bookmarklets are <strong>offline</strong> password generators. First inspect the source code to ensure it's doing what you expect and that it's fully offline.</p>
+        <p>Passphrases, such as Diceware or EFF, aren't provided due to their size as well as the requirement to generate completely offline. The Unicode generators are also not provided.</p>
+        <p>The JavaScript "window.alert()" function is used to give you the password. You may need to tweak your popup blocking preferences to see the generated password.</p>
+        <p>Drag and drop any or all links to your bookmark toolbar.</p>
+        <h4>Pseudoword Bookmarklets</h4>
+        <table>
+          <tr>
+            <!-- To save space in readability, use tabs in each bookmarklet, not spaces -->
+            <td> <!-- Apple, Inc. Pseudowords -->
+<a class="bookmarklet" href='javascript:(function() {
+String.prototype.rtrim=function(){return this.replace(/\s+$/g,"");};
+function sec_rand(count) {
+	var min;
+	var rand_array = new Uint32Array(1);
+	const my_crypto = window.crypto || window.msCrypto;
+	count >>>= 0;
+	var min = (-count >>> 0) % count;
+	do {
+		my_crypto.getRandomValues(rand_array);
+	} while (rand_array[0] < min);
+	return rand_array[0] % count;
+}
+function generate_pass(len, set, spaces) {
+	var pass = "";
+	if (typeof set == "string") var pass_arr = set.split("");
+	else pass_arr = set;
+	for(i=len; i--;) {
+		if (spaces) {
+			pass += pass_arr[sec_rand(set.length)];
+			pass += " ";
+		}
+		else pass += pass_arr[sec_rand(set.length)];
+	}
+	return pass.rtrim();
+}
+function generate_apple() {
+	function _apple(n) {
+		return Math.floor(Math.log2((6*n-1)*19**(4*n-1)*6**(2*n)*20*n));
+	}
+	var pass = [];
+	var digits = "0123456789";
+	var vowels = "aeiouy";
+	var consonants = "bcdfghjkmnpqrstvwxz";
+	var entropy = 70;
+	var v_ent = Math.log2(vowels.length);
+	var c_ent = Math.log2(consonants.length);
+	var n = 1;
+	while (_apple(n) <= entropy) { n++; };
+	for (let i = 0; i < n; i++) {
+		pass[6*i]   = generate_pass(1, consonants);
+		pass[6*i+1] = generate_pass(1, vowels);
+		pass[6*i+2] = generate_pass(1, consonants);
+		pass[6*i+3] = generate_pass(1, consonants);
+		pass[6*i+4] = generate_pass(1, vowels);
+		pass[6*i+5] = generate_pass(1, consonants);
+	}
+	var d_loc = 0;
+	var c_loc = 0;
+	var edge = sec_rand(2*n);
+	var digit = generate_pass(1, digits);
+	if (edge % 2 == 0) { d_loc = 3*edge; }
+	else { d_loc = 3*edge+2; }
+	pass[d_loc] = digit;
+	do { c_loc = sec_rand(pass.length); } while (c_loc == d_loc);
+	pass[c_loc] = pass[c_loc].toUpperCase();
+	for (let i = n-1; i > 0; i-- ) {
+		pass.splice(6*i, 0, "-");
+	}
+	return pass.join("");
+}
+window.alert(generate_apple());
+})();'>Apple Inc.</a>
+            </td>
+            <td> <!-- Bubble Babble Pseudowords -->
+<a class="bookmarklet" href='javascript:(function() {
+String.prototype.rtrim=function(){return this.replace(/\s+$/g,"");};
+function sec_rand(count) {
+	var min;
+	var rand_array = new Uint32Array(1);
+	const my_crypto = window.crypto || window.msCrypto;
+	count >>>= 0;
+	var min = (-count >>> 0) % count;
+	do {
+		my_crypto.getRandomValues(rand_array);
+	} while (rand_array[0] < min);
+	return rand_array[0] % count;
+}
+function generate_pass(len, set, spaces) {
+	var pass = "";
+	if (typeof set == "string") var pass_arr = set.split("");
+	else pass_arr = set;
+	for(i=len; i--;) {
+		if (spaces) {
+			pass += pass_arr[sec_rand(set.length)];
+			pass += " ";
+		}
+		else pass += pass_arr[sec_rand(set.length)];
+	}
+	return pass.rtrim();
+}
+function generate_babble() {
+	var pass = [];
+	var vowels = "aeiouy";
+	var consonants = "bcdfghklmnprstvzx";
+	var entropy = 70;
+	var v_ent = Math.log2(vowels.length);
+	var c_ent = Math.log2(consonants.length);
+	var out_ent = (2*c_ent)+(2*v_ent);
+	var in_ent = (3*c_ent)+(2*v_ent);
+	entropy = entropy - (2*out_ent);
+	var len = 3;
+	var tot_ent = out_ent + (len*in_ent) + out_ent;
+	for (var i=0; i<len+2; i++) {
+		for (var j=0; j<5; j++) {
+			if (j % 2 == 0) pass[(5*i)+j] = generate_pass(1, consonants);
+			else pass[(5*i)+j] = generate_pass(1, vowels);
+		}
+	}
+	pass[0] = "x";
+	pass[pass.length-1] = "x";
+	for (var i=pass.length; i>0; i-=5) pass.splice(i, 0, "-");
+	pass.pop();
+	return pass.join("");
+}
+window.alert(generate_babble());
+})();'>Bubble Babble</a>
+            </td>
+            <td> <!-- Korean K-pop Pseudowords -->
+<a class="bookmarklet" href='javascript:(function() {
+String.prototype.rtrim=function(){return this.replace(/\s+$/g,"");};
+function sec_rand(count) {
+	var min;
+	var rand_array = new Uint32Array(1);
+	const my_crypto = window.crypto || window.msCrypto;
+	count >>>= 0;
+	var min = (-count >>> 0) % count;
+	do {
+		my_crypto.getRandomValues(rand_array);
+	} while (rand_array[0] < min);
+	return rand_array[0] % count;
+}
+function generate_pass(len, set, spaces) {
+	var pass = "";
+	if (typeof set == "string") var pass_arr = set.split("");
+	else pass_arr = set;
+	for(i=len; i--;) {
+		if (spaces) {
+			pass += pass_arr[sec_rand(set.length)];
+			pass += " ";
+		}
+		else pass += pass_arr[sec_rand(set.length)];
+	}
+	return pass.rtrim();
+}
+function generate_kpop() {
+	var kpop = ["A","Ah","Bae","Bin","Bo","Choi","Chul","Da","Do","Dong","Eun","Gi","Gun","Ha","Hae","Hee","Ho","Hu","Hwa","Hwan","Hye","Hyo","Hyun","Il","In","Ja","Jae","Ji","Jin","Jong","Joo","Joon","Ju","Jun","Jung","Ki","Kun","Kyu","Lee","Mi","Min","Moon","Nam","Ok","Park","Rin","Seo","Seul","Shi","Sik","So","Song","Soo","Su","Sun","Sung","Won","Woo","Ye","Yeon","Yoo","Yu","Yul","Yun"];
+	var entropy = 70;
+	var len = Math.ceil(entropy/Math.log2(kpop.length));
+	var pass = "";
+	for (i=0; i<len; i++) {
+		pass += kpop[sec_rand(len)];
+		if (i%2 == 1 && i!=len-1) pass += "-";
+	}
+	return pass;
+}
+window.alert(generate_kpop());
+})();'>Korean K-pop</a>
+            </td>
+            <td> <!-- Secret Ninja Pseudowords -->
+<a class="bookmarklet" href='javascript:(function() {
+String.prototype.rtrim=function(){return this.replace(/\s+$/g,"");};
+function sec_rand(count) {
+	var min;
+	var rand_array = new Uint32Array(1);
+	const my_crypto = window.crypto || window.msCrypto;
+	count >>>= 0;
+	var min = (-count >>> 0) % count;
+	do {
+		my_crypto.getRandomValues(rand_array);
+	} while (rand_array[0] < min);
+	return rand_array[0] % count;
+}
+function generate_pass(len, set, spaces) {
+	var pass = "";
+	if (typeof set == "string") var pass_arr = set.split("");
+	else pass_arr = set;
+	for(i=len; i--;) {
+		if (spaces) {
+			pass += pass_arr[sec_rand(set.length)];
+			pass += " ";
+		}
+		else pass += pass_arr[sec_rand(set.length)];
+	}
+	return pass.rtrim();
+}
+function generate_ninja() {
+	var ninja = ["ka","zu","mi","te","ku","lu","ji","ri","ki","zu","me","ta","rin","to","mo","no","ke","shi","ari","chi","do","ru","mei","na","fu","zi"];
+	var entropy = 70;
+	var len = Math.ceil(entropy/Math.log2(ninja.length));
+	var pass = "";
+	for (i=0; i<len; i++) {
+		pass += ninja[sec_rand(len)];
+		if (i%3 == 2 && i!=len-1) pass += "-";
+	}
+	return pass;
+}
+window.alert(generate_ninja());
+})();'>Secret Ninja</a>
+            </td>
+          </tr>
+        </table>
+        <h4>Random Password Bookmarklets</h4>
+        <table>
+          <tr>
+            <td> <!-- Base-94 Random Passwords -->
+<a class="bookmarklet" href='javascript:(function() {
+String.prototype.rtrim=function(){return this.replace(/\s+$/g,"");};
+function sec_rand(count) {
+	var min;
+	var rand_array = new Uint32Array(1);
+	const my_crypto = window.crypto || window.msCrypto;
+	count >>>= 0;
+	var min = (-count >>> 0) % count;
+	do {
+		my_crypto.getRandomValues(rand_array);
+	} while (rand_array[0] < min);
+	return rand_array[0] % count;
+}
+function generate_pass(len, set, spaces) {
+	var pass = "";
+	if (typeof set == "string") var pass_arr = set.split("");
+	else pass_arr = set;
+	for(i=len; i--;) {
+		if (spaces) {
+			pass += pass_arr[sec_rand(set.length)];
+			pass += " ";
+		}
+		else pass += pass_arr[sec_rand(set.length)];
+	}
+	return pass.rtrim();
+}
+function generate_random() {
+	var s = "";
+	var entropy = 70;
+	for (i=0; i<94; i++) s += String.fromCharCode(33+i);
+	var len = Math.ceil(entropy/Math.log2(s.length));
+	var pass = generate_pass(len, s);
+	return pass;
+}
+window.alert(generate_random());
+})();'>Base-94</a>
+            </td>
+            <td> <!-- Base-85 Random Passwords -->
+<a class="bookmarklet" href='javascript:(function() {
+String.prototype.rtrim=function(){return this.replace(/\s+$/g,"");};
+function sec_rand(count) {
+	var min;
+	var rand_array = new Uint32Array(1);
+	const my_crypto = window.crypto || window.msCrypto;
+	count >>>= 0;
+	var min = (-count >>> 0) % count;
+	do {
+		my_crypto.getRandomValues(rand_array);
+	} while (rand_array[0] < min);
+	return rand_array[0] % count;
+}
+function generate_pass(len, set, spaces) {
+	var pass = "";
+	if (typeof set == "string") var pass_arr = set.split("");
+	else pass_arr = set;
+	for(i=len; i--;) {
+		if (spaces) {
+			pass += pass_arr[sec_rand(set.length)];
+			pass += " ";
+		}
+		else pass += pass_arr[sec_rand(set.length)];
+	}
+	return pass.rtrim();
+}
+function generate_random() {
+	var entropy = 70;
+	var s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!#$%&()*+-;<=>?@^_`{|}~";
+	var len = Math.ceil(entropy/Math.log2(s.length));
+	var pass = generate_pass(len, s);
+	return pass;
+}
+window.alert(generate_random());
+})();'>Base-85</a>
+            </td>
+            <td> <!-- Base-64 (+/) Random Passwords -->
+<a class="bookmarklet" href='javascript:(function() {
+String.prototype.rtrim=function(){return this.replace(/\s+$/g,"");};
+function sec_rand(count) {
+	var min;
+	var rand_array = new Uint32Array(1);
+	const my_crypto = window.crypto || window.msCrypto;
+	count >>>= 0;
+	var min = (-count >>> 0) % count;
+	do {
+		my_crypto.getRandomValues(rand_array);
+	} while (rand_array[0] < min);
+	return rand_array[0] % count;
+}
+function generate_pass(len, set, spaces) {
+	var pass = "";
+	if (typeof set == "string") var pass_arr = set.split("");
+	else pass_arr = set;
+	for(i=len; i--;) {
+		if (spaces) {
+			pass += pass_arr[sec_rand(set.length)];
+			pass += " ";
+		}
+		else pass += pass_arr[sec_rand(set.length)];
+	}
+	return pass.rtrim();
+}
+function generate_random() {
+	var entropy = 70;
+	var s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/";
+	var len = Math.ceil(entropy/Math.log2(s.length));
+	var pass = generate_pass(len, s);
+	return pass;
+}
+window.alert(generate_random());
+})();'>Base-64 (+/)</a>
+            </td>
+            <td> <!-- Base-64 (-_) Random Passwords -->
+<a class="bookmarklet" href='javascript:(function() {
+String.prototype.rtrim=function(){return this.replace(/\s+$/g,"");};
+function sec_rand(count) {
+	var min;
+	var rand_array = new Uint32Array(1);
+	const my_crypto = window.crypto || window.msCrypto;
+	count >>>= 0;
+	var min = (-count >>> 0) % count;
+	do {
+		my_crypto.getRandomValues(rand_array);
+	} while (rand_array[0] < min);
+	return rand_array[0] % count;
+}
+function generate_pass(len, set, spaces) {
+	var pass = "";
+	if (typeof set == "string") var pass_arr = set.split("");
+	else pass_arr = set;
+	for(i=len; i--;) {
+		if (spaces) {
+			pass += pass_arr[sec_rand(set.length)];
+			pass += " ";
+		}
+		else pass += pass_arr[sec_rand(set.length)];
+	}
+	return pass.rtrim();
+}
+function generate_random() {
+	var entropy = 70;
+	var s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_";
+	var len = Math.ceil(entropy/Math.log2(s.length));
+	var pass = generate_pass(len, s);
+	return pass;
+}
+window.alert(generate_random());
+})();'>Base-64 (-_)</a>
+<br/>
+            </td>
+          </tr>
+          <tr>
+            <td> <!-- Base-62 Random Passwords -->
+<a class="bookmarklet" href='javascript:(function() {
+String.prototype.rtrim=function(){return this.replace(/\s+$/g,"");};
+function sec_rand(count) {
+	var min;
+	var rand_array = new Uint32Array(1);
+	const my_crypto = window.crypto || window.msCrypto;
+	count >>>= 0;
+	var min = (-count >>> 0) % count;
+	do {
+		my_crypto.getRandomValues(rand_array);
+	} while (rand_array[0] < min);
+	return rand_array[0] % count;
+}
+function generate_pass(len, set, spaces) {
+	var pass = "";
+	if (typeof set == "string") var pass_arr = set.split("");
+	else pass_arr = set;
+	for(i=len; i--;) {
+		if (spaces) {
+			pass += pass_arr[sec_rand(set.length)];
+			pass += " ";
+		}
+		else pass += pass_arr[sec_rand(set.length)];
+	}
+	return pass.rtrim();
+}
+function generate_random() {
+	var entropy = 70;
+	var s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+	var len = Math.ceil(entropy/Math.log2(s.length));
+	var pass = generate_pass(len, s);
+	return pass;
+}
+window.alert(generate_random());
+})();'>Base-62</a>
+            </td>
+            <td> <!-- Base-58 Random Passwords -->
+<a class="bookmarklet" href='javascript:(function() {
+String.prototype.rtrim=function(){return this.replace(/\s+$/g,"");};
+function sec_rand(count) {
+	var min;
+	var rand_array = new Uint32Array(1);
+	const my_crypto = window.crypto || window.msCrypto;
+	count >>>= 0;
+	var min = (-count >>> 0) % count;
+	do {
+		my_crypto.getRandomValues(rand_array);
+	} while (rand_array[0] < min);
+	return rand_array[0] % count;
+}
+function generate_pass(len, set, spaces) {
+	var pass = "";
+	if (typeof set == "string") var pass_arr = set.split("");
+	else pass_arr = set;
+	for(i=len; i--;) {
+		if (spaces) {
+			pass += pass_arr[sec_rand(set.length)];
+			pass += " ";
+		}
+		else pass += pass_arr[sec_rand(set.length)];
+	}
+	return pass.rtrim();
+}
+function generate_random() {
+	var entropy = 70;
+	var s = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
+	var len = Math.ceil(entropy/Math.log2(s.length));
+	var pass = generate_pass(len, s);
+	return pass;
+}
+window.alert(generate_random());
+})();'>Base-58</a>
+            </td>
+            <td> <!-- Base-52 Random Passwords -->
+<a class="bookmarklet" href='javascript:(function() {
+String.prototype.rtrim=function(){return this.replace(/\s+$/g,"");};
+function sec_rand(count) {
+	var min;
+	var rand_array = new Uint32Array(1);
+	const my_crypto = window.crypto || window.msCrypto;
+	count >>>= 0;
+	var min = (-count >>> 0) % count;
+	do {
+		my_crypto.getRandomValues(rand_array);
+	} while (rand_array[0] < min);
+	return rand_array[0] % count;
+}
+function generate_pass(len, set, spaces) {
+	var pass = "";
+	if (typeof set == "string") var pass_arr = set.split("");
+	else pass_arr = set;
+	for(i=len; i--;) {
+		if (spaces) {
+			pass += pass_arr[sec_rand(set.length)];
+			pass += " ";
+		}
+		else pass += pass_arr[sec_rand(set.length)];
+	}
+	return pass.rtrim();
+}
+function generate_random() {
+	var entropy = 70;
+	var s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	var len = Math.ceil(entropy/Math.log2(s.length));
+	var pass = generate_pass(len, s);
+	return pass;
+}
+window.alert(generate_random());
+})();'>Base-52</a>
+            </td>
+            <td> <!-- Base-36 Random Passwords -->
+<a class="bookmarklet" href='javascript:(function() {
+String.prototype.rtrim=function(){return this.replace(/\s+$/g,"");};
+function sec_rand(count) {
+	var min;
+	var rand_array = new Uint32Array(1);
+	const my_crypto = window.crypto || window.msCrypto;
+	count >>>= 0;
+	var min = (-count >>> 0) % count;
+	do {
+		my_crypto.getRandomValues(rand_array);
+	} while (rand_array[0] < min);
+	return rand_array[0] % count;
+}
+function generate_pass(len, set, spaces) {
+	var pass = "";
+	if (typeof set == "string") var pass_arr = set.split("");
+	else pass_arr = set;
+	for(i=len; i--;) {
+		if (spaces) {
+			pass += pass_arr[sec_rand(set.length)];
+			pass += " ";
+		}
+		else pass += pass_arr[sec_rand(set.length)];
+	}
+	return pass.rtrim();
+}
+function generate_random() {
+	var entropy = 70;
+	var s = "0123456789abcdefghijklmnopqrstuvwxyz";
+	var len = Math.ceil(entropy/Math.log2(s.length));
+	var pass = generate_pass(len, s);
+	return pass;
+}
+window.alert(generate_random());
+})();'>Base-36</a>
+            </td>
+          </tr>
+          <tr>
+            <td> <!-- Base-32 Random Passwords -->
+<a class="bookmarklet" href='javascript:(function() {
+String.prototype.rtrim=function(){return this.replace(/\s+$/g,"");};
+function sec_rand(count) {
+	var min;
+	var rand_array = new Uint32Array(1);
+	const my_crypto = window.crypto || window.msCrypto;
+	count >>>= 0;
+	var min = (-count >>> 0) % count;
+	do {
+		my_crypto.getRandomValues(rand_array);
+	} while (rand_array[0] < min);
+	return rand_array[0] % count;
+}
+function generate_pass(len, set, spaces) {
+	var pass = "";
+	if (typeof set == "string") var pass_arr = set.split("");
+	else pass_arr = set;
+	for(i=len; i--;) {
+		if (spaces) {
+			pass += pass_arr[sec_rand(set.length)];
+			pass += " ";
+		}
+		else pass += pass_arr[sec_rand(set.length)];
+	}
+	return pass.rtrim();
+}
+function generate_random() {
+	var entropy = 70;
+	var s = "0123456789abcdefghjkmnpqrstvwxyz";
+	var len = Math.ceil(entropy/Math.log2(s.length));
+	var pass = generate_pass(len, s);
+	return pass;
+}
+window.alert(generate_random());
+})();'>Base-32</a>
+            </td>
+            <td> <!-- Base-32 Random Passwords -->
+<a class="bookmarklet" href='javascript:(function() {
+String.prototype.rtrim=function(){return this.replace(/\s+$/g,"");};
+function sec_rand(count) {
+	var min;
+	var rand_array = new Uint32Array(1);
+	const my_crypto = window.crypto || window.msCrypto;
+	count >>>= 0;
+	var min = (-count >>> 0) % count;
+	do {
+		my_crypto.getRandomValues(rand_array);
+	} while (rand_array[0] < min);
+	return rand_array[0] % count;
+}
+function generate_pass(len, set, spaces) {
+	var pass = "";
+	if (typeof set == "string") var pass_arr = set.split("");
+	else pass_arr = set;
+	for(i=len; i--;) {
+		if (spaces) {
+			pass += pass_arr[sec_rand(set.length)];
+			pass += " ";
+		}
+		else pass += pass_arr[sec_rand(set.length)];
+	}
+	return pass.rtrim();
+}
+function generate_random() {
+	var entropy = 70;
+	var s = "abcdefghijklmnopqrstuvwxyz";
+	var len = Math.ceil(entropy/Math.log2(s.length));
+	var pass = generate_pass(len, s);
+	return pass;
+}
+window.alert(generate_random());
+})();'>Base-26</a>
+            </td>
+            <td> <!-- Base-16 Random Passwords -->
+<a class="bookmarklet" href='javascript:(function() {
+String.prototype.rtrim=function(){return this.replace(/\s+$/g,"");};
+function sec_rand(count) {
+	var min;
+	var rand_array = new Uint32Array(1);
+	const my_crypto = window.crypto || window.msCrypto;
+	count >>>= 0;
+	var min = (-count >>> 0) % count;
+	do {
+		my_crypto.getRandomValues(rand_array);
+	} while (rand_array[0] < min);
+	return rand_array[0] % count;
+}
+function generate_pass(len, set, spaces) {
+	var pass = "";
+	if (typeof set == "string") var pass_arr = set.split("");
+	else pass_arr = set;
+	for(i=len; i--;) {
+		if (spaces) {
+			pass += pass_arr[sec_rand(set.length)];
+			pass += " ";
+		}
+		else pass += pass_arr[sec_rand(set.length)];
+	}
+	return pass.rtrim();
+}
+function generate_random() {
+	var entropy = 70;
+	var s = "0123456789abcdef";
+	var len = Math.ceil(entropy/Math.log2(s.length));
+	var pass = generate_pass(len, s);
+	return pass;
+}
+window.alert(generate_random());
+})();'>Base-16</a>
+            </td>
+            <td> <!-- Base-10 Random Passwords -->
+<a class="bookmarklet" href='javascript:(function() {
+String.prototype.rtrim=function(){return this.replace(/\s+$/g,"");};
+function sec_rand(count) {
+	var min;
+	var rand_array = new Uint32Array(1);
+	const my_crypto = window.crypto || window.msCrypto;
+	count >>>= 0;
+	var min = (-count >>> 0) % count;
+	do {
+		my_crypto.getRandomValues(rand_array);
+	} while (rand_array[0] < min);
+	return rand_array[0] % count;
+}
+function generate_pass(len, set, spaces) {
+	var pass = "";
+	if (typeof set == "string") var pass_arr = set.split("");
+	else pass_arr = set;
+	for(i=len; i--;) {
+		if (spaces) {
+			pass += pass_arr[sec_rand(set.length)];
+			pass += " ";
+		}
+		else pass += pass_arr[sec_rand(set.length)];
+	}
+	return pass.rtrim();
+}
+function generate_random() {
+	var entropy = 70;
+	var s = "0123456789";
+	var len = Math.ceil(entropy/Math.log2(s.length));
+	var pass = generate_pass(len, s);
+	return pass;
+}
+window.alert(generate_random());
+})();'>Base-10</a>
+            </td>
+          </tr>
+          <tr>
+            <td> <!-- Base-8 Random Passwords -->
+<a class="bookmarklet" href='javascript:(function() {
+String.prototype.rtrim=function(){return this.replace(/\s+$/g,"");};
+function sec_rand(count) {
+	var min;
+	var rand_array = new Uint32Array(1);
+	const my_crypto = window.crypto || window.msCrypto;
+	count >>>= 0;
+	var min = (-count >>> 0) % count;
+	do {
+		my_crypto.getRandomValues(rand_array);
+	} while (rand_array[0] < min);
+	return rand_array[0] % count;
+}
+function generate_pass(len, set, spaces) {
+	var pass = "";
+	if (typeof set == "string") var pass_arr = set.split("");
+	else pass_arr = set;
+	for(i=len; i--;) {
+		if (spaces) {
+			pass += pass_arr[sec_rand(set.length)];
+			pass += " ";
+		}
+		else pass += pass_arr[sec_rand(set.length)];
+	}
+	return pass.rtrim();
+}
+function generate_random() {
+	var entropy = 70;
+	var s = "01234567";
+	var len = Math.ceil(entropy/Math.log2(s.length));
+	var pass = generate_pass(len, s);
+	return pass;
+}
+window.alert(generate_random());
+})();'>Base-8</a>
+            </td>
+            <td> <!-- Base-2 Random Passwords -->
+<a class="bookmarklet" href='javascript:(function() {
+String.prototype.rtrim=function(){return this.replace(/\s+$/g,"");};
+function sec_rand(count) {
+	var min;
+	var rand_array = new Uint32Array(1);
+	const my_crypto = window.crypto || window.msCrypto;
+	count >>>= 0;
+	var min = (-count >>> 0) % count;
+	do {
+		my_crypto.getRandomValues(rand_array);
+	} while (rand_array[0] < min);
+	return rand_array[0] % count;
+}
+function generate_pass(len, set, spaces) {
+	var pass = "";
+	if (typeof set == "string") var pass_arr = set.split("");
+	else pass_arr = set;
+	for(i=len; i--;) {
+		if (spaces) {
+			pass += pass_arr[sec_rand(set.length)];
+			pass += " ";
+		}
+		else pass += pass_arr[sec_rand(set.length)];
+	}
+	return pass.rtrim();
+}
+function generate_random() {
+	var entropy = 70;
+	var s = "01";
+	var len = Math.ceil(entropy/Math.log2(s.length));
+	var pass = generate_pass(len, s);
+	return pass;
+}
+window.alert(generate_random());
+})();'>Base-2</a>
+            </td>
+            <td> <!-- Random Coin Flips-->
+<a class="bookmarklet" href='javascript:(function() {
+String.prototype.rtrim=function(){return this.replace(/\s+$/g,"");};
+function sec_rand(count) {
+	var min;
+	var rand_array = new Uint32Array(1);
+	const my_crypto = window.crypto || window.msCrypto;
+	count >>>= 0;
+	var min = (-count >>> 0) % count;
+	do {
+		my_crypto.getRandomValues(rand_array);
+	} while (rand_array[0] < min);
+	return rand_array[0] % count;
+}
+function generate_pass(len, set, spaces) {
+	var pass = "";
+	if (typeof set == "string") var pass_arr = set.split("");
+	else pass_arr = set;
+	for(i=len; i--;) {
+		if (spaces) {
+			pass += pass_arr[sec_rand(set.length)];
+			pass += " ";
+		}
+		else pass += pass_arr[sec_rand(set.length)];
+	}
+	return pass.rtrim();
+}
+function generate_random() {
+	var entropy = 70;
+	var s = "HT";
+	var len = Math.ceil(entropy/Math.log2(s.length));
+	var pass = generate_pass(len, s);
+	return pass;
+}
+window.alert(generate_random());
+})();'>Coin Flips</a>
+            </td>
+            <td> <!-- Random DNA Sequences-->
+<a class="bookmarklet" href='javascript:(function() {
+String.prototype.rtrim=function(){return this.replace(/\s+$/g,"");};
+function sec_rand(count) {
+	var min;
+	var rand_array = new Uint32Array(1);
+	const my_crypto = window.crypto || window.msCrypto;
+	count >>>= 0;
+	var min = (-count >>> 0) % count;
+	do {
+		my_crypto.getRandomValues(rand_array);
+	} while (rand_array[0] < min);
+	return rand_array[0] % count;
+}
+function generate_pass(len, set, spaces) {
+	var pass = "";
+	if (typeof set == "string") var pass_arr = set.split("");
+	else pass_arr = set;
+	for(i=len; i--;) {
+		if (spaces) {
+			pass += pass_arr[sec_rand(set.length)];
+			pass += " ";
+		}
+		else pass += pass_arr[sec_rand(set.length)];
+	}
+	return pass.rtrim();
+}
+function generate_random() {
+	var entropy = 70;
+	var s = "ACGT";
+	var len = Math.ceil(entropy/Math.log2(s.length));
+	var pass = generate_pass(len, s);
+	return pass;
+}
+window.alert(generate_random());
+})();'>DNA Sequences</a>
+            </td>
+          </tr>
+        </table>
+      </div>
+    <div id="footer" class="clear">
+      <p><strong>Disclaimer: This is for demonstration purposes only and is not logging passwords!</strong></p>
+      <p>
+        <a href="https://github.com/atoponce/webpassgen"><img alt="Github logo" title="Get the source code" src="assets/github.png" /></a>
+        <a href="https://github.com/atoponce/webpassgen/releases/latest"><img alt="Download icon" title="Download latest release" src="assets/download.png" /></a>
+        <a href="https://twitter.com/AaronToponce"><img alt="Twitter logo" title="Meet the author" src="assets/twitter.png" /></a>
+      </p>
+    </div>
+  </body>
+</html>
