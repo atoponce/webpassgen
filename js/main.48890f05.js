@@ -276,6 +276,7 @@ function generate_bitcoin(selection) {
     switch(selection) {
         case "Chinese (Simp)": wordlist = bitcoin_cn_simp; break;
         case "Chinese (Trad)": wordlist = bitcoin_cn_trad; break;
+        case "Czech": wordlist = bitcoin_cz; break;
         case "English": wordlist = bitcoin_en; break;
         case "French": wordlist = bitcoin_fr; break;
         case "Italian": wordlist = bitcoin_it; break;
