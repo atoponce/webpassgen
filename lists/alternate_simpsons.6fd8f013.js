@@ -15,5 +15,5 @@ sim[13]="complimentingcontroversialentertainmentgroundskeeperinternationalold-fa
 sim[14]="michaeljacksonposturologistsresponsibilitysuccessmanshipsuperintendent";
 sim[15]="congratulations";
 sim[16]="anesthesiologist";
-var alternate_simpsons=[];
+let alternate_simpsons=[];
 for(let i=1;i<17;i++){for(let j=0;j<sim[i].length;j+=i){alternate_simpsons.push(sim[i].substr(j,i));}}

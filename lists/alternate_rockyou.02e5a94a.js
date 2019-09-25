@@ -16,5 +16,5 @@ you[14]="friendsforeveriloveyousomuchprettyprincesssiempreteamare";
 you[15]="111111111111111123456789012345123456789123456nuncateolvidare";
 you[16]="cristianoronaldomanchesterunited";
 you[17]="highschoolmusicalmychemicalromance";
-var alternate_rockyou=[];
+let alternate_rockyou=[];
 for(let i=4;i<18;i++){for(let j=0;j<you[i].length;j+=i){alternate_rockyou.push(you[i].substr(j,i));}}
