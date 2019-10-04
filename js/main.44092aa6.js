@@ -137,6 +137,7 @@ function generate_diceware(selection) {
         case "Norwegian": wordlist = diceware_no; break;
         case "Polish": wordlist = diceware_pl; break;
         case "Portuguese": wordlist = diceware_pt; break;
+        case "Romanian": wordlist = diceware_ro; break;
         case "Russian": wordlist = diceware_ru; break;
         case "Slovak": wordlist = diceware_sk; break;
         case "Slovenian": wordlist = diceware_sl; break;
