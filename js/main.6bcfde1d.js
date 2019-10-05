@@ -101,7 +101,8 @@ function sec_rand(count) {
 function generate_pass(len, set, spaces) {
     var pass = "";
     if (typeof set == "string") var pass_arr = set.split("");
-    else pass_arr = set;
+    else pass_arr = [...new Set(set)];
+    pass_arr = [...new Set(pass_arr)]; // enforce unique elements in array
     for(i=len; i--;) {
         if (spaces) {
             pass += pass_arr[sec_rand(set.length)];
