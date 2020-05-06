@@ -87,11 +87,6 @@ button:hover {
     left: 50%;
     position: absolute;
 }
-.passphrase-separator {
-    bottom: 5px;
-    right: 5px;
-    position: absolute;
-}
 .cell {
     border: 1px solid black;
     display: table-cell;
