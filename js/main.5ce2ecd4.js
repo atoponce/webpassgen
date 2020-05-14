@@ -130,6 +130,7 @@ function generate_diceware(selection) {
         case "Finnish": wordlist = diceware_fi; break;
         case "French": wordlist = diceware_fr; break;
         case "German": wordlist = diceware_de; break;
+        case "Hebrew": wordlist = diceware_iw; break;
         case "Hungarian": wordlist = diceware_hu; break;
         case "Italian": wordlist = diceware_it; break;
         case "Japanese": wordlist = diceware_jp; break;
