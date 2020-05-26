@@ -193,6 +193,8 @@ function generate_alternate(selection) {
     switch(selection) {
         case "Colors": return generate_colors(); break;
         case "Elvish": wordlist = alternate_elvish; break;
+        case "English (Deseret)": wordlist = alternate_deseret; break;
+        case "English (Shavian)": wordlist = alternate_shavian; break;
         case "Klingon": wordlist = alternate_klingon; break;
         case "PGP": wordlist = alternate_pgp; break;
         case "RockYou": wordlist = alternate_rockyou; break;
@@ -210,8 +212,9 @@ function generate_alternate(selection) {
     pass = pass.replace(/ /g,"-");
     pass_id.innerText = pass;
 
-    pass_length.innerHTML = "<span>" + pass.length + "</span>" + " characters.";
+    pass_length.innerHTML = "<span>" + [...pass].length + "</span>" + " characters.";
     pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(wordlist.length)) + "-bits.";
+    // �𐑯𐑛𐑒𐑮𐑨𐑓𐑑𐑣�
 }
 
 function is_too_dark(hex) {
