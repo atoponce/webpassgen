@@ -25,10 +25,12 @@ function set_dark_theme() {
     var theme_switcher = document.getElementById("theme_switcher");
     var cells = document.getElementsByClassName("cell");
     theme_switcher.innerText = "Light Theme";
-    css.insertRule("a {color: yellow;}");
-    css.insertRule("a:visited {color: orange;}");
-    css.insertRule("body {color: white; background-color: black;}");
-    css.insertRule("img {filter: invert(1);}");
+    if (css.rules[0].selectorText == undefined) {
+        css.insertRule("a {color: yellow;}");
+        css.insertRule("a:visited {color: orange;}");
+        css.insertRule("body {color: white; background-color: black;}");
+        css.insertRule("img {filter: invert(1);}");
+    }
     for(var i=0; i<cells.length; i++) {
         cells[i].style.borderColor = "#fff";
     }
@@ -40,7 +42,7 @@ function swap_stylesheet() {
         localStorage.setItem("theme", "dark");
         set_dark_theme();
     }
-    else {
+    else if (chosen_theme == "Light Theme") {
         localStorage.removeItem("theme");
         set_light_theme();
     }
