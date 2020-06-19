@@ -3,8 +3,8 @@
 <!-- Minimized, i.e. edited down to just the bare bones needed to create good passwords by H Johnson -->
 <!-- Made fully HTML5 compliant by Aaron Toponce, cleaned up some HTML -->
 
-<!-- Installation:  
-  a) Locate this file on your hard disk. 
+<!-- Installation:
+  a) Locate this file on your hard disk.
   b) Browse to it with a url like file:///path/to/mightytiny.html
   c) Book mark it so it's easy to run again.
 -->
@@ -52,69 +52,72 @@
       <option onclick="generate_random()">DNA Sequence     </option>
     </select>
     <p><small>(All output formats deliver aproximately the same password strength.)</small></p>
-    <strong>3)</strong> 
+    <strong>3)</strong>
     <button onclick="generate_random()" value="Generate">Click here to generate a new password</button>
     <p><strong>4) Your new password is:</strong></p>
     <p><span id="random-pass" class="password"></span></p>
     <p><small>(<span id="random-length" ></span> characters wide, <span id="random-entropy"></span> bits of entropy)</small></p>
     <p><strong>5) Once you copy your password, close this page.</strong></p>
     <script>
-      var spaces=false;
-      String.prototype.rtrim = function() { return this.replace(/\s+$/g,""); }
-      function get_entropy() { return parseInt(document.querySelector('input[name="entropy"]:checked').value);}
-
-      /* Uniform, unbiased, secure, random number generator */
-      function sec_rand(count) {
-      var min = (-count >>> 0) % count;
-      var rand = new Uint32Array(1);
-      const crypto = window.crypto || window.msCrypto;
-        for (;;) {
-            crypto.getRandomValues(rand);
-            if (rand[0] >= min) return rand[0] % count;
+        var spaces=false;
+        String.prototype.rtrim = function() {
+            return this.replace(/\s+$/g,"");
         }
-      }
-
-      function generate_pass(len, set, spaces) {
-        var pass = "";
-        if (typeof set == "string") var pass_arr = set.split("");
-        else pass_arr = set;
-        for(i=len; i--;) {
-            if (spaces) {pass += pass_arr[sec_rand(set.length)]; pass += " ";}
-            else         pass += pass_arr[sec_rand(set.length)];
+        function get_entropy() {
+            return parseInt(document.querySelector('input[name="entropy"]:checked').value);
         }
-        return pass.rtrim();
-      }
 
-      function generate_random() {
-        var s = '';
-        var entropy      = get_entropy();
-        var pass_id      = document.getElementById('random-pass');
-        var pass_length  = document.getElementById('random-length');
-        var pass_entropy = document.getElementById('random-entropy');
-        var option       = document.getElementById('base-options').value;
-             if (option == "Base-94") { for (i=0; i<94; i++) s += String.fromCharCode(33+i); }
-        else if (option == "Base-85"          ) { var s = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!#$%&()*+-;<=>?@^_`{|}~"; }
-        else if (option == "Base-64 (+/)"     ) { var s = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+/"; }
-        else if (option == "Base-64 (-_)"     ) { var s = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_"; }
-        else if (option == "Base-62"          ) { var s = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"; }
-        else if (option == "Base-58 (Bitcoin)") { var s =  "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ"; }
-        else if (option == "Base-52"          ) { var s =           "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"; }
-        else if (option == "Base-36"          ) { var s = "0123456789abcdefghijklmnopqrstuvwxyz"; }
-        else if (option == "Base-32"          ) { var s = "0123456789abcdefghjkmnpqrstvwxyz"; }
-        else if (option == "Base-26"          ) { var s =           "abcdefghijklmnopqrstuvwxyz"; }
-        else if (option == "Base-16"          ) { var s = "0123456789abcdef"; }
-        else if (option == "Base-10"          ) { var s = "0123456789"; }
-        else if (option == "Base-8"           ) { var s = "01234567"; }
-        else if (option == "Base-2"           ) { var s = "01"; }
-        else if (option == "Coin Flips"       ) { var s = "HT"; }
-        else if (option == "DNA Sequence"     ) { var s = "ACGT"; }
-        var len = Math.ceil(entropy/Math.log2(s.length));
-        var pass = generate_pass(len, s);
-        //Set values in html
-             pass_id.innerText = pass;
-         pass_length.innerHTML = len;
-        pass_entropy.innerHTML = Math.floor(len * Math.log2(s.length));
-      }
+        /* Uniform, unbiased, secure, random number generator */
+        function sec_rand(count) {
+            let min = (-count >>> 0) % count;
+            let rand = new Uint32Array(1);
+            const crypto = window.crypto || window.msCrypto;
+            do { crypto.getRandomValues(rand); } while (rand[0] < min);
+            return rand[0] % count;
+        }
+
+        function generate_pass(len, set, spaces) {
+            let pass = "";
+            let pass_arr = "";
+            if (typeof set == "string") { pass_arr = set.split(""); }
+            else                        { pass_arr = set; }
+            for(let i = len; i > 0; i--) {
+                if (spaces) { pass += pass_arr[sec_rand(set.length)]; pass += " "; }
+                else        { pass += pass_arr[sec_rand(set.length)]; }
+            }
+            return pass.rtrim();
+        }
+
+        function generate_random() {
+            let s = "";
+            let entropy      = get_entropy();
+            let pass_id      = document.getElementById("random-pass");
+            let pass_length  = document.getElementById("random-length");
+            let pass_entropy = document.getElementById("random-entropy");
+            let option       = document.getElementById("base-options").value;
+                 if (option == "Base-94"          ) { for (i=0; i<94; i++) { s += String.fromCharCode(33+i); }}
+            else if (option == "Base-85"          ) { s = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!#$%&()*+-;<=>?@^_`{|}~"; }
+            else if (option == "Base-64 (+/)"     ) { s = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+/"; }
+            else if (option == "Base-64 (-_)"     ) { s = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_"; }
+            else if (option == "Base-62"          ) { s = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"; }
+            else if (option == "Base-58 (Bitcoin)") { s =  "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ"; }
+            else if (option == "Base-52"          ) { s =           "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"; }
+            else if (option == "Base-36"          ) { s = "0123456789abcdefghijklmnopqrstuvwxyz"; }
+            else if (option == "Base-32"          ) { s = "0123456789abcdefghjkmnpqrstvwxyz"; }
+            else if (option == "Base-26"          ) { s =           "abcdefghijklmnopqrstuvwxyz"; }
+            else if (option == "Base-16"          ) { s = "0123456789abcdef"; }
+            else if (option == "Base-10"          ) { s = "0123456789"; }
+            else if (option == "Base-8"           ) { s = "01234567"; }
+            else if (option == "Base-2"           ) { s = "01"; }
+            else if (option == "Coin Flips"       ) { s = "HT"; }
+            else if (option == "DNA Sequence"     ) { s = "ACGT"; }
+            let len = Math.ceil(entropy / Math.log2(s.length));
+            let pass = generate_pass(len, s);
+            //Set values in html
+                 pass_id.innerText = pass;
+             pass_length.innerHTML = len;
+            pass_entropy.innerHTML = Math.floor(len * Math.log2(s.length));
+        }
     </script>
   </body>
 </html>
