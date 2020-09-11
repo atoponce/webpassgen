@@ -721,3 +721,123 @@ function generate_emoji() {
     pass_id.innerText = pass;
     pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(random_emoji.length)) + "-bits.";
 }
+
+// Dicekey functions
+// I know that above, I'm using underscores as a separator, and here I'm using camelCase. I'll get around to a proper
+// standard later. Right now, I'm just getting this into place.
+function shuffleDice() {
+    let chars = "ABCDEFGHIJKLMNOPRSTUVWXYZ".split("");
+    for (let i=0; i<chars.length; i++) {
+        var randInt = sec_rand(chars.length);
+        var tmp = chars[randInt];
+        chars[randInt] = chars[i];
+        chars[i] = tmp;
+    }
+    return chars; // start with string, return array
+}
+function rotateDice() {
+    for (let i=1; i<=25; i++) {
+        var orientations = [];
+        var cell = document.getElementById("cell" + i);
+        var randInt = sec_rand(4);
+        if (randInt === 1) {
+            orientations.push("E");
+            cell.classList.add("rotate90");
+        }
+        else if (randInt === 2) {
+            orientations.push("S");
+            cell.classList.add("rotate180");
+        }
+        else if (randInt === 3) {
+            orientations.push("W");
+            cell.classList.add("rotate270");
+        }
+        else orientations.push("N");
+    }
+}
+function convertDecToBin(num) {
+    let res = num.toString(2);
+    return res.padStart(11, '0');
+}
+function opticalBits(res) {
+    // black = 0, white = 1
+    // [2^10, 2^9, 2^8, ..., 2^2, 2^1, 2^0]
+    const topBits = {
+        "A1":2002,"B1":1996,"C1":1946,"D1":1924,"E1":1954,"F1":1864,"G1":1878,"H1":1904,"I1":1844,"J1":1830,"K1":1846,"L1":1812,"M1":1798,"N1":1744,"O1":1762,"P1":1766,"R1":1698,"S1":1668,"T1":1710,"U1":1676,"V1":1694,"W1":1648,"X1":1622,"Y1":1642,"Z1":1656,
+        "A2":2018,"B2":1926,"C2":1952,"D2":1968,"E2":1944,"F2":1892,"G2":1908,"H2":1884,"I2":1816,"J2":1820,"K2":1848,"L2":1818,"M2":1800,"N2":1778,"O2":1772,"P2":1768,"R2":1708,"S2":1674,"T2":1696,"U2":1666,"V2":1680,"W2":1604,"X2":1624,"Y2":1636,"Z2":1654,
+        "A3":1984,"B3":1928,"C3":1938,"D3":1972,"E3":1942,"F3":1898,"G3":1870,"H3":1874,"I3":1814,"J3":1810,"K3":1794,"L3":1808,"M3":1842,"N3":1736,"O3":1750,"P3":1732,"R3":1678,"S3":1702,"T3":1690,"U3":1672,"V3":1706,"W3":1610,"X3":1634,"Y3":1608,"Z3":1612,
+        "A4":2020,"B4":1932,"C4":1960,"D4":1934,"E4":1868,"F4":1872,"G4":1856,"H4":1896,"I4":1836,"J4":1840,"K4":1804,"L4":1822,"M4":1748,"N4":1734,"O4":1752,"P4":1738,"R4":1716,"S4":1704,"T4":1684,"U4":1670,"V4":1640,"W4":1614,"X4":1644,"Y4":1606,"Z4":1602,
+        "A5":2004,"B5":1976,"C5":1958,"D5":1920,"E5":1912,"F5":1890,"G5":1866,"H5":1894,"I5":1826,"J5":1802,"K5":1824,"L5":1828,"M5":1760,"N5":1728,"O5":1746,"P5":1776,"R5":1722,"S5":1682,"T5":1720,"U5":1724,"V5":1618,"W5":1652,"X5":1630,"Y5":1660,"Z5":1646,
+        "A6":1986,"B6":1940,"C6":1930,"D6":1964,"E6":1862,"F6":1880,"G6":1860,"H6":1850,"I6":1832,"J6":1796,"K6":1838,"L6":1834,"M6":1764,"N6":1742,"O6":1756,"P6":1688,"R6":1712,"S6":1692,"T6":1718,"U6":1714,"V6":1628,"W6":1658,"X6":1616,"Y6":1650,"Z6":1632
+    };
+    const bottomBits = {
+        "A1":1038,"B1":1086,"C1":1114,"D1":1130,"E1":1146,"F1":1174,"G1":1190,"H1":1206,"I1":1222,"J1":1234,"K1":1248,"L1":1260,"M1":1272,"N1":1302,"O1":1320,"P1":1332,"R1":1348,"S1":1364,"T1":1376,"U1":1388,"V1":1400,"W1":1416,"X1":1432,"Y1":1444,"Z1":1456,
+        "A2":1046,"B2":1100,"C2":1116,"D2":1134,"E2":1148,"F2":1176,"G2":1194,"H2":1208,"I2":1224,"J2":1236,"K2":1250,"L2":1262,"M2":1274,"N2":1306,"O2":1322,"P2":1334,"R2":1350,"S2":1366,"T2":1378,"U2":1390,"V2":1402,"W2":1420,"X2":1434,"Y2":1446,"Z2":1458,
+        "A3":1050,"B3":1102,"C3":1122,"D3":1138,"E3":1150,"F3":1178,"G3":1196,"H3":1210,"I3":1226,"J3":1238,"K3":1252,"L3":1264,"M3":1276,"N3":1308,"O3":1324,"P3":1336,"R3":1354,"S3":1368,"T3":1380,"U3":1392,"V3":1404,"W3":1422,"X3":1436,"Y3":1448,"Z3":1460,
+        "A4":1068,"B4":1106,"C4":1124,"D4":1140,"E4":1162,"F4":1180,"G4":1198,"H4":1212,"I4":1228,"J4":1242,"K4":1254,"L4":1266,"M4":1290,"N4":1310,"O4":1326,"P4":1338,"R4":1356,"S4":1370,"T4":1382,"U4":1394,"V4":1410,"W4":1426,"X4":1438,"Y4":1450,"Z4":1462,
+        "A5":1076,"B5":1110,"C5":1126,"D5":1142,"E5":1166,"F5":1186,"G5":1200,"H5":1214,"I5":1230,"J5":1244,"K5":1256,"L5":1268,"M5":1294,"N5":1316,"O5":1328,"P5":1340,"R5":1358,"S5":1372,"T5":1384,"U5":1396,"V5":1412,"W5":1428,"X5":1440,"Y5":1452,"Z5":1464,
+        "A6":1084,"B6":1112,"C6":1128,"D6":1144,"E6":1172,"F6":1188,"G6":1202,"H6":1220,"I6":1232,"J6":1246,"K6":1258,"L6":1270,"M6":1298,"N6":1318,"O6":1330,"P6":1346,"R6":1360,"S6":1374,"T6":1386,"U6":1398,"V6":1414,"W6":1430,"X6":1442,"Y6":1454,"Z6":1466
+    };
+    return [topBits[res], bottomBits[res]];
+}
+function generatePixels(bitString) {
+    let divs = "";
+    for (let i=0; i<11; i++) {
+        if (bitString[i] == "0") divs += '<div class="black bit"></div>';
+        else divs += '<div class="white bit"></div>';
+    }
+    return divs;
+}
+function populateCells() {
+    let diceArray = shuffleDice();
+    for (let i=1; i<=25; i++) {
+        var cell = document.getElementById("cell" + i);
+        var die = diceArray[i-1];
+        var side = sec_rand(6) + 1;
+        var res = die + side;
+
+        var topBits = opticalBits(res)[0];
+        var topDivs = generatePixels(convertDecToBin(topBits));
+        var topDiv = document.createElement("div");
+        topDiv.className = "bits";
+        topDiv.innerHTML = topDivs;
+        cell.appendChild(topDiv);
+
+        var face = document.createElement("div");
+        face.className = "text flex";
+        face.innerText = res;
+        cell.appendChild(face);
+
+        var bottomBits = opticalBits(res)[1];
+        var bottomDivs = generatePixels(convertDecToBin(bottomBits));
+        var bottomDiv = document.createElement("div");
+        bottomDiv.className = "bits";
+        bottomDiv.innerHTML = bottomDivs;
+        cell.appendChild(bottomDiv);
+    }
+    rotateDice();
+}
+function resetCells() {
+    for (let i=1; i<=25; i++) {
+        var cell = document.getElementById("cell" + i);
+        cell.className = "tableCell";
+        for (let i=2; i>=0; i--) cell.removeChild(cell.childNodes[i]);
+    }
+}
+function getDiceKey() {
+    var orientation = "";
+    var dice = [];
+    var dicekey = "";
+    for (let i=1; i<=25; i++) {
+        var cell = document.getElementById("cell" + i);
+        if (cell.classList.contains("rotate90")) orientation = "E";
+        else if (cell.classList.contains("rotate180")) orientation = "S";
+        else if (cell.classList.contains("rotate270")) orientation = "W";
+        else orientation = "N";
+        dicekey += cell.children[1].innerText;
+        dicekey += orientation;
+        if (i < 25) dicekey += " ";
+    }
+    console.clear();
+    console.log(dicekey);
+}

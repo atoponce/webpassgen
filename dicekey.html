@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+  <head>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="assets/style.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Secure DiceKey Generator</title>
+    <script src="js/main.js"></script>
+    <script>
+        function reset_theme() {
+            if (localStorage.theme === "dark") set_dark_theme();
+            for (let i=1; i<=25; i++) document.getElementById("cell" + i).style.color = "black";
+        }
+    </script>
+  </head>
+  <body onload="reset_theme(); populateCells(); getDiceKey();">
+    <div id="container" class="flex">
+      <div id="header">
+        <h1>DiceKey Generator</h1>
+        <ul id="navigation">
+          <li><a href="index.html">Passwords</a></li>
+          <li><a href="bookmarklets.html">Bookmarklets</a></li>
+          <li><a href="dicekeys.html">DiceKeys</a></li>
+          <li><a href="#" onclick="swap_stylesheet();" id="theme_switcher">Dark Theme</a></li>
+        </ul>
+      </div>
+      <div id="howto">
+        <p>This is an online implementation of the <a href="https://dicekeys.com">physical device</a>. Please purchase
+        the actual device at <a href="https://www.crowdsupply.com/dicekeys/dicekeys">Crowd Supply</a>. Use
+        <a href="https://github.com/atoponce/webpassgen/blob/master/DICEKEY.md">these instructions</a> for learning how
+        to manually generate a password or passphrase from it.</p>
+        <p><strong>Disclaimer:</strong> I am not associated with the product. This was built to be a <a
+        href="https://en.wikipedia.org/wiki/Rube_Goldberg_machine">Rube Goldberg machine</a> for demonstration and
+        testing purposes only.</p>
+      </div> <!-- howto -->
+      <div id="diceTable">
+        <div id="tableBody">
+          <div class="tableRow">
+            <div id="cell1" class="tableCell"></div>
+            <div id="cell2" class="tableCell"></div>
+            <div id="cell3" class="tableCell"></div>
+            <div id="cell4" class="tableCell"></div>
+            <div id="cell5" class="tableCell"></div>
+          </div> <!-- tableRow -->
+          <div class="tableRow">
+            <div id="cell6" class="tableCell"></div>
+            <div id="cell7" class="tableCell"></div>
+            <div id="cell8" class="tableCell"></div>
+            <div id="cell9" class="tableCell"></div>
+            <div id="cell10" class="tableCell"></div>
+          </div> <!-- tableRow -->
+          <div class="tableRow">
+            <div id="cell11" class="tableCell"></div>
+            <div id="cell12" class="tableCell"></div>
+            <div id="cell13" class="tableCell"></div>
+            <div id="cell14" class="tableCell"></div>
+            <div id="cell15" class="tableCell"></div>
+          </div> <!-- tableRow -->
+          <div class="tableRow">
+            <div id="cell16" class="tableCell"></div>
+            <div id="cell17" class="tableCell"></div>
+            <div id="cell18" class="tableCell"></div>
+            <div id="cell19" class="tableCell"></div>
+            <div id="cell20" class="tableCell"></div>
+          </div> <!-- tableRow -->
+          <div class="tableRow">
+            <div id="cell21" class="tableCell"></div>
+            <div id="cell22" class="tableCell"></div>
+            <div id="cell23" class="tableCell"></div>
+            <div id="cell24" class="tableCell"></div>
+            <div id="cell25" class="tableCell"></div>
+          </div> <!-- tableRow -->
+        </div> <!-- tableBody -->
+      </div> <!-- diceTable -->
+      <div class="break"></div>
+      <div id="dice-button">
+        <button onclick="resetCells(); populateCells(); getDiceKey();">Generate</button>
+        <button onclick="window.print();">Print</button>
+      </div>
+      <div class="break"></div>
+      <div id="footer" class="clear">
+        <p>Never trust online password generators, including mine.<br/>
+           For better security, use the <a href="bookmarklets.html">bookmarklets</a>, or my <a href="https://github.com/atoponce/nodepassgen">command-line tool</a>.<br/>
+           For best security, use the generator that ships with your password manager.</p>
+        <p><strong>For demonstration purposes only. It is not logging passwords.</strong></p>
+        <p>
+          <a href="https://github.com/atoponce/webpassgen"><img alt="Github logo" title="Get the source code" src="assets/github.png" /></a>
+          <a href="https://github.com/atoponce/webpassgen/releases/latest"><img alt="Download icon" title="Download latest release" src="assets/download.png" /></a>
+          <a href="https://twitter.com/AaronToponce"><img alt="Twitter logo" title="Meet the author" src="assets/twitter.png" /></a>
+        </p>
+      </div>
+    </div> <!-- container -->
+  </body>
+</html>

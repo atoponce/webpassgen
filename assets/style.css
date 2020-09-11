@@ -3,7 +3,6 @@
     src: url("./twemoji.woff2") format("woff2");
 }
 /* body tags */
-body { margin: 0; }
 select {
     -moz-appearance: none;
     -moz-border-radius: 2px;
@@ -36,28 +35,28 @@ button {
     border-radius: 2px;
     color: #FFFFFF;
     cursor: pointer;
-    display: inline-block;
     font-size: 14px;
     height: 25px;
     line-height: 25px;
     padding: 0px;
-    position: absolute;
-    right: 10px;
     text-decoration: none;
-    top: 40px;
     width: 80px;
 }
-
 button:hover {
-   background: #7f34b1; /* purple */
-   text-decoration: none;
+    background: #7f34b1; /* purple */
+    text-decoration: none;
 }
 button:hover {
     -moz-box-shadow: 1px 1px 0px #CCC;
     -webkit-box-shadow: 1px 1px 0px #CCC;
     box-shadow: 1px 1px 0px #CCC;
 }
-
+.pass-button {
+    display: inline-block;
+    position: absolute;
+    right: 10px;
+    top: 40px;
+}
 /* classes */
 .clear { clear: both; }
 .dark_contrast {
@@ -230,15 +229,6 @@ button:hover {
 #entropy-80 { background: #74e163; } /* green */
 #entropy-80:hover, #entropy-toolbar input[type="radio"]:checked + #entropy-80 { background: #4db635; } /* green */
 
-#release {
-    border: 1px solid #77dd77;
-    display: inline-block;
-    padding: 4px 8px;
-    font-size: 14px;
-    font-weight: 600;
-    height: 32px;
-}
-
 @media only screen and (max-width: 767px) {
     #container { width: 480px; }
     .cell { margin: 5px 10px; width: 460px; }
@@ -256,4 +246,85 @@ button:hover {
     #entropy-70 { margin-top: 2px; }
     #entropy-75 { margin-top: 2px; }
     #entropy-80 { margin-top: 2px; }
+}
+
+/* Dicekey CSS */
+.flex {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+#diceTable {
+    background-color: #6280c5;
+    border-collapse: separate;
+    border-spacing: 20px;
+    display: table;
+    margin: 0 auto;
+}
+#tableBody {
+    display: table-row-group;
+}
+.tableRow {
+    display: table-row;
+}
+.tableCell {
+    background-color: white;
+    border-radius: 10px;
+    display: table-cell;
+    height: 100px;
+    vertical-align: middle;
+    width: 100px;
+}
+.bits {
+    background-color: black;
+    border: 1px solid black;
+    border-spacing: 0.5px;
+    display: table;
+    height: 5px;
+    margin: -6px auto;
+    padding: 2px;
+}
+.bit {
+    display: table-cell;
+    height: 5px;
+    margin: 0 auto;
+    width: 5px;
+}
+.black {
+    background-color: black;
+}
+.white {
+    background-color: white;
+}
+.text {
+    font-family: monospace;
+    font-size: 40px;
+    font-weight: bold;
+    height: 55px;
+    letter-spacing: 4px;
+    text-indent: 4px;
+    width: 100px;
+}
+.rotate90 {
+    transform: rotate(90deg);
+}
+.rotate180 {
+    transform: rotate(180deg);
+}
+.rotate270 {
+    transform: rotate(270deg);
+}
+.break {
+    flex-basis: 100%;
+    height: 0;
+}
+#howto {
+    align-self: stretch;
+    margin-left: 20px;
+    vertical-align: top;
+    width: 600px;
+}
+#dice-button {
+    margin-top: 20px;
 }

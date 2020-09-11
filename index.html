@@ -6,14 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Passphrase and Password Generator</title>
+    <script src="js/main.js"></script>
+    <script>
+        function reset_theme() {
+            if(localStorage.theme == "dark") set_dark_theme();
+        }
+    </script>
   </head>
-  <body onload="load_passes()">
+  <body onload="reset_theme(); load_passes()">
     <div id="container">
       <div id="header">
       <h1>Passphrase and Password Generator</h1>
         <ul id="navigation">
-          <li><a href="index.html">Generate</a></li>
+          <li><a href="index.html">Passwords</a></li>
           <li><a href="bookmarklets.html">Bookmarklets</a></li>
+          <li><a href="dicekey.html">DiceKeys</a></li>
           <li><a href="#" onclick="swap_stylesheet(); load_passes();" id="theme_switcher">Dark Theme</a></li>
         </ul>
         <p>Select minimum security margin (in bits): </p>
@@ -42,7 +49,7 @@
               <option>Trump</option>
             </select>
           </div>
-          <button value="Generate" onclick="generate_passphrase('alternate');">Generate</button>
+          <button class="pass-button" value="Generate" onclick="generate_passphrase('alternate');">Generate</button>
           <div id="alt-pass" class="password"></div>
           <div class="stats length">
             <span id="alt-entropy"></span>
@@ -64,7 +71,7 @@
               <option>Spanish</option>
             </select>
           </div>
-          <button value="Generate" onclick="generate_passphrase('bitcoin');">Generate</button>
+          <button class="pass-button" value="Generate" onclick="generate_passphrase('bitcoin');">Generate</button>
           <div id="btc-pass" class="password"></div>
           <div class="stats length">
             <span id="btc-entropy"></span>
@@ -107,7 +114,7 @@
               <option>Turkish</option>
             </select>
           </div>
-          <button value="Generate" onclick="generate_passphrase('diceware');">Generate</button>
+          <button class="pass-button" value="Generate" onclick="generate_passphrase('diceware');">Generate</button>
           <div id="diceware-pass" class="password"></div>
           <div class="stats length">
             <span id="diceware-entropy"></span>
@@ -130,7 +137,7 @@
                 <option>Star Wars</option>
             </select>
           </div>
-          <button value="Generate" onclick="generate_passphrase('eff');">Generate</button>
+          <button class="pass-button" value="Generate" onclick="generate_passphrase('eff');">Generate</button>
           <div id="eff-pass" class="password"></div>
           <div class="stats length">
             <span id="eff-entropy"></span>
@@ -147,7 +154,7 @@
               <option>Secret Ninja</option>
             </select>
           </div>
-          <button value="Generate" onclick="generate_pseudowords();">Generate</button>
+          <button class="pass-button" value="Generate" onclick="generate_pseudowords();">Generate</button>
           <p id="pseudo-pass" class="password"></p>
           <div class="stats length">
             <span id="pseudo-entropy"></span>
@@ -184,7 +191,7 @@
               </optgroup>
             </select>
           </div>
-          <button value="Generate" onclick="generate_random();">Generate</button>
+          <button class="pass-button" value="Generate" onclick="generate_random();">Generate</button>
           <p id="random-pass" class="password"></p>
           <div class="stats length">
             <span id="random-entropy"></span>
@@ -196,7 +203,7 @@
         <p>Never trust online password generators, including mine.<br/>
            For better security, use the <a href="bookmarklets.html">bookmarklets</a>, or my <a href="https://github.com/atoponce/nodepassgen">command-line tool</a>.<br/>
            For best security, use the generator that ships with your password manager.</p>
-	<p><strong>For demonstration purposes only. It is not logging passwords.</strong></p>
+        <p><strong>For demonstration purposes only. It is not logging passwords.</strong></p>
         <p>
           <a href="https://github.com/atoponce/webpassgen"><img alt="Github logo" title="Get the source code" src="assets/github.png" /></a>
           <a href="https://github.com/atoponce/webpassgen/releases/latest"><img alt="Download icon" title="Download latest release" src="assets/download.png" /></a>
@@ -215,9 +222,6 @@
             <p>🐉🐉🐉🐉🐉</p>
         </div>
     </div>
-
-    <!-- core functions -->
-    <script src="js/main.js"></script>
 
     <!-- alternate passphrase generator -->
     <script src="lists/alternate_colors.js"></script>
@@ -287,9 +291,6 @@
 
     <script>
       function load_passes() {
-        if(localStorage.theme == "dark")
-            set_dark_theme();
-
         generate_passphrase("diceware");
         generate_passphrase("eff");
         generate_passphrase("alternate");
