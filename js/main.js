@@ -1,4 +1,4 @@
-var spaces = false;
+let spaces = false;
 String.prototype.rtrim = function() {
     return this.replace(/\s+$/g,"");
 };
@@ -439,11 +439,11 @@ function generate_bitcoin(selection) {
             break;
     }
 
-    var entropy = get_entropy();
-    var len = Math.ceil(entropy / Math.log2(wordlist.length));
-    var pass_id = document.getElementById("btc-pass");
-    var pass_length = document.getElementById("btc-length");
-    var pass_entropy = document.getElementById("btc-entropy");
+    let entropy = get_entropy();
+    let len = Math.ceil(entropy / Math.log2(wordlist.length));
+    let pass_id = document.getElementById("btc-pass");
+    let pass_length = document.getElementById("btc-length");
+    let pass_entropy = document.getElementById("btc-entropy");
 
     pass = generate_pass(len, wordlist, true);
     pass = pass.replace(/ /g,"-");
@@ -728,8 +728,8 @@ function generate_emoji() {
 function shuffleDice() {
     let chars = "ABCDEFGHIJKLMNOPRSTUVWXYZ".split("");
     for (let i=0; i<chars.length; i++) {
-        var randInt = sec_rand(chars.length);
-        var tmp = chars[randInt];
+        let randInt = sec_rand(chars.length);
+        let tmp = chars[randInt];
         chars[randInt] = chars[i];
         chars[i] = tmp;
     }
@@ -737,9 +737,9 @@ function shuffleDice() {
 }
 function rotateDice() {
     for (let i=1; i<=25; i++) {
-        var orientations = [];
-        var cell = document.getElementById("cell" + i);
-        var randInt = sec_rand(4);
+        let orientations = [];
+        let cell = document.getElementById("cell" + i);
+        let randInt = sec_rand(4);
         if (randInt === 1) {
             orientations.push("E");
             cell.classList.add("rotate90");
@@ -791,26 +791,26 @@ function generatePixels(bitString) {
 function populateCells() {
     let diceArray = shuffleDice();
     for (let i=1; i<=25; i++) {
-        var cell = document.getElementById("cell" + i);
-        var die = diceArray[i-1];
-        var side = sec_rand(6) + 1;
-        var res = die + side;
+        let cell = document.getElementById("cell" + i);
+        let die = diceArray[i-1];
+        let side = sec_rand(6) + 1;
+        let res = die + side;
 
-        var topBits = opticalBits(res)[0];
-        var topDivs = generatePixels(convertDecToBin(topBits));
-        var topDiv = document.createElement("div");
+        let topBits = opticalBits(res)[0];
+        let topDivs = generatePixels(convertDecToBin(topBits));
+        let topDiv = document.createElement("div");
         topDiv.className = "bits";
         topDiv.innerHTML = topDivs;
         cell.appendChild(topDiv);
 
-        var face = document.createElement("div");
+        let face = document.createElement("div");
         face.className = "text flex";
         face.innerText = res;
         cell.appendChild(face);
 
-        var bottomBits = opticalBits(res)[1];
-        var bottomDivs = generatePixels(convertDecToBin(bottomBits));
-        var bottomDiv = document.createElement("div");
+        let bottomBits = opticalBits(res)[1];
+        let bottomDivs = generatePixels(convertDecToBin(bottomBits));
+        let bottomDiv = document.createElement("div");
         bottomDiv.className = "bits";
         bottomDiv.innerHTML = bottomDivs;
         cell.appendChild(bottomDiv);
@@ -819,17 +819,17 @@ function populateCells() {
 }
 function resetCells() {
     for (let i=1; i<=25; i++) {
-        var cell = document.getElementById("cell" + i);
+        let cell = document.getElementById("cell" + i);
         cell.className = "tableCell";
         for (let i=2; i>=0; i--) cell.removeChild(cell.childNodes[i]);
     }
 }
 function getDiceKey() {
-    var orientation = "";
-    var dice = [];
-    var dicekey = "";
+    let orientation = "";
+    let dice = [];
+    let dicekey = "";
     for (let i=1; i<=25; i++) {
-        var cell = document.getElementById("cell" + i);
+        let cell = document.getElementById("cell" + i);
         if (cell.classList.contains("rotate90")) orientation = "E";
         else if (cell.classList.contains("rotate180")) orientation = "S";
         else if (cell.classList.contains("rotate270")) orientation = "W";
