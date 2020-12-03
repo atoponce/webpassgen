@@ -275,6 +275,7 @@ button:hover {
 .tableCell {
     background-color: white;
     border-radius: 10px;
+    color: black;
     display: table-cell;
     height: 100px;
     vertical-align: middle;
