@@ -4,16 +4,10 @@
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="assets/style.css">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="color-scheme" content="dark light">
     <title>Secure DiceKey Generator</title>
-    <script src="js/main.js"></script>
-    <script>
-        function reset_theme() {
-            if (localStorage.theme === "dark") set_dark_theme();
-            for (let i=1; i<=25; i++) document.getElementById("cell" + i).style.color = "black";
-        }
-    </script>
   </head>
-  <body onload="reset_theme(); populateCells(); getDiceKey();">
+  <body onload="">
     <div id="container" class="flex">
       <div id="header">
         <h1>DiceKey Generator</h1>
@@ -21,7 +15,7 @@
           <li><a href="index.html">Passwords</a></li>
           <li><a href="bookmarklets.html">Bookmarklets</a></li>
           <li><a href="dicekey.html">DiceKeys</a></li>
-          <li><a href="#" onclick="swap_stylesheet();" id="theme_switcher">Dark Theme</a></li>
+          <li><a href="#" onclick="toggle_theme();" id="theme_switcher">Dark Theme</a></li>
         </ul>
       </div>
       <div id="howto">
@@ -90,5 +84,13 @@
         </p>
       </div>
     </div> <!-- container -->
+    <script src="js/main.js"></script>
+    <script>
+      window.onload = function () {
+        init_theme();
+        populateCells();
+        getDiceKey();
+      };
+    </script>
   </body>
 </html>

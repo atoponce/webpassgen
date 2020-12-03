@@ -3,6 +3,10 @@
     src: url("./twemoji.woff2") format("woff2");
 }
 /* body tags */
+body {
+    color: black; background-color: white;
+}
+
 select {
     -moz-appearance: none;
     -moz-border-radius: 2px;
@@ -271,6 +275,7 @@ button:hover {
 .tableCell {
     background-color: white;
     border-radius: 10px;
+    color: black;
     display: table-cell;
     height: 100px;
     vertical-align: middle;
@@ -328,3 +333,10 @@ button:hover {
 #dice-button {
     margin-top: 20px;
 }
+
+/* overriden styles for Dark Theme */
+body.dark-theme {color: white; background-color: black;}
+.dark-theme .cell { border-color: #FFF; }
+.dark-theme a {color: yellow;}
+.dark-theme a:visited {color: orange;}
+.dark-theme img {filter: invert(1);}
