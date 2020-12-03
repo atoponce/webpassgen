@@ -10,50 +10,37 @@ function unicode_warn() {
     }
 }
 
-function set_light_theme() {
-    let css = document.styleSheets[0];
-    let theme_switcher = document.getElementById("theme_switcher");
-    let cells = document.getElementsByClassName("cell");
-
-    theme_switcher.innerText = "Dark Theme";
-
-    for (let i = 0; i < 4; i++) {
-        css.deleteRule(0);
-    }
-
-    for (let i = 0; i < cells.length; i++) {
-        cells[i].style.borderColor = "#000";
-    }
-}
+const pageContainer = document.getElementsByTagName("body")[0];
+const prefersDarkTheme = window.matchMedia("(prefers-color-scheme: dark)");
+const theme_switcher = document.getElementById("theme_switcher");
 
 function set_dark_theme() {
-    let css = document.styleSheets[0];
-    let theme_switcher = document.getElementById("theme_switcher");
-    let cells = document.getElementsByClassName("cell");
-
+    pageContainer.classList.add("dark-theme");
+    localStorage.setItem("theme", "dark");
     theme_switcher.innerText = "Light Theme";
+}
 
-    if (css.rules[0].selectorText == undefined) {
-        css.insertRule("a {color: yellow;}");
-        css.insertRule("a:visited {color: orange;}");
-        css.insertRule("body {color: white; background-color: black;}");
-        css.insertRule("img {filter: invert(1);}");
-    }
+function set_light_theme() {
+    pageContainer.classList.remove("dark-theme");
+    localStorage.setItem("theme", "light");
+    theme_switcher.innerText = "Dark Theme";
+}
 
-    for (let i = 0; i < cells.length; i++) {
-        cells[i].style.borderColor = "#fff";
+function init_theme() {
+    if (localStorage.getItem("theme") === "dark") {
+        set_dark_theme(); // Dark Theme was set on page load because of previously set preference.
+    } else if (localStorage.getItem("theme") === undefined && prefersDarkTheme && prefersDarkTheme.matches == true) {
+        set_dark_theme(); // Dark Theme was set on page load because of OS preference.
+    } else {
+        // Light Theme was assumed due to page default or user preference or OS preference.
     }
 }
 
-function swap_stylesheet() {
-    let chosen_theme = document.getElementById("theme_switcher").innerText;
-
-    if (chosen_theme == "Dark Theme") {
-        localStorage.setItem("theme", "dark");
-        set_dark_theme();
-    } else if (chosen_theme == "Light Theme") {
-        localStorage.removeItem("theme");
+function toggle_theme() {
+    if (pageContainer.classList.contains("dark-theme")) {
         set_light_theme();
+    } else {
+        set_dark_theme();
     }
 }
 
@@ -377,7 +364,7 @@ function generate_colors() {
     for (let i = 0; i < len; i++) {
         let hex = alternate_colors[pass[i]];
 
-        if (chosen_theme == undefined) {
+        if (chosen_theme === undefined || chosen_theme == "light") {
             if (is_too_light(hex)) {
                 tmp += "<span class='bold light_contrast' style='color:#" + hex + ";'>" + pass[i] + "</span> ";
             } else {
