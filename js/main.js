@@ -29,7 +29,7 @@ function set_light_theme() {
 function init_theme() {
     if (localStorage.getItem("theme") === "dark") {
         set_dark_theme(); // Dark Theme was set on page load because of previously set preference.
-    } else if (localStorage.getItem("theme") === undefined && prefersDarkTheme && prefersDarkTheme.matches == true) {
+    } else if (!localStorage.getItem("theme") && prefersDarkTheme && prefersDarkTheme.matches == true) {
         set_dark_theme(); // Dark Theme was set on page load because of OS preference.
     } else {
         // Light Theme was assumed due to page default or user preference or OS preference.
