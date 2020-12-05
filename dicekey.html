@@ -15,7 +15,7 @@
           <li><a href="index.html">Passwords</a></li>
           <li><a href="bookmarklets.html">Bookmarklets</a></li>
           <li><a href="dicekey.html">DiceKeys</a></li>
-          <li><a href="#" onclick="toggle_theme();" id="theme_switcher">Dark Theme</a></li>
+          <li><a href="#" onclick="toggleTheme();" id="theme_switcher">Dark Theme</a></li>
         </ul>
       </div>
       <div id="howto">
@@ -87,7 +87,7 @@
     <script src="js/main.js"></script>
     <script>
       window.onload = function () {
-        init_theme();
+        initTheme();
         populateCells();
         getDiceKey();
       };

@@ -1,9 +1,10 @@
 let spaces = false;
+
 String.prototype.rtrim = function() {
     return this.replace(/\s+$/g,"");
 };
 
-function unicode_warn() {
+function unicodeWarn() {
     if (localStorage.getItem("unicode_warned") === null) {
         document.getElementById("overlay").style.display = "block";
         localStorage.setItem("unicode_warned", true);
@@ -12,43 +13,43 @@ function unicode_warn() {
 
 const pageContainer = document.getElementsByTagName("body")[0];
 const prefersDarkTheme = window.matchMedia("(prefers-color-scheme: dark)");
-const theme_switcher = document.getElementById("theme_switcher");
+const themeSwitcher = document.getElementById("theme_switcher");
 
-function set_dark_theme() {
+function setDarkTheme() {
     pageContainer.classList.add("dark-theme");
     localStorage.setItem("theme", "dark");
-    theme_switcher.innerText = "Light Theme";
+    themeSwitcher.innerText = "Light Theme";
 }
 
-function set_light_theme() {
+function setLightTheme() {
     pageContainer.classList.remove("dark-theme");
     localStorage.setItem("theme", "light");
-    theme_switcher.innerText = "Dark Theme";
+    themeSwitcher.innerText = "Dark Theme";
 }
 
-function init_theme() {
+function initTheme() {
     if (localStorage.getItem("theme") === "dark") {
-        set_dark_theme(); // Dark Theme was set on page load because of previously set preference.
+        setDarkTheme(); // Dark Theme was set on page load because of previously set preference.
     } else if (!localStorage.getItem("theme") && prefersDarkTheme && prefersDarkTheme.matches == true) {
-        set_dark_theme(); // Dark Theme was set on page load because of OS preference.
+        setDarkTheme(); // Dark Theme was set on page load because of OS preference.
     } else {
         // Light Theme was assumed due to page default or user preference or OS preference.
     }
 }
 
-function toggle_theme() {
+function toggleTheme() {
     if (pageContainer.classList.contains("dark-theme")) {
-        set_light_theme();
+        setLightTheme();
     } else {
-        set_dark_theme();
+        setDarkTheme();
     }
 }
 
-function get_entropy() {
+function getEntropy() {
     return parseInt(document.querySelector("input[name='entropy']:checked").value);
 }
 
-function get_source_list(source) {
+function getSourceList(source) {
     let s_list;
 
     switch (source) {
@@ -69,26 +70,26 @@ function get_source_list(source) {
     return s_list;
 }
 
-function generate_passphrase(source) {
-    let s_list = get_source_list(source);
+function generatePassphrase(source) {
+    let s_list = getSourceList(source);
 
     switch (source) {
         case "diceware":
-            generate_diceware(s_list);
+            generateDiceware(s_list);
             break;
         case "eff":
-            generate_eff(s_list);
+            generateEff(s_list);
             break;
         case "alternate":
-            generate_alternate(s_list);
+            generateAlternate(s_list);
             break;
         case "bitcoin":
-            generate_bitcoin(s_list);
+            generateBitcoin(s_list);
             break;
     }
 }
 
-function sec_rand(count) {
+function secRand(count) {
     let min = (-count >>> 0) % count;
     let rand = new Uint32Array(1);
     const crypto = window.crypto || window.msCrypto;
@@ -100,7 +101,7 @@ function sec_rand(count) {
     return rand[0] % count;
 }
 
-function generate_pass(len, set, spaces) {
+function generatePass(len, set, spaces) {
     let pass = "";
     let pass_arr = "";
 
@@ -114,17 +115,17 @@ function generate_pass(len, set, spaces) {
 
     for (let i = len; i > 0; i--) {
         if (spaces) {
-            pass += pass_arr[sec_rand(set.length)];
+            pass += pass_arr[secRand(set.length)];
             pass += " ";
         } else {
-            pass += pass_arr[sec_rand(set.length)];
+            pass += pass_arr[secRand(set.length)];
         }
     }
 
     return pass.rtrim();
 }
 
-function generate_diceware(selection) {
+function generateDiceware(selection) {
     let pass = "";
     let wordlist = "";
 
@@ -221,20 +222,20 @@ function generate_diceware(selection) {
             break;
     }
 
-    let entropy = get_entropy();
+    let entropy = getEntropy();
     let len = Math.ceil(entropy / Math.log2(wordlist.length));
     let pass_id = document.getElementById("diceware-pass");
     let pass_length = document.getElementById("diceware-length");
     let pass_entropy = document.getElementById("diceware-entropy");
 
-    pass = generate_pass(len, wordlist, true);
+    pass = generatePass(len, wordlist, true);
     pass = pass.replace(/ /g,"-");
     pass_id.innerText = pass;
     pass_length.innerHTML = "<span>" + pass.length + "</span>" + " characters.";
     pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(wordlist.length)) + "-bits.";
 }
 
-function generate_eff(selection) {
+function generateEff(selection) {
     let pass = "";
     let wordlist = "";
 
@@ -262,26 +263,26 @@ function generate_eff(selection) {
             break;
     }
 
-    let entropy = get_entropy();
+    let entropy = getEntropy();
     let len = Math.ceil(entropy / Math.log2(wordlist.length));
     let pass_id = document.getElementById("eff-pass");
     let pass_length = document.getElementById("eff-length");
     let pass_entropy = document.getElementById("eff-entropy");
 
-    pass = generate_pass(len, wordlist, true);
+    pass = generatePass(len, wordlist, true);
     pass = pass.replace(/ /g,"-");
     pass_id.innerText = pass;
     pass_length.innerHTML = "<span>" + pass.length + "</span>" + " characters.";
     pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(wordlist.length)) + "-bits.";
 }
 
-function generate_alternate(selection) {
+function generateAlternate(selection) {
     let pass = "";
     let wordlist = "";
 
     switch (selection) {
         case "Colors":
-            return generate_colors();
+            return generateColors();
         case "Elvish":
             wordlist = alternate_elvish;
             break;
@@ -308,20 +309,20 @@ function generate_alternate(selection) {
             break;
     }
 
-    let entropy = get_entropy();
+    let entropy = getEntropy();
     let len = Math.ceil(entropy / Math.log2(wordlist.length));
     let pass_id = document.getElementById("alt-pass");
     let pass_length = document.getElementById("alt-length");
     let pass_entropy = document.getElementById("alt-entropy");
 
-    pass = generate_pass(len, wordlist, true);
+    pass = generatePass(len, wordlist, true);
     pass = pass.replace(/ /g,"-");
     pass_id.innerText = pass;
     pass_length.innerHTML = "<span>" + [...pass].length + "</span>" + " characters.";
     pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(wordlist.length)) + "-bits.";
 }
 
-function is_too_dark(hex) {
+function isTooDark(hex) {
     let rgb = parseInt(hex, 16);
     let r = (rgb >> 16) & 0xff;
     let g = (rgb >>  8) & 0xff;
@@ -335,7 +336,7 @@ function is_too_dark(hex) {
     return true;
 }
 
-function is_too_light(hex) {
+function isTooLight(hex) {
     let rgb = parseInt(hex, 16);
     let r = (rgb >> 16) & 0xff;
     let g = (rgb >>  8) & 0xff;
@@ -349,29 +350,29 @@ function is_too_light(hex) {
     return true;
 }
 
-function generate_colors() {
+function generateColors() {
     let tmp = "";
     let total_len;
     let color_keys = Object.keys(alternate_colors);
-    let entropy = get_entropy();
+    let entropy = getEntropy();
     let len = Math.ceil(entropy / Math.log2(color_keys.length));
     let pass_id = document.getElementById("alt-pass");
     let pass_length = document.getElementById("alt-length");
     let pass_entropy = document.getElementById("alt-entropy");
-    let pass = generate_pass(len, color_keys, true).split(" ");
+    let pass = generatePass(len, color_keys, true).split(" ");
     let chosen_theme = localStorage.theme;
 
     for (let i = 0; i < len; i++) {
         let hex = alternate_colors[pass[i]];
 
         if (chosen_theme === undefined || chosen_theme == "light") {
-            if (is_too_light(hex)) {
+            if (isTooLight(hex)) {
                 tmp += "<span class='bold light_contrast' style='color:#" + hex + ";'>" + pass[i] + "</span> ";
             } else {
                 tmp += "<span class='bold' style='color:#" + hex + ";'>" + pass[i] + "</span> ";
             }
         } else if (chosen_theme == "dark") {
-            if (is_too_dark(hex)) {
+            if (isTooDark(hex)) {
                 tmp += "<span class='bold dark_contrast' style='color:#" + hex + ";'>" + pass[i] + "</span> ";
             } else {
                 tmp += "<span class='bold' style='color:#" + hex + ";'>" + pass[i] + "</span> ";
@@ -392,7 +393,7 @@ function generate_colors() {
     pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(color_keys.length)) + "-bits.";
 }
 
-function generate_bitcoin(selection) {
+function generateBitcoin(selection) {
     let pass = "";
     let wordlist = "";
 
@@ -426,28 +427,28 @@ function generate_bitcoin(selection) {
             break;
     }
 
-    let entropy = get_entropy();
+    let entropy = getEntropy();
     let len = Math.ceil(entropy / Math.log2(wordlist.length));
     let pass_id = document.getElementById("btc-pass");
     let pass_length = document.getElementById("btc-length");
     let pass_entropy = document.getElementById("btc-entropy");
 
-    pass = generate_pass(len, wordlist, true);
+    pass = generatePass(len, wordlist, true);
     pass = pass.replace(/ /g,"-");
     pass_id.innerText = pass;
     pass_length.innerHTML = "<span>" + pass.length + "</span>" + " characters.";
     pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(wordlist.length)) + "-bits.";
 }
 
-function generate_ninja() {
+function generateNinja() {
     let pass = "";
     let ninja = ["ka","zu","mi","te","ku","lu","ji","ri","ki","zu","me","ta","rin",
                  "to","mo","no","ke","shi","ari","chi","do","ru","mei","na","fu","zi"];
-    let entropy = get_entropy();
+    let entropy = getEntropy();
     let len = Math.ceil(entropy / Math.log2(ninja.length));
 
     for (let i = 0; i < len; i++) {
-        pass += ninja[sec_rand(len)];
+        pass += ninja[secRand(len)];
 
         if (i % 3 == 2 && i != len - 1) {
             pass += "-";
@@ -484,7 +485,7 @@ function generate_apple() {
     let digits = "0123456789";
     let vowels = "aeiouy";
     let consonants = "bcdfghjkmnpqrstvwxz";
-    let entropy = get_entropy();
+    let entropy = getEntropy();
     let n = 1; // number of blocks
 
     while (_apple(n) <= entropy) {
@@ -492,18 +493,18 @@ function generate_apple() {
     }
 
     for (let i = 0; i < n; i++) {
-        pass[6 * i]     = generate_pass(1, consonants);
-        pass[6 * i + 1] = generate_pass(1, vowels);
-        pass[6 * i + 2] = generate_pass(1, consonants);
-        pass[6 * i + 3] = generate_pass(1, consonants);
-        pass[6 * i + 4] = generate_pass(1, vowels);
-        pass[6 * i + 5] = generate_pass(1, consonants);
+        pass[6 * i]     = generatePass(1, consonants);
+        pass[6 * i + 1] = generatePass(1, vowels);
+        pass[6 * i + 2] = generatePass(1, consonants);
+        pass[6 * i + 3] = generatePass(1, consonants);
+        pass[6 * i + 4] = generatePass(1, vowels);
+        pass[6 * i + 5] = generatePass(1, consonants);
     }
 
     let d_loc = 0;
     let c_loc = 0;
-    let edge = sec_rand(2 * n); // [0, 2n)
-    let digit = generate_pass(1, digits);
+    let edge = secRand(2 * n); // [0, 2n)
+    let digit = generatePass(1, digits);
 
     if (edge % 2 == 0) {
         d_loc = 3 * edge;
@@ -514,7 +515,7 @@ function generate_apple() {
     pass[d_loc] = digit;
 
     do {
-        c_loc = sec_rand(pass.length);
+        c_loc = secRand(pass.length);
     } while (c_loc == d_loc);
 
     pass[c_loc] = pass[c_loc].toUpperCase();
@@ -530,7 +531,7 @@ function generate_babble() {
     let pass = [];
     let vowels = "aeiouy";
     let consonants = "bcdfghklmnprstvzx";
-    let entropy = get_entropy();
+    let entropy = getEntropy();
     let v_ent = Math.log2(vowels.length);
     let c_ent = Math.log2(consonants.length);
     let out_ent = (2 * c_ent) + (2 * v_ent);
@@ -544,9 +545,9 @@ function generate_babble() {
     for (let i = 0; i < len + 2; i++) {
         for (let j = 0; j < 5; j++) {
             if (j % 2 == 0) {
-                pass[(5 * i) + j] = generate_pass(1, consonants);
+                pass[(5 * i) + j] = generatePass(1, consonants);
             } else {
-                pass[(5 * i) + j] = generate_pass(1, vowels);
+                pass[(5 * i) + j] = generatePass(1, vowels);
             }
         }
     }
@@ -569,12 +570,12 @@ function generate_kpop() {
                 "Ho","Hu","Hwa","Hwan","Hye","Hyo","Hyun","Il","In","Ja","Jae","Ji","Jin","Jong","Joo","Joon",
                 "Ju","Jun","Jung","Ki","Kun","Kyu","Lee","Mi","Min","Moon","Nam","Ok","Park","Rin","Seo","Seul",
                 "Shi","Sik","So","Song","Soo","Su","Sun","Sung","Won","Woo","Ye","Yeon","Yoo","Yu","Yul","Yun"];
-    let entropy = get_entropy();
+    let entropy = getEntropy();
     let len = Math.ceil(entropy / Math.log2(kpop.length));
     let pass = "";
 
     for (let i = 0; i < len; i++) {
-        pass += kpop[sec_rand(len)];
+        pass += kpop[secRand(len)];
 
         if (i % 2 == 1 && i != len - 1) {
             pass += "-";
@@ -584,7 +585,7 @@ function generate_kpop() {
     return [pass, kpop.length, Math.floor(len * Math.log2(kpop.length))];
 }
 
-function generate_pseudowords() {
+function generatePseudowords() {
     let ret = [];
     let pseudo = document.getElementById("pseudo-options").value;
 
@@ -593,7 +594,7 @@ function generate_pseudowords() {
     } else if (pseudo == "Bubble Babble") {
         ret = generate_babble();
     } else if (pseudo == "Secret Ninja") {
-        ret = generate_ninja();
+        ret = generateNinja();
     } else if (pseudo == "Korean K-pop") {
         ret = generate_kpop();
     }
@@ -609,9 +610,9 @@ function generate_pseudowords() {
     pass_entropy.innerHTML = "~" + ent + "-bits.";
 }
 
-function generate_random() {
+function generateRandom() {
     let s = "";
-    let entropy = get_entropy();
+    let entropy = getEntropy();
     let pass_id = document.getElementById("random-pass");
     let pass_length = document.getElementById("random-length");
     let pass_entropy = document.getElementById("random-entropy");
@@ -655,14 +656,14 @@ function generate_random() {
 
     // Unicode optgroup
     } else if (option == "Base-256") {
-        unicode_warn();
+        unicodeWarn();
 
         s  = "ḀḁḂḃḄḅḆḇḈḉḊḋḌḍḎḏḐḑḒḓḔḕḖḗḘḙḚḛḜḝḞḟḠḡḢḣḤḥḦḧḨḩḪḫḬḭḮḯḰḱḲḳḴḵḶḷḸḹḺḻḼḽḾḿ";
         s += "ṀṁṂṃṄṅṆṇṈṉṊṋṌṍṎṏṐṑṒṓṔṕṖṗṘṙṚṛṜṝṞṟṠṡṢṣṤṥṦṧṨṩṪṫṬṭṮṯṰṱṲṳṴṵṶṷṸṹṺṻṼṽṾṿ";
         s += "ẀẁẂẃẄẅẆẇẈẉẊẋẌẍẎẏẐẑẒẓẔẕẖẗẘẙẚẛẜẝẞẟẠạẢảẤấẦầẨẩẪẫẬậẮắẰằẲẳẴẵẶặẸẹẺẻẼẽẾế";
         s += "ỀềỂểỄễỆệỈỉỊịỌọỎỏỐốỒồỔổỖỗỘộỚớỜờỞởỠỡỢợỤụỦủỨứỪừỬửỮữỰựỲỳỴỵỶỷỸỹỺỻỼỽỾỿ";
     } else if (option == "Base-256 (Braille)") {
-        unicode_warn();
+        unicodeWarn();
 
         // first character is not an ASCII space, but could still break lines
         s  = " ⠁⠂⠃⠄⠅⠆⠇⠈⠉⠊⠋⠌⠍⠎⠏⠐⠑⠒⠓⠔⠕⠖⠗⠘⠙⠚⠛⠜⠝⠞⠟⠠⠡⠢⠣⠤⠥⠦⠧⠨⠩⠪⠫⠬⠭⠮⠯⠰⠱⠲⠳⠴⠵⠶⠷⠸⠹⠺⠻⠼⠽⠾⠿";
@@ -670,7 +671,7 @@ function generate_random() {
         s += "⢀⢁⢂⢃⢄⢅⢆⢇⢈⢉⢊⢋⢌⢍⢎⢏⢐⢑⢒⢓⢔⢕⢖⢗⢘⢙⢚⢛⢜⢝⢞⢟⢠⢡⢢⢣⢤⢥⢦⢧⢨⢩⢪⢫⢬⢭⢮⢯⢰⢱⢲⢳⢴⢵⢶⢷⢸⢹⢺⢻⢼⢽⢾⢿";
         s += "⣀⣁⣂⣃⣄⣅⣆⣇⣈⣉⣊⣋⣌⣍⣎⣏⣐⣑⣒⣓⣔⣕⣖⣗⣘⣙⣚⣛⣜⣝⣞⣟⣠⣡⣢⣣⣤⣥⣦⣧⣨⣩⣪⣫⣬⣭⣮⣯⣰⣱⣲⣳⣴⣵⣶⣷⣸⣹⣺⣻⣼⣽⣾⣿";
     } else if (option == "Base-188 (ISO 8859-1)") {
-        unicode_warn();
+        unicodeWarn();
 
         for (let i = 0; i < 94; i++) {
             s += String.fromCharCode(33 + i);
@@ -681,11 +682,11 @@ function generate_random() {
 
         s = s.replace(String.fromCharCode(173),""); // soft-hyphen isn't graphical
     } else if (option == "Emoji") {
-        return generate_emoji();
+        return generateEmoji();
     }
 
     let len = Math.ceil(entropy / Math.log2(s.length));
-    let pass = generate_pass(len, s);
+    let pass = generatePass(len, s);
 
     pass_length.innerHTML = len + " characters.";
     pass_id.removeAttribute("style"); // from emoji
@@ -693,15 +694,15 @@ function generate_random() {
     pass_entropy.innerHTML = "~" + Math.floor(len * Math.log2(s.length)) + "-bits.";
 }
 
-function generate_emoji() {
-    unicode_warn();
+function generateEmoji() {
+    unicodeWarn();
 
-    let entropy = get_entropy();
+    let entropy = getEntropy();
     let pass_id = document.getElementById("random-pass");
     let pass_length = document.getElementById("random-length");
     let pass_entropy = document.getElementById("random-entropy");
     let len = Math.ceil(entropy / Math.log2(random_emoji.length));
-    let pass = generate_pass(len, random_emoji);
+    let pass = generatePass(len, random_emoji);
 
     pass_length.innerHTML = len + " characters.";
     pass_id.style.fontFamily = "Emoji";
@@ -710,12 +711,10 @@ function generate_emoji() {
 }
 
 // Dicekey functions
-// I know that above, I'm using underscores as a separator, and here I'm using camelCase. I'll get around to a proper
-// standard later. Right now, I'm just getting this into place.
 function shuffleDice() {
     let chars = "ABCDEFGHIJKLMNOPRSTUVWXYZ".split("");
     for (let i=0; i<chars.length; i++) {
-        let randInt = sec_rand(chars.length);
+        let randInt = secRand(chars.length);
         let tmp = chars[randInt];
         chars[randInt] = chars[i];
         chars[i] = tmp;
@@ -726,7 +725,7 @@ function rotateDice() {
     for (let i=1; i<=25; i++) {
         let orientations = [];
         let cell = document.getElementById("cell" + i);
-        let randInt = sec_rand(4);
+        let randInt = secRand(4);
         if (randInt === 1) {
             orientations.push("E");
             cell.classList.add("rotate90");
@@ -780,7 +779,7 @@ function populateCells() {
     for (let i=1; i<=25; i++) {
         let cell = document.getElementById("cell" + i);
         let die = diceArray[i-1];
-        let side = sec_rand(6) + 1;
+        let side = secRand(6) + 1;
         let res = die + side;
 
         let topBits = opticalBits(res)[0];

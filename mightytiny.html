@@ -14,7 +14,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>MightyTiny Password Generator - v0.2</title>
   </head>
-  <body onload="generate_random()">
+  <body>
     <h2>MightyTiny Password Generator</h2>
     <hr>
     <p>Don't let the primitive look of this gadget fool you. Fancy screen formatting was deliberately left out of this version.</p>
@@ -24,51 +24,50 @@
     <p><strong>Be safe:</strong> Use a different password everywhere you go. Use passwords with at least 70 bits of entropy.</p>
     <hr>
     <strong>1) Select minimum entropy:</strong>
-    <input onclick="generate_random()" name="entropy" type="radio" value="55"         >55-bits
-    <input onclick="generate_random()" name="entropy" type="radio" value="60"         >60-bits
-    <input onclick="generate_random()" name="entropy" type="radio" value="65"         >65-bits
-    <input onclick="generate_random()" name="entropy" type="radio" value="70" checked >70-bits
-    <input onclick="generate_random()" name="entropy" type="radio" value="75"         >75-bits
-    <input onclick="generate_random()" name="entropy" type="radio" value="80"         >80-bits
-    <input onclick="generate_random()" name="entropy" type="radio" value="128"        >128-bits
+    <input onclick="generateRandom()" name="entropy" type="radio" value="55"         >55-bits
+    <input onclick="generateRandom()" name="entropy" type="radio" value="60"         >60-bits
+    <input onclick="generateRandom()" name="entropy" type="radio" value="65"         >65-bits
+    <input onclick="generateRandom()" name="entropy" type="radio" value="70" checked >70-bits
+    <input onclick="generateRandom()" name="entropy" type="radio" value="75"         >75-bits
+    <input onclick="generateRandom()" name="entropy" type="radio" value="80"         >80-bits
+    <input onclick="generateRandom()" name="entropy" type="radio" value="128"        >128-bits
     <p><small><i>(More bits = more security. 70-bits is the recommended minimum. 128-bits for password-based encryption.)</i></small></p>
     <strong>2) Select an output format:</strong>
     <select id="base-options">
-      <option onclick="generate_random()">Base-94          </option>
-      <option onclick="generate_random()">Base-85          </option>
-      <option onclick="generate_random()">Base-64 (+/)     </option>
-      <option onclick="generate_random()">Base-64 (-_)     </option>
-      <option onclick="generate_random()">Base-62          </option>
-      <option onclick="generate_random()">Base-58 (Bitcoin)</option>
-      <option onclick="generate_random()">Base-52          </option>
-      <option onclick="generate_random()">Base-36          </option>
-      <option onclick="generate_random()">Base-32          </option>
-      <option onclick="generate_random()">Base-26          </option>
-      <option onclick="generate_random()">Base-16          </option>
-      <option onclick="generate_random()">Base-10          </option>
-      <option onclick="generate_random()">Base-8           </option>
-      <option onclick="generate_random()">Base-2           </option>
-      <option onclick="generate_random()">Coin Flips       </option>
-      <option onclick="generate_random()">DNA Sequence     </option>
+      <option onclick="generateRandom()">Base-94          </option>
+      <option onclick="generateRandom()">Base-85          </option>
+      <option onclick="generateRandom()">Base-64 (+/)     </option>
+      <option onclick="generateRandom()">Base-64 (-_)     </option>
+      <option onclick="generateRandom()">Base-62          </option>
+      <option onclick="generateRandom()">Base-58 (Bitcoin)</option>
+      <option onclick="generateRandom()">Base-52          </option>
+      <option onclick="generateRandom()">Base-36          </option>
+      <option onclick="generateRandom()">Base-32          </option>
+      <option onclick="generateRandom()">Base-26          </option>
+      <option onclick="generateRandom()">Base-16          </option>
+      <option onclick="generateRandom()">Base-10          </option>
+      <option onclick="generateRandom()">Base-8           </option>
+      <option onclick="generateRandom()">Base-2           </option>
+      <option onclick="generateRandom()">Coin Flips       </option>
+      <option onclick="generateRandom()">DNA Sequence     </option>
     </select>
     <p><small>(All output formats deliver aproximately the same password strength.)</small></p>
     <strong>3)</strong>
-    <button onclick="generate_random()" value="Generate">Click here to generate a new password</button>
+    <button onclick="generateRandom()" value="Generate">Click here to generate a new password</button>
     <p><strong>4) Your new password is:</strong></p>
     <p><span id="random-pass" class="password"></span></p>
     <p><small>(<span id="random-length" ></span> characters wide, <span id="random-entropy"></span> bits of entropy)</small></p>
     <p><strong>5) Once you copy your password, close this page.</strong></p>
     <script>
-        var spaces=false;
         String.prototype.rtrim = function() {
             return this.replace(/\s+$/g,"");
         }
-        function get_entropy() {
+        function getEntropy() {
             return parseInt(document.querySelector('input[name="entropy"]:checked').value);
         }
 
         /* Uniform, unbiased, secure, random number generator */
-        function sec_rand(count) {
+        function secRand(count) {
             let min = (-count >>> 0) % count;
             let rand = new Uint32Array(1);
             const crypto = window.crypto || window.msCrypto;
@@ -76,21 +75,20 @@
             return rand[0] % count;
         }
 
-        function generate_pass(len, set, spaces) {
+        function generatePass(len, set) {
             let pass = "";
             let pass_arr = "";
             if (typeof set == "string") { pass_arr = set.split(""); }
             else                        { pass_arr = set; }
             for(let i = len; i > 0; i--) {
-                if (spaces) { pass += pass_arr[sec_rand(set.length)]; pass += " "; }
-                else        { pass += pass_arr[sec_rand(set.length)]; }
+                pass += pass_arr[secRand(set.length)];
             }
             return pass.rtrim();
         }
 
-        function generate_random() {
+        function generateRandom() {
             let s = "";
-            let entropy      = get_entropy();
+            let entropy      = getEntropy();
             let pass_id      = document.getElementById("random-pass");
             let pass_length  = document.getElementById("random-length");
             let pass_entropy = document.getElementById("random-entropy");
@@ -112,12 +110,16 @@
             else if (option == "Coin Flips"       ) { s = "HT"; }
             else if (option == "DNA Sequence"     ) { s = "ACGT"; }
             let len = Math.ceil(entropy / Math.log2(s.length));
-            let pass = generate_pass(len, s);
+            let pass = generatePass(len, s);
             //Set values in html
                  pass_id.innerText = pass;
              pass_length.innerHTML = len;
             pass_entropy.innerHTML = Math.floor(len * Math.log2(s.length));
         }
+
+        window.onload = function () {
+            generateRandom();
+        };
     </script>
   </body>
 </html>

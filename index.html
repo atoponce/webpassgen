@@ -16,16 +16,16 @@
           <li><a href="index.html">Passwords</a></li>
           <li><a href="bookmarklets.html">Bookmarklets</a></li>
           <li><a href="dicekey.html">DiceKeys</a></li>
-          <li><a href="#" onclick="toggle_theme(); load_passes();" id="theme_switcher">Dark Theme</a></li>
+          <li><a href="#" onclick="toggleTheme(); loadPasses();" id="theme_switcher">Dark Theme</a></li>
         </ul>
         <p>Select minimum security margin (in bits): </p>
         <div id="entropy-toolbar">
-          <input type="radio" name="entropy" value="55" id="rtb1" onclick="load_passes()"><label id="entropy-55" for="rtb1">55</label>
-          <input type="radio" name="entropy" value="60" id="rtb2" onclick="load_passes()"><label id="entropy-60" for="rtb2">60</label>
-          <input type="radio" name="entropy" value="65" id="rtb3" onclick="load_passes()"><label id="entropy-65" for="rtb3">65</label>
-          <input type="radio" name="entropy" value="70" id="rtb4" onclick="load_passes()" checked><label id="entropy-70" for="rtb4">70</label>
-          <input type="radio" name="entropy" value="75" id="rtb5" onclick="load_passes()"><label id="entropy-75" for="rtb5">75</label>
-          <input type="radio" name="entropy" value="80" id="rtb6" onclick="load_passes()"><label id="entropy-80" for="rtb6">80</label>
+          <input type="radio" name="entropy" value="55" id="rtb1" onclick="loadPasses()"><label id="entropy-55" for="rtb1">55</label>
+          <input type="radio" name="entropy" value="60" id="rtb2" onclick="loadPasses()"><label id="entropy-60" for="rtb2">60</label>
+          <input type="radio" name="entropy" value="65" id="rtb3" onclick="loadPasses()"><label id="entropy-65" for="rtb3">65</label>
+          <input type="radio" name="entropy" value="70" id="rtb4" onclick="loadPasses()" checked><label id="entropy-70" for="rtb4">70</label>
+          <input type="radio" name="entropy" value="75" id="rtb5" onclick="loadPasses()"><label id="entropy-75" for="rtb5">75</label>
+          <input type="radio" name="entropy" value="80" id="rtb6" onclick="loadPasses()"><label id="entropy-80" for="rtb6">80</label>
         </div>
       </div>
       <div id="table">
@@ -44,7 +44,7 @@
               <option>Trump</option>
             </select>
           </div>
-          <button class="pass-button" value="Generate" onclick="generate_passphrase('alternate');">Generate</button>
+          <button class="pass-button" value="Generate" onclick="generatePassphrase('alternate');">Generate</button>
           <div id="alt-pass" class="password"></div>
           <div class="stats length">
             <span id="alt-entropy"></span>
@@ -66,7 +66,7 @@
               <option>Spanish</option>
             </select>
           </div>
-          <button class="pass-button" value="Generate" onclick="generate_passphrase('bitcoin');">Generate</button>
+          <button class="pass-button" value="Generate" onclick="generatePassphrase('bitcoin');">Generate</button>
           <div id="btc-pass" class="password"></div>
           <div class="stats length">
             <span id="btc-entropy"></span>
@@ -109,7 +109,7 @@
               <option>Turkish</option>
             </select>
           </div>
-          <button class="pass-button" value="Generate" onclick="generate_passphrase('diceware');">Generate</button>
+          <button class="pass-button" value="Generate" onclick="generatePassphrase('diceware');">Generate</button>
           <div id="diceware-pass" class="password"></div>
           <div class="stats length">
             <span id="diceware-entropy"></span>
@@ -132,7 +132,7 @@
                 <option>Star Wars</option>
             </select>
           </div>
-          <button class="pass-button" value="Generate" onclick="generate_passphrase('eff');">Generate</button>
+          <button class="pass-button" value="Generate" onclick="generatePassphrase('eff');">Generate</button>
           <div id="eff-pass" class="password"></div>
           <div class="stats length">
             <span id="eff-entropy"></span>
@@ -149,7 +149,7 @@
               <option>Secret Ninja</option>
             </select>
           </div>
-          <button class="pass-button" value="Generate" onclick="generate_pseudowords();">Generate</button>
+          <button class="pass-button" value="Generate" onclick="generatePseudowords();">Generate</button>
           <p id="pseudo-pass" class="password"></p>
           <div class="stats length">
             <span id="pseudo-entropy"></span>
@@ -186,7 +186,7 @@
               </optgroup>
             </select>
           </div>
-          <button class="pass-button" value="Generate" onclick="generate_random();">Generate</button>
+          <button class="pass-button" value="Generate" onclick="generateRandom();">Generate</button>
           <p id="random-pass" class="password"></p>
           <div class="stats length">
             <span id="random-entropy"></span>
@@ -288,17 +288,17 @@
     <script src="lists/random_emoji.js"></script>
 
     <script>
-      function load_passes() {
-        generate_passphrase("diceware");
-        generate_passphrase("eff");
-        generate_passphrase("alternate");
-        generate_passphrase("bitcoin");
-        generate_pseudowords();
-        generate_random();
+      function loadPasses() {
+        generatePassphrase("diceware");
+        generatePassphrase("eff");
+        generatePassphrase("alternate");
+        generatePassphrase("bitcoin");
+        generatePseudowords();
+        generateRandom();
       }
       window.onload = function () {
-        init_theme();
-        load_passes();
+        initTheme();
+        loadPasses();
       };
     </script>
   </body>
