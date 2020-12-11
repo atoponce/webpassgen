@@ -34,22 +34,22 @@
     <p><small><i>(More bits = more security. 70-bits is the recommended minimum. 128-bits for password-based encryption.)</i></small></p>
     <strong>2) Select an output format:</strong>
     <select id="base-options">
-      <option onclick="generateRandom()">Base-94          </option>
-      <option onclick="generateRandom()">Base-85          </option>
-      <option onclick="generateRandom()">Base-64 (+/)     </option>
-      <option onclick="generateRandom()">Base-64 (-_)     </option>
-      <option onclick="generateRandom()">Base-62          </option>
-      <option onclick="generateRandom()">Base-58 (Bitcoin)</option>
-      <option onclick="generateRandom()">Base-52          </option>
-      <option onclick="generateRandom()">Base-36          </option>
-      <option onclick="generateRandom()">Base-32          </option>
-      <option onclick="generateRandom()">Base-26          </option>
-      <option onclick="generateRandom()">Base-16          </option>
-      <option onclick="generateRandom()">Base-10          </option>
-      <option onclick="generateRandom()">Base-8           </option>
-      <option onclick="generateRandom()">Base-2           </option>
-      <option onclick="generateRandom()">Coin Flips       </option>
-      <option onclick="generateRandom()">DNA Sequence     </option>
+      <option onclick="generateRandom()">Base-94     </option>
+      <option onclick="generateRandom()">Base-85     </option>
+      <option onclick="generateRandom()">Base-64 (+/)</option>
+      <option onclick="generateRandom()">Base-64 (-_)</option>
+      <option onclick="generateRandom()">Base-62     </option>
+      <option onclick="generateRandom()">Base-58     </option>
+      <option onclick="generateRandom()">Base-52     </option>
+      <option onclick="generateRandom()">Base-36     </option>
+      <option onclick="generateRandom()">Base-32     </option>
+      <option onclick="generateRandom()">Base-26     </option>
+      <option onclick="generateRandom()">Base-16     </option>
+      <option onclick="generateRandom()">Base-10     </option>
+      <option onclick="generateRandom()">Base-8      </option>
+      <option onclick="generateRandom()">Base-2      </option>
+      <option onclick="generateRandom()">Coin Flips  </option>
+      <option onclick="generateRandom()">DNA Sequence</option>
     </select>
     <p><small>(All output formats deliver aproximately the same password strength.)</small></p>
     <strong>3)</strong>
@@ -59,67 +59,69 @@
     <p><small>(<span id="random-length" ></span> characters wide, <span id="random-entropy"></span> bits of entropy)</small></p>
     <p><strong>5) Once you copy your password, close this page.</strong></p>
     <script>
-        String.prototype.rtrim = function() {
-            return this.replace(/\s+$/g,"");
-        }
-        function getEntropy() {
-            return parseInt(document.querySelector('input[name="entropy"]:checked').value);
-        }
+      // Formatting breaks linting convention, but is preserved for layman readability.
+      String.prototype.rtrim = function () {
+        return this.replace(/\s+$/g, '')
+      }
 
-        /* Uniform, unbiased, secure, random number generator */
-        function secRand(count) {
-            let min = (-count >>> 0) % count;
-            let rand = new Uint32Array(1);
-            const crypto = window.crypto || window.msCrypto;
-            do { crypto.getRandomValues(rand); } while (rand[0] < min);
-            return rand[0] % count;
-        }
+      function getEntropy () {
+        return parseInt(document.querySelector('input[name="entropy"]:checked').value)
+      }
 
-        function generatePass(len, set) {
-            let pass = "";
-            let pass_arr = "";
-            if (typeof set == "string") { pass_arr = set.split(""); }
-            else                        { pass_arr = set; }
-            for(let i = len; i > 0; i--) {
-                pass += pass_arr[secRand(set.length)];
-            }
-            return pass.rtrim();
-        }
+      /* Uniform, unbiased, secure, random number generator */
+      function secRand (count) {
+        const min = (-count >>> 0) % count
+        const rand = new Uint32Array(1)
+        const crypto = window.crypto || window.msCrypto
+        do { crypto.getRandomValues(rand) } while (rand[0] < min)
+        return rand[0] % count
+      }
 
-        function generateRandom() {
-            let s = "";
-            let entropy      = getEntropy();
-            let pass_id      = document.getElementById("random-pass");
-            let pass_length  = document.getElementById("random-length");
-            let pass_entropy = document.getElementById("random-entropy");
-            let option       = document.getElementById("base-options").value;
-                 if (option == "Base-94"          ) { for (i=0; i<94; i++) { s += String.fromCharCode(33+i); }}
-            else if (option == "Base-85"          ) { s = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!#$%&()*+-;<=>?@^_`{|}~"; }
-            else if (option == "Base-64 (+/)"     ) { s = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+/"; }
-            else if (option == "Base-64 (-_)"     ) { s = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_"; }
-            else if (option == "Base-62"          ) { s = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"; }
-            else if (option == "Base-58 (Bitcoin)") { s =  "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ"; }
-            else if (option == "Base-52"          ) { s =           "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"; }
-            else if (option == "Base-36"          ) { s = "0123456789abcdefghijklmnopqrstuvwxyz"; }
-            else if (option == "Base-32"          ) { s = "0123456789abcdefghjkmnpqrstvwxyz"; }
-            else if (option == "Base-26"          ) { s =           "abcdefghijklmnopqrstuvwxyz"; }
-            else if (option == "Base-16"          ) { s = "0123456789abcdef"; }
-            else if (option == "Base-10"          ) { s = "0123456789"; }
-            else if (option == "Base-8"           ) { s = "01234567"; }
-            else if (option == "Base-2"           ) { s = "01"; }
-            else if (option == "Coin Flips"       ) { s = "HT"; }
-            else if (option == "DNA Sequence"     ) { s = "ACGT"; }
-            let len = Math.ceil(entropy / Math.log2(s.length));
-            let pass = generatePass(len, s);
-            //Set values in html
-                 pass_id.innerText = pass;
-             pass_length.innerHTML = len;
-            pass_entropy.innerHTML = Math.floor(len * Math.log2(s.length));
+      function generatePass (len, set) {
+        let pass = ''
+        let passArr = ''
+        if (typeof set === 'string') { passArr = set.split('') }
+        else                         { passArr = set }
+        for (let i = len; i > 0; i--) {
+          pass += passArr[secRand(set.length)]
         }
+        return pass.rtrim()
+      }
 
-        window.onload = function () {
-            generateRandom();
-        };
+      function generateRandom () {
+        let s = ''
+        const entropy   = getEntropy()
+        const passId    = document.getElementById('random-pass')
+        const passLength  = document.getElementById('random-length')
+        const passEntropy = document.getElementById('random-entropy')
+        const option    = document.getElementById('base-options').value
+             if (option === 'Base-94'          ) { for (let i = 0; i < 94; i++) { s += String.fromCharCode(33 + i) }}
+        else if (option === 'Base-85'          ) { s = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!#$%&()*+-;<=>?@^_`{|}~' }
+        else if (option === 'Base-64 (+/)'     ) { s = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+/' }
+        else if (option === 'Base-64 (-_)'     ) { s = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_' }
+        else if (option === 'Base-62'          ) { s = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ' }
+        else if (option === 'Base-58 (Bitcoin)') { s =  '123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ' }
+        else if (option === 'Base-52'          ) { s =           'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ' }
+        else if (option === 'Base-36'          ) { s = '0123456789abcdefghijklmnopqrstuvwxyz' }
+        else if (option === 'Base-32'          ) { s = '0123456789abcdefghjkmnpqrstvwxyz' }
+        else if (option === 'Base-26'          ) { s =           'abcdefghijklmnopqrstuvwxyz' }
+        else if (option === 'Base-16'          ) { s = '0123456789abcdef' }
+        else if (option === 'Base-10'          ) { s = '0123456789' }
+        else if (option === 'Base-8'           ) { s = '01234567' }
+        else if (option === 'Base-2'           ) { s = '01' }
+        else if (option === 'Coin Flips'       ) { s = 'HT' }
+        else if (option === 'DNA Sequence'     ) { s = 'ACGT' }
+        const len = Math.ceil(entropy / Math.log2(s.length))
+        const pass = generatePass(len, s)
+        //Set values in html
+             passId.innerText = pass
+         passLength.innerHTML = len
+        passEntropy.innerHTML = Math.floor(len * Math.log2(s.length))
+      }
+
+      window.onload = function () {
+        generateRandom()
+      }
     </script>
   </body>
 </html>

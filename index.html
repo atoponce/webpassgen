@@ -1,38 +1,38 @@
 <!doctype html>
-<html lang="en">
+<html lang='en'>
   <head>
-    <link rel="shortcut icon" href="favicon.ico">
-    <link rel="stylesheet" href="assets/style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="color-scheme" content="dark light">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel='shortcut icon' href='favicon.ico'>
+    <link rel='stylesheet' href='assets/style.css'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <meta name='color-scheme' content='dark light'>
+    <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
     <title>Passphrase and Password Generator</title>
   </head>
   <body>
-    <div id="container">
-      <div id="header">
+    <div id='container'>
+      <div id='header'>
       <h1>Passphrase and Password Generator</h1>
-        <ul id="navigation">
-          <li><a href="index.html">Passwords</a></li>
-          <li><a href="bookmarklets.html">Bookmarklets</a></li>
-          <li><a href="dicekey.html">DiceKeys</a></li>
-          <li><a href="#" onclick="toggleTheme(); loadPasses();" id="theme_switcher">Dark Theme</a></li>
+        <ul id='navigation'>
+          <li><a href='index.html'>Passwords</a></li>
+          <li><a href='bookmarklets.html'>Bookmarklets</a></li>
+          <li><a href='dicekey.html'>DiceKeys</a></li>
+          <li><a href='#' onclick='toggleTheme(); loadPasses();' id='theme_switcher'>Dark Theme</a></li>
         </ul>
         <p>Select minimum security margin (in bits): </p>
-        <div id="entropy-toolbar">
-          <input type="radio" name="entropy" value="55" id="rtb1" onclick="loadPasses()"><label id="entropy-55" for="rtb1">55</label>
-          <input type="radio" name="entropy" value="60" id="rtb2" onclick="loadPasses()"><label id="entropy-60" for="rtb2">60</label>
-          <input type="radio" name="entropy" value="65" id="rtb3" onclick="loadPasses()"><label id="entropy-65" for="rtb3">65</label>
-          <input type="radio" name="entropy" value="70" id="rtb4" onclick="loadPasses()" checked><label id="entropy-70" for="rtb4">70</label>
-          <input type="radio" name="entropy" value="75" id="rtb5" onclick="loadPasses()"><label id="entropy-75" for="rtb5">75</label>
-          <input type="radio" name="entropy" value="80" id="rtb6" onclick="loadPasses()"><label id="entropy-80" for="rtb6">80</label>
+        <div id='entropy-toolbar'>
+          <input type='radio' name='entropy' value='55' id='rtb1' onclick='loadPasses()'><label id='entropy-55' for='rtb1'>55</label>
+          <input type='radio' name='entropy' value='60' id='rtb2' onclick='loadPasses()'><label id='entropy-60' for='rtb2'>60</label>
+          <input type='radio' name='entropy' value='65' id='rtb3' onclick='loadPasses()'><label id='entropy-65' for='rtb3'>65</label>
+          <input type='radio' name='entropy' value='70' id='rtb4' onclick='loadPasses()' checked><label id='entropy-70' for='rtb4'>70</label>
+          <input type='radio' name='entropy' value='75' id='rtb5' onclick='loadPasses()'><label id='entropy-75' for='rtb5'>75</label>
+          <input type='radio' name='entropy' value='80' id='rtb6' onclick='loadPasses()'><label id='entropy-80' for='rtb6'>80</label>
         </div>
       </div>
-      <div id="table">
-        <div id="alt-default" class="cell">
-          <p class="cell-title"><strong>Alternate</strong></p>
-          <div class="optional">
-            <select id="alt-options">
+      <div id='table'>
+        <div id='alt-default' class='cell'>
+          <p class='cell-title'><strong>Alternate</strong></p>
+          <div class='optional'>
+            <select id='alt-options'>
               <option>Colors</option>
               <option>Elvish</option>
               <option>English (Deseret)</option>
@@ -44,21 +44,21 @@
               <option>Trump</option>
             </select>
           </div>
-          <button class="pass-button" value="Generate" onclick="generatePassphrase('alternate');">Generate</button>
-          <div id="alt-pass" class="password"></div>
-          <div class="stats length">
-            <span id="alt-entropy"></span>
-            <span id="alt-length"></span>
+          <button class='pass-button' value='Generate' onclick='generatePassphrase("alternate");'>Generate</button>
+          <div id='alt-pass' class='password'></div>
+          <div class='stats length'>
+            <span id='alt-entropy'></span>
+            <span id='alt-length'></span>
           </div>
         </div>
-        <div id="btc-default" class="cell">
-          <p class="cell-title"><strong>Bitcoin</strong></p>
-          <div class="optional">
-            <select id="bitcoin-options">
+        <div id='btc-default' class='cell'>
+          <p class='cell-title'><strong>Bitcoin</strong></p>
+          <div class='optional'>
+            <select id='bitcoin-options'>
               <option>Chinese (Simp)</option>
               <option>Chinese (Trad)</option>
               <option>Czech</option>
-              <option selected="selected">English</option>
+              <option selected='selected'>English</option>
               <option>French</option>
               <option>Italian</option>
               <option>Japanese</option>
@@ -66,17 +66,17 @@
               <option>Spanish</option>
             </select>
           </div>
-          <button class="pass-button" value="Generate" onclick="generatePassphrase('bitcoin');">Generate</button>
-          <div id="btc-pass" class="password"></div>
-          <div class="stats length">
-            <span id="btc-entropy"></span>
-            <span id="btc-length"></span>
+          <button class='pass-button' value='Generate' onclick='generatePassphrase("bitcoin");'>Generate</button>
+          <div id='btc-pass' class='password'></div>
+          <div class='stats length'>
+            <span id='btc-entropy'></span>
+            <span id='btc-length'></span>
           </div>
         </div>
-        <div id="diceware-default" class="cell">
-          <p class="cell-title"><strong>Diceware</strong></p>
-          <div class="optional">
-            <select id="diceware-options">
+        <div id='diceware-default' class='cell'>
+          <p class='cell-title'><strong>Diceware</strong></p>
+          <div class='optional'>
+            <select id='diceware-options'>
               <option>Basque</option>
               <option>Bulgarian</option>
               <option>Catalan</option>
@@ -84,7 +84,7 @@
               <option>Czech</option>
               <option>Danish</option>
               <option>Dutch</option>
-              <option selected="selected">English</option>
+              <option selected='selected'>English</option>
               <option>English (Beale)</option>
               <option>Esperanto</option>
               <option>Estonian</option>
@@ -109,58 +109,58 @@
               <option>Turkish</option>
             </select>
           </div>
-          <button class="pass-button" value="Generate" onclick="generatePassphrase('diceware');">Generate</button>
-          <div id="diceware-pass" class="password"></div>
-          <div class="stats length">
-            <span id="diceware-entropy"></span>
-            <span id="diceware-length"></span>
+          <button class='pass-button' value='Generate' onclick='generatePassphrase("diceware");'>Generate</button>
+          <div id='diceware-pass' class='password'></div>
+          <div class='stats length'>
+            <span id='diceware-entropy'></span>
+            <span id='diceware-length'></span>
           </div>
         </div>
-        <div id="eff-default" class="cell">
-          <p class="cell-title"><strong>EFF</strong></p>
-          <div class="optional">
-            <select id="eff-options">
-              <optgroup label="Official">
+        <div id='eff-default' class='cell'>
+          <p class='cell-title'><strong>EFF</strong></p>
+          <div class='optional'>
+            <select id='eff-options'>
+              <optgroup label='Official'>
                 <option>Distant Words</option>
                 <option>Long Words</option>
-                <option selected="selected">Short Words</option>
+                <option selected='selected'>Short Words</option>
               </optgroup>
-              <optgroup label="Unofficial">
+              <optgroup label='Unofficial'>
                 <option>Game of Thrones</option>
                 <option>Harry Potter</option>
                 <option>Star Trek</option>
                 <option>Star Wars</option>
             </select>
           </div>
-          <button class="pass-button" value="Generate" onclick="generatePassphrase('eff');">Generate</button>
-          <div id="eff-pass" class="password"></div>
-          <div class="stats length">
-            <span id="eff-entropy"></span>
-            <span id="eff-length"></span>
+          <button class='pass-button' value='Generate' onclick='generatePassphrase("eff");'>Generate</button>
+          <div id='eff-pass' class='password'></div>
+          <div class='stats length'>
+            <span id='eff-entropy'></span>
+            <span id='eff-length'></span>
           </div>
         </div>
-        <div id="pseudo-default" class="cell">
-          <p class="cell-title"><strong>Pseudowords</strong></p>
-          <div class="optional">
-            <select id="pseudo-options">
+        <div id='pseudo-default' class='cell'>
+          <p class='cell-title'><strong>Pseudowords</strong></p>
+          <div class='optional'>
+            <select id='pseudo-options'>
               <option>Apple, Inc.</option>
               <option>Bubble Babble</option>
               <option>Korean K-pop</option>
               <option>Secret Ninja</option>
             </select>
           </div>
-          <button class="pass-button" value="Generate" onclick="generatePseudowords();">Generate</button>
-          <p id="pseudo-pass" class="password"></p>
-          <div class="stats length">
-            <span id="pseudo-entropy"></span>
-            <span id="pseudo-length"></span>
+          <button class='pass-button' value='Generate' onclick='generatePseudowords();'>Generate</button>
+          <p id='pseudo-pass' class='password'></p>
+          <div class='stats length'>
+            <span id='pseudo-entropy'></span>
+            <span id='pseudo-length'></span>
           </div>
         </div>
-        <div id="random-default" class="cell">
-          <p class="cell-title"><strong>Random</strong></p>
-          <div class="optional">
-            <select id="random-options">
-              <optgroup label="ASCII">
+        <div id='random-default' class='cell'>
+          <p class='cell-title'><strong>Random</strong></p>
+          <div class='optional'>
+            <select id='random-options'>
+              <optgroup label='ASCII'>
                 <option selected>Base94</option>
                 <option>Base85</option>
                 <option>Base64</option>
@@ -177,7 +177,7 @@
                 <option>Coin Flips</option>
                 <option>DNA Sequence</option>
               </optgroup>
-              <optgroup label="Unicode">
+              <optgroup label='Unicode'>
                 <option>Braille</option>
                 <option>Emoji</option>
                 <option>ISO 8859-1</option>
@@ -185,32 +185,32 @@
               </optgroup>
             </select>
           </div>
-          <button class="pass-button" value="Generate" onclick="generateRandom();">Generate</button>
-          <p id="random-pass" class="password"></p>
-          <div class="stats length">
-            <span id="random-entropy"></span>
-            <span id="random-length"></span>
+          <button class='pass-button' value='Generate' onclick='generateRandom();'>Generate</button>
+          <p id='random-pass' class='password'></p>
+          <div class='stats length'>
+            <span id='random-entropy'></span>
+            <span id='random-length'></span>
           </div>
         </div>
       </div>
-      <div id="footer" class="clear">
+      <div id='footer' class='clear'>
         <p>Never trust online password generators, including mine.<br/>
-           For better security, use the <a href="bookmarklets.html">bookmarklets</a>, or my <a href="https://github.com/atoponce/nodepassgen">command-line tool</a>.<br/>
+           For better security, use the <a href='bookmarklets.html'>bookmarklets</a>, or my <a href='https://github.com/atoponce/nodepassgen'>command-line tool</a>.<br/>
            For best security, use the generator that ships with your password manager.</p>
         <p><strong>For demonstration purposes only. It is not logging passwords.</strong></p>
         <p>
-          <a href="https://github.com/atoponce/webpassgen"><img alt="Github logo" title="Get the source code" src="assets/github.png" /></a>
-          <a href="https://github.com/atoponce/webpassgen/releases/latest"><img alt="Download icon" title="Download latest release" src="assets/download.png" /></a>
-          <a href="https://twitter.com/AaronToponce"><img alt="Twitter logo" title="Meet the author" src="assets/twitter.png" /></a>
+          <a href='https://github.com/atoponce/webpassgen'><img alt='Github logo' title='Get the source code' src='assets/github.png' /></a>
+          <a href='https://github.com/atoponce/webpassgen/releases/latest'><img alt='Download icon' title='Download latest release' src='assets/download.png' /></a>
+          <a href='https://twitter.com/AaronToponce'><img alt='Twitter logo' title='Meet the author' src='assets/twitter.png' /></a>
         </p>
       </div>
     </div>
-    <div id="overlay" onclick="document.getElementById('overlay').style.display='none';">
-        <div id="overlay_text">
+    <div id='overlay' onclick='document.getElementById("overlay").style.display="none";'>
+        <div id='overlay_text'>
             <p>🔥🔥🔥🔥🔥</p>
             <p>Here be dragons!</p>
-            <p>Using non-ASCII Unicode characters could <a style="color: #F3BC00" href="https://apple.stackexchange.com/questions/202143/i-included-emoji-in-my-password-and-now-i-cant-log-in-to-my-account-on-yosemite">lock you out of your account</a>!</p>
-            <p>Further, emoji codepoints specifically are <a style="color: #F3BC00" href="https://twitter.com/FakeUnicode/status/1192245294429130752">ambiguous, ignored, unpredictable, and unstable</a>.</p>
+            <p>Using non-ASCII Unicode characters could <a style='color: #F3BC00' href='https://apple.stackexchange.com/questions/202143/i-included-emoji-in-my-password-and-now-i-cant-log-in-to-my-account-on-yosemite'>lock you out of your account</a>!</p>
+            <p>Further, emoji codepoints specifically are <a style='color: #F3BC00' href='https://twitter.com/FakeUnicode/status/1192245294429130752'>ambiguous, ignored, unpredictable, and unstable</a>.</p>
             <p>You should exercise extreme caution using Unicode passwords.</p>
             <p>Click anywhere to continue.</p>
             <p>🐉🐉🐉🐉🐉</p>
@@ -218,87 +218,87 @@
     </div>
 
     <!-- main page scripts -->
-    <script src="js/main.js"></script>
+    <script src='js/main.js'></script>
 
     <!-- alternate passphrase generator -->
-    <script src="lists/alternate_colors.js"></script>
-    <script src="lists/alternate_deseret.js"></script>
-    <script src="lists/alternate_elvish.js"></script>
-    <script src="lists/alternate_klingon.js"></script>
-    <script src="lists/alternate_pgp.js"></script>
-    <script src="lists/alternate_rockyou.js"></script>
-    <script src="lists/alternate_shavian.js"></script>
-    <script src="lists/alternate_simpsons.js"></script>
-    <script src="lists/alternate_trump.js"></script>
+    <script src='lists/alternateColors.js'></script>
+    <script src='lists/alternateDeseret.js'></script>
+    <script src='lists/alternateElvish.js'></script>
+    <script src='lists/alternateKlingon.js'></script>
+    <script src='lists/alternatePgp.js'></script>
+    <script src='lists/alternateRockyou.js'></script>
+    <script src='lists/alternateShavian.js'></script>
+    <script src='lists/alternateSimpsons.js'></script>
+    <script src='lists/alternateTrump.js'></script>
 
     <!-- bitcoin passphrase generator -->
-    <script src="lists/bitcoin_cn_simp.js"></script>
-    <script src="lists/bitcoin_cn_trad.js"></script>
-    <script src="lists/bitcoin_cz.js"></script>
-    <script src="lists/bitcoin_en.js"></script>
-    <script src="lists/bitcoin_es.js"></script>
-    <script src="lists/bitcoin_fr.js"></script>
-    <script src="lists/bitcoin_it.js"></script>
-    <script src="lists/bitcoin_jp.js"></script>
-    <script src="lists/bitcoin_ko.js"></script>
+    <script src='lists/bitcoinCNSimp.js'></script>
+    <script src='lists/bitcoinCNTrad.js'></script>
+    <script src='lists/bitcoinCZ.js'></script>
+    <script src='lists/bitcoinEN.js'></script>
+    <script src='lists/bitcoinES.js'></script>
+    <script src='lists/bitcoinFR.js'></script>
+    <script src='lists/bitcoinIT.js'></script>
+    <script src='lists/bitcoinJP.js'></script>
+    <script src='lists/bitcoinKO.js'></script>
 
     <!-- diceware passphrase generator -->
-    <script src="lists/diceware_beale.js"></script>
-    <script src="lists/diceware_bg.js"></script>
-    <script src="lists/diceware_ca.js"></script>
-    <script src="lists/diceware_cn.js"></script>
-    <script src="lists/diceware_cz.js"></script>
-    <script src="lists/diceware_da.js"></script>
-    <script src="lists/diceware_de.js"></script>
-    <script src="lists/diceware_en.js"></script>
-    <script src="lists/diceware_eo.js"></script>
-    <script src="lists/diceware_es.js"></script>
-    <script src="lists/diceware_et.js"></script>
-    <script src="lists/diceware_eu.js"></script>
-    <script src="lists/diceware_fi.js"></script>
-    <script src="lists/diceware_fr.js"></script>
-    <script src="lists/diceware_hu.js"></script>
-    <script src="lists/diceware_it.js"></script>
-    <script src="lists/diceware_iw.js"></script>
-    <script src="lists/diceware_jp.js"></script>
-    <script src="lists/diceware_la.js"></script>
-    <script src="lists/diceware_mi.js"></script>
-    <script src="lists/diceware_nl.js"></script>
-    <script src="lists/diceware_no.js"></script>
-    <script src="lists/diceware_pl.js"></script>
-    <script src="lists/diceware_pt.js"></script>
-    <script src="lists/diceware_ro.js"></script>
-    <script src="lists/diceware_ru.js"></script>
-    <script src="lists/diceware_sk.js"></script>
-    <script src="lists/diceware_sl.js"></script>
-    <script src="lists/diceware_sv.js"></script>
-    <script src="lists/diceware_tr.js"></script>
+    <script src='lists/dicewareBeale.js'></script>
+    <script src='lists/dicewareBG.js'></script>
+    <script src='lists/dicewareCA.js'></script>
+    <script src='lists/dicewareCN.js'></script>
+    <script src='lists/dicewareCZ.js'></script>
+    <script src='lists/dicewareDA.js'></script>
+    <script src='lists/dicewareDE.js'></script>
+    <script src='lists/dicewareEN.js'></script>
+    <script src='lists/dicewareEO.js'></script>
+    <script src='lists/dicewareES.js'></script>
+    <script src='lists/dicewareET.js'></script>
+    <script src='lists/dicewareEU.js'></script>
+    <script src='lists/dicewareFI.js'></script>
+    <script src='lists/dicewareFR.js'></script>
+    <script src='lists/dicewareHU.js'></script>
+    <script src='lists/dicewareIT.js'></script>
+    <script src='lists/dicewareIW.js'></script>
+    <script src='lists/dicewareJP.js'></script>
+    <script src='lists/dicewareLA.js'></script>
+    <script src='lists/dicewareMI.js'></script>
+    <script src='lists/dicewareNL.js'></script>
+    <script src='lists/dicewareNO.js'></script>
+    <script src='lists/dicewarePL.js'></script>
+    <script src='lists/dicewarePT.js'></script>
+    <script src='lists/dicewareRO.js'></script>
+    <script src='lists/dicewareRU.js'></script>
+    <script src='lists/dicewareSK.js'></script>
+    <script src='lists/dicewareSL.js'></script>
+    <script src='lists/dicewareSV.js'></script>
+    <script src='lists/dicewareTR.js'></script>
 
     <!-- eff passphrase generator -->
-    <script src="lists/eff_distant.js"></script>
-    <script src="lists/eff_gameofthrones.js"></script>
-    <script src="lists/eff_harrypotter.js"></script>
-    <script src="lists/eff_long.js"></script>
-    <script src="lists/eff_short.js"></script>
-    <script src="lists/eff_startrek.js"></script>
-    <script src="lists/eff_starwars.js"></script>
+    <script src='lists/effDistant.js'></script>
+    <script src='lists/effGameOfThrones.js'></script>
+    <script src='lists/effHarryPotter.js'></script>
+    <script src='lists/effLong.js'></script>
+    <script src='lists/effShort.js'></script>
+    <script src='lists/effStarTrek.js'></script>
+    <script src='lists/effStarWars.js'></script>
 
     <!-- emoji - on its own -->
-    <script src="lists/random_emoji.js"></script>
+    <script src='lists/randomEmoji.js'></script>
 
     <script>
-      function loadPasses() {
-        generatePassphrase("diceware");
-        generatePassphrase("eff");
-        generatePassphrase("alternate");
-        generatePassphrase("bitcoin");
-        generatePseudowords();
-        generateRandom();
+      function loadPasses () {
+        generatePassphrase('diceware')
+        generatePassphrase('eff')
+        generatePassphrase('alternate')
+        generatePassphrase('bitcoin')
+        generatePseudowords()
+        generateRandom()
       }
       window.onload = function () {
-        initTheme();
-        loadPasses();
-      };
+        initTheme()
+        loadPasses()
+      }
     </script>
   </body>
 </html>
