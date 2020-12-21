@@ -8,22 +8,19 @@ sent to the server for logging. You should be able to download this code,
 and run it offline, if you're truly paranoid.
 
 ## Desktop Screenshots
-<table style="border-collapse: collapse; border: 1px solid black;"><tr><td style="border: 1px solid black;">
-<img alt="Light theme desktop screenshot" src="https://user-images.githubusercontent.com/699572/58374448-a44e5980-7efb-11e9-93f8-46b20237b7ca.png" />
+<table style="border-collapse: collapse; border: 1px solid black;">
+<tr><td style="border: 1px solid black;">
+<img alt="Light theme desktop screenshot" src="https://user-images.githubusercontent.com/699572/102729250-304d8080-42ed-11eb-8559-56da890f1688.png" />
 </td><td style="border: 1px solid black;">
-<img alt="Dark theme desktop screenshot" src="https://user-images.githubusercontent.com/699572/58374449-a44e5980-7efb-11e9-985a-76048f3ddd8a.png" />
+<img alt="Dark theme desktop screenshot" src="https://user-images.githubusercontent.com/699572/102729248-2fb4ea00-42ed-11eb-9a3b-437bd16ce8fb.png" />
 </td></tr></table>
 
-
 ## Mobile-Friendly Screenshots
-<table style="border-collapse: collapse; border: 1px solid black;"><tr><td style="border: 1px solid black;">
-<img alt="First light theme mobile screenshot" src="https://user-images.githubusercontent.com/699572/58374450-a44e5980-7efb-11e9-99e7-1120f8981cd2.png" />
+<table style="border-collapse: collapse; border: 1px solid black;">
+<tr><td style="border: 1px solid black;">
+<img alt="Light theme mobile screenshot" src="https://user-images.githubusercontent.com/699572/102729253-317ead80-42ed-11eb-88d2-36b94480255d.png" />
 </td><td style="border: 1px solid black;">
-<img alt="Second light theme mobile screenshot" src="https://user-images.githubusercontent.com/699572/58374451-a4e6f000-7efb-11e9-9ee5-2dc0bc4560cc.png" />
-</td><td style="border: 1px solid black;">
-<img alt="First dark theme mobile screenshot" src="https://user-images.githubusercontent.com/699572/58374452-a4e6f000-7efb-11e9-8d45-2c86947946ab.png" />
-</td><td style="border: 1px solid black;">
-<img alt="Second dark theme mobile screenshot" src="https://user-images.githubusercontent.com/699572/58374453-a4e6f000-7efb-11e9-922f-7874b593f32d.png" />
+<img alt="Dark theme mobile screenshot" src="https://user-images.githubusercontent.com/699572/102729252-30e61700-42ed-11eb-8f08-73d07c752fcb.png" />
 </td></tr></table>
 
 ## Supported Languages
@@ -56,7 +53,7 @@ Here is the full breakdown of language support across the passphrase generators:
 | 23 | NL  | Dutch      | 7,776  |      |      |  ✔️   |     | Alternate composite                             |
 | 24 | NO  | Norwegian  | 7,776  |      |      |  ✔️   |     |                                                 |
 | 25 | PL  | Polish     | 7,776  |      |      |  ✔️   |     |                                                 |
-| 26 | PT  | Portuguese | 7,776  |      |      |  ✔️   |     |                                                 |
+| 26 | PT  | Portuguese |  var.  |      |  ✔️   |  ✔️   |     |                                                 |
 | 27 | RO  | Romanian   | 7,776  |      |      |  ✔️   |     |                                                 |
 | 28 | RU  | Russian    | 7,776  |      |      |  ✔️   |     |                                                 |
 | 29 | SK  | Slovak     | 7,776  |      |      |  ✔️   |     |                                                 |
@@ -102,28 +99,35 @@ Here is the English breakdown:
 
 Here is the Spanish breakdown:
 
-| ID  | Name            | Wordlist  | Unique | Notes                                        |
-|:---:|:----------------|:----------|:------:|:---------------------------------------------|
-| 11a | Spanish         | Bitcoin   | 2,048  |                                              |
-| 11b | Spanish         | Diceware  | 7,776  |  7,773 unique at first. Added ", "", and """ |
+| ID  | Name    | Wordlist | Unique | Notes                                        |
+|:---:|:--------|:---------|:------:|:---------------------------------------------|
+| 11a | Spanish | Bitcoin  | 2,048  |                                              |
+| 11b | Spanish | Diceware | 7,776  |  7,773 unique at first. Added ", "", and """ |
 
 Here is the French breakdown:
 
-| ID  | Name            | Wordlist  | Unique | Notes                         |
-|:---:|:----------------|:----------|:------:|:------------------------------|
-| 15a | French          | Bitcoin   | 2,048  |                               |
-| 15b | French          | Diceware  | 7,776  |                               |
+| ID  | Name   | Wordlist | Unique | Notes                         |
+|:---:|:-------|:---------|:------:|:------------------------------|
+| 15a | French | Bitcoin  | 2,048  |                               |
+| 15b | French | Diceware | 7,776  |                               |
 
 Here is the Italian breakdown:
 
-| ID  | Name            | Wordlist  | Unique | Notes                         |
-|:---:|:----------------|:----------|:------:|:------------------------------|
-| 17a | Italian         | Bitcoin   | 2,048  |                               |
-| 17b | Italian         | Diceware  | 7,776  |                               |
+| ID  | Name    | Wordlist | Unique | Notes                         |
+|:---:|:--------|:---------|:------:|:------------------------------|
+| 17a | Italian | Bitcoin  | 2,048  |                               |
+| 17b | Italian | Diceware | 7,776  |                               |
 
 Here is the Japanese breakdown:
 
-| ID  | Name            | Wordlist  | Unique | Notes                         |
-|:---:|:----------------|:----------|:------:|:------------------------------|
-| 19a | Japanese        | Bitcoin   | 2,048  |                               |
-| 19b | Japanese        | Diceware  | 7,776  |                               |
+| ID  | Name     | Wordlist | Unique | Notes                         |
+|:---:|:---------|:---------|:------:|:------------------------------|
+| 19a | Japanese | Bitcoin  | 2,048  |                               |
+| 19b | Japanese | Diceware | 7,776  |                               |
+
+Here is the Portuguese breakdown:
+
+| ID  | Name       | Wordlist | Unique | Notes                         |
+|:---:|:-----------|:---------|:------:|:------------------------------|
+| 26a | Portuguese | Bitcoin  | 2,048  |                               |
+| 26b | Portuguese | Diceware | 7,776  |                               |
