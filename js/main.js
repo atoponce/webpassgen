@@ -394,6 +394,9 @@ function generateBitcoin (selection) {
     case 'Korean':
       wordList = bitcoinKR
       break
+    case 'Portuguese':
+      wordList = bitcoinPT
+      break
     case 'Spanish':
       wordList = bitcoinES
       break
