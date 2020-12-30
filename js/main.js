@@ -157,6 +157,9 @@ function generateDiceware (selection) {
     case 'German':
       wordList = dicewareDE
       break
+    case 'Greek':
+      wordList = dicewareEL
+      break
     case 'Hebrew':
       wordList = dicewareIW
       break

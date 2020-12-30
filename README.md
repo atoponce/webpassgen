@@ -36,30 +36,31 @@ Here is the full breakdown of language support across the passphrase generators:
 |  6 | CZ  | Czech      |  var.  |      |  ✔️   |  ✔️   |     |                                                 |
 |  7 | DA  | Danish     | 7,776  |      |      |  ✔️   |     |                                                 |
 |  8 | DE  | German     | 7,776  |      |      |  ✔️   |     |                                                 |
-|  9 | EN  | English    |  var.  |  ✔️   |  ✔️   |  ✔️   |  ✔️  |                                                 |
-| 10 | EO  | Esperanto  | 7,776  |      |      |  ✔️   |     |                                                 |
-| 11 | ES  | Spanish    |  var.  |      |  ✔️   |  ✔️   |     |                                                 |
-| 12 | ET  | Estonian   | 7,776  |      |      |  ✔️   |     |                                                 |
-| 13 | EU  | Basque     | 7,776  |      |      |  ✔️   |     |                                                 |
-| 14 | FI  | Finnish    | 7,776  |      |      |  ✔️   |     |                                                 |
-| 15 | FR  | French     |  var.  |      |  ✔️   |  ✔️   |     |                                                 |
-| 16 | HU  | Hungarian  | 7,776  |      |      |  ✔️   |     |                                                 |
-| 17 | IT  | Italian    |  var.  |      |  ✔️   |  ✔️   |     |                                                 |
-| 18 | IW  | Hebrew     | 7,776  |      |      |  ✔️   |     |                                                 |
-| 19 | JP  | Japanese   |  var.  |      |  ✔️   |  ✔️   |     |                                                 |
-| 20 | KO  | Korean     | 2,048  |      |  ✔️   |      |     |                                                 |
-| 21 | LA  | Latin      | 7,776  |      |      |  ✔️   |     |                                                 |
-| 22 | MI  | Maori      | 7,776  |      |      |  ✔️   |     |                                                 |
-| 23 | NL  | Dutch      | 7,776  |      |      |  ✔️   |     | Alternate composite                             |
-| 24 | NO  | Norwegian  | 7,776  |      |      |  ✔️   |     |                                                 |
-| 25 | PL  | Polish     | 7,776  |      |      |  ✔️   |     |                                                 |
-| 26 | PT  | Portuguese |  var.  |      |  ✔️   |  ✔️   |     |                                                 |
-| 27 | RO  | Romanian   | 7,776  |      |      |  ✔️   |     |                                                 |
-| 28 | RU  | Russian    | 7,776  |      |      |  ✔️   |     |                                                 |
-| 29 | SK  | Slovak     | 7,776  |      |      |  ✔️   |     |                                                 |
-| 30 | SL  | Slovenian  | 7,776  |      |      |  ✔️   |     |                                                 |
-| 31 | SV  | Swedish    | 7,776  |      |      |  ✔️   |     | 7,775 unique at first. Added "2a".              |
-| 32 | TR  | Turkish    | 7,776  |      |      |  ✔️   |     | 7,775 unique at first. Added "2a".              |
+|  9 | EL  | Greek      | 7,776  |      |      |  ✔️   |     |                                                 |
+| 10 | EN  | English    |  var.  |  ✔️   |  ✔️   |  ✔️   |  ✔️  |                                                 |
+| 11 | EO  | Esperanto  | 7,776  |      |      |  ✔️   |     |                                                 |
+| 12 | ES  | Spanish    |  var.  |      |  ✔️   |  ✔️   |     |                                                 |
+| 13 | ET  | Estonian   | 7,776  |      |      |  ✔️   |     |                                                 |
+| 14 | EU  | Basque     | 7,776  |      |      |  ✔️   |     |                                                 |
+| 15 | FI  | Finnish    | 7,776  |      |      |  ✔️   |     |                                                 |
+| 16 | FR  | French     |  var.  |      |  ✔️   |  ✔️   |     |                                                 |
+| 17 | HU  | Hungarian  | 7,776  |      |      |  ✔️   |     |                                                 |
+| 18 | IT  | Italian    |  var.  |      |  ✔️   |  ✔️   |     |                                                 |
+| 19 | IW  | Hebrew     | 7,776  |      |      |  ✔️   |     |                                                 |
+| 20 | JP  | Japanese   |  var.  |      |  ✔️   |  ✔️   |     |                                                 |
+| 21 | KO  | Korean     | 2,048  |      |  ✔️   |      |     |                                                 |
+| 22 | LA  | Latin      | 7,776  |      |      |  ✔️   |     |                                                 |
+| 23 | MI  | Maori      | 7,776  |      |      |  ✔️   |     |                                                 |
+| 24 | NL  | Dutch      | 7,776  |      |      |  ✔️   |     | Alternate composite                             |
+| 25 | NO  | Norwegian  | 7,776  |      |      |  ✔️   |     |                                                 |
+| 26 | PL  | Polish     | 7,776  |      |      |  ✔️   |     |                                                 |
+| 27 | PT  | Portuguese |  var.  |      |  ✔️   |  ✔️   |     |                                                 |
+| 28 | RO  | Romanian   | 7,776  |      |      |  ✔️   |     |                                                 |
+| 29 | RU  | Russian    | 7,776  |      |      |  ✔️   |     |                                                 |
+| 30 | SK  | Slovak     | 7,776  |      |      |  ✔️   |     |                                                 |
+| 31 | SL  | Slovenian  | 7,776  |      |      |  ✔️   |     |                                                 |
+| 32 | SV  | Swedish    | 7,776  |      |      |  ✔️   |     | 7,775 unique at first. Added "2a".              |
+| 33 | TR  | Turkish    | 7,776  |      |      |  ✔️   |     | 7,775 unique at first. Added "2a".              |
 
 Here is the Chinese breakdown:
 
@@ -101,33 +102,33 @@ Here is the Spanish breakdown:
 
 | ID  | Name    | Wordlist | Unique | Notes                                        |
 |:---:|:--------|:---------|:------:|:---------------------------------------------|
-| 11a | Spanish | Bitcoin  | 2,048  |                                              |
-| 11b | Spanish | Diceware | 7,776  |  7,773 unique at first. Added ", "", and """ |
+| 12a | Spanish | Bitcoin  | 2,048  |                                              |
+| 12b | Spanish | Diceware | 7,776  |  7,773 unique at first. Added ", "", and """ |
 
 Here is the French breakdown:
 
 | ID  | Name   | Wordlist | Unique | Notes                         |
 |:---:|:-------|:---------|:------:|:------------------------------|
-| 15a | French | Bitcoin  | 2,048  |                               |
-| 15b | French | Diceware | 7,776  |                               |
+| 16a | French | Bitcoin  | 2,048  |                               |
+| 16b | French | Diceware | 7,776  |                               |
 
 Here is the Italian breakdown:
 
 | ID  | Name    | Wordlist | Unique | Notes                         |
 |:---:|:--------|:---------|:------:|:------------------------------|
-| 17a | Italian | Bitcoin  | 2,048  |                               |
-| 17b | Italian | Diceware | 7,776  |                               |
+| 18a | Italian | Bitcoin  | 2,048  |                               |
+| 18b | Italian | Diceware | 7,776  |                               |
 
 Here is the Japanese breakdown:
 
 | ID  | Name     | Wordlist | Unique | Notes                         |
 |:---:|:---------|:---------|:------:|:------------------------------|
-| 19a | Japanese | Bitcoin  | 2,048  |                               |
-| 19b | Japanese | Diceware | 7,776  |                               |
+| 20a | Japanese | Bitcoin  | 2,048  |                               |
+| 20b | Japanese | Diceware | 7,776  |                               |
 
 Here is the Portuguese breakdown:
 
 | ID  | Name       | Wordlist | Unique | Notes                         |
 |:---:|:-----------|:---------|:------:|:------------------------------|
-| 26a | Portuguese | Bitcoin  | 2,048  |                               |
-| 26b | Portuguese | Diceware | 7,776  |                               |
+| 27a | Portuguese | Bitcoin  | 2,048  |                               |
+| 27b | Portuguese | Diceware | 7,776  |                               |
