@@ -286,6 +286,9 @@ function generateAlternate (selection) {
     case 'PGP':
       wordList = alternatePgp
       break
+    case 'Pokerware':
+      wordList = alternatePokerware
+      break
     case 'RockYou':
       wordList = alternateRockyou
       break
