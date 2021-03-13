@@ -142,6 +142,9 @@ function generateDiceware (selection) {
     case 'English (Beale)':
       wordList = dicewareBeale
       break
+    case 'English (NLP)':
+      wordList = dicewareNLP
+      break
     case 'Esperanto':
       wordList = dicewareEO
       break
@@ -211,16 +214,50 @@ function generateDiceware (selection) {
   }
 
   const entropy = getEntropy()
-  const len = Math.ceil(entropy / Math.log2(wordList.length))
   const passId = document.getElementById('diceware-pass')
   const passLength = document.getElementById('diceware-length')
   const passEntropy = document.getElementById('diceware-entropy')
 
-  pass = generatePass(len, wordList, true)
-  pass = pass.replace(/ /g, '-')
+  if ( wordList.filter(Array.isArray).length === 2) {
+    // We're working on the "Natrual Language Passwords" list
+    const len1 = Math.ceil(entropy / Math.log2(wordList[0].length)) // adjectives
+    const len2 = Math.ceil(entropy / Math.log2(wordList[1].length)) // nouns
+    const adjs = generatePass(len1, wordList[0], true).split(" ")
+    const nouns = generatePass(len2, wordList[1], true).split(" ")
+
+    let bits = 0
+    let counter = 0
+
+    // building up the password alteraning: adj-noun-adj-noun-...
+    while (bits <= entropy) {
+      if (counter % 2 === 0) {
+        pass += adjs[counter]
+        bits += Math.log2(wordList[0].length)
+      }
+      else {
+        pass += nouns[counter]
+        bits += Math.log2(wordList[1].length)
+      }
+
+      pass += '-'
+      counter++
+    }
+
+    pass = pass.replace(/-$/g, '')
+    passEntropy.innerHTML = '~' + Math.floor(bits) + '-bits.'
+  }
+  else {
+    // Every other Diceware word list.
+    const len = Math.ceil(entropy / Math.log2(wordList.length))
+
+    pass = generatePass(len, wordList, true)
+    pass = pass.replace(/ /g, '-')
+
+    passEntropy.innerHTML = '~' + Math.floor(len * Math.log2(wordList.length)) + '-bits.'
+  }
+
   passId.innerText = pass
   passLength.innerHTML = '<span>' + pass.length + '</span>' + ' characters.'
-  passEntropy.innerHTML = '~' + Math.floor(len * Math.log2(wordList.length)) + '-bits.'
 }
 
 function generateEff (selection) {
