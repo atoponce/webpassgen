@@ -87,16 +87,17 @@ Here is the English breakdown:
 | 9d | English         | Bitcoin   | 2,048  |                               |
 | 9e | English         | Diceware  | 8,192  | 8k word list                  |
 | 9f | English (Beale) | Diceware  | 7,776  |                               |
-| 9g | Game of Thrones | EFF       | 4,000  | Unofficial                    |
-| 9h | Harry Potter    | EFF       | 4,000  | Unofficial                    |
-| 9i | Long            | EFF       | 1,296  |                               |
-| 9j | PGP             | Alternate |   512  |                               |
-| 9k | Short           | EFF       | 1,296  |                               |
-| 9l | Shavian         | Alternate | 7,776  | Alternate English alphabet    |
-| 9m | Simpsons        | Alternate | 5,000  | From Peerio                   |
-| 9n | Star Trek       | EFF       | 4,000  | Unofficial                    |
-| 9o | Star Wars       | EFF       | 4,000  | Unofficial                    |
-| 9p | Trump           | Alternate | 8,192  | From his Twitter account      |
+| 9f | English (NLP)   | Diceware  |  var.  | 1,296 adjectives, 7,776 nouns |
+| 9h | Game of Thrones | EFF       | 4,000  | Unofficial                    |
+| 9i | Harry Potter    | EFF       | 4,000  | Unofficial                    |
+| 9j | Long            | EFF       | 1,296  |                               |
+| 9k | PGP             | Alternate |   512  |                               |
+| 9l | Short           | EFF       | 1,296  |                               |
+| 9m | Shavian         | Alternate | 7,776  | Alternate English alphabet    |
+| 9n | Simpsons        | Alternate | 5,000  | From Peerio                   |
+| 9o | Star Trek       | EFF       | 4,000  | Unofficial                    |
+| 9p | Star Wars       | EFF       | 4,000  | Unofficial                    |
+| 9q | Trump           | Alternate | 8,192  | From his Twitter account      |
 
 Here is the Spanish breakdown:
 
