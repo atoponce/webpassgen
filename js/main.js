@@ -91,14 +91,16 @@ function secRand (count) {
   return rand[0] % count
 }
 
+function uniquesOnly (list) {
+  return [...new Set(list)] // enforce unique elements in array
+}
+
 function generatePass (len, set, spaces) {
   let pass = ''
   let passArr = ''
 
   if (typeof set === 'string') passArr = set.split('')
   else passArr = set
-
-  passArr = [...new Set(passArr)] // enforce unique elements in array
 
   for (let i = len; i > 0; i--) {
     if (spaces) {
@@ -213,6 +215,8 @@ function generateDiceware (selection) {
       break
   }
 
+  wordList = uniquesOnly(wordList)
+
   const entropy = getEntropy()
   const passId = document.getElementById('diceware-pass')
   const passLength = document.getElementById('diceware-length')
@@ -250,7 +254,7 @@ function generateDiceware (selection) {
     // Every other Diceware word list.
     const len = Math.ceil(entropy / Math.log2(wordList.length))
 
-    pass = generatePass(len, wordList, true)
+    pass += generatePass(len, wordList, true)
     pass = pass.replace(/ /g, '-')
 
     passEntropy.innerHTML = '~' + Math.floor(len * Math.log2(wordList.length)) + '-bits.'
@@ -288,13 +292,15 @@ function generateEff (selection) {
       break
   }
 
+  wordList = uniquesOnly(wordList)
+
   const entropy = getEntropy()
   const len = Math.ceil(entropy / Math.log2(wordList.length))
   const passId = document.getElementById('eff-pass')
   const passLength = document.getElementById('eff-length')
   const passEntropy = document.getElementById('eff-entropy')
 
-  pass = generatePass(len, wordList, true)
+  pass += generatePass(len, wordList, true)
   pass = pass.replace(/ /g, '-')
   passId.innerText = pass
   passLength.innerHTML = '<span>' + pass.length + '</span>' + ' characters.'
@@ -310,6 +316,25 @@ function generateAlternate (selection) {
       return generateColors()
     case 'Elvish':
       wordList = alternateElvish
+      break
+    case 'English (All)':
+      wordList = Object.keys(alternateColors)
+      wordList = wordList.concat(alternatePgp)
+      wordList = wordList.concat(alternatePokerware)
+      wordList = wordList.concat(alternateRockyou)
+      wordList = wordList.concat(alternateSimpsons)
+      wordList = wordList.concat(alternateTrump)
+      wordList = wordList.concat(bitcoinEN)
+      wordList = wordList.concat(dicewareEN)
+      wordList = wordList.concat(dicewareBeale)
+      wordList = wordList.concat(dicewareNLP)
+      wordList = wordList.concat(effDistant)
+      wordList = wordList.concat(effGameOfThrones)
+      wordList = wordList.concat(effHarryPotter)
+      wordList = wordList.concat(effLong)
+      wordList = wordList.concat(effShort)
+      wordList = wordList.concat(effStarTrek)
+      wordList = wordList.concat(effStarWars)
       break
     case 'English (Deseret)':
       wordList = alternateDeseret
@@ -337,13 +362,16 @@ function generateAlternate (selection) {
       break
   }
 
+  wordList = uniquesOnly(wordList)
+
   const entropy = getEntropy()
   const len = Math.ceil(entropy / Math.log2(wordList.length))
   const passId = document.getElementById('alt-pass')
   const passLength = document.getElementById('alt-length')
   const passEntropy = document.getElementById('alt-entropy')
 
-  pass = generatePass(len, wordList, true)
+
+  pass += generatePass(len, wordList, true)
   pass = pass.replace(/ /g, '-')
   passId.innerText = pass
   passLength.innerHTML = '<span>' + [...pass].length + '</span>' + ' characters.'
@@ -445,13 +473,15 @@ function generateBitcoin (selection) {
       break
   }
 
+  wordList = uniquesOnly(wordList)
+
   const entropy = getEntropy()
   const len = Math.ceil(entropy / Math.log2(wordList.length))
   const passId = document.getElementById('btc-pass')
   const passLength = document.getElementById('btc-length')
   const passEntropy = document.getElementById('btc-entropy')
 
-  pass = generatePass(len, wordList, true)
+  pass += generatePass(len, wordList, true)
   pass = pass.replace(/ /g, '-')
   passId.innerText = pass
   passLength.innerHTML = '<span>' + pass.length + '</span>' + ' characters.'
