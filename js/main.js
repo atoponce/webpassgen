@@ -254,7 +254,7 @@ function generateDiceware (selection) {
     // Every other Diceware word list.
     const len = Math.ceil(entropy / Math.log2(wordList.length))
 
-    pass += generatePass(len, wordList, true)
+    pass = generatePass(len, wordList, true)
     pass = pass.replace(/ /g, '-')
 
     passEntropy.innerHTML = '~' + Math.floor(len * Math.log2(wordList.length)) + '-bits.'
@@ -300,7 +300,7 @@ function generateEff (selection) {
   const passLength = document.getElementById('eff-length')
   const passEntropy = document.getElementById('eff-entropy')
 
-  pass += generatePass(len, wordList, true)
+  pass = generatePass(len, wordList, true)
   pass = pass.replace(/ /g, '-')
   passId.innerText = pass
   passLength.innerHTML = '<span>' + pass.length + '</span>' + ' characters.'
@@ -371,7 +371,7 @@ function generateAlternate (selection) {
   const passEntropy = document.getElementById('alt-entropy')
 
 
-  pass += generatePass(len, wordList, true)
+  pass = generatePass(len, wordList, true)
   pass = pass.replace(/ /g, '-')
   passId.innerText = pass
   passLength.innerHTML = '<span>' + [...pass].length + '</span>' + ' characters.'
@@ -481,7 +481,7 @@ function generateBitcoin (selection) {
   const passLength = document.getElementById('btc-length')
   const passEntropy = document.getElementById('btc-entropy')
 
-  pass += generatePass(len, wordList, true)
+  pass = generatePass(len, wordList, true)
   pass = pass.replace(/ /g, '-')
   passId.innerText = pass
   passLength.innerHTML = '<span>' + pass.length + '</span>' + ' characters.'
