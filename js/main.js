@@ -248,7 +248,7 @@ function generateDiceware (selection) {
     }
 
     pass = pass.replace(/-$/g, '')
-    passEntropy.innerHTML = '~' + Math.floor(bits) + '-bits.'
+    passEntropy.innerHTML = Math.floor(bits) + '-bits,'
   }
   else {
     // Every other Diceware word list.
@@ -257,7 +257,7 @@ function generateDiceware (selection) {
     pass = generatePass(len, wordList, true)
     pass = pass.replace(/ /g, '-')
 
-    passEntropy.innerHTML = '~' + Math.floor(len * Math.log2(wordList.length)) + '-bits.'
+    passEntropy.innerHTML = Math.floor(len * Math.log2(wordList.length)) + '-bits,'
   }
 
   passId.innerText = pass
@@ -304,7 +304,7 @@ function generateEff (selection) {
   pass = pass.replace(/ /g, '-')
   passId.innerText = pass
   passLength.innerHTML = '<span>' + pass.length + '</span>' + ' characters.'
-  passEntropy.innerHTML = '~' + Math.floor(len * Math.log2(wordList.length)) + '-bits.'
+  passEntropy.innerHTML = Math.floor(len * Math.log2(wordList.length)) + '-bits,'
 }
 
 function generateAlternate (selection) {
@@ -318,23 +318,24 @@ function generateAlternate (selection) {
       wordList = alternateElvish
       break
     case 'English (All)':
-      wordList = Object.keys(alternateColors)
-      wordList = wordList.concat(alternatePgp)
-      wordList = wordList.concat(alternatePokerware)
-      wordList = wordList.concat(alternateRockyou)
-      wordList = wordList.concat(alternateSimpsons)
-      wordList = wordList.concat(alternateTrump)
-      wordList = wordList.concat(bitcoinEN)
-      wordList = wordList.concat(dicewareEN)
-      wordList = wordList.concat(dicewareBeale)
-      wordList = wordList.concat(dicewareNLP)
-      wordList = wordList.concat(effDistant)
-      wordList = wordList.concat(effGameOfThrones)
-      wordList = wordList.concat(effHarryPotter)
-      wordList = wordList.concat(effLong)
-      wordList = wordList.concat(effShort)
-      wordList = wordList.concat(effStarTrek)
-      wordList = wordList.concat(effStarWars)
+      wordList = Object.keys(alternateColors)           // 1029 words
+      wordList = wordList.concat(alternatePgp)          //  512 words
+      wordList = wordList.concat(alternatePokerware)    // 5304 words
+      wordList = wordList.concat(alternateRockyou)      // 7776 words
+      wordList = wordList.concat(alternateSimpsons)     // 5000 words
+      wordList = wordList.concat(alternateTrump)        // 8192 words
+      wordList = wordList.concat(bitcoinEN)             // 2048 words
+      wordList = wordList.concat(dicewareEN)            // 8192 words
+      wordList = wordList.concat(dicewareBeale)         // 7776 words
+      wordList = wordList.concat(dicewareNLP)           // 9072 words
+      wordList = wordList.concat(effDistant)            // 1296 words
+      wordList = wordList.concat(effGameOfThrones)      // 4000 words
+      wordList = wordList.concat(effHarryPotter)        // 4000 words
+      wordList = wordList.concat(effLong)               // 7776 words
+      wordList = wordList.concat(effShort)              // 1296 words
+      wordList = wordList.concat(effStarTrek)           // 4000 words
+      wordList = wordList.concat(effStarWars)           // 4000 words
+      wordList = wordList.concat(pseudoSKey)            // 2048 words
       break
     case 'English (Deseret)':
       wordList = alternateDeseret
@@ -375,7 +376,7 @@ function generateAlternate (selection) {
   pass = pass.replace(/ /g, '-')
   passId.innerText = pass
   passLength.innerHTML = '<span>' + [...pass].length + '</span>' + ' characters.'
-  passEntropy.innerHTML = '~' + Math.floor(len * Math.log2(wordList.length)) + '-bits.'
+  passEntropy.innerHTML = Math.floor(len * Math.log2(wordList.length)) + '-bits,'
 }
 
 function isTooDark (hex) {
@@ -433,7 +434,7 @@ function generateColors () {
   pass = tmp
   const totalLen = pass.length + (len - 1)
   passLength.innerHTML = '<span>' + totalLen + '</span>' + ' characters.'
-  passEntropy.innerHTML = '~' + Math.floor(len * Math.log2(colorKeys.length)) + '-bits.'
+  passEntropy.innerHTML = Math.floor(len * Math.log2(colorKeys.length)) + '-bits,'
 }
 
 function generateBitcoin (selection) {
@@ -485,7 +486,7 @@ function generateBitcoin (selection) {
   pass = pass.replace(/ /g, '-')
   passId.innerText = pass
   passLength.innerHTML = '<span>' + pass.length + '</span>' + ' characters.'
-  passEntropy.innerHTML = '~' + Math.floor(len * Math.log2(wordList.length)) + '-bits.'
+  passEntropy.innerHTML = Math.floor(len * Math.log2(wordList.length)) + '-bits,'
 }
 
 function generateNinja () {
@@ -496,7 +497,7 @@ function generateNinja () {
   const len = Math.ceil(entropy / Math.log2(ninja.length))
 
   for (let i = 0; i < len; i++) {
-    pass += ninja[secRand(len)]
+    pass += ninja[secRand(ninja.length)]
 
     if (i % 3 === 2 && i !== len - 1) pass += '-'
   }
@@ -537,7 +538,7 @@ function generateApple () {
   while (_apple(n) <= entropy) n++
 
   for (let i = 0; i < n; i++) {
-    pass[6 * i] = generatePass(1, consonants)
+    pass[6 * i]     = generatePass(1, consonants)
     pass[6 * i + 1] = generatePass(1, vowels)
     pass[6 * i + 2] = generatePass(1, consonants)
     pass[6 * i + 3] = generatePass(1, consonants)
@@ -599,20 +600,35 @@ function generateBabble () {
 
 function generateKpop () {
   // 64 unique words = 6 bits of entropy per word
-  const kpop = ['A', 'Ah', 'Bae', 'Bin', 'Bo', 'Choi', 'Chul', 'Da', 'Do', 'Dong', 'Eun', 'Gi', 'Gun', 'Ha', 'Hae', 'Hee',
-    'Ho', 'Hu', 'Hwa', 'Hwan', 'Hye', 'Hyo', 'Hyun', 'Il', 'In', 'Ja', 'Jae', 'Ji', 'Jin', 'Jong', 'Joo', 'Joon',
-    'Ju', 'Jun', 'Jung', 'Ki', 'Kun', 'Kyu', 'Lee', 'Mi', 'Min', 'Moon', 'Nam', 'Ok', 'Park', 'Rin', 'Seo', 'Seul',
-    'Shi', 'Sik', 'So', 'Song', 'Soo', 'Su', 'Sun', 'Sung', 'Won', 'Woo', 'Ye', 'Yeon', 'Yoo', 'Yu', 'Yul', 'Yun']
+  const kpop = ['A', 'Ah', 'Bae', 'Bin', 'Bo', 'Choi', 'Chul', 'Da', 'Do', 'Dong', 'Eun', 'Gi',
+    'Gun', 'Ha', 'Hae', 'Hee', 'Ho', 'Hu', 'Hwa', 'Hwan', 'Hye', 'Hyo', 'Hyun', 'Il', 'In', 'Ja',
+    'Jae', 'Ji', 'Jin', 'Jong', 'Joo', 'Joon', 'Ju', 'Jun', 'Jung', 'Ki', 'Kun', 'Kyu', 'Lee', 'Mi',
+    'Min', 'Moon', 'Nam', 'Ok', 'Park', 'Rin', 'Seo', 'Seul', 'Shi', 'Sik', 'So', 'Song', 'Soo',
+    'Su', 'Sun', 'Sung', 'Won', 'Woo', 'Ye', 'Yeon', 'Yoo', 'Yu', 'Yul', 'Yun']
   const entropy = getEntropy()
   const len = Math.ceil(entropy / Math.log2(kpop.length))
   let pass = ''
 
   for (let i = 0; i < len; i++) {
-    pass += kpop[secRand(len)]
+    pass += kpop[secRand(kpop.length)]
     if (i % 2 === 1 && i !== len - 1) pass += '-'
   }
 
   return [pass, kpop.length, Math.floor(len * Math.log2(kpop.length))]
+}
+
+function generateSKey () {
+  const wordList = uniquesOnly(pseudoSKey)
+  const entropy = getEntropy()
+  const len = Math.ceil(entropy / Math.log2(wordList.length))
+  let pass = ''
+
+  for (let i = 0; i < len; i++) {
+    pass += wordList[secRand(wordList.length)]
+    if (i !== len - 1) pass += '-'
+  }
+
+  return [pass, wordList.length, Math.floor(len * Math.log2(wordList.length))]
 }
 
 function generatePseudowords () {
@@ -621,8 +637,9 @@ function generatePseudowords () {
 
   if (pseudo === 'Apple, Inc.') ret = generateApple()
   else if (pseudo === 'Bubble Babble') ret = generateBabble()
-  else if (pseudo === 'Secret Ninja') ret = generateNinja()
   else if (pseudo === 'Korean K-pop') ret = generateKpop()
+  else if (pseudo === 'S/Key') ret = generateSKey()
+  else if (pseudo === 'Secret Ninja') ret = generateNinja()
 
   const pass = ret[0]
   const ent = ret[2]
@@ -632,7 +649,7 @@ function generatePseudowords () {
 
   passId.innerText = pass
   passLength.innerHTML = pass.length + ' characters.'
-  passEntropy.innerHTML = '~' + ent + '-bits.'
+  passEntropy.innerHTML = ent + '-bits,'
 }
 
 function generateRandom () {
@@ -722,7 +739,7 @@ function generateRandom () {
   passLength.innerHTML = len + ' characters.'
   passId.removeAttribute('style') // from emoji
   passId.innerText = pass
-  passEntropy.innerHTML = '~' + Math.floor(len * Math.log2(s.length)) + '-bits.'
+  passEntropy.innerHTML = Math.floor(len * Math.log2(s.length)) + '-bits,'
 }
 
 function generateEmoji () {
@@ -738,7 +755,7 @@ function generateEmoji () {
   passLength.innerHTML = len + ' characters.'
   passId.style.fontFamily = 'Emoji'
   passId.innerText = pass
-  passEntropy.innerHTML = '~' + Math.floor(len * Math.log2(randomEmoji.length)) + '-bits.'
+  passEntropy.innerHTML = '~' + Math.floor(len * Math.log2(randomEmoji.length)) + '-bits,'
 }
 
 // Dicekey functions
