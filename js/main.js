@@ -323,11 +323,13 @@ function generateAlternate (selection) {
       wordList = wordList.concat(alternatePokerware)    // 5304 words
       wordList = wordList.concat(alternateRockyou)      // 7776 words
       wordList = wordList.concat(alternateSimpsons)     // 5000 words
+      wordList = wordList.concat(alternateSkey)         // 2048 words
       wordList = wordList.concat(alternateTrump)        // 8192 words
       wordList = wordList.concat(bitcoinEN)             // 2048 words
       wordList = wordList.concat(dicewareEN)            // 8192 words
       wordList = wordList.concat(dicewareBeale)         // 7776 words
-      wordList = wordList.concat(dicewareNLP)           // 9072 words
+      wordList = wordList.concat(dicewareNLP[0])        // 1296 words
+      wordList = wordList.concat(dicewareNLP[1])        // 7776 words
       wordList = wordList.concat(effDistant)            // 1296 words
       wordList = wordList.concat(effGameOfThrones)      // 4000 words
       wordList = wordList.concat(effHarryPotter)        // 4000 words
@@ -335,7 +337,6 @@ function generateAlternate (selection) {
       wordList = wordList.concat(effShort)              // 1296 words
       wordList = wordList.concat(effStarTrek)           // 4000 words
       wordList = wordList.concat(effStarWars)           // 4000 words
-      wordList = wordList.concat(pseudoSKey)            // 2048 words
       break
     case 'English (Deseret)':
       wordList = alternateDeseret
@@ -357,6 +358,9 @@ function generateAlternate (selection) {
       break
     case 'Simpsons':
       wordList = alternateSimpsons
+      break
+    case 'S/KEY':
+      wordList = alternateSkey
       break
     case 'Trump':
       wordList = alternateTrump
@@ -638,7 +642,6 @@ function generatePseudowords () {
   if (pseudo === 'Apple, Inc.') ret = generateApple()
   else if (pseudo === 'Bubble Babble') ret = generateBabble()
   else if (pseudo === 'Korean K-pop') ret = generateKpop()
-  else if (pseudo === 'S/Key') ret = generateSKey()
   else if (pseudo === 'Secret Ninja') ret = generateNinja()
 
   const pass = ret[0]
