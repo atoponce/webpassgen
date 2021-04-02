@@ -581,8 +581,6 @@ function generateBabble () {
  
   for (let i = 0; i < entropy.length; i++) entropy[i] = secRand(256)
 
-  console.log(entropy)
-
   for (let i = 0; i < entropy.length + 1; i += 2) {
     if (i >= entropy.length) {
       pass += vowels[checksum % 6] + consonants[16] + vowels[Math.floor(checksum / 6)]
