@@ -577,20 +577,22 @@ function generateBabble () {
   const bytes = Math.ceil(getEntropy()/8)
   const entropy = new Uint8Array(bytes + (bytes % 2)) // Must be a multiple of 2 bytes
   let pass = 'x'
-  let count = 1
+  let checksum = 1
  
-  for (let i = 0; i < bytes; i++) entropy[i] = secRand(256)
+  for (let i = 0; i < entropy.length; i++) entropy[i] = secRand(256)
+
+  console.log(entropy)
 
   for (let i = 0; i < entropy.length + 1; i += 2) {
     if (i >= entropy.length) {
-      pass += vowels[count % 6] + consonants[16] + vowels[Math.floor(count/6)]
+      pass += vowels[checksum % 6] + consonants[16] + vowels[Math.floor(checksum / 6)]
       break
     }
 
     byte1 = entropy[i]
-    pass += vowels[(((byte1 >> 6) & 3) + count) % 6]
+    pass += vowels[(((byte1 >> 6) & 3) + checksum) % 6]
     pass += consonants[(byte1 >> 2) & 15]
-    pass += vowels[((byte1 & 3) + Math.floor(count/6)) % 6]
+    pass += vowels[((byte1 & 3) + Math.floor(checksum / 6)) % 6]
  
     if ((i + 1) > entropy.length) break
  
@@ -599,7 +601,7 @@ function generateBabble () {
     pass += '-'
     pass += consonants[byte2 & 15]
  
-    count = ((count * 5) + (byte1 * 7) + byte2) % 36
+    checksum = ((checksum * 5) + (byte1 * 7) + byte2) % 36
   }
 
   pass += 'x'
