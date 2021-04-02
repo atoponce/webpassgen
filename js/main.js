@@ -571,35 +571,40 @@ function generateApple () {
 }
 
 function generateBabble () {
-  const pass = []
+  // Actually conforms to the spec, meaning the checksums are valid
   const vowels = 'aeiouy'
   const consonants = 'bcdfghklmnprstvzx'
-  let entropy = getEntropy()
-  const vowelEnt = Math.log2(vowels.length)
-  const consEnt = Math.log2(consonants.length)
-  const outerEnt = (2 * consEnt) + (2 * vowelEnt)
-  const innerEnt = (3 * consEnt) + (2 * vowelEnt)
+  const bytes = Math.ceil(getEntropy()/8)
+  const entropy = new Uint8Array(bytes + (bytes % 2)) // Must be a multiple of 2 bytes
+  let pass = 'x'
+  let count = 1
+ 
+  crypto.getRandomValues(entropy)
 
-  entropy = entropy - (2 * outerEnt)
-
-  const len = Math.ceil(entropy / innerEnt)
-  const totalEnt = outerEnt + (len * innerEnt) + outerEnt
-
-  for (let i = 0; i < len + 2; i++) {
-    for (let j = 0; j < 5; j++) {
-      if (j % 2 === 0) pass[(5 * i) + j] = generatePass(1, consonants)
-      else pass[(5 * i) + j] = generatePass(1, vowels)
+  for (let i = 0; i < entropy.length + 1; i += 2) {
+    if (i >= entropy.length) {
+      pass += vowels[count % 6] + consonants[16] + vowels[Math.floor(count/6)]
+      break
     }
+
+    byte1 = entropy[i]
+    pass += vowels[(((byte1 >> 6) & 3) + count) % 6]
+    pass += consonants[(byte1 >> 2) & 15]
+    pass += vowels[((byte1 & 3) + Math.floor(count/6)) % 6]
+ 
+    if ((i + 1) > entropy.length) break
+ 
+    byte2 = entropy[i+1]
+    pass += consonants[(byte2 >> 4) & 15]
+    pass += '-'
+    pass += consonants[byte2 & 15]
+ 
+    count = (count * 5 + byte1 * 7 + byte2) % 36
   }
 
-  pass[0] = 'x'
-  pass[pass.length - 1] = 'x'
+  pass += 'x'
 
-  for (let i = pass.length; i > 0; i -= 5) pass.splice(i, 0, '-')
-
-  pass.pop() // strip last '-'
-
-  return [pass.join(''), (len + 2) * 5, Math.floor(totalEnt)]
+  return [pass, pass.length, entropy.length * 8]
 }
 
 function generateKpop () {
@@ -619,6 +624,10 @@ function generateKpop () {
   }
 
   return [pass, kpop.length, Math.floor(len * Math.log2(kpop.length))]
+}
+
+function generateProquint () {
+  
 }
 
 function generateSKey () {
