@@ -571,7 +571,7 @@ function generateApple () {
 }
 
 function generateBabble () {
-  // Actually conforms to the spec, meaning the checksums are valid
+  // https://web.mit.edu/kenta/www/one/bubblebabble/spec/jrtrjwzi/draft-huima-01.txt
   const vowels = 'aeiouy'
   const consonants = 'bcdfghklmnprstvzx'
   const bytes = Math.ceil(getEntropy()/8)
@@ -599,7 +599,7 @@ function generateBabble () {
     pass += '-'
     pass += consonants[byte2 & 15]
  
-    count = (count * 5 + byte1 * 7 + byte2) % 36
+    count = ((count * 5) + (byte1 * 7) + byte2) % 36
   }
 
   pass += 'x'
@@ -627,7 +627,29 @@ function generateKpop () {
 }
 
 function generateProquint () {
+  // https://arxiv.org/html/0901.4016
+  const vowels = 'aiou'
+  const consonants = 'bdfghjklmnprstvz'
+  let bytes = Math.ceil(getEntropy()/8)
+  bytes += (bytes % 2)
+
+  let pass = consonants[secRand(16)]
+
+  for (let i = 0; i < bytes + 1; i += 2) {
+    pass += vowels[secRand(4)]
+    pass += consonants[secRand(16)]
+    pass += vowels[secRand(4)]
+ 
+    if ((i + 1) > bytes) break
+ 
+    pass += consonants[secRand(16)]
+    pass += '-'
+    pass += consonants[secRand(16)]
+  }
   
+  pass += consonants[secRand(16)]
+  
+  return [pass, pass.length, bytes*8]
 }
 
 function generateSKey () {
@@ -651,6 +673,7 @@ function generatePseudowords () {
   if (pseudo === 'Apple, Inc.') ret = generateApple()
   else if (pseudo === 'Bubble Babble') ret = generateBabble()
   else if (pseudo === 'Korean K-pop') ret = generateKpop()
+  else if (pseudo === 'Proquints') ret = generateProquint()
   else if (pseudo === 'Secret Ninja') ret = generateNinja()
 
   const pass = ret[0]
