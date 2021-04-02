@@ -579,7 +579,7 @@ function generateBabble () {
   let pass = 'x'
   let count = 1
  
-  crypto.getRandomValues(entropy)
+  for (let i = 0; i < bytes; i++) entropy[i] = secRand(256)
 
   for (let i = 0; i < entropy.length + 1; i += 2) {
     if (i >= entropy.length) {
