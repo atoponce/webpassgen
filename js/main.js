@@ -248,7 +248,7 @@ function generateDiceware (selection) {
     }
 
     pass = pass.replace(/-$/g, '')
-    passEntropy.innerHTML = Math.floor(bits) + '-bits,'
+    passEntropy.innerHTML = Math.floor(bits) + ' bits,'
   }
   else {
     // Every other Diceware word list.
@@ -257,7 +257,7 @@ function generateDiceware (selection) {
     pass = generatePass(len, wordList, true)
     pass = pass.replace(/ /g, '-')
 
-    passEntropy.innerHTML = Math.floor(len * Math.log2(wordList.length)) + '-bits,'
+    passEntropy.innerHTML = Math.floor(len * Math.log2(wordList.length)) + ' bits,'
   }
 
   passId.innerText = pass
@@ -304,7 +304,7 @@ function generateEff (selection) {
   pass = pass.replace(/ /g, '-')
   passId.innerText = pass
   passLength.innerHTML = '<span>' + pass.length + '</span>' + ' characters.'
-  passEntropy.innerHTML = Math.floor(len * Math.log2(wordList.length)) + '-bits,'
+  passEntropy.innerHTML = Math.floor(len * Math.log2(wordList.length)) + ' bits,'
 }
 
 function generateAlternate (selection) {
@@ -380,7 +380,7 @@ function generateAlternate (selection) {
   pass = pass.replace(/ /g, '-')
   passId.innerText = pass
   passLength.innerHTML = '<span>' + [...pass].length + '</span>' + ' characters.'
-  passEntropy.innerHTML = Math.floor(len * Math.log2(wordList.length)) + '-bits,'
+  passEntropy.innerHTML = Math.floor(len * Math.log2(wordList.length)) + ' bits,'
 }
 
 function isTooDark (hex) {
@@ -438,7 +438,7 @@ function generateColors () {
   pass = tmp
   const totalLen = pass.length + (len - 1)
   passLength.innerHTML = '<span>' + totalLen + '</span>' + ' characters.'
-  passEntropy.innerHTML = Math.floor(len * Math.log2(colorKeys.length)) + '-bits,'
+  passEntropy.innerHTML = Math.floor(len * Math.log2(colorKeys.length)) + ' bits,'
 }
 
 function generateBitcoin (selection) {
@@ -490,7 +490,7 @@ function generateBitcoin (selection) {
   pass = pass.replace(/ /g, '-')
   passId.innerText = pass
   passLength.innerHTML = '<span>' + pass.length + '</span>' + ' characters.'
-  passEntropy.innerHTML = Math.floor(len * Math.log2(wordList.length)) + '-bits,'
+  passEntropy.innerHTML = Math.floor(len * Math.log2(wordList.length)) + ' bits,'
 }
 
 function generateNinja () {
@@ -683,7 +683,7 @@ function generatePseudowords () {
 
   passId.innerText = pass
   passLength.innerHTML = pass.length + ' characters.'
-  passEntropy.innerHTML = ent + '-bits,'
+  passEntropy.innerHTML = ent + ' bits,'
 }
 
 function generateRandom () {
@@ -773,7 +773,7 @@ function generateRandom () {
   passLength.innerHTML = len + ' characters.'
   passId.removeAttribute('style') // from emoji
   passId.innerText = pass
-  passEntropy.innerHTML = Math.floor(len * Math.log2(s.length)) + '-bits,'
+  passEntropy.innerHTML = Math.floor(len * Math.log2(s.length)) + ' bits,'
 }
 
 function generateEmoji () {
@@ -789,7 +789,7 @@ function generateEmoji () {
   passLength.innerHTML = len + ' characters.'
   passId.style.fontFamily = 'Emoji'
   passId.innerText = pass
-  passEntropy.innerHTML = '~' + Math.floor(len * Math.log2(randomEmoji.length)) + '-bits,'
+  passEntropy.innerHTML = '~' + Math.floor(len * Math.log2(randomEmoji.length)) + ' bits,'
 }
 
 // Dicekey functions
