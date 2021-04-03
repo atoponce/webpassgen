@@ -574,14 +574,14 @@ function generateBabble () {
   // https://web.mit.edu/kenta/www/one/bubblebabble/spec/jrtrjwzi/draft-huima-01.txt
   const vowels = 'aeiouy'
   const consonants = 'bcdfghklmnprstvzx'
-  const bytes = Math.ceil(getEntropy()/8)
-  const entropy = new Uint8Array(bytes + (bytes % 2)) // Must be a multiple of 2 bytes
+  const bytes = Math.ceil(getEntropy() / 8)
+  const entropy = new Uint8Array(bytes)
   let pass = 'x'
   let checksum = 1
  
   for (let i = 0; i < entropy.length; i++) entropy[i] = secRand(256)
 
-  for (let i = 0; i < entropy.length + 1; i += 2) {
+  for (let i = 0; i <= entropy.length; i += 2) {
     if (i >= entropy.length) {
       pass += vowels[checksum % 6] + consonants[16] + vowels[Math.floor(checksum / 6)]
       break
@@ -592,7 +592,7 @@ function generateBabble () {
     pass += consonants[(byte1 >> 2) & 15]
     pass += vowels[((byte1 & 3) + Math.floor(checksum / 6)) % 6]
  
-    if ((i + 1) > entropy.length) break
+    if ((i + 1) >= entropy.length) break
  
     byte2 = entropy[i+1]
     pass += consonants[(byte2 >> 4) & 15]
@@ -626,21 +626,20 @@ function generateKpop () {
   return [pass, kpop.length, Math.floor(len * Math.log2(kpop.length))]
 }
 
-function generateProquint () {
+function generateProquints () {
   // https://arxiv.org/html/0901.4016
   const vowels = 'aiou'
   const consonants = 'bdfghjklmnprstvz'
-  let bytes = Math.ceil(getEntropy()/8)
-  bytes += (bytes % 2)
-
+  const entropy = getEntropy()
+  const len = Math.ceil(entropy / 16)
   let pass = consonants[secRand(16)]
 
-  for (let i = 0; i < bytes + 1; i += 2) {
+  for (let i = len; i > 0; i--) {
     pass += vowels[secRand(4)]
     pass += consonants[secRand(16)]
     pass += vowels[secRand(4)]
  
-    if ((i + 1) > bytes) break
+    if (i === 1) break
  
     pass += consonants[secRand(16)]
     pass += '-'
@@ -649,7 +648,7 @@ function generateProquint () {
   
   pass += consonants[secRand(16)]
   
-  return [pass, pass.length, bytes*8]
+  return [pass, pass.length, len * 16]
 }
 
 function generateSKey () {
@@ -673,7 +672,7 @@ function generatePseudowords () {
   if (pseudo === 'Apple, Inc.') ret = generateApple()
   else if (pseudo === 'Bubble Babble') ret = generateBabble()
   else if (pseudo === 'Korean K-pop') ret = generateKpop()
-  else if (pseudo === 'Proquints') ret = generateProquint()
+  else if (pseudo === 'Proquints') ret = generateProquints()
   else if (pseudo === 'Secret Ninja') ret = generateNinja()
 
   const pass = ret[0]
