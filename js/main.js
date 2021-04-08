@@ -828,7 +828,7 @@ function generateRandom () {
     pass += s[check % 37n]
   }
 
-  passLength.innerText = len + ' characters.'
+  passLength.innerText = pass.length + ' characters.'
   passId.removeAttribute('style') // from emoji
   passId.innerText = pass
   passEntropy.innerText = Math.floor(len * Math.log2(s.length)) + ' bits,'
@@ -847,7 +847,7 @@ function generateEmoji () {
   const len = Math.ceil(entropy / Math.log2(randomEmoji.length))
   const pass = generatePass(len, randomEmoji)
 
-  passLength.innerText = len + ' characters.'
+  passLength.innerText = pass.length + ' characters.'
   passId.style.fontFamily = 'Emoji'
   passId.innerText = pass
   passEntropy.innerText = Math.floor(len * Math.log2(randomEmoji.length)) + ' bits,'
