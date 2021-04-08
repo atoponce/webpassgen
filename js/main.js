@@ -248,7 +248,7 @@ function generateDiceware (selection) {
     }
 
     pass = pass.replace(/-$/g, '')
-    passEntropy.innerHTML = Math.floor(bits) + ' bits,'
+    passEntropy.innerText = Math.floor(bits) + ' bits,'
   }
   else {
     // Every other Diceware word list.
@@ -257,11 +257,11 @@ function generateDiceware (selection) {
     pass = generatePass(len, wordList, true)
     pass = pass.replace(/ /g, '-')
 
-    passEntropy.innerHTML = Math.floor(len * Math.log2(wordList.length)) + ' bits,'
+    passEntropy.innerText = Math.floor(len * Math.log2(wordList.length)) + ' bits,'
   }
 
   passId.innerText = pass
-  passLength.innerHTML = '<span>' + pass.length + '</span>' + ' characters.'
+  passLength.innerText = pass.length + ' characters.'
 }
 
 function generateEff (selection) {
@@ -303,8 +303,8 @@ function generateEff (selection) {
   pass = generatePass(len, wordList, true)
   pass = pass.replace(/ /g, '-')
   passId.innerText = pass
-  passLength.innerHTML = '<span>' + pass.length + '</span>' + ' characters.'
-  passEntropy.innerHTML = Math.floor(len * Math.log2(wordList.length)) + ' bits,'
+  passLength.innerText = pass.length + ' characters.'
+  passEntropy.innerText = Math.floor(len * Math.log2(wordList.length)) + ' bits,'
 }
 
 function generateAlternate (selection) {
@@ -379,8 +379,8 @@ function generateAlternate (selection) {
   pass = generatePass(len, wordList, true)
   pass = pass.replace(/ /g, '-')
   passId.innerText = pass
-  passLength.innerHTML = '<span>' + [...pass].length + '</span>' + ' characters.'
-  passEntropy.innerHTML = Math.floor(len * Math.log2(wordList.length)) + ' bits,'
+  passLength.innerText = [...pass].length + ' characters.'
+  passEntropy.innerText = Math.floor(len * Math.log2(wordList.length)) + ' bits,'
 }
 
 function isTooDark (hex) {
@@ -437,8 +437,8 @@ function generateColors () {
 
   pass = tmp
   const totalLen = pass.length + (len - 1)
-  passLength.innerHTML = '<span>' + totalLen + '</span>' + ' characters.'
-  passEntropy.innerHTML = Math.floor(len * Math.log2(colorKeys.length)) + ' bits,'
+  passLength.innerText = totalLen + ' characters.'
+  passEntropy.innerText = Math.floor(len * Math.log2(colorKeys.length)) + ' bits,'
 }
 
 function generateBitcoin (selection) {
@@ -480,17 +480,52 @@ function generateBitcoin (selection) {
 
   wordList = uniquesOnly(wordList)
 
-  const entropy = getEntropy()
-  const len = Math.ceil(entropy / Math.log2(wordList.length))
-  const passId = document.getElementById('btc-pass')
-  const passLength = document.getElementById('btc-length')
-  const passEntropy = document.getElementById('btc-entropy')
+  function _bytesToBinary (bytes) {
+    let total = 0n
+    for (let i = 0; i < bytes.length; i++) total |= BigInt(bytes[i] * 256**(bytes.length - i - 1))
+    return total.toString(2)
+  }
 
-  pass = generatePass(len, wordList, true)
-  pass = pass.replace(/ /g, '-')
-  passId.innerText = pass
-  passLength.innerHTML = '<span>' + pass.length + '</span>' + ' characters.'
-  passEntropy.innerHTML = Math.floor(len * Math.log2(wordList.length)) + ' bits,'
+  function _sha256 (bytes) {
+    const crypto = window.crypto || window.msCrypto
+
+    return crypto.subtle.digest('SHA-256', bytes)
+    .then(function (hash) {
+      return hash
+    })
+  }
+
+  const entropy = getEntropy()
+  const requiredEntropy = Math.ceil(entropy / 32) * 32 // Multiple of 32 bits, per the bip39 spec
+
+  const entropyBuffer = new Uint8Array(Math.ceil(requiredEntropy / 8))
+  for (let i = 0; i < entropyBuffer.length; i++) entropyBuffer[i] = secRand(256)
+
+  _sha256(entropyBuffer)
+  .then(function (digest) {
+    sha256Digest = new Uint8Array(digest)
+
+    const entropyBits = _bytesToBinary(entropyBuffer).padStart(requiredEntropy, '0')
+    const checkBits = _bytesToBinary(sha256Digest).padStart(256, '0').substr(0, 11 - (requiredEntropy % 11))
+    const allBits = entropyBits + checkBits
+
+    const bitWords = allBits.match(/(.{1,11})/g)
+    const words = bitWords.map(function (binary) {
+      const index = parseInt(binary, 2)
+      return wordList[index]
+    })
+    
+    const passId = document.getElementById('btc-pass')
+    const passLength = document.getElementById('btc-length')
+    const passEntropy = document.getElementById('btc-entropy')
+    const passCheck = document.getElementById('btc-check')
+
+    pass = words.join('-')
+    passId.innerText = pass
+    passLength.innerText = pass.length + ' characters.'
+    passEntropy.innerText = requiredEntropy + ' bits,'
+    passCheck.innerText = 'Checksum integrated.'
+  })
 }
 
 function generateNinja () {
@@ -571,7 +606,8 @@ function generateApple () {
 }
 
 function generateBabble () {
-  // https://web.mit.edu/kenta/www/one/bubblebabble/spec/jrtrjwzi/draft-huima-01.txt
+  // Spec: https://web.mit.edu/kenta/www/one/bubblebabble/spec/jrtrjwzi/draft-huima-01.txt
+  // Code based on https://github.com/kpalin/bubblepy
   const vowels = 'aeiouy'
   const consonants = 'bcdfghklmnprstvzx'
   const bytes = Math.ceil(getEntropy() / 8)
@@ -667,10 +703,14 @@ function generateSKey () {
 
 function generatePseudowords () {
   let ret = []
+  let displayCheck = false
   const pseudo = document.getElementById('pseudo-options').value
 
   if (pseudo === 'Apple, Inc.') ret = generateApple()
-  else if (pseudo === 'Bubble Babble') ret = generateBabble()
+  else if (pseudo === 'Bubble Babble') {
+    ret = generateBabble()
+    displayCheck = true
+  }
   else if (pseudo === 'Korean K-pop') ret = generateKpop()
   else if (pseudo === 'Proquints') ret = generateProquints()
   else if (pseudo === 'Secret Ninja') ret = generateNinja()
@@ -680,18 +720,25 @@ function generatePseudowords () {
   const passId = document.getElementById('pseudo-pass')
   const passLength = document.getElementById('pseudo-length')
   const passEntropy = document.getElementById('pseudo-entropy')
+  const passCheck = document.getElementById('pseudo-check')
 
   passId.innerText = pass
-  passLength.innerHTML = pass.length + ' characters.'
-  passEntropy.innerHTML = ent + ' bits,'
+  passLength.innerText = pass.length + ' characters.'
+  passEntropy.innerText = ent + ' bits,'
+
+  if (displayCheck) passCheck.innerText = 'Checksum integrated.'
+  else passCheck.innerText = ''
 }
 
 function generateRandom () {
   let s = ''
+  let check = ''
+  let displayCheck = false
   const entropy = getEntropy()
   const passId = document.getElementById('random-pass')
   const passLength = document.getElementById('random-length')
   const passEntropy = document.getElementById('random-entropy')
+  const passCheck = document.getElementById('random-check')
   const option = document.getElementById('random-options').value
 
   switch (option) {
@@ -717,7 +764,7 @@ function generateRandom () {
     case 'Base36':
       s = '0123456789abcdefghijklmnopqrstuvwxyz'
       break
-    case 'Base32':
+    case 'Base32': // Crockford's base32
       s = '0123456789abcdefghjkmnpqrstvwxyz'
       break
     case 'Base26':
@@ -768,12 +815,26 @@ function generateRandom () {
   }
 
   const len = Math.ceil(entropy / Math.log2(s.length))
-  const pass = generatePass(len, s, false)
+  pass = generatePass(len, s, false)
 
-  passLength.innerHTML = len + ' characters.'
+  if (option === 'Base32') {
+    // Add Crockford's modulo 37 checksum
+    let check = 0n
+    s += '*~$=u'
+    displayCheck = true
+
+    for (let i = 0; i < pass.length; i++) check += BigInt(s.indexOf(pass[i]) * 32**(pass.length - i - 1))
+
+    pass += s[check % 37n]
+  }
+
+  passLength.innerText = len + ' characters.'
   passId.removeAttribute('style') // from emoji
   passId.innerText = pass
-  passEntropy.innerHTML = Math.floor(len * Math.log2(s.length)) + ' bits,'
+  passEntropy.innerText = Math.floor(len * Math.log2(s.length)) + ' bits,'
+
+  if (displayCheck) passCheck.innerText = 'Checksum integrated.'
+  else passCheck.innerText = ''
 }
 
 function generateEmoji () {
@@ -786,10 +847,10 @@ function generateEmoji () {
   const len = Math.ceil(entropy / Math.log2(randomEmoji.length))
   const pass = generatePass(len, randomEmoji)
 
-  passLength.innerHTML = len + ' characters.'
+  passLength.innerText = len + ' characters.'
   passId.style.fontFamily = 'Emoji'
   passId.innerText = pass
-  passEntropy.innerHTML = '~' + Math.floor(len * Math.log2(randomEmoji.length)) + ' bits,'
+  passEntropy.innerText = Math.floor(len * Math.log2(randomEmoji.length)) + ' bits,'
 }
 
 // Dicekey functions

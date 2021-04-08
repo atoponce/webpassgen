@@ -81,6 +81,12 @@ button:hover {
     left: 50%;
     position: absolute;
 }
+.checksum {
+    bottom: 5px;
+    right: 5px;
+    font-size: 12px;
+    position: absolute;
+}
 .cell {
     border: 1px solid black;
     display: table-cell;
