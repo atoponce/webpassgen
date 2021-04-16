@@ -524,24 +524,8 @@ function generateBitcoin (selection) {
     passId.innerText = pass
     passLength.innerText = pass.length + ' characters.'
     passEntropy.innerText = requiredEntropy + ' bits,'
-    passCheck.innerText = 'Checksum integrated.'
+    passCheck.innerText = 'Integrated checksum.'
   })
-}
-
-function generateNinja () {
-  let pass = ''
-  const ninja = ['ka', 'zu', 'mi', 'te', 'ku', 'lu', 'ji', 'ri', 'ki', 'zu', 'me', 'ta', 'rin',
-    'to', 'mo', 'no', 'ke', 'shi', 'ari', 'chi', 'do', 'ru', 'mei', 'na', 'fu', 'zi']
-  const entropy = getEntropy()
-  const len = Math.ceil(entropy / Math.log2(ninja.length))
-
-  for (let i = 0; i < len; i++) {
-    pass += ninja[secRand(ninja.length)]
-
-    if (i % 3 === 2 && i !== len - 1) pass += '-'
-  }
-
-  return [pass, ninja.length, Math.floor(len * Math.log2(ninja.length))]
 }
 
 function generateApple () {
@@ -643,23 +627,38 @@ function generateBabble () {
   return [pass, pass.length, entropy.length * 8]
 }
 
-function generateKpop () {
-  // 64 unique words = 6 bits of entropy per word
-  const kpop = ['A', 'Ah', 'Bae', 'Bin', 'Bo', 'Choi', 'Chul', 'Da', 'Do', 'Dong', 'Eun', 'Gi',
-    'Gun', 'Ha', 'Hae', 'Hee', 'Ho', 'Hu', 'Hwa', 'Hwan', 'Hye', 'Hyo', 'Hyun', 'Il', 'In', 'Ja',
-    'Jae', 'Ji', 'Jin', 'Jong', 'Joo', 'Joon', 'Ju', 'Jun', 'Jung', 'Ki', 'Kun', 'Kyu', 'Lee', 'Mi',
-    'Min', 'Moon', 'Nam', 'Ok', 'Park', 'Rin', 'Seo', 'Seul', 'Shi', 'Sik', 'So', 'Song', 'Soo',
-    'Su', 'Sun', 'Sung', 'Won', 'Woo', 'Ye', 'Yeon', 'Yoo', 'Yu', 'Yul', 'Yun']
+function generateMunemo () {
+  // https://github.com/jmettraux/munemo
+  const munemo = [
+    'ba',  'bi',  'bu',  'be',  'bo',
+    'cha', 'chi', 'chu', 'che', 'cho',
+    'da',  'di',  'du',  'de',  'do',
+    'fa',  'fi',  'fu',  'fe',  'fo',
+    'ga',  'gi',  'gu',  'ge',  'go',
+    'ha',  'hi',  'hu',  'he',  'ho',
+    'ja',  'ji',  'ju',  'je',  'jo',
+    'ka',  'ki',  'ku',  'ke',  'ko',
+    'la',  'li',  'lu',  'le',  'lo',
+    'ma',  'mi',  'mu',  'me',  'mo',
+    'na',  'ni',  'nu',  'ne',  'no',
+    'pa',  'pi',  'pu',  'pe',  'po',
+    'ra',  'ri',  'ru',  're',  'ro',
+    'sa',  'si',  'su',  'se',  'so',
+    'sha', 'shi', 'shu', 'she', 'sho',
+    'ta',  'ti',  'tu',  'te',  'to',
+    'tsa', 'tsi', 'tsu', 'tse', 'tso',
+    'wa',  'wi',  'wu',  'we',  'wo',
+    'ya',  'yi',  'yu',  'ye',  'yo',
+    'za',  'zi',  'zu',  'ze',  'zo'
+  ]
   const entropy = getEntropy()
-  const len = Math.ceil(entropy / Math.log2(kpop.length))
+  const bits = Math.log2(100)
+  const numWords = Math.ceil(entropy/bits)
   let pass = ''
 
-  for (let i = 0; i < len; i++) {
-    pass += kpop[secRand(kpop.length)]
-    if (i % 2 === 1 && i !== len - 1) pass += '-'
-  }
+  for (let i = 0; i < numWords; i++) pass += munemo[secRand(100)]
 
-  return [pass, kpop.length, Math.floor(len * Math.log2(kpop.length))]
+  return [pass, pass.length, Math.floor(numWords * bits)]
 }
 
 function generateProquints () {
@@ -687,6 +686,114 @@ function generateProquints () {
   return [pass, pass.length, len * 16]
 }
 
+function generateLetterblock () {
+  // https://www.draketo.de/software/letterblock-diceware
+  // Diverged from above with:
+  //  - '$' and '%' appended to make the checksum delimeters 6 characters
+  //  - Treating digits as leet-speak
+  function _isDigit (str) {
+    return str.length === 1 && str.match(/[0-9]/)
+  }
+
+  function _replaceDigit (str) {
+    if (str === '0') return 'o'
+    else if (str === '1') return 'l'
+    else if (str === '2') return 'z'
+    else if (str === '3') return 'e'
+    else if (str === '4') return 'a'
+    else if (str === '5') return 's'
+    else if (str === '6') return 'b'
+    else if (str === '7') return 't'
+    else if (str === '8') return 'b'
+    else if (str === '9') return 'g'
+  }
+
+  function _getCombos (arr, res, ctr) {
+    const ptr0 = ctr.toString(2).padStart(4, '0')[0]
+    const ptr1 = ctr.toString(2).padStart(4, '0')[1]
+    const ptr2 = ctr.toString(2).padStart(4, '0')[2]
+    const ptr3 = ctr.toString(2).padStart(4, '0')[3]
+
+    if (arr[0][ptr0] !== undefined && arr[1][ptr1] !== undefined && arr[2][ptr2] !== undefined && arr[3][ptr3] !== undefined) {
+      res.push(arr[0][ptr0] + arr[1][ptr1] + arr[2][ptr2] + arr[3][ptr3])
+    }
+
+    ctr++
+
+    if (ctr < 16) _getCombos(arr, res, ctr)
+  }
+
+  function _calculateScores (arr) {
+    let results = {}
+
+    for (let i = 0; i < arr.length; i++) {
+      let str = arr[i]
+      let score = 0
+
+      for (let j = 0; j < str.length - 1; j++) {
+        if (_isDigit(str[j])) score += bigrams[_replaceDigit(str[j]) + str[j + 1].toLowerCase()]
+        else if (_isDigit(str[j + 1])) score += bigrams[str[j].toLowerCase() + _replaceDigit(str[j + 1])]
+        else score += bigrams[str[j].toLowerCase() + str[j + 1].toLowerCase()]
+      }
+
+      results[str] = score
+    }
+
+    return Object.keys(results).reduce(function(a, b){ return results[a] > results[b] ? a : b })
+  }
+
+  const entropy = getEntropy()
+  const letters = [
+    ['1',  'A',  'J',  'a',  'h', 'px'],
+    ['26', 'BC', 'LR', 'bc', 'i', 'r'],
+    ['37', 'DH', 'N',  'd',  'j', 't'],
+    ['48', 'E',  'PX', 'e',  'k', 'u'],
+    ['59', 'FK', 'U',  'f',  'm', 'v'],
+    ['0',  'QM', 'VW', 'gq', 'o', 'w']
+  ]
+  const delimiters = '.+-=@%'
+  const blockEntropy = 4 * Math.floor(Math.log2(36))
+  const totalEntropy = Math.ceil(entropy / blockEntropy) * blockEntropy
+  const numBlocks = (totalEntropy / blockEntropy)
+  const blocks = []
+  const checks = []
+
+  let pw = ''
+
+  for (let i = 0; i < numBlocks; i++) {
+    const jail = []
+    const combos = []
+    let block = ''
+    let check = 0
+
+    for (let j = 0; j < 4; j++) {
+      const randNum = secRand(36)
+      const row = Math.floor(randNum / 6)
+      const col = randNum % 6
+
+      let cell = letters[row][col]
+      jail.push(cell)
+
+      check += (row + 1) // Indexed at 1 per the original proposal
+    }
+
+    _getCombos(jail, combos, 0)
+
+    let winner = _calculateScores(combos)
+
+    blocks.push(winner)
+    checks.push(check)
+  }
+
+  for (let i = 0; i < blocks.length; i++) {
+    pw += blocks[i]
+
+    if (checks[i + 1] !== undefined) pw += delimiters[(checks[i] + checks[i + 1]) % 6]
+  }
+
+  return [pw, pw.length, totalEntropy]
+}
+
 function generateSKey () {
   const wordList = uniquesOnly(pseudoSKey)
   const entropy = getEntropy()
@@ -711,9 +818,12 @@ function generatePseudowords () {
     ret = generateBabble()
     displayCheck = true
   }
-  else if (pseudo === 'Korean K-pop') ret = generateKpop()
+  else if (pseudo === 'Letterblock Diceware') {
+    ret = generateLetterblock()
+    displayCheck = true
+  }
+  else if (pseudo === 'Munemo') ret = generateMunemo()
   else if (pseudo === 'Proquints') ret = generateProquints()
-  else if (pseudo === 'Secret Ninja') ret = generateNinja()
 
   const pass = ret[0]
   const ent = ret[2]
@@ -726,7 +836,7 @@ function generatePseudowords () {
   passLength.innerText = pass.length + ' characters.'
   passEntropy.innerText = ent + ' bits,'
 
-  if (displayCheck) passCheck.innerText = 'Checksum integrated.'
+  if (displayCheck) passCheck.innerText = 'Integrated checksum.'
   else passCheck.innerText = ''
 }
 
@@ -833,7 +943,7 @@ function generateRandom () {
   passId.innerText = pass
   passEntropy.innerText = Math.floor(len * Math.log2(s.length)) + ' bits,'
 
-  if (displayCheck) passCheck.innerText = 'Checksum integrated.'
+  if (displayCheck) passCheck.innerText = 'Integrated checksum.'
   else passCheck.innerText = ''
 }
 

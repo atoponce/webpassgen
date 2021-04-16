@@ -17,7 +17,7 @@ select {
     font-size: 12px;
     height: 25px;
     padding: 3px 22px 3px 6px;
-    width: 120px;
+    width: 165px;
 }
 select option {
     background-color: #dddddd;
@@ -125,7 +125,7 @@ button:hover {
     color: black;
     content: '▶';
     font-size: 13px;
-    left: 100px;
+    left: 145px;
     pointer-events: none;
     position: absolute;
     transform: rotate(90deg);
