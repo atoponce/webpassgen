@@ -629,36 +629,44 @@ function generateBabble () {
 
 function generateMunemo () {
   // https://github.com/jmettraux/munemo
-  const munemo = [
-    'ba',  'bi',  'bu',  'be',  'bo',
-    'cha', 'chi', 'chu', 'che', 'cho',
-    'da',  'di',  'du',  'de',  'do',
-    'fa',  'fi',  'fu',  'fe',  'fo',
-    'ga',  'gi',  'gu',  'ge',  'go',
-    'ha',  'hi',  'hu',  'he',  'ho',
-    'ja',  'ji',  'ju',  'je',  'jo',
-    'ka',  'ki',  'ku',  'ke',  'ko',
-    'la',  'li',  'lu',  'le',  'lo',
-    'ma',  'mi',  'mu',  'me',  'mo',
-    'na',  'ni',  'nu',  'ne',  'no',
-    'pa',  'pi',  'pu',  'pe',  'po',
-    'ra',  'ri',  'ru',  're',  'ro',
-    'sa',  'si',  'su',  'se',  'so',
-    'sha', 'shi', 'shu', 'she', 'sho',
-    'ta',  'ti',  'tu',  'te',  'to',
-    'tsa', 'tsi', 'tsu', 'tse', 'tso',
-    'wa',  'wi',  'wu',  'we',  'wo',
-    'ya',  'yi',  'yu',  'ye',  'yo',
-    'za',  'zi',  'zu',  'ze',  'zo'
-  ]
-  const entropy = getEntropy()
-  const bits = Math.log2(100)
-  const numWords = Math.ceil(entropy/bits)
-  let pass = ''
+  function _tos(num, str) {
+    const munemo = [
+      'ba',  'bi',  'bu',  'be',  'bo',  'cha', 'chi', 'chu', 'che', 'cho',
+      'da',  'di',  'du',  'de',  'do',  'fa',  'fi',  'fu',  'fe',  'fo',
+      'ga',  'gi',  'gu',  'ge',  'go',  'ha',  'hi',  'hu',  'he',  'ho',
+      'ja',  'ji',  'ju',  'je',  'jo',  'ka',  'ki',  'ku',  'ke',  'ko',
+      'la',  'li',  'lu',  'le',  'lo',  'ma',  'mi',  'mu',  'me',  'mo',
+      'na',  'ni',  'nu',  'ne',  'no',  'pa',  'pi',  'pu',  'pe',  'po',
+      'ra',  'ri',  'ru',  're',  'ro',  'sa',  'si',  'su',  'se',  'so',
+      'sha', 'shi', 'shu', 'she', 'sho', 'ta',  'ti',  'tu',  'te',  'to',
+      'tsa', 'tsi', 'tsu', 'tse', 'tso', 'wa',  'wi',  'wu',  'we',  'wo',
+      'ya',  'yi',  'yu',  'ye',  'yo',  'za',  'zi',  'zu',  'ze',  'zo'
+    ]
 
-  for (let i = 0; i < numWords; i++) pass += munemo[secRand(100)]
+    mod = num % 100n
+    rem = num / 100n
+    str = munemo[mod] + str
 
-  return [pass, pass.length, Math.floor(numWords * bits)]
+    if (rem > 0) return _tos(rem, str)
+    else return str
+  }
+
+  const minEntropy = getEntropy()
+  const numBytes = Math.ceil(minEntropy / 8)
+  const isNegative = secRand(2)
+
+  let num = 0n
+
+  for (let i = 0; i < numBytes; i++) num += BigInt(secRand(256) * (256 ** i))
+
+  let pass = _tos(num, '')
+
+  // 'xa' = -1 * num:
+  //    fowohazehikorawihomeho =  1989259826396086294829
+  //  xafowohazehikorawihomeho = -1989259826396086294829
+  if (isNegative) pass = 'xa' + pass
+
+  return [pass, pass.length, numBytes * 8 + 1] // One more bit for signed integers
 }
 
 function generateProquints () {
