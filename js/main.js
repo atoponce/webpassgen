@@ -656,6 +656,7 @@ function generateMunemo () {
 
   let num = 0n
 
+  // Half the key space is negative, half is non-negative
   for (let i = 0; i < minEntropy - 1; i++) num += BigInt(secRand(2) * (2 ** i))
 
   let pass = _tos(num, '')
@@ -665,7 +666,7 @@ function generateMunemo () {
   //  xafowohazehikorawihomeho = -1989259826396086294829
   if (isNegative) pass = 'xa' + pass
 
-  return [pass, pass.length, minEntropy] // One more bit for signed integers
+  return [pass, pass.length, minEntropy]
 }
 
 function generateProquints () {
