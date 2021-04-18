@@ -652,12 +652,11 @@ function generateMunemo () {
   }
 
   const minEntropy = getEntropy()
-  const numBytes = Math.ceil(minEntropy / 8)
   const isNegative = secRand(2)
 
   let num = 0n
 
-  for (let i = 0; i < numBytes; i++) num += BigInt(secRand(256) * (256 ** i))
+  for (let i = 0; i < minEntropy - 1; i++) num += BigInt(secRand(256) * (2 ** i))
 
   let pass = _tos(num, '')
 
@@ -666,7 +665,7 @@ function generateMunemo () {
   //  xafowohazehikorawihomeho = -1989259826396086294829
   if (isNegative) pass = 'xa' + pass
 
-  return [pass, pass.length, numBytes * 8 + 1] // One more bit for signed integers
+  return [pass, pass.length, minEntropy] // One more bit for signed integers
 }
 
 function generateProquints () {
