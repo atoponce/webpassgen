@@ -656,7 +656,7 @@ function generateMunemo () {
 
   let num = 0n
 
-  for (let i = 0; i < minEntropy - 1; i++) num += BigInt(secRand(256) * (2 ** i))
+  for (let i = 0; i < minEntropy - 1; i++) num += BigInt(secRand(2) * (2 ** i))
 
   let pass = _tos(num, '')
 
