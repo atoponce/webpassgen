@@ -248,6 +248,14 @@ function generateDiceware (selection) {
     }
 
     pass = pass.replace(/-$/g, '')
+
+    const tmpArr = pass.split('-')
+
+    if (tmpArr.length % 2 === 1) {
+      tmpArr.unshift(tmpArr.pop())
+      pass = tmpArr.join('-')
+    }
+
     passEntropy.innerText = Math.floor(bits) + ' bits,'
   }
   else {
