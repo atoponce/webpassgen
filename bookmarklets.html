@@ -32,7 +32,7 @@
       </div>
       <div id="content">
         <p>These bookmarklets are <strong>offline</strong> password generators. First inspect the source code to ensure it's doing what you expect and that it's fully offline.</p>
-        <p>Passphrases, such as Diceware or EFF, aren't provided due to their size as well as the requirement to generate completely offline. The Unicode generators are also not provided.</p>
+        <p>Passphrases, such as Diceware or EFF, and the Letterblock Pseudowords aren't provided due to their size as well as the requirement to generate completely offline. The Unicode generators are also not provided.</p>
         <p>The JavaScript "window.alert()" function is used to give you the password. You may need to tweak your popup blocking preferences to see the generated password.</p>
         <p>Drag and drop any or all links to your bookmark toolbar.</p>
         <h4>Pseudoword Bookmarklets</h4>
@@ -41,35 +41,23 @@
             <!-- To save space in readability, use tabs in each bookmarklet, not spaces -->
             <td> <!-- Apple, Inc. Pseudowords -->
 <a class="bookmarklet" href='javascript:(function() {
-String.prototype.rtrim=function(){return this.replace(/\s+$/g, "");};
-function secRand(count) {
-	let min = (-count >>> 0) % count;
-	let rand = new Uint32Array(1);
+function secRand (count) {
+	const min = (-count >>> 0) % count;
+	const rand = new Uint32Array(1);
 	const crypto = window.crypto || window.msCrypto;
-	do {
-		crypto.getRandomValues(rand);
-	} while (rand[0] < min);
+	do crypto.getRandomValues(rand);
+	while (rand[0] < min);
 	return rand[0] % count;
 }
-function generatePass(len, set, spaces) {
+function generatePass (len, set) {
 	let pass = "";
 	let passArr = "";
-	if (typeof set == "string") {
-		passArr = set.split("");
-	} else {
-		passArr = set;
-	}
-	for (i = len; i > 0; i--) {
-		if (spaces) {
-			pass += passArr[secRand(set.length)];
-			pass += " ";
-		} else {
-			pass += passArr[secRand(set.length)];
-		}
-	}
-	return pass.rtrim();
+	if (typeof set == "string") passArr = set.split("");
+	else passArr = set;
+	for (i = len; i > 0; i--) pass += passArr[secRand(set.length)];
+	return pass;
 }
-function generateApple() {
+function generateApple () {
 	function _apple(n) {
 		return Math.floor(Math.log2((6*n-1) * 19**(4*n-1) * 6**(2*n) * 20 * n));
 	}
@@ -77,11 +65,9 @@ function generateApple() {
 	let digits = "0123456789";
 	let vowels = "aeiouy";
 	let consonants = "bcdfghjkmnpqrstvwxz";
-	let entropy = 70;
+	const entropy = 70;
 	let n = 1;
-	while (_apple(n) <= entropy) {
-		n++;
-	}
+	while (_apple(n) <= entropy) n++;
 	for (let i = 0; i < n; i++) {
 		pass[6*i]   = generatePass(1, consonants);
 		pass[6*i+1] = generatePass(1, vowels);
@@ -94,19 +80,13 @@ function generateApple() {
 	let charLoc = 0;
 	let edge = secRand(2*n);
 	let digit = generatePass(1, digits);
-	if (edge % 2 == 0) {
-		digitLoc = 3*edge;
-	} else {
-		digitLoc = 3*edge+2;
-	}
+	if (edge % 2 == 0) digitLoc = 3*edge;
+	else digitLoc = 3*edge+2;
 	pass[digitLoc] = digit;
-	do {
-		charLoc = secRand(pass.length);
-	} while (charLoc == digitLoc);
+	do charLoc = secRand(pass.length);
+	while (charLoc == digitLoc);
 	pass[charLoc] = pass[charLoc].toUpperCase();
-	for (let i = n - 1; i > 0; i--) {
-		pass.splice(6 * i, 0, "-");
-	}
+	for (let i = n - 1; i > 0; i--) pass.splice(6 * i, 0, "-");
 	return pass.join("");
 }
 window.alert(generateApple());
@@ -114,155 +94,123 @@ window.alert(generateApple());
             </td>
             <td> <!-- Bubble Babble Pseudowords -->
 <a class="bookmarklet" href='javascript:(function() {
-String.prototype.rtrim=function(){return this.replace(/\s+$/g, "");};
-function secRand(count) {
-	let min = (-count >>> 0) % count;
-	let rand = new Uint32Array(1);
+function secRand (count) {
+	const min = (-count >>> 0) % count;
+	const rand = new Uint32Array(1);
 	const crypto = window.crypto || window.msCrypto;
-	do {
-		crypto.getRandomValues(rand);
-	} while (rand[0] < min);
+	do crypto.getRandomValues(rand);
+	while (rand[0] < min);
 	return rand[0] % count;
 }
-function generatePass(len, set, spaces) {
+function generatePass (len, set) {
 	let pass = "";
 	let passArr = "";
-	if (typeof set == "string") {
-		passArr = set.split("");
-	} else {
-		passArr = set;
-	}
-	for (let i = len; i > 0; i--) {
-		if (spaces) {
-			pass += passArr[secRand(set.length)];
-			pass += " ";
-		} else {
-			pass += passArr[secRand(set.length)];
-		}
-	}
-	return pass.rtrim();
+	if (typeof set == "string") passArr = set.split("");
+	else passArr = set;
+	for (let i = len; i > 0; i--) pass += passArr[secRand(set.length)];
+	return pass.trim();
 }
-function generateBabble() {
-	let pass = [];
-	let vowels = "aeiouy";
-	let consonants = "bcdfghklmnprstvzx";
-	let entropy = 70;
-	let vowelEnt = Math.log2(vowels.length);
-	let consEnt = Math.log2(consonants.length);
-	let outerEnt = (2 * consEnt) + (2 * vowelEnt);
-	let innerEnt = (3 * consEnt) + (2 * vowelEnt);
-	entropy = entropy - (2 * outerEnt);
-	let len = 3;
-	let totalEnt = outerEnt + (len * innerEnt) + outerEnt;
-	for (let i = 0; i < len + 2; i++) {
-		for (let j = 0; j < 5; j++) {
-			if (j % 2 == 0) {
-				pass[(5 * i) + j] = generatePass(1, consonants);
-			} else {
-				pass[(5 * i) + j] = generatePass(1, vowels);
-			}
+function generateBabble () {
+	const vowels = "aeiouy";
+	const consonants = "bcdfghklmnprstvzx";
+	const bytes = Math.ceil(70 / 8);
+	const entropy = new Uint8Array(bytes);
+	let pass = "x";
+	let checksum = 1;
+	for (let i = 0; i < entropy.length; i++) entropy[i] = secRand(256);
+	for (let i = 0; i <= entropy.length; i += 2) {
+		if (i >= entropy.length) {
+			pass += vowels[checksum % 6] + consonants[16] + vowels[Math.floor(checksum / 6)];
+			break;
 		}
+		byte1 = entropy[i];
+		pass += vowels[(((byte1 >> 6) & 3) + checksum) % 6];
+		pass += consonants[(byte1 >> 2) & 15];
+		pass += vowels[((byte1 & 3) + Math.floor(checksum / 6)) % 6];
+		if ((i + 1) >= entropy.length) break;
+		byte2 = entropy[i+1];
+		pass += consonants[(byte2 >> 4) & 15];
+		pass += "-";
+		pass += consonants[byte2 & 15];
+		checksum = ((checksum * 5) + (byte1 * 7) + byte2) % 36;
 	}
-	pass[0] = "x";
-	pass[pass.length-1] = "x";
-	for (let i = pass.length; i > 0; i -= 5) {
-		pass.splice(i, 0, "-");
-	}
-	pass.pop();
-	return pass.join("");
+	pass += "x";
+	return pass;
 }
 window.alert(generateBabble());
-})();'>Bubble Babble</a>
+})();'>Bubble Babble (Checksum)</a>
             </td>
-            <td> <!-- Korean K-pop Pseudowords -->
+            <td> <!-- Munemo Pseudowords -->
 <a class="bookmarklet" href='javascript:(function() {
-String.prototype.rtrim=function(){return this.replace(/\s+$/g, "");};
-function secRand(count) {
-	let min = (-count >>> 0) % count;
-	let rand = new Uint32Array(1);
+function secRand (count) {
+	const min = (-count >>> 0) % count;
+	const rand = new Uint32Array(1);
 	const crypto = window.crypto || window.msCrypto;
-	do {
-		crypto.getRandomValues(rand);
-	} while (rand[0] < min);
+	do crypto.getRandomValues(rand);
+	while (rand[0] < min);
 	return rand[0] % count;
 }
-function generatePass(len, set, spaces) {
-	let pass = "";
-	let passArr = "";
-	if (typeof set == "string") {
-		passArr = set.split("");
-	} else {
-		passArr = set;
+function generateMunemo () {
+	function _tos(num, str) {
+		const munemo = [
+			"ba",  "bi",  "bu",  "be",  "bo",  "cha", "chi", "chu", "che", "cho",
+			"da",  "di",  "du",  "de",  "do",  "fa",  "fi",  "fu",  "fe",  "fo",
+			"ga",  "gi",  "gu",  "ge",  "go",  "ha",  "hi",  "hu",  "he",  "ho",
+			"ja",  "ji",  "ju",  "je",  "jo",  "ka",  "ki",  "ku",  "ke",  "ko",
+			"la",  "li",  "lu",  "le",  "lo",  "ma",  "mi",  "mu",  "me",  "mo",
+			"na",  "ni",  "nu",  "ne",  "no",  "pa",  "pi",  "pu",  "pe",  "po",
+			"ra",  "ri",  "ru",  "re",  "ro",  "sa",  "si",  "su",  "se",  "so",
+			"sha", "shi", "shu", "she", "sho", "ta",  "ti",  "tu",  "te",  "to",
+			"tsa", "tsi", "tsu", "tse", "tso", "wa",  "wi",  "wu",  "we",  "wo",
+			"ya",  "yi",  "yu",  "ye",  "yo",  "za",  "zi",  "zu",  "ze",  "zo"
+		];
+		mod = num % 100n;
+		rem = num / 100n;
+		str = munemo[mod] + str;
+		if (rem > 0) return _tos(rem, str);
+		else return str;
 	}
-	for (let i = len; i > 0; i--) {
-		if (spaces) {
-			pass += passArr[secRand(set.length)];
-			pass += " ";
-		} else {
-			pass += passArr[secRand(set.length)];
-		}
-	}
-	return pass.rtrim();
-}
-function generateKpop() {
-	let kpop = ["A", "Ah", "Bae", "Bin", "Bo", "Choi", "Chul", "Da", "Do", "Dong", "Eun", "Gi", "Gun", "Ha", "Hae", "Hee", "Ho", "Hu", "Hwa", "Hwan", "Hye", "Hyo", "Hyun", "Il", "In", "Ja", "Jae", "Ji", "Jin", "Jong", "Joo", "Joon", "Ju", "Jun", "Jung", "Ki", "Kun", "Kyu", "Lee", "Mi", "Min", "Moon", "Nam", "Ok", "Park", "Rin", "Seo", "Seul", "Shi", "Sik", "So", "Song", "Soo", "Su", "Sun", "Sung", "Won", "Woo", "Ye", "Yeon", "Yoo", "Yu", "Yul", "Yun"];
-	let entropy = 70;
-	let len = Math.ceil(entropy / Math.log2(kpop.length));
-	let pass = "";
-	for (let i = 0; i < len; i++) {
-		pass += kpop[secRand(len)];
-		if (i % 2 == 1 && i != len - 1) {
-			pass += "-";
-		}
-	}
+	const minEntropy = 70;
+	const isNegative = secRand(2);
+	let num = 0n;
+	for (let i = 0; i < minEntropy - 1; i++) num += BigInt(secRand(2) * (2 ** i));
+	let pass = _tos(num, "");
+	if (isNegative) pass = "xa" + pass;
 	return pass;
 }
-window.alert(generateKpop());
-})();'>Korean K-pop</a>
+window.alert(generateMunemo());
+})();'>Munemo</a>
             </td>
-            <td> <!-- Secret Ninja Pseudowords -->
+            <td> <!-- Proquints Pseudowords -->
 <a class="bookmarklet" href='javascript:(function() {
-String.prototype.rtrim=function(){return this.replace(/\s+$/g, "");};
-function secRand(count) {
-	let min = (-count >>> 0) % count;
-	let rand = new Uint32Array(1);
+function secRand (count) {
+	const min = (-count >>> 0) % count;
+	const rand = new Uint32Array(1);
 	const crypto = window.crypto || window.msCrypto;
-	do {
-		crypto.getRandomValues(rand);
-	} while (rand[0] < min);
+	do crypto.getRandomValues(rand);
+	while (rand[0] < min);
 	return rand[0] % count;
 }
-function generatePass(len, set, spaces) {
-	let pass = "";
-	let passArr = "";
-	if (typeof set == "string") {
-		passArr = set.split("");
-	} else {
-		passArr = set;
-	}
+function generateProquints () {
+	const vowels = "aiou";
+	const consonants = "bdfghjklmnprstvz";
+	const entropy = 70;
+	const len = Math.ceil(entropy / 16);
+	let pass = consonants[secRand(16)];
 	for (let i = len; i > 0; i--) {
-		if (spaces) {
-			pass += passArr[secRand(set.length)];
-			pass += " ";
-		} else {
-			pass += passArr[secRand(set.length)];
-		}
+		pass += vowels[secRand(4)];
+		pass += consonants[secRand(16)];
+		pass += vowels[secRand(4)];
+		if (i === 1) break;
+		pass += consonants[secRand(16)];
+		pass += "-";
+		pass += consonants[secRand(16)];
 	}
-	return pass.rtrim();
-}
-function generateNinja() {
-	let ninja = ["ka", "zu", "mi", "te", "ku", "lu", "ji", "ri", "ki", "zu", "me", "ta", "rin", "to", "mo", "no", "ke", "shi", "ari", "chi", "do", "ru", "mei", "na", "fu", "zi"];
-	let entropy = 70;
-	let len = Math.ceil(entropy / Math.log2(ninja.length));
-	let pass = "";
-	for (i=0; i<len; i++) {
-		pass += ninja[secRand(len)];
-		if (i%3 == 2 && i!=len-1) pass += "-";
-	}
+	pass += consonants[secRand(16)];
 	return pass;
 }
-window.alert(generateNinja());
-})();'>Secret Ninja</a>
+window.alert(generateProquints());
+})();'>Proquints</a>
             </td>
           </tr>
         </table>
@@ -271,37 +219,25 @@ window.alert(generateNinja());
           <tr>
             <td> <!-- Base-94 Random Passwords -->
 <a class="bookmarklet" href='javascript:(function() {
-String.prototype.rtrim=function(){return this.replace(/\s+$/g, "");};
-function secRand(count) {
-	let min = (-count >>> 0) % count;
-	let rand = new Uint32Array(1);
+function secRand (count) {
+	const min = (-count >>> 0) % count;
+	const rand = new Uint32Array(1);
 	const crypto = window.crypto || window.msCrypto;
-	do {
-		crypto.getRandomValues(rand);
-	} while (rand[0] < min);
+	do crypto.getRandomValues(rand);
+	while (rand[0] < min);
 	return rand[0] % count;
 }
-function generatePass(len, set, spaces) {
+function generatePass (len, set) {
 	let pass = "";
 	let passArr = "";
-	if (typeof set == "string") {
-		passArr = set.split("");
-	} else {
-		passArr = set;
-	}
-	for (let i = len; i > 0; i--) {
-		if (spaces) {
-			pass += passArr[secRand(set.length)];
-			pass += " ";
-		} else {
-			pass += passArr[secRand(set.length)];
-		}
-	}
-	return pass.rtrim();
+	if (typeof set == "string") passArr = set.split("");
+	else passArr = set;
+	for (let i = len; i > 0; i--) pass += passArr[secRand(set.length)];
+	return pass.trim();
 }
-function generateRandom() {
+function generateRandom () {
 	let s = "";
-	let entropy = 70;
+	const entropy = 70;
 	for (i=0; i<94; i++) s += String.fromCharCode(33+i);
 	let len = Math.ceil(entropy / Math.log2(s.length));
 	let pass = generatePass(len, s);
@@ -312,36 +248,24 @@ window.alert(generateRandom());
             </td>
             <td> <!-- Base-85 Random Passwords -->
 <a class="bookmarklet" href='javascript:(function() {
-String.prototype.rtrim=function(){return this.replace(/\s+$/g, "");};
-function secRand(count) {
-	let min = (-count >>> 0) % count;
-	let rand = new Uint32Array(1);
+function secRand (count) {
+	const min = (-count >>> 0) % count;
+	const rand = new Uint32Array(1);
 	const crypto = window.crypto || window.msCrypto;
-	do {
-		crypto.getRandomValues(rand);
-	} while (rand[0] < min);
+	do crypto.getRandomValues(rand);
+	while (rand[0] < min);
 	return rand[0] % count;
 }
-function generatePass(len, set, spaces) {
+function generatePass (len, set) {
 	let pass = "";
 	let passArr = "";
-	if (typeof set == "string") {
-		passArr = set.split("");
-	} else {
-		passArr = set;
-	}
-	for (let i = len; i > 0; i--) {
-		if (spaces) {
-			pass += passArr[secRand(set.length)];
-			pass += " ";
-		} else {
-			pass += passArr[secRand(set.length)];
-		}
-	}
-	return pass.rtrim();
+	if (typeof set == "string") passArr = set.split("");
+	else passArr = set;
+	for (let i = len; i > 0; i--) pass += passArr[secRand(set.length)];
+	return pass.trim();
 }
-function generateRandom() {
-	let entropy = 70;
+function generateRandom () {
+	const entropy = 70;
 	let s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!#$%&()*+-;<=>?@^_`{|}~";
 	let len = Math.ceil(entropy / Math.log2(s.length));
 	let pass = generatePass(len, s);
@@ -352,36 +276,24 @@ window.alert(generateRandom());
             </td>
             <td> <!-- Base-64 (+/) Random Passwords -->
 <a class="bookmarklet" href='javascript:(function() {
-String.prototype.rtrim=function(){return this.replace(/\s+$/g, "");};
-function secRand(count) {
-	let min = (-count >>> 0) % count;
-	let rand = new Uint32Array(1);
+function secRand (count) {
+	const min = (-count >>> 0) % count;
+	const rand = new Uint32Array(1);
 	const crypto = window.crypto || window.msCrypto;
-	do {
-		crypto.getRandomValues(rand);
-	} while (rand[0] < min);
+	do crypto.getRandomValues(rand);
+	while (rand[0] < min);
 	return rand[0] % count;
 }
-function generatePass(len, set, spaces) {
+function generatePass (len, set) {
 	let pass = "";
 	let passArr = "";
-	if (typeof set == "string") {
-		passArr = set.split("");
-	} else {
-		passArr = set;
-	}
-	for (let i = len; i > 0; i--) {
-		if (spaces) {
-			pass += passArr[secRand(set.length)];
-			pass += " ";
-		} else {
-			pass += passArr[secRand(set.length)];
-		}
-	}
-	return pass.rtrim();
+	if (typeof set == "string") passArr = set.split("");
+	else passArr = set;
+	for (let i = len; i > 0; i--) pass += passArr[secRand(set.length)];
+	return pass.trim();
 }
-function generateRandom() {
-	let entropy = 70;
+function generateRandom () {
+	const entropy = 70;
 	let s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/";
 	let len = Math.ceil(entropy / Math.log2(s.length));
 	let pass = generatePass(len, s);
@@ -392,36 +304,24 @@ window.alert(generateRandom());
             </td>
             <td> <!-- Base-64 (-_) Random Passwords -->
 <a class="bookmarklet" href='javascript:(function() {
-String.prototype.rtrim=function(){return this.replace(/\s+$/g, "");};
-function secRand(count) {
-	let min = (-count >>> 0) % count;
-	let rand = new Uint32Array(1);
+function secRand (count) {
+	const min = (-count >>> 0) % count;
+	const rand = new Uint32Array(1);
 	const crypto = window.crypto || window.msCrypto;
-	do {
-		crypto.getRandomValues(rand);
-	} while (rand[0] < min);
+	do crypto.getRandomValues(rand);
+	while (rand[0] < min);
 	return rand[0] % count;
 }
-function generatePass(len, set, spaces) {
+function generatePass (len, set) {
 	let pass = "";
 	let passArr = "";
-	if (typeof set == "string") {
-		passArr = set.split("");
-	} else {
-		passArr = set;
-	}
-	for (let i = len; i > 0; i--) {
-		if (spaces) {
-			pass += passArr[secRand(set.length)];
-			pass += " ";
-		} else {
-			pass += passArr[secRand(set.length)];
-		}
-	}
-	return pass.rtrim();
+	if (typeof set == "string") passArr = set.split("");
+	else passArr = set;
+	for (let i = len; i > 0; i--) pass += passArr[secRand(set.length)];
+	return pass.trim();
 }
-function generateRandom() {
-	let entropy = 70;
+function generateRandom () {
+	const entropy = 70;
 	let s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_";
 	let len = Math.ceil(entropy / Math.log2(s.length));
 	let pass = generatePass(len, s);
@@ -435,36 +335,24 @@ window.alert(generateRandom());
           <tr>
             <td> <!-- Base-62 Random Passwords -->
 <a class="bookmarklet" href='javascript:(function() {
-String.prototype.rtrim=function(){return this.replace(/\s+$/g, "");};
-function secRand(count) {
-	let min = (-count >>> 0) % count;
-	let rand = new Uint32Array(1);
+function secRand (count) {
+	const min = (-count >>> 0) % count;
+	const rand = new Uint32Array(1);
 	const crypto = window.crypto || window.msCrypto;
-	do {
-		crypto.getRandomValues(rand);
-	} while (rand[0] < min);
+	do crypto.getRandomValues(rand);
+	while (rand[0] < min);
 	return rand[0] % count;
 }
-function generatePass(len, set, spaces) {
+function generatePass (len, set) {
 	let pass = "";
 	let passArr = "";
-	if (typeof set == "string") {
-		passArr = set.split("");
-	} else {
-		passArr = set;
-	}
-	for (let i = len; i > 0; i--) {
-		if (spaces) {
-			pass += passArr[secRand(set.length)];
-			pass += " ";
-		} else {
-			pass += passArr[secRand(set.length)];
-		}
-	}
-	return pass.rtrim();
+	if (typeof set == "string") passArr = set.split("");
+	else passArr = set;
+	for (let i = len; i > 0; i--) pass += passArr[secRand(set.length)];
+	return pass.trim();
 }
-function generateRandom() {
-	let entropy = 70;
+function generateRandom () {
+	const entropy = 70;
 	let s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 	let len = Math.ceil(entropy / Math.log2(s.length));
 	let pass = generatePass(len, s);
@@ -475,76 +363,52 @@ window.alert(generateRandom());
             </td>
             <td> <!-- Base-58 Random Passwords -->
 <a class="bookmarklet" href='javascript:(function() {
-String.prototype.rtrim=function(){return this.replace(/\s+$/g, "");};
-function secRand(count) {
-	let min = (-count >>> 0) % count;
-	let rand = new Uint32Array(1);
+function secRand (count) {
+	const min = (-count >>> 0) % count;
+	const rand = new Uint32Array(1);
 	const crypto = window.crypto || window.msCrypto;
-	do {
-		crypto.getRandomValues(rand);
-	} while (rand[0] < min);
+	do crypto.getRandomValues(rand);
+	while (rand[0] < min);
 	return rand[0] % count;
 }
-function generatePass(len, set, spaces) {
+function generatePass (len, set) {
 	let pass = "";
 	let passArr = "";
-	if (typeof set == "string") {
-		passArr = set.split("");
-	} else {
-		passArr = set;
-	}
-	for (let i = len; i > 0; i--) {
-		if (spaces) {
-			pass += passArr[secRand(set.length)];
-			pass += " ";
-		} else {
-			pass += passArr[secRand(set.length)];
-		}
-	}
-	return pass.rtrim();
+	if (typeof set == "string") passArr = set.split("");
+	else passArr = set;
+	for (let i = len; i > 0; i--) pass += passArr[secRand(set.length)];
+	return pass.trim();
 }
-function generateRandom() {
-	let entropy = 70;
+function generateRandom () {
+	const entropy = 70;
 	let s = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
 	let len = Math.ceil(entropy / Math.log2(s.length));
 	let pass = generatePass(len, s);
 	return pass;
 }
-window.alert(generateRandom());
+window.alert(generateRandom())
 })();'>Base-58</a>
             </td>
             <td> <!-- Base-52 Random Passwords -->
 <a class="bookmarklet" href='javascript:(function() {
-String.prototype.rtrim=function(){return this.replace(/\s+$/g, "");};
-function secRand(count) {
-	let min = (-count >>> 0) % count;
-	let rand = new Uint32Array(1);
+function secRand (count) {
+	const min = (-count >>> 0) % count;
+	const rand = new Uint32Array(1);
 	const crypto = window.crypto || window.msCrypto;
-	do {
-		crypto.getRandomValues(rand);
-	} while (rand[0] < min);
+	do crypto.getRandomValues(rand);
+	while (rand[0] < min);
 	return rand[0] % count;
 }
-function generatePass(len, set, spaces) {
+function generatePass (len, set) {
 	let pass = "";
 	let passArr = "";
-	if (typeof set == "string") {
-		passArr = set.split("");
-	} else {
-		passArr = set;
-	}
-	for (let i = len; i > 0; i--) {
-		if (spaces) {
-			pass += passArr[secRand(set.length)];
-			pass += " ";
-		} else {
-			pass += passArr[secRand(set.length)];
-		}
-	}
-	return pass.rtrim();
+	if (typeof set == "string") passArr = set.split("");
+	else passArr = set;
+	for (let i = len; i > 0; i--) pass += passArr[secRand(set.length)];
+	return pass.trim();
 }
-function generateRandom() {
-	let entropy = 70;
+function generateRandom () {
+	const entropy = 70;
 	let s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	let len = Math.ceil(entropy / Math.log2(s.length));
 	let pass = generatePass(len, s);
@@ -555,36 +419,24 @@ window.alert(generateRandom());
             </td>
             <td> <!-- Base-36 Random Passwords -->
 <a class="bookmarklet" href='javascript:(function() {
-String.prototype.rtrim=function(){return this.replace(/\s+$/g, "");};
-function secRand(count) {
-	let min = (-count >>> 0) % count;
-	let rand = new Uint32Array(1);
+function secRand (count) {
+	const min = (-count >>> 0) % count;
+	const rand = new Uint32Array(1);
 	const crypto = window.crypto || window.msCrypto;
-	do {
-		crypto.getRandomValues(rand);
-	} while (rand[0] < min);
+	do crypto.getRandomValues(rand);
+	while (rand[0] < min);
 	return rand[0] % count;
 }
-function generatePass(len, set, spaces) {
+function generatePass (len, set) {
 	let pass = "";
 	let passArr = "";
-	if (typeof set == "string") {
-		passArr = set.split("");
-	} else {
-		passArr = set;
-	}
-	for (let i = len; i > 0; i--) {
-		if (spaces) {
-			pass += passArr[secRand(set.length)];
-			pass += " ";
-		} else {
-			pass += passArr[secRand(set.length)];
-		}
-	}
-	return pass.rtrim();
+	if (typeof set == "string") passArr = set.split("");
+	else passArr = set;
+	for (let i = len; i > 0; i--) pass += passArr[secRand(set.length)];
+	return pass.trim();
 }
-function generateRandom() {
-	let entropy = 70;
+function generateRandom () {
+	const entropy = 70;
 	let s = "0123456789abcdefghijklmnopqrstuvwxyz";
 	let len = Math.ceil(entropy / Math.log2(s.length));
 	let pass = generatePass(len, s);
@@ -597,76 +449,57 @@ window.alert(generateRandom());
           <tr>
             <td> <!-- Base-32 Random Passwords -->
 <a class="bookmarklet" href='javascript:(function() {
-String.prototype.rtrim=function(){return this.replace(/\s+$/g, "");};
-function secRand(count) {
-	let min = (-count >>> 0) % count;
-	let rand = new Uint32Array(1);
+function secRand (count) {
+	const min = (-count >>> 0) % count;
+	const rand = new Uint32Array(1);
 	const crypto = window.crypto || window.msCrypto;
-	do {
-		crypto.getRandomValues(rand);
-	} while (rand[0] < min);
+	do crypto.getRandomValues(rand);
+	while (rand[0] < min);
 	return rand[0] % count;
 }
-function generatePass(len, set, spaces) {
+function generatePass (len, set) {
 	let pass = "";
 	let passArr = "";
-	if (typeof set == "string") {
-		passArr = set.split("");
-	} else {
-		passArr = set;
-	}
-	for (let i = len; i > 0; i--) {
-		if (spaces) {
-			pass += passArr[secRand(set.length)];
-			pass += " ";
-		} else {
-			pass += passArr[secRand(set.length)];
-		}
-	}
-	return pass.rtrim();
+	if (typeof set == "string") passArr = set.split("");
+	else passArr = set;
+	for (let i = len; i > 0; i--) pass += passArr[secRand(set.length)];
+	return pass.trim();
 }
-function generateRandom() {
-	let entropy = 70;
+function generateRandom () {
+	const entropy = 70;
 	let s = "0123456789abcdefghjkmnpqrstvwxyz";
 	let len = Math.ceil(entropy / Math.log2(s.length));
 	let pass = generatePass(len, s);
+	let check = 0n;
+	s += "*~$=u";
+	displayCheck = true;
+	for (let i = 0; i < pass.length; i++) check += BigInt(s.indexOf(pass[i]) * 32**(pass.length - i - 1));
+	pass += s[check % 37n];
 	return pass;
 }
 window.alert(generateRandom());
-})();'>Base-32</a>
+})();'>Base-32 (Checksum)</a>
             </td>
             <td> <!-- Base-32 Random Passwords -->
 <a class="bookmarklet" href='javascript:(function() {
-String.prototype.rtrim=function(){return this.replace(/\s+$/g, "");};
-function secRand(count) {
-	let min = (-count >>> 0) % count;
-	let rand = new Uint32Array(1);
+function secRand (count) {
+	const min = (-count >>> 0) % count;
+	const rand = new Uint32Array(1);
 	const crypto = window.crypto || window.msCrypto;
-	do {
-		crypto.getRandomValues(rand);
-	} while (rand[0] < min);
+	do crypto.getRandomValues(rand);
+	while (rand[0] < min);
 	return rand[0] % count;
 }
-function generatePass(len, set, spaces) {
+function generatePass (len, set) {
 	let pass = "";
 	let passArr = "";
-	if (typeof set == "string") {
-		passArr = set.split("");
-	} else {
-		passArr = set;
-	}
-	for (let i = len; i > 0; i--) {
-		if (spaces) {
-			pass += passArr[secRand(set.length)];
-			pass += " ";
-		} else {
-			pass += passArr[secRand(set.length)];
-		}
-	}
-	return pass.rtrim();
+	if (typeof set == "string") passArr = set.split("");
+	else passArr = set;
+	for (let i = len; i > 0; i--) pass += passArr[secRand(set.length)];
+	return pass.trim();
 }
-function generateRandom() {
-	let entropy = 70;
+function generateRandom () {
+	const entropy = 70;
 	let s = "abcdefghijklmnopqrstuvwxyz";
 	let len = Math.ceil(entropy / Math.log2(s.length));
 	let pass = generatePass(len, s);
@@ -677,36 +510,24 @@ window.alert(generateRandom());
             </td>
             <td> <!-- Base-16 Random Passwords -->
 <a class="bookmarklet" href='javascript:(function() {
-String.prototype.rtrim=function(){return this.replace(/\s+$/g, "");};
-function secRand(count) {
-	let min = (-count >>> 0) % count;
-	let rand = new Uint32Array(1);
+function secRand (count) {
+	const min = (-count >>> 0) % count;
+	const rand = new Uint32Array(1);
 	const crypto = window.crypto || window.msCrypto;
-	do {
-		crypto.getRandomValues(rand);
-	} while (rand[0] < min);
+	do crypto.getRandomValues(rand);
+	while (rand[0] < min);
 	return rand[0] % count;
 }
-function generatePass(len, set, spaces) {
+function generatePass (len, set) {
 	let pass = "";
 	let passArr = "";
-	if (typeof set == "string") {
-		passArr = set.split("");
-	} else {
-		passArr = set;
-	}
-	for (let i = len; i > 0; i--) {
-		if (spaces) {
-			pass += passArr[secRand(set.length)];
-			pass += " ";
-		} else {
-			pass += passArr[secRand(set.length)];
-		}
-	}
-	return pass.rtrim();
+	if (typeof set == "string") passArr = set.split("");
+	else passArr = set;
+	for (let i = len; i > 0; i--) pass += passArr[secRand(set.length)];
+	return pass.trim();
 }
-function generateRandom() {
-	let entropy = 70;
+function generateRandom () {
+	const entropy = 70;
 	let s = "0123456789abcdef";
 	let len = Math.ceil(entropy / Math.log2(s.length));
 	let pass = generatePass(len, s);
@@ -717,36 +538,24 @@ window.alert(generateRandom());
             </td>
             <td> <!-- Base-10 Random Passwords -->
 <a class="bookmarklet" href='javascript:(function() {
-String.prototype.rtrim=function(){return this.replace(/\s+$/g, "");};
-function secRand(count) {
-	let min = (-count >>> 0) % count;
-	let rand = new Uint32Array(1);
+function secRand (count) {
+	const min = (-count >>> 0) % count;
+	const rand = new Uint32Array(1);
 	const crypto = window.crypto || window.msCrypto;
-	do {
-		crypto.getRandomValues(rand);
-	} while (rand[0] < min);
+	do crypto.getRandomValues(rand);
+	while (rand[0] < min);
 	return rand[0] % count;
 }
-function generatePass(len, set, spaces) {
+function generatePass (len, set) {
 	let pass = "";
 	let passArr = "";
-	if (typeof set == "string") {
-		passArr = set.split("");
-	} else {
-		passArr = set;
-	}
-	for (let i = len; i > 0; i--) {
-		if (spaces) {
-			pass += passArr[secRand(set.length)];
-			pass += " ";
-		} else {
-			pass += passArr[secRand(set.length)];
-		}
-	}
-	return pass.rtrim();
+	if (typeof set == "string") passArr = set.split("");
+	else passArr = set;
+	for (let i = len; i > 0; i--) pass += passArr[secRand(set.length)];
+	return pass.trim();
 }
-function generateRandom() {
-	let entropy = 70;
+function generateRandom () {
+	const entropy = 70;
 	let s = "0123456789";
 	let len = Math.ceil(entropy / Math.log2(s.length));
 	let pass = generatePass(len, s);
@@ -759,36 +568,24 @@ window.alert(generateRandom());
           <tr>
             <td> <!-- Base-8 Random Passwords -->
 <a class="bookmarklet" href='javascript:(function() {
-String.prototype.rtrim=function(){return this.replace(/\s+$/g, "");};
-function secRand(count) {
-	let min = (-count >>> 0) % count;
-	let rand = new Uint32Array(1);
+function secRand (count) {
+	const min = (-count >>> 0) % count;
+	const rand = new Uint32Array(1);
 	const crypto = window.crypto || window.msCrypto;
-	do {
-		crypto.getRandomValues(rand);
-	} while (rand[0] < min);
+	do crypto.getRandomValues(rand);
+	while (rand[0] < min);
 	return rand[0] % count;
 }
-function generatePass(len, set, spaces) {
+function generatePass (len, set) {
 	let pass = "";
 	let passArr = "";
-	if (typeof set == "string") {
-		passArr = set.split("");
-	} else {
-		passArr = set;
-	}
-	for (let i = len; i > 0; i--) {
-		if (spaces) {
-			pass += passArr[secRand(set.length)];
-			pass += " ";
-		} else {
-			pass += passArr[secRand(set.length)];
-		}
-	}
-	return pass.rtrim();
+	if (typeof set == "string") passArr = set.split("");
+	else passArr = set;
+	for (let i = len; i > 0; i--) pass += passArr[secRand(set.length)];
+	return pass.trim();
 }
-function generateRandom() {
-	let entropy = 70;
+function generateRandom () {
+	const entropy = 70;
 	let s = "01234567";
 	let len = Math.ceil(entropy / Math.log2(s.length));
 	let pass = generatePass(len, s);
@@ -799,36 +596,24 @@ window.alert(generateRandom());
             </td>
             <td> <!-- Base-2 Random Passwords -->
 <a class="bookmarklet" href='javascript:(function() {
-String.prototype.rtrim=function(){return this.replace(/\s+$/g, "");};
-function secRand(count) {
-	let min = (-count >>> 0) % count;
-	let rand = new Uint32Array(1);
+function secRand (count) {
+	const min = (-count >>> 0) % count;
+	const rand = new Uint32Array(1);
 	const crypto = window.crypto || window.msCrypto;
-	do {
-		crypto.getRandomValues(rand);
-	} while (rand[0] < min);
+	do crypto.getRandomValues(rand);
+	while (rand[0] < min);
 	return rand[0] % count;
 }
-function generatePass(len, set, spaces) {
+function generatePass (len, set) {
 	let pass = "";
 	let passArr = "";
-	if (typeof set == "string") {
-		passArr = set.split("");
-	} else {
-		passArr = set;
-	}
-	for (let i = len; i > 0; i--) {
-		if (spaces) {
-			pass += passArr[secRand(set.length)];
-			pass += " ";
-		} else {
-			pass += passArr[secRand(set.length)];
-		}
-	}
-	return pass.rtrim();
+	if (typeof set == "string") passArr = set.split("");
+	else passArr = set;
+	for (let i = len; i > 0; i--) pass += passArr[secRand(set.length)];
+	return pass.trim();
 }
-function generateRandom() {
-	let entropy = 70;
+function generateRandom () {
+	const entropy = 70;
 	let s = "01";
 	let len = Math.ceil(entropy / Math.log2(s.length));
 	let pass = generatePass(len, s);
@@ -839,36 +624,24 @@ window.alert(generateRandom());
             </td>
             <td> <!-- Random Coin Flips-->
 <a class="bookmarklet" href='javascript:(function() {
-String.prototype.rtrim=function(){return this.replace(/\s+$/g, "");};
-function secRand(count) {
-	let min = (-count >>> 0) % count;
-	let rand = new Uint32Array(1);
+function secRand (count) {
+	const min = (-count >>> 0) % count;
+	const rand = new Uint32Array(1);
 	const crypto = window.crypto || window.msCrypto;
-	do {
-		crypto.getRandomValues(rand);
-	} while (rand[0] < min);
+	do crypto.getRandomValues(rand);
+	while (rand[0] < min);
 	return rand[0] % count;
 }
-function generatePass(len, set, spaces) {
+function generatePass (len, set) {
 	let pass = "";
 	let passArr = "";
-	if (typeof set == "string") {
-		passArr = set.split("");
-	} else {
-		passArr = set;
-	}
-	for (let i = len; i > 0; i--) {
-		if (spaces) {
-			pass += passArr[secRand(set.length)];
-			pass += " ";
-		} else {
-			pass += passArr[secRand(set.length)];
-		}
-	}
-	return pass.rtrim();
+	if (typeof set == "string") passArr = set.split("");
+	else passArr = set;
+	for (let i = len; i > 0; i--) pass += passArr[secRand(set.length)];
+	return pass.trim();
 }
-function generateRandom() {
-	let entropy = 70;
+function generateRandom () {
+	const entropy = 70;
 	let s = "HT";
 	let len = Math.ceil(entropy / Math.log2(s.length));
 	let pass = generatePass(len, s);
@@ -879,36 +652,24 @@ window.alert(generateRandom());
             </td>
             <td> <!-- Random DNA Sequences-->
 <a class="bookmarklet" href='javascript:(function() {
-String.prototype.rtrim=function(){return this.replace(/\s+$/g, "");};
-function secRand(count) {
-	let min = (-count >>> 0) % count;
-	let rand = new Uint32Array(1);
+function secRand (count) {
+	const min = (-count >>> 0) % count;
+	const rand = new Uint32Array(1);
 	const crypto = window.crypto || window.msCrypto;
-	do {
-		crypto.getRandomValues(rand);
-	} while (rand[0] < min);
+	do crypto.getRandomValues(rand);
+	while (rand[0] < min);
 	return rand[0] % count;
 }
-function generatePass(len, set, spaces) {
+function generatePass (len, set) {
 	let pass = "";
 	let passArr = "";
-	if (typeof set == "string") {
-		passArr = set.split("");
-	} else {
-		passArr = set;
-	}
-	for (let i = len; i > 0; i--) {
-		if (spaces) {
-			pass += passArr[secRand(set.length)];
-			pass += " ";
-		} else {
-			pass += passArr[secRand(set.length)];
-		}
-	}
-	return pass.rtrim();
+	if (typeof set == "string") passArr = set.split("");
+	else passArr = set;
+	for (let i = len; i > 0; i--) pass += passArr[secRand(set.length)];
+	return pass.trim();
 }
-function generateRandom() {
-	let entropy = 70;
+function generateRandom () {
+	const entropy = 70;
 	let s = "ACGT";
 	let len = Math.ceil(entropy / Math.log2(s.length));
 	let pass = generatePass(len, s);
