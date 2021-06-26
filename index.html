@@ -14,8 +14,8 @@
       <h1>Passphrase and Password Generator</h1>
         <ul id='navigation'>
           <li><a href='index.html'>Passwords</a></li>
+          <li><a href='entropy.html'>Add Entropy</a></li>
           <li><a href='bookmarklets.html'>Bookmarklets</a></li>
-          <li><a href='dicekey.html'>DiceKeys</a></li>
           <li><a href='#' onclick='toggleTheme(); loadPasses();' id='theme_switcher'>Dark Theme</a></li>
         </ul>
         <p>Select minimum security margin (in bits): </p>
@@ -49,6 +49,10 @@
           </div>
           <button class='pass-button' value='Generate' onclick='generatePassphrase("alternate");'>Generate</button>
           <div id='alt-pass' class='password'></div>
+          <div class='use-entropy'>
+            <input type='checkbox' id='alt-entropy-check' name='entropy-check' value='alt-ntropy'>
+            <label for='alt-entropy-check'> Use entropy?</label>
+          </div>
           <div class='stats length'>
             <span id='alt-entropy'></span>
             <span id='alt-length'></span>
@@ -73,6 +77,10 @@
           </div>
           <button class='pass-button' value='Generate' onclick='generatePassphrase("bitcoin");'>Generate</button>
           <div id='btc-pass' class='password'></div>
+          <div class='use-entropy'>
+            <input type='checkbox' id='btc-entropy-check' name='entropy-check' value='btc-entropy'>
+            <label for='btc-entropy-check'> Use entropy?</label>
+          </div>
           <div class='stats length'>
             <span id='btc-entropy'></span>
             <span id='btc-length'></span>
@@ -119,6 +127,10 @@
           </div>
           <button class='pass-button' value='Generate' onclick='generatePassphrase("diceware");'>Generate</button>
           <div id='diceware-pass' class='password'></div>
+          <div class='use-entropy'>
+            <input type='checkbox' id='diceware-entropy-check' name='entropy-check' value='diceware-entropy'>
+            <label for='diceware-entropy-check'> Use entropy?</label>
+          </div>
           <div class='stats length'>
             <span id='diceware-entropy'></span>
             <span id='diceware-length'></span>
@@ -143,6 +155,10 @@
           </div>
           <button class='pass-button' value='Generate' onclick='generatePassphrase("eff");'>Generate</button>
           <div id='eff-pass' class='password'></div>
+          <div class='use-entropy'>
+            <input type='checkbox' id='eff-entropy-check' name='entropy-check' value='eff-entropy'>
+            <label for='eff-entropy-check'> Use entropy?</label>
+          </div>
           <div class='stats length'>
             <span id='eff-entropy'></span>
             <span id='eff-length'></span>
@@ -162,6 +178,10 @@
           </div>
           <button class='pass-button' value='Generate' onclick='generatePseudowords();'>Generate</button>
           <p id='pseudo-pass' class='password'></p>
+          <div class='use-entropy'>
+            <input type='checkbox' id='pseudo-entropy-check' name='entropy-check' value='pseudo-entropy'>
+            <label for='pseudo-entropy-check'> Use entropy?</label>
+          </div>
           <div class='stats length'>
             <span id='pseudo-entropy'></span>
             <span id='pseudo-length'></span>
@@ -199,6 +219,10 @@
           </div>
           <button class='pass-button' value='Generate' onclick='generateRandom();'>Generate</button>
           <p id='random-pass' class='password'></p>
+          <div class='use-entropy'>
+            <input type='checkbox' id='random-entropy-check' name='entropy-check' value='random-entropy'>
+            <label for='random-entropy-check'> Use entropy?</label>
+          </div>
           <div class='stats length'>
             <span id='random-entropy'></span>
             <span id='random-length'></span>

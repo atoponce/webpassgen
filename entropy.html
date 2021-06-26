@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <link rel='shortcut icon' href='favicon.ico'>
+    <link rel='stylesheet' href='assets/style.css'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <meta name='color-scheme' content='dark light'>
+    <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+    <title>Passphrase and Password Generator</title>
+  </head>
+  <body>
+    <div id='container'>
+      <div id='header'>
+      <h1>JavaScript Mouse Entropy</h1>
+        <ul id='navigation'>
+          <li><a href='index.html'>Passwords</a></li>
+          <li><a href='entropy.html'>Add Entropy</a></li>
+          <li><a href='bookmarklets.html'>Bookmarklets</a></li>
+          <li><a href='#' onclick='toggleTheme();' id='theme_switcher'>Dark Theme</a></li>
+        </ul>
+      </div>
+      <p>Move your mouse (or finger) across the changing randogram below to add entropy to the generator. Entropy is collected and stored every 16 bits.</p>
+      <canvas id='randogram' height='400' width='400'></canvas>
+      <p class='collected'>Stored: <span class='collected' id='entropyResult1'>0</span> bits / <span class='collected' id='entropyResult2'></span> items.</p>
+      <p><strong>Please note:</strong> This does not replace the browser CSPRNG. Instead, it is mixed in.
+         This really is only useful if you suspect your system CSPRNG is compromised or if you believe it is not sufficiently seeded for security.</p>
+    </div>
+    <script src='js/main.js'></script>
+    <script src='js/randogram.js'></script>
+    <script>
+      window.onload = function () {
+        initTheme()
+      }
+    </script>
+  </body>
+</html>

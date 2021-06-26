@@ -71,18 +71,25 @@ button:hover {
 .bold {
     font-weight: bold;
 }
-.stats {
+.use-entropy {
     bottom: 5px;
     left: 5px;
     font-size: 12px;
     position: absolute;
+    visibility: hidden;
+}
+.stats {
+    bottom: 5px;
+    right: 5px;
+    font-size: 12px;
+    position: absolute;
 }
 .entropy {
-    left: 50%;
+    right: 50%;
     position: absolute;
 }
 .checksum {
-    bottom: 5px;
+    bottom: 22px;
     right: 5px;
     font-size: 12px;
     position: absolute;
@@ -133,6 +140,7 @@ button:hover {
 /* ids */
 #container {
     margin: 0 auto;
+    pointer-events: auto;
     width: 768px;
 }
 #header {
@@ -225,6 +233,20 @@ button:hover {
 #entropy-80 { background: #74e163; } /* green */
 #entropy-80:hover, #entropy-toolbar input[type="radio"]:checked + #entropy-80 { background: #4db635; } /* green */
 
+/* Mouse Entropy CSS */
+#randogram {
+    cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAPFBMVEUAAAD/ACD/ACD/ACD/ACD/ACD/ACD/ACD/ACD/ACD/ACD/ACD/ACD/ACD/ACD/ACD/ACD/ACD/ACD/ACBBwp1eAAAAE3RSTlMAAissLjU5Oj0+QkdXWVzw8/X444EtGgAAAGlJREFUGNNVjkEWAjEIxdI62Kq1+OX+d3UzpQ4L3ksWBMqs5NR3YYTbYvMYHN805qEKr2XMQw3SJMNT4fbH8BCA7jvXAdpmLNfqAVz+Ueu6/NMgTfZOUz0+5/2u8MoM9awrBmUeO3eb5QfrOgWEiHcvOAAAAABJRU5ErkJggg=='), crosshair;
+    margin: 0 calc((100% - 400px)/2);
+    touch-action: none;
+}
+.collected {
+    font-family: monospace;
+    font-weight: bold;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+}
+
 @media only screen and (max-width: 767px) {
     #container { width: 480px; }
     .cell { margin: 5px 10px; width: 460px; }
@@ -233,6 +255,8 @@ button:hover {
     #entropy-70 { margin-top: 2px; }
     #entropy-75 { margin-top: 2px; }
     #entropy-80 { margin-top: 2px; }
+
+    #randogram {margin: 0 calc((768px - 400px)/2);}
 }
 @media only screen and (max-width: 479px) {
     #container { width: 100%; }
@@ -242,88 +266,8 @@ button:hover {
     #entropy-70 { margin-top: 2px; }
     #entropy-75 { margin-top: 2px; }
     #entropy-80 { margin-top: 2px; }
-}
 
-/* Dicekey CSS */
-.flex {
-    align-items: center;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-#diceTable {
-    background-color: #6280c5;
-    border-collapse: separate;
-    border-spacing: 20px;
-    display: table;
-    margin: 0 auto;
-}
-#tableBody {
-    display: table-row-group;
-}
-.tableRow {
-    display: table-row;
-}
-.tableCell {
-    background-color: white;
-    border-radius: 10px;
-    color: black;
-    display: table-cell;
-    height: 100px;
-    vertical-align: middle;
-    width: 100px;
-}
-.bits {
-    background-color: black;
-    border: 1px solid black;
-    border-spacing: 0.5px;
-    display: table;
-    height: 5px;
-    margin: -6px auto;
-    padding: 2px;
-}
-.bit {
-    display: table-cell;
-    height: 5px;
-    margin: 0 auto;
-    width: 5px;
-}
-.black {
-    background-color: black;
-}
-.white {
-    background-color: white;
-}
-.text {
-    font-family: monospace;
-    font-size: 40px;
-    font-weight: bold;
-    height: 55px;
-    letter-spacing: 3px;
-    text-indent: 4px;
-    width: 100px;
-}
-.rotate90 {
-    transform: rotate(90deg);
-}
-.rotate180 {
-    transform: rotate(180deg);
-}
-.rotate270 {
-    transform: rotate(270deg);
-}
-.break {
-    flex-basis: 100%;
-    height: 0;
-}
-#howto {
-    align-self: stretch;
-    margin-left: 20px;
-    vertical-align: top;
-    width: 600px;
-}
-#dice-button {
-    margin-top: 20px;
+    #randogram {margin: 0 calc((100% - 400px)/2);}
 }
 
 /* overriden styles for Dark Theme */
