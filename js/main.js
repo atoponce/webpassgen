@@ -952,6 +952,9 @@ function generateRandom () {
     case 'Base52':
       s = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
       break
+    case 'Base45':
+      s = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_$%*+-./:'
+      break
     case 'Base36':
       s = '0123456789abcdefghijklmnopqrstuvwxyz'
       break
