@@ -80,6 +80,22 @@ function generatePassphrase (source) {
   }
 }
 
+function toggleEntropyVisibility () {
+  const classes = document.getElementsByClassName('use-entropy')
+
+  if (localStorage.hasOwnProperty('entropy')) {
+    if (JSON.parse(localStorage.entropy).length > 0) {
+      for (let i = 0; i < classes.length; i++) {
+        classes[i].style.visibility = 'visible'
+        classes[i].children[2].innerText = JSON.parse(localStorage.entropy).length
+      }
+    } else {
+      for (let i = 0; i < classes.length; i++) classes[i].style.visibility = 'hidden'
+    }
+  }
+
+}
+
 function secRand (count, useEntropy = false) {
   let num = 0
   const min = 2**16 % count
@@ -87,8 +103,7 @@ function secRand (count, useEntropy = false) {
   const crypto = window.crypto || window.msCrypto
 
   do {
-    crypto.getRandomValues(rand)
-    num = rand[0]
+    num = crypto.getRandomValues(rand)[0]
 
     if (useEntropy) {
       const entropy = JSON.parse(localStorage.entropy)
@@ -101,6 +116,8 @@ function secRand (count, useEntropy = false) {
     }
   } while (num < min)
 
+  toggleEntropyVisibility()
+
   return num % count
 }
 
@@ -111,15 +128,6 @@ function uniquesOnly (list) {
 function generatePass (len, set, spaces, useEntropy) {
   let pass = ''
   let passArr = ''
-  const classes = document.getElementsByClassName('use-entropy')
-
-  if (localStorage.hasOwnProperty('entropy')) {
-    if (JSON.parse(localStorage.entropy).length > 0) {
-      for (let i = 0; i < classes.length; i++) classes[i].style.visibility = 'visible'
-    } else {
-      for (let i = 0; i < classes.length; i++) classes[i].style.visibility = 'hidden'
-    }
-  }
 
   if (typeof set === 'string') passArr = set.split('')
   else passArr = set
