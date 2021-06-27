@@ -727,7 +727,7 @@ function generateMunemo () {
   let num = 0n
 
   // Half the key space is negative, half is non-negative
-  for (let i = 0; i < minEntropy - 1; i++) num += BigInt(secRand(2) * (2 ** i), useEntropy)
+  for (let i = 0; i < minEntropy - 1; i++) num += BigInt(secRand(2, useEntropy) * (2 ** i))
 
   let pass = _tos(num, '')
 
