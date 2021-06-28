@@ -276,3 +276,7 @@ body.dark-theme {color: white; background-color: black;}
 .dark-theme a {color: yellow;}
 .dark-theme a:visited {color: orange;}
 .dark-theme img {filter: invert(1);}
+
+#theme_switcher {
+  text-decoration: none;
+}

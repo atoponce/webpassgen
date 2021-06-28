@@ -27,7 +27,7 @@
           <li><a href="index.html">Passwords</a></li>
           <li><a href="entropy.html">Add Entropy</a></li>
           <li><a href="bookmarklets.html">Bookmarklets</a></li>
-          <li><a href="#" onclick="toggleTheme();" id="theme_switcher">Dark Theme</a></li>
+          <li><a href='#' onclick='toggleTheme(); loadPasses();' id='theme_switcher' title='Change theme'>🌒</a></li>
         </ul>
       </div>
       <div id="content">
@@ -417,6 +417,36 @@ function generateRandom () {
 window.alert(generateRandom());
 })();'>Base-52</a>
             </td>
+            <td> <!-- Base-45 Random Passwords -->
+<a class="bookmarklet" href='javascript:(function() {
+function secRand (count) {
+	const min = (-count >>> 0) % count;
+	const rand = new Uint32Array(1);
+	const crypto = window.crypto || window.msCrypto;
+	do crypto.getRandomValues(rand);
+	while (rand[0] < min);
+	return rand[0] % count;
+}
+function generatePass (len, set) {
+	let pass = "";
+	let passArr = "";
+	if (typeof set == "string") passArr = set.split("");
+	else passArr = set;
+	for (let i = len; i > 0; i--) pass += passArr[secRand(set.length)];
+	return pass.trim();
+}
+function generateRandom () {
+	const entropy = 70;
+	let s = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_$%*+-./:";
+	let len = Math.ceil(entropy / Math.log2(s.length));
+	let pass = generatePass(len, s);
+	return pass;
+}
+window.alert(generateRandom());
+})();'>Base-45</a>
+            </td>
+          </tr>
+          <tr>
             <td> <!-- Base-36 Random Passwords -->
 <a class="bookmarklet" href='javascript:(function() {
 function secRand (count) {
@@ -445,8 +475,6 @@ function generateRandom () {
 window.alert(generateRandom());
 })();'>Base-36</a>
             </td>
-          </tr>
-          <tr>
             <td> <!-- Base-32 Random Passwords -->
 <a class="bookmarklet" href='javascript:(function() {
 function secRand (count) {
@@ -480,7 +508,7 @@ function generateRandom () {
 window.alert(generateRandom());
 })();'>Base-32 (Checksum)</a>
             </td>
-            <td> <!-- Base-32 Random Passwords -->
+            <td> <!-- Base-26 Random Passwords -->
 <a class="bookmarklet" href='javascript:(function() {
 function secRand (count) {
 	const min = (-count >>> 0) % count;
@@ -536,6 +564,8 @@ function generateRandom () {
 window.alert(generateRandom());
 })();'>Base-16</a>
             </td>
+          </tr>
+          <tr>
             <td> <!-- Base-10 Random Passwords -->
 <a class="bookmarklet" href='javascript:(function() {
 function secRand (count) {
@@ -564,8 +594,6 @@ function generateRandom () {
 window.alert(generateRandom());
 })();'>Base-10</a>
             </td>
-          </tr>
-          <tr>
             <td> <!-- Base-8 Random Passwords -->
 <a class="bookmarklet" href='javascript:(function() {
 function secRand (count) {
@@ -594,6 +622,34 @@ function generateRandom () {
 window.alert(generateRandom());
 })();'>Base-8</a>
             </td>
+            <td> <!-- Base-4 Random Passwords -->
+<a class="bookmarklet" href='javascript:(function() {
+function secRand (count) {
+	const min = (-count >>> 0) % count;
+	const rand = new Uint32Array(1);
+	const crypto = window.crypto || window.msCrypto;
+	do crypto.getRandomValues(rand);
+	while (rand[0] < min);
+	return rand[0] % count;
+}
+function generatePass (len, set) {
+	let pass = "";
+	let passArr = "";
+	if (typeof set == "string") passArr = set.split("");
+	else passArr = set;
+	for (let i = len; i > 0; i--) pass += passArr[secRand(set.length)];
+	return pass.trim();
+}
+function generateRandom () {
+	const entropy = 70;
+	let s = "ACGT";
+	let len = Math.ceil(entropy / Math.log2(s.length));
+	let pass = generatePass(len, s);
+	return pass;
+}
+window.alert(generateRandom());
+})();'>Base-4</a>
+            </td>
             <td> <!-- Base-2 Random Passwords -->
 <a class="bookmarklet" href='javascript:(function() {
 function secRand (count) {
@@ -621,62 +677,6 @@ function generateRandom () {
 }
 window.alert(generateRandom());
 })();'>Base-2</a>
-            </td>
-            <td> <!-- Random Coin Flips-->
-<a class="bookmarklet" href='javascript:(function() {
-function secRand (count) {
-	const min = (-count >>> 0) % count;
-	const rand = new Uint32Array(1);
-	const crypto = window.crypto || window.msCrypto;
-	do crypto.getRandomValues(rand);
-	while (rand[0] < min);
-	return rand[0] % count;
-}
-function generatePass (len, set) {
-	let pass = "";
-	let passArr = "";
-	if (typeof set == "string") passArr = set.split("");
-	else passArr = set;
-	for (let i = len; i > 0; i--) pass += passArr[secRand(set.length)];
-	return pass.trim();
-}
-function generateRandom () {
-	const entropy = 70;
-	let s = "HT";
-	let len = Math.ceil(entropy / Math.log2(s.length));
-	let pass = generatePass(len, s);
-	return pass;
-}
-window.alert(generateRandom());
-})();'>Coin Flips</a>
-            </td>
-            <td> <!-- Random DNA Sequences-->
-<a class="bookmarklet" href='javascript:(function() {
-function secRand (count) {
-	const min = (-count >>> 0) % count;
-	const rand = new Uint32Array(1);
-	const crypto = window.crypto || window.msCrypto;
-	do crypto.getRandomValues(rand);
-	while (rand[0] < min);
-	return rand[0] % count;
-}
-function generatePass (len, set) {
-	let pass = "";
-	let passArr = "";
-	if (typeof set == "string") passArr = set.split("");
-	else passArr = set;
-	for (let i = len; i > 0; i--) pass += passArr[secRand(set.length)];
-	return pass.trim();
-}
-function generateRandom () {
-	const entropy = 70;
-	let s = "ACGT";
-	let len = Math.ceil(entropy / Math.log2(s.length));
-	let pass = generatePass(len, s);
-	return pass;
-}
-window.alert(generateRandom());
-})();'>DNA Sequences</a>
             </td>
           </tr>
         </table>

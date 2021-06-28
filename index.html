@@ -16,7 +16,7 @@
           <li><a href='index.html'>Passwords</a></li>
           <li><a href='entropy.html'>Add Entropy</a></li>
           <li><a href='bookmarklets.html'>Bookmarklets</a></li>
-          <li><a href='#' onclick='toggleTheme(); loadPasses();' id='theme_switcher'>Dark Theme</a></li>
+          <li><a href='#' onclick='toggleTheme(); loadPasses();' id='theme_switcher' title='Change theme'>🌒</a></li>
         </ul>
         <p>Select minimum security margin (in bits): </p>
         <div id='entropy-toolbar'>
@@ -52,7 +52,7 @@
           <div class='use-entropy'>
             <input type='checkbox' id='alt-entropy-check' name='entropy-check' value='alt-ntropy'>
             <label for='alt-entropy-check'> Mix entropy?</label>
-            <span></span> words remaining.
+            <span></span> words left.
           </div>
           <div class='stats length'>
             <span id='alt-entropy'></span>
@@ -81,7 +81,7 @@
           <div class='use-entropy'>
             <input type='checkbox' id='btc-entropy-check' name='entropy-check' value='btc-entropy'>
             <label for='btc-entropy-check'> Mix entropy?</label>
-            <span></span> words remaining.
+            <span></span> words left.
           </div>
           <div class='stats length'>
             <span id='btc-entropy'></span>
@@ -132,7 +132,7 @@
           <div class='use-entropy'>
             <input type='checkbox' id='diceware-entropy-check' name='entropy-check' value='diceware-entropy'>
             <label for='diceware-entropy-check'> Mix entropy?</label>
-            <span></span> words remaining.
+            <span></span> words left.
           </div>
           <div class='stats length'>
             <span id='diceware-entropy'></span>
@@ -161,7 +161,7 @@
           <div class='use-entropy'>
             <input type='checkbox' id='eff-entropy-check' name='entropy-check' value='eff-entropy'>
             <label for='eff-entropy-check'> Mix entropy?</label>
-            <span></span> words remaining.
+            <span></span> words left.
           </div>
           <div class='stats length'>
             <span id='eff-entropy'></span>
@@ -185,7 +185,7 @@
           <div class='use-entropy'>
             <input type='checkbox' id='pseudo-entropy-check' name='entropy-check' value='pseudo-entropy'>
             <label for='pseudo-entropy-check'> Mix entropy?</label>
-            <span></span> characters remaining.
+            <span></span> characters left.
           </div>
           <div class='stats length'>
             <span id='pseudo-entropy'></span>
@@ -211,9 +211,8 @@
                 <option>Base16</option>
                 <option>Base10</option>
                 <option>Base8</option>
+                <option>Base4</option>
                 <option>Base2</option>
-                <option>Coin Flips</option>
-                <option>DNA Sequence</option>
               </optgroup>
               <optgroup label='Unicode'>
                 <option>Braille</option>
@@ -228,7 +227,7 @@
           <div class='use-entropy'>
             <input type='checkbox' id='random-entropy-check' name='entropy-check' value='random-entropy'>
             <label for='random-entropy-check'> Mix entropy?</label>
-            <span></span> characters remaining.
+            <span></span> characters left.
           </div>
           <div class='stats length'>
             <span id='random-entropy'></span>

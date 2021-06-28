@@ -40,15 +40,15 @@
       <option onclick="generateRandom()">Base-62     </option>
       <option onclick="generateRandom()">Base-58     </option>
       <option onclick="generateRandom()">Base-52     </option>
+      <option onclick="generateRandom()">Base-45     </option>
       <option onclick="generateRandom()">Base-36     </option>
       <option onclick="generateRandom()">Base-32     </option>
       <option onclick="generateRandom()">Base-26     </option>
       <option onclick="generateRandom()">Base-16     </option>
       <option onclick="generateRandom()">Base-10     </option>
       <option onclick="generateRandom()">Base-8      </option>
+      <option onclick="generateRandom()">Base-4      </option>
       <option onclick="generateRandom()">Base-2      </option>
-      <option onclick="generateRandom()">Coin Flips  </option>
-      <option onclick="generateRandom()">DNA Sequence</option>
     </select>
     <p><small>(All output formats deliver aproximately the same password strength.)</small></p>
     <strong>3)</strong>
@@ -99,15 +99,15 @@
 	  case 'Base-62':      s = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'; break
 	  case 'Base-58':      s =  '123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ'; break
 	  case 'Base-52':      s =           'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'; break
+	  case 'Base-45':      s = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_$%*+-./:'; break
 	  case 'Base-36':      s = '0123456789abcdefghijklmnopqrstuvwxyz'; break
 	  case 'Base-32':      s = '0123456789abcdefghjkmnpqrstvwxyz'; break
 	  case 'Base-26':      s =           'abcdefghijklmnopqrstuvwxyz'; break
 	  case 'Base-16':      s = '0123456789abcdef'; break
 	  case 'Base-10':      s = '0123456789'; break
 	  case 'Base-8':       s = '01234567'; break
+	  case 'Base-4':       s = 'ACGT'; break
 	  case 'Base-2':       s = '01'; break
-	  case 'Coin Flips':   s = 'HT'; break
-	  case 'DNA Sequence': s = 'ACGT'; break
         }
         const len = Math.ceil(entropy / Math.log2(s.length))
         const pass = generatePass(len, s)

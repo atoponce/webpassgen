@@ -13,13 +13,13 @@ function unicodeWarn () {
 function setDarkTheme () {
   PAGECONTAINER.classList.add('dark-theme')
   localStorage.setItem('theme', 'dark')
-  THEMESWITCHER.innerText = 'Light Theme'
+  THEMESWITCHER.innerText = '☀️'
 }
 
 function setLightTheme () {
   PAGECONTAINER.classList.remove('dark-theme')
   localStorage.setItem('theme', 'light')
-  THEMESWITCHER.innerText = 'Dark Theme'
+  THEMESWITCHER.innerText = '🌑'
 }
 
 function initTheme () {
@@ -100,21 +100,19 @@ function secRand (count, useEntropy = false) {
   let num = 0
   const min = 2**16 % count
   const rand = new Uint16Array(1)
-  const crypto = window.crypto || window.msCrypto
 
-  do {
-    num = crypto.getRandomValues(rand)[0]
+  if (useEntropy) {
+    const entropy = JSON.parse(localStorage.entropy)
 
-    if (useEntropy) {
-      const entropy = JSON.parse(localStorage.entropy)
-
-      if (entropy.length > 0) {
-        num ^= entropy[0]
-        entropy.shift()
-        localStorage.entropy = JSON.stringify(entropy)
-      }
+    if (entropy.length > 0) {
+      num = entropy[0]
+      entropy.shift()
+      localStorage.entropy = JSON.stringify(entropy)
     }
-  } while (num < min)
+  }
+
+  do num ^= crypto.getRandomValues(rand)[0]
+  while (num < min)
 
   toggleEntropyVisibility()
 
@@ -981,14 +979,11 @@ function generateRandom () {
     case 'Base8':
       s = '01234567'
       break
+    case 'Base4':
+      s = 'ACGT'
+      break
     case 'Base2':
       s = '01'
-      break
-    case 'Coin Flips':
-      s = 'HT'
-      break
-    case 'DNA Sequence':
-      s = 'ACGT'
       break
     // Unicode optgroup
     case 'Braille': // Base256
