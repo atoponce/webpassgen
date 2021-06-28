@@ -11,7 +11,7 @@
   <body>
     <div id='container'>
       <div id='header'>
-      <h1>JavaScript Mouse Entropy</h1>
+        <h1>JavaScript Mouse Entropy</h1>
         <ul id='navigation'>
           <li><a href='index.html'>Passwords</a></li>
           <li><a href='entropy.html'>Add Entropy</a></li>
@@ -19,11 +19,12 @@
           <li><a href='#' onclick='toggleTheme(); loadPasses();' id='theme_switcher' title='Change theme'>🌒</a></li>
         </ul>
       </div>
-      <p>Move your mouse (or finger) across the changing randogram below to add entropy to the generator. Entropy is collected and stored every 16 bits.</p>
+      <p>Move your mouse (or finger) across the changing randogram below to collect non-deterministic entropy that you can use when generating passwords. Entropy is collected and stored every 16 bits.</p>
       <canvas id='randogram' height='400' width='400'></canvas>
-      <p class='collected'>Stored: <span class='collected' id='entropyResult1'>0</span> bits / <span class='collected' id='entropyResult2'></span> objects.</p>
+      <p class='collected'>Stored: <span class='collected' id='entropyResult1'>0</span> bits / <span class='collected' id='entropyResult2'>0</span> objects.</p>
       <p><strong>Please note:</strong> This does not replace the browser CSPRNG. Instead, it is mixed in.
-         This really is only useful if you suspect your system CSPRNG is compromised or if you believe it is not sufficiently seeded for security.</p>
+         This really is only useful if you suspect your system CSPRNG is compromised or if you believe it is not sufficiently seeded for security.
+         Most passphrases will use about 5-10 objects (words), and most passwords will use about 11-20 (characters).</p>
     </div>
     <div id="footer" class="clear">
       <p>Never trust online password generators, including this one.<br/>
