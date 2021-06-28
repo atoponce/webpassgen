@@ -19,7 +19,7 @@ function setDarkTheme () {
 function setLightTheme () {
   PAGECONTAINER.classList.remove('dark-theme')
   localStorage.setItem('theme', 'light')
-  THEMESWITCHER.innerText = '🌑'
+  THEMESWITCHER.innerText = '🌒'
 }
 
 function initTheme () {
