@@ -49,24 +49,30 @@ function drawRandogram () {
   return pixels
 }
 
-function getEntropy () {
+function updateEntropyCounts () {
+  let items = 0
   const entropyResult1 = document.getElementById('entropyResult1')
   const entropyResult2 = document.getElementById('entropyResult2')
-  const pixels = drawRandogram()
 
-  let entropy
-  let bits = []
-  let neumann = []
-  let items = JSON.parse(localStorage.entropy).length
+  if (localStorage.hasOwnProperty('entropy')) items = JSON.parse(localStorage.entropy).length
 
   entropyResult1.innerText = 16 * items
   entropyResult2.innerText = items
+
+}
+
+function getEntropy () {
+  let entropy
+  let bits = neumann = []
+  const pixels = drawRandogram()
 
   if (localStorage.hasOwnProperty('entropy')) {
     entropy = JSON.parse(localStorage.entropy)
   } else {
     entropy = []
   }
+
+  updateEntropyCounts() // set count initially
 
   document.getElementById('randogram').onpointermove = function (e) {
     const x = Math.floor(e.offsetX)
@@ -86,7 +92,6 @@ function getEntropy () {
 
           if (bits.length === 16) {
             entropy.push(parseInt(bits.join(''), 2))
-            items++
             bits = []
           }
         }
@@ -95,8 +100,7 @@ function getEntropy () {
       }
     } // if 0 <= x < LENGTH && 0 <= y < LENGTH
 
-    entropyResult1.innerText = 16 * items
-    entropyResult2.innerText = items
+    updateEntropyCounts() // update counts on mouse movement
   } // onpointermove
   requestAnimationFrame(drawRandogram)
 } // getEntropy()
