@@ -255,8 +255,6 @@ button:hover {
     #entropy-70 { margin-top: 2px; }
     #entropy-75 { margin-top: 2px; }
     #entropy-80 { margin-top: 2px; }
-
-    #randogram {margin: 0 calc((768px - 400px)/2);}
 }
 @media only screen and (max-width: 479px) {
     #container { width: 100%; }
@@ -266,8 +264,6 @@ button:hover {
     #entropy-70 { margin-top: 2px; }
     #entropy-75 { margin-top: 2px; }
     #entropy-80 { margin-top: 2px; }
-
-    #randogram {margin: 0 calc((100% - 400px)/2);}
 }
 
 /* overriden styles for Dark Theme */
