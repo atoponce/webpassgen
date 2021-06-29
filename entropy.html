@@ -14,39 +14,47 @@
         <h1>Mouse Entropy</h1>
         <ul id='navigation'>
           <li><a href='index.html'>Passwords</a></li>
-          <li><a href='entropy.html'>Add Entropy</a></li>
+          <li><a href='entropy.html'>Entropy</a></li>
           <li><a href='bookmarklets.html'>Bookmarklets</a></li>
-          <li><a href='#' onclick='toggleTheme(); loadPasses();' id='theme_switcher' title='Change theme'>🌒</a></li>
+          <li>
+            <a href='#' onclick='toggleTheme(); loadPasses();' id='theme_switcher' title='Change theme'>
+              <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-moon'>
+                <path d='M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z'></path>
+              </svg>
+            </a>
+          </li>
         </ul>
       </div>
-      <p>This is a <strong>true random number generator</strong> using your mouse/finger movement as a source of entropy. Move your mouse/finger across the noise below to collect true random bits. Inspired by <a href='https://keepass.info'>KeePass</a>.</p>
-      <canvas id='randogram' height='400' width='400'></canvas>
-      <p class='collected'>Collected: 
-        <span class='collected' id='entropyResult2'>0</span> items
-        (<span class='collected' id='entropyResult1'>0</span> bits)
-      </p>
-      <h2>FAQ</h2>
-      <p>
-        <ul>
-          <li><strong>Do I need it?</strong> Most likely not. Seriously. Your passwords are already secure even if you don't use this tool.</li>
-          <li><strong>Why then?</strong> Paranoia—you suspect the browser CSPRNG is compromised or not sufficiently seeded.</li>
-          <li><strong>What is an "item"?</strong> It's 16 bits that can be used for a passphrase word or password character.</li>
-          <li><strong>How much do I need?</strong> Depends. Most passphrases are 5-10 words, and most passwords are 11-20 characters.</li>
-          <li><strong>Then what?</strong> Go back to the password generator, check "Mix entropy?", then the purple "Generate" button.</li>
-          <li><strong>What happened?</strong> The entropy was mixed with the browser CSPRNG to produce a true random password.</li>
-        </ul>
-      </p>
-      <h2>Technical</h2>
-      <p>
-        <ol>
-          <li>The noise above is generated with the browser's CSPRNG.</li>
-          <li>When the mouse is moved, the bit at the xy-coordinate is collected.</li>
-          <li>When two bits are collected, they are whitened using <a href='https://en.wikipedia.org/wiki/Hardware_random_number_generator#Software_whitening'>John von Neumann's debiaser</a>.</li>
-          <li>16 whitened bits are stored in an array as 1 item.</li>
-          <li>During password generation, each 16-bit item is mixed with the browser CSPRNG using XOR.</li>
-          <li>Each 16-bit item is then discarded.</li>
-        </ol>
-      </p>
+      <div id='content'>
+        <p>Capture random bits to build a <strong>true random</strong> password by moving your mouse/finger across the noise below. This utilizes your mouse/finger movements as a source of entropy. Inspired by <a href='https://keepass.info'>KeePass</a>.</p>
+        <canvas id='randogram' height='400' width='400'></canvas>
+        <p class='collected'>Collected: 
+          <span class='collected' id='entropyResult2'>0</span> samples
+          (<span class='collected' id='entropyResult1'>0</span> bits)
+        </p>
+        <h2>FAQ</h2>
+        <p>
+          <ul>
+            <li><strong>What is the goal?</strong> To add entropy to the browser CSPRNG to produce a true random password.</li>
+            <li><strong>Do I need it?</strong> Most likely not. Your passwords are already secure even if you don't use this tool.</li>
+            <li><strong>Why then?</strong> Paranoia—you suspect the browser CSPRNG is compromised or not sufficiently seeded.</li>
+            <li><strong>What is a "sample"?</strong> It's 16 bits that can be used for a passphrase word or password character.</li>
+            <li><strong>How much do I need?</strong> Depends. Most passphrases are 5-10 words, and most passwords are 11-20 characters.</li>
+            <li><strong>Then what?</strong> Go back to the password generator, check "Mix entropy?", then the purple "Generate" button.</li>
+          </ul>
+        </p>
+        <h2>Technical</h2>
+        <p>
+          <ol>
+            <li>The noise above is generated with the browser's CSPRNG.</li>
+            <li>When the mouse is moved, the bit at the xy-coordinate is collected.</li>
+            <li>When two bits are collected, they are decorrelated using <a href='https://en.wikipedia.org/wiki/Hardware_random_number_generator#Software_whitening'>John von Neumann's debiaser</a>.</li>
+            <li>16 unbiased bits are stored in an array as 1 sample.</li>
+            <li>During password generation, each 16-bit sample is mixed with the browser CSPRNG using XOR.</li>
+            <li>Each 16-bit sample is then discarded.</li>
+          </ol>
+        </p>
+      </div>
     </div>
     <div id="footer" class="clear">
       <p>Never trust online password generators, including this one.<br/>
