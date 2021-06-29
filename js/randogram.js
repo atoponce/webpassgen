@@ -1,8 +1,14 @@
+const LENGTH = 400
+
 const CANVAS = document.getElementById('randogram')
 const CTX = CANVAS.getContext('2d', {alpha: false})
-const LENGTH = 400
+
 const OFFICERRANK = document.getElementById('officerRank')
 const RANKPIPS = document.getElementById('rankPips')
+const NEXTRANK = document.getElementById('nextRank')
+const REMAININGRANKBITS = document.getElementById('remainingRankBits')
+const ENTROPYRESULT1 = document.getElementById('entropyResult1')
+const ENTROPYRESULT2 = document.getElementById('entropyResult2')
 
 function awardOfficerRank (bits) {
   // Thank you https://feathericons.com/
@@ -71,8 +77,12 @@ function awardOfficerRank (bits) {
   if (bits < 64) rank = rankOrder[0]
   else rank = rankOrder[Math.floor(Math.log2(bits / 16)) - 1]
 
+  let nextRank = rankOrder[rankOrder.indexOf(rank) + 1]
+
   localStorage.rank = rank
   OFFICERRANK.innerText = rank
+  NEXTRANK.innerText = nextRank
+  REMAININGRANKBITS.innerText = 16 * 2 ** (rankOrder.indexOf(nextRank) + 1) - localStorage.lifetimeBits
 
   // openPip, closedPip
   let pipString = ''
@@ -140,14 +150,11 @@ function drawRandogram () {
 
 function updateEntropyCounts () {
   let items = 0
-  const entropyResult1 = document.getElementById('entropyResult1')
-  const entropyResult2 = document.getElementById('entropyResult2')
 
   if (localStorage.hasOwnProperty('entropy')) items = JSON.parse(localStorage.entropy).length
 
-  entropyResult1.innerText = 16 * items
-  entropyResult2.innerText = items
-
+  ENTROPYRESULT1.innerText = 16 * items
+  ENTROPYRESULT2.innerText = items
 }
 
 function getEntropy () {
