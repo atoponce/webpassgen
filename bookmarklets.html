@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="en">
+<html lang='en'>
   <head>
-    <link rel="shortcut icon" href="favicon.ico">
-    <link rel="stylesheet" href="assets/style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="color-scheme" content="dark light">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel='shortcut icon' href='favicon.ico'>
+    <link rel='stylesheet' href='assets/style.css'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <meta name='color-scheme' content='dark light'>
+    <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
     <title>Passphrase and Password Generator</title>
     <style>
       /* might need later */
@@ -20,17 +20,23 @@
     </style>
   </head>
   <body>
-    <div id="container">
-      <div id="header">
+    <div id='container'>
+      <div id='header'>
         <h1>Browser Bookmarklets</h1>
-        <ul id="navigation">
-          <li><a href="index.html">Passwords</a></li>
-          <li><a href="entropy.html">Add Entropy</a></li>
-          <li><a href="bookmarklets.html">Bookmarklets</a></li>
-          <li><a href='#' onclick='toggleTheme(); loadPasses();' id='theme_switcher' title='Change theme'>🌒</a></li>
+        <ul id='navigation'>
+          <li><a href='index.html'>Passwords</a></li>
+          <li><a href='entropy.html'>Entropy</a></li>
+          <li><a href='bookmarklets.html'>Bookmarklets</a></li>
+          <li>
+            <a href='#' onclick='toggleTheme(); loadPasses();' id='theme_switcher' title='Change theme'>
+              <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-moon'>
+                <path d='M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z'></path>
+              </svg>
+            </a>
+          </li>
         </ul>
       </div>
-      <div id="content">
+      <div id='content'>
         <p>These bookmarklets are <strong>offline</strong> password generators. First inspect the source code to ensure it's doing what you expect and that it's fully offline.</p>
         <p>Passphrases, such as Diceware or EFF, and the Letterblock Pseudowords aren't provided due to their size as well as the requirement to generate completely offline. The Unicode generators are also not provided.</p>
         <p>The JavaScript "window.alert()" function is used to give you the password. You may need to tweak your popup blocking preferences to see the generated password.</p>
@@ -40,7 +46,7 @@
           <tr>
             <!-- To save space in readability, use tabs in each bookmarklet, not spaces -->
             <td> <!-- Apple, Inc. Pseudowords -->
-<a class="bookmarklet" href='javascript:(function() {
+<a class='bookmarklet' href='javascript:(function() {
 function secRand (count) {
 	const min = (-count >>> 0) % count;
 	const rand = new Uint32Array(1);
@@ -93,7 +99,7 @@ window.alert(generateApple());
 })();'>Apple Inc.</a>
             </td>
             <td> <!-- Bubble Babble Pseudowords -->
-<a class="bookmarklet" href='javascript:(function() {
+<a class='bookmarklet' href='javascript:(function() {
 function secRand (count) {
 	const min = (-count >>> 0) % count;
 	const rand = new Uint32Array(1);
@@ -141,7 +147,7 @@ window.alert(generateBabble());
 })();'>Bubble Babble (Checksum)</a>
             </td>
             <td> <!-- Munemo Pseudowords -->
-<a class="bookmarklet" href='javascript:(function() {
+<a class='bookmarklet' href='javascript:(function() {
 function secRand (count) {
 	const min = (-count >>> 0) % count;
 	const rand = new Uint32Array(1);
@@ -182,7 +188,7 @@ window.alert(generateMunemo());
 })();'>Munemo</a>
             </td>
             <td> <!-- Proquints Pseudowords -->
-<a class="bookmarklet" href='javascript:(function() {
+<a class='bookmarklet' href='javascript:(function() {
 function secRand (count) {
 	const min = (-count >>> 0) % count;
 	const rand = new Uint32Array(1);
@@ -218,7 +224,7 @@ window.alert(generateProquints());
         <table>
           <tr>
             <td> <!-- Base-94 Random Passwords -->
-<a class="bookmarklet" href='javascript:(function() {
+<a class='bookmarklet' href='javascript:(function() {
 function secRand (count) {
 	const min = (-count >>> 0) % count;
 	const rand = new Uint32Array(1);
@@ -247,7 +253,7 @@ window.alert(generateRandom());
 })();'>Base-94</a>
             </td>
             <td> <!-- Base-85 Random Passwords -->
-<a class="bookmarklet" href='javascript:(function() {
+<a class='bookmarklet' href='javascript:(function() {
 function secRand (count) {
 	const min = (-count >>> 0) % count;
 	const rand = new Uint32Array(1);
@@ -275,7 +281,7 @@ window.alert(generateRandom());
 })();'>Base-85</a>
             </td>
             <td> <!-- Base-64 (+/) Random Passwords -->
-<a class="bookmarklet" href='javascript:(function() {
+<a class='bookmarklet' href='javascript:(function() {
 function secRand (count) {
 	const min = (-count >>> 0) % count;
 	const rand = new Uint32Array(1);
@@ -303,7 +309,7 @@ window.alert(generateRandom());
 })();'>Base-64 (+/)</a>
             </td>
             <td> <!-- Base-64 (-_) Random Passwords -->
-<a class="bookmarklet" href='javascript:(function() {
+<a class='bookmarklet' href='javascript:(function() {
 function secRand (count) {
 	const min = (-count >>> 0) % count;
 	const rand = new Uint32Array(1);
@@ -334,7 +340,7 @@ window.alert(generateRandom());
           </tr>
           <tr>
             <td> <!-- Base-62 Random Passwords -->
-<a class="bookmarklet" href='javascript:(function() {
+<a class='bookmarklet' href='javascript:(function() {
 function secRand (count) {
 	const min = (-count >>> 0) % count;
 	const rand = new Uint32Array(1);
@@ -362,7 +368,7 @@ window.alert(generateRandom());
 })();'>Base-62</a>
             </td>
             <td> <!-- Base-58 Random Passwords -->
-<a class="bookmarklet" href='javascript:(function() {
+<a class='bookmarklet' href='javascript:(function() {
 function secRand (count) {
 	const min = (-count >>> 0) % count;
 	const rand = new Uint32Array(1);
@@ -390,7 +396,7 @@ window.alert(generateRandom())
 })();'>Base-58</a>
             </td>
             <td> <!-- Base-52 Random Passwords -->
-<a class="bookmarklet" href='javascript:(function() {
+<a class='bookmarklet' href='javascript:(function() {
 function secRand (count) {
 	const min = (-count >>> 0) % count;
 	const rand = new Uint32Array(1);
@@ -418,7 +424,7 @@ window.alert(generateRandom());
 })();'>Base-52</a>
             </td>
             <td> <!-- Base-45 Random Passwords -->
-<a class="bookmarklet" href='javascript:(function() {
+<a class='bookmarklet' href='javascript:(function() {
 function secRand (count) {
 	const min = (-count >>> 0) % count;
 	const rand = new Uint32Array(1);
@@ -448,7 +454,7 @@ window.alert(generateRandom());
           </tr>
           <tr>
             <td> <!-- Base-36 Random Passwords -->
-<a class="bookmarklet" href='javascript:(function() {
+<a class='bookmarklet' href='javascript:(function() {
 function secRand (count) {
 	const min = (-count >>> 0) % count;
 	const rand = new Uint32Array(1);
@@ -476,7 +482,7 @@ window.alert(generateRandom());
 })();'>Base-36</a>
             </td>
             <td> <!-- Base-32 Random Passwords -->
-<a class="bookmarklet" href='javascript:(function() {
+<a class='bookmarklet' href='javascript:(function() {
 function secRand (count) {
 	const min = (-count >>> 0) % count;
 	const rand = new Uint32Array(1);
@@ -509,7 +515,7 @@ window.alert(generateRandom());
 })();'>Base-32 (Checksum)</a>
             </td>
             <td> <!-- Base-26 Random Passwords -->
-<a class="bookmarklet" href='javascript:(function() {
+<a class='bookmarklet' href='javascript:(function() {
 function secRand (count) {
 	const min = (-count >>> 0) % count;
 	const rand = new Uint32Array(1);
@@ -537,7 +543,7 @@ window.alert(generateRandom());
 })();'>Base-26</a>
             </td>
             <td> <!-- Base-16 Random Passwords -->
-<a class="bookmarklet" href='javascript:(function() {
+<a class='bookmarklet' href='javascript:(function() {
 function secRand (count) {
 	const min = (-count >>> 0) % count;
 	const rand = new Uint32Array(1);
@@ -567,7 +573,7 @@ window.alert(generateRandom());
           </tr>
           <tr>
             <td> <!-- Base-10 Random Passwords -->
-<a class="bookmarklet" href='javascript:(function() {
+<a class='bookmarklet' href='javascript:(function() {
 function secRand (count) {
 	const min = (-count >>> 0) % count;
 	const rand = new Uint32Array(1);
@@ -595,7 +601,7 @@ window.alert(generateRandom());
 })();'>Base-10</a>
             </td>
             <td> <!-- Base-8 Random Passwords -->
-<a class="bookmarklet" href='javascript:(function() {
+<a class='bookmarklet' href='javascript:(function() {
 function secRand (count) {
 	const min = (-count >>> 0) % count;
 	const rand = new Uint32Array(1);
@@ -623,7 +629,7 @@ window.alert(generateRandom());
 })();'>Base-8</a>
             </td>
             <td> <!-- Base-4 Random Passwords -->
-<a class="bookmarklet" href='javascript:(function() {
+<a class='bookmarklet' href='javascript:(function() {
 function secRand (count) {
 	const min = (-count >>> 0) % count;
 	const rand = new Uint32Array(1);
@@ -651,7 +657,7 @@ window.alert(generateRandom());
 })();'>Base-4</a>
             </td>
             <td> <!-- Base-2 Random Passwords -->
-<a class="bookmarklet" href='javascript:(function() {
+<a class='bookmarklet' href='javascript:(function() {
 function secRand (count) {
 	const min = (-count >>> 0) % count;
 	const rand = new Uint32Array(1);
@@ -681,19 +687,19 @@ window.alert(generateRandom());
           </tr>
         </table>
       </div>
-    <div id="footer" class="clear">
+    <div id='footer' class='clear'>
       <p>Never trust online password generators, including this one.<br/>
-         For better security, use the <a href="bookmarklets.html">bookmarklets</a>, or my <a href="https://github.com/atoponce/nodepassgen">command-line tool</a>.<br/>
+         For better security, use the <a href='bookmarklets.html'>bookmarklets</a>, or my <a href='https://github.com/atoponce/nodepassgen'>command-line tool</a>.<br/>
          For best security, use the generator that ships with your password manager.</p>
       <p><strong>For demonstration purposes only. It is not logging passwords.</strong></p>
       <p>
-        <a href="https://github.com/atoponce/webpassgen"><img alt="Github logo" title="Get the source code" src="assets/github.png" /></a>
-        <a href="https://github.com/atoponce/webpassgen/releases/latest"><img alt="Download icon" title="Download latest release" src="assets/download.png" /></a>
-        <a href="https://twitter.com/AaronToponce"><img alt="Twitter logo" title="Meet the author" src="assets/twitter.png" /></a>
+        <a href='https://github.com/atoponce/webpassgen'><img alt='Github logo' title='Get the source code' src='assets/github.png' /></a>
+        <a href='https://github.com/atoponce/webpassgen/releases/latest'><img alt='Download icon' title='Download latest release' src='assets/download.png' /></a>
+        <a href='https://twitter.com/AaronToponce'><img alt='Twitter logo' title='Meet the author' src='assets/twitter.png' /></a>
       </p>
       <p id='version'>Version: development</p>
     </div>
-    <script src="js/main.js"></script>
+    <script src='js/main.js'></script>
     <script>
       window.onload = function () {
         initTheme();
