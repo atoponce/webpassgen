@@ -137,6 +137,11 @@ button:hover {
     position: absolute;
     transform: rotate(90deg);
 }
+.feather {
+  fill: currentColor;
+  vertical-align: text-bottom;
+}
+
 /* ids */
 #container {
     margin: 0 auto;
@@ -235,7 +240,7 @@ button:hover {
 
 /* Mouse Entropy CSS */
 #randogram {
-    cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAPFBMVEUAAAD/ACD/ACD/ACD/ACD/ACD/ACD/ACD/ACD/ACD/ACD/ACD/ACD/ACD/ACD/ACD/ACD/ACD/ACD/ACBBwp1eAAAAE3RSTlMAAissLjU5Oj0+QkdXWVzw8/X444EtGgAAAGlJREFUGNNVjkEWAjEIxdI62Kq1+OX+d3UzpQ4L3ksWBMqs5NR3YYTbYvMYHN805qEKr2XMQw3SJMNT4fbH8BCA7jvXAdpmLNfqAVz+Ueu6/NMgTfZOUz0+5/2u8MoM9awrBmUeO3eb5QfrOgWEiHcvOAAAAABJRU5ErkJggg=='), crosshair;
+    cursor: url('data:image/gif;base64,R0lGODlhFAAUAIQWAP8/P/9AQP+zs/+2tv+3t/+5uf+6uv/Bwf/Cwv/Dw//ExP/Fxf/Gxv/Hx//Ly//MzP/R0f/S0v/U1P/V1f/z8////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEKAB8ALAAAAAAUABQAAAWU4FeNX2me5ViJlDCt6FlNAzUSQPDAcfUEAMIIAijueo8iILKqGIo6nuhXZMBGBeVxClWQUpVsbucDAqxSUUUBdTjMjS9qtACcAuiYaYQ4JeR6Ig4nDmlIAXdbemU5DQpAUYtJOWgIZoopVGcqa1CKPlB5anVGTRNmXlJ8UC8VAkUHgGAIRUIVLRKyexUSAjZqhj0kIQA7'), crosshair;
     margin: 0 calc((100% - 400px)/2);
     touch-action: none;
 }
