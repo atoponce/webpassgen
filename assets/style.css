@@ -138,7 +138,6 @@ button:hover {
     transform: rotate(90deg);
 }
 .feather {
-  fill: currentColor;
   vertical-align: text-bottom;
 }
 
