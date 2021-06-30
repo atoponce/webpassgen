@@ -680,7 +680,7 @@ function generateBabble () {
 
   entropyCheck.checked ? useEntropy = true : useEntropy = false
 
-  for (let i = 0; i < entropy.length; i++) entropy[i] = secRand(256, entropyCheck)
+  for (let i = 0; i < entropy.length; i++) entropy[i] = secRand(256, useEntropy)
 
   for (let i = 0; i <= entropy.length; i += 2) {
     if (i >= entropy.length) {
