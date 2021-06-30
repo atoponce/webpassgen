@@ -119,7 +119,7 @@ function concatenate (resultConstructor, ...arrays) {
 }
 
 function randogram () {
-  return crypto.getRandomValues(new Uint8Array(40000)) // max ArrayBufferView byte length
+  return crypto.getRandomValues(new Uint8Array(40000))
 }
 
 function genPixels () {
