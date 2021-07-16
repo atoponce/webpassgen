@@ -1008,8 +1008,13 @@ function generateRandom () {
       return generateEmoji()
     case 'ISO 8859-1': // Base188
       unicodeWarn()
-      for (let i = 0; i < 94; i++) s += String.fromCharCode(33 + i)
-      for (let i = 0; i < 95; i++) s += String.fromCharCode(161 + i)
+      // Standard ASCII
+      for (let i = 0; i < 94; i++) {
+        s += String.fromCharCode(33 + i)
+      }
+      for (let i = 0; i < 95; i++) {
+        s += String.fromCharCode(161 + i)
+      }
       s = s.replace(String.fromCharCode(173), '') // soft-hyphen isn't graphical
       break
     case 'Latin Extended': // Base256
@@ -1072,7 +1077,7 @@ function generateEmoji () {
   const pass = generatePass(len, randomEmoji, false, useEntropy)
 
   passLength.innerText = pass.length + ' characters.'
-  passId.style.fontFamily = 'Emoji'
+  passId.style.fontFamily = 'Twemoji Mozilla'
   passId.innerText = pass
   passEntropy.innerText = Math.floor(len * Math.log2(randomEmoji.length)) + ' bits,'
 }
