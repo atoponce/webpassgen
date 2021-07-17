@@ -1076,7 +1076,7 @@ function generateEmoji () {
 
   const pass = generatePass(len, randomEmoji, false, useEntropy)
 
-  passLength.innerText = pass.length + ' characters.'
+  passLength.innerText = len + ' characters.'
   passId.style.fontFamily = 'Twemoji Mozilla'
   passId.innerText = pass
   passEntropy.innerText = Math.floor(len * Math.log2(randomEmoji.length)) + ' bits,'
