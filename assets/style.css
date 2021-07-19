@@ -270,7 +270,7 @@ button:hover {
     #entropy-80 { margin-top: 2px; }
 }
 
-/* overriden styles for Dark Theme */
+/* override styles for Dark Theme */
 body.dark-theme {color: white; background-color: black;}
 .dark-theme .cell { border-color: #FFF; }
 .dark-theme a {color: yellow;}

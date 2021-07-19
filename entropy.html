@@ -56,7 +56,7 @@
           <ol>
             <li>The noise above is generated with the browser's CSPRNG.</li>
             <li>When the mouse is moved, the bit at the xy-coordinate is collected.</li>
-            <li>When two bits are collected, they are decorrelated using <a href='https://en.wikipedia.org/wiki/Hardware_random_number_generator#Software_whitening'>John von Neumann's debiaser</a>.</li>
+            <li>When two bits are collected, they are decorrelated using <a href='https://en.wikipedia.org/wiki/Hardware_random_number_generator#Software_whitening'>John von Neumann's randomness extractor</a>.</li>
             <li>16 unbiased bits are stored in an array as 1 sample.</li>
             <li>During password generation, each 16-bit sample is mixed with the browser CSPRNG using XOR.</li>
             <li>Each 16-bit sample is then discarded.</li>
