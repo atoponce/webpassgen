@@ -277,7 +277,7 @@ function generateDiceware (selection) {
   entropyCheck.checked ? useEntropy = true : useEntropy = false
 
   if ( wordList.filter(Array.isArray).length === 2) {
-    // We're working on the "Natrual Language Passwords" list
+    // We're working on the "Natural Language Passwords" list
     const len1 = Math.ceil(entropy / Math.log2(wordList[0].length)) // adjectives
     const len2 = Math.ceil(entropy / Math.log2(wordList[1].length)) // nouns
     const adjs = generatePass(len1, wordList[0], true, useEntropy).split(" ")
@@ -286,7 +286,7 @@ function generateDiceware (selection) {
     let bits = 0
     let counter = 0
 
-    // building up the password alteraning: adj-noun-adj-noun-...
+    // building up the password alternating: adj-noun-adj-noun-...
     while (bits <= entropy) {
       if (counter % 2 === 0) {
         pass += adjs[counter]
@@ -785,7 +785,7 @@ function generateProquints () {
 function generateLetterblock () {
   // https://www.draketo.de/software/letterblock-diceware
   // Diverged from above with:
-  //  - '$' and '%' appended to make the checksum delimeters 6 characters
+  //  - '$' and '%' appended to make the checksum delimiters 6 characters
   //  - Treating digits as leet-speak
   function _isDigit (str) {
     return str.length === 1 && str.match(/[0-9]/)
@@ -1030,7 +1030,7 @@ function generateRandom () {
       for (let i = 0; i < 94; i++) {
         s += String.fromCharCode(33 + i)
       }
-      // Excludes Unicod U+F8FF in the Corporate Private Use Area for the Apple logo
+      // Excludes Unicode U+F8FF in the Corporate Private Use Area for the Apple logo
       s += 'ÄÅÇÉÑÖÜáàâäãåçéèêëíìîïñóòôöõúùûü†°¢£§•¶ß®©™´¨≠ÆØ∞±≤≥¥µ∂∑∏π∫ªºΩæ'
       s += 'ø¿¡¬√ƒ≈∆«»…ÀÃÕŒœ–—“”‘’÷◊ÿŸ⁄€‹›ﬁﬂ‡·‚„‰ÂÊÁËÈÍÎÏÌÓÔÒÚÛÙıˆ˜¯˘˙˚¸˝˛ˇ'
       break
