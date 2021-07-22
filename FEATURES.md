@@ -45,6 +45,12 @@ Those three families of generators are broken down into six general categories:
 Below is a list of the features that this project supports, with the various generators that supply
 each feature. Note that many generators have multiple features.
 
+## Mouse Entropy Collection
+The project supports collecting entropy via mouse or finger movement over an animated CSPRNG noise
+matrix. These bits are debiased and stored locally for mixing into the password generation if you
+choose. This should yield "true random" passwords, providing information theoretic security like
+flipping fair coins or tossing fair dice.
+
 ## Checksums
 Client-side software could check the validity of the checksum first before sending it to the
 authentication server for hashing. This should reduce stress off the authentication server by
@@ -60,7 +66,6 @@ generators are designed to spark a discussion about the security of how passphra
 
 * Alternate: English (All), Pokerware, RockYou, Simpsons, Trump
 * Diceware: English (Beale), English (NLP)
-* DiceKeys (separate link on the page)
 
 ## Encoding Standards
 Each of these is a common (more or less) standard for converting binary into text. In the case of
