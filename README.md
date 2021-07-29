@@ -10,17 +10,17 @@ and run it offline, if you're truly paranoid.
 ## Desktop Screenshots
 <table style="border-collapse: collapse; border: 1px solid black;">
 <tr><td style="border: 1px solid black;">
-<img alt="Light theme desktop screenshot" src="https://user-images.githubusercontent.com/699572/102729250-304d8080-42ed-11eb-8559-56da890f1688.png" />
+<img alt="Light theme desktop screenshot" src="https://user-images.githubusercontent.com/699572/127556853-20914ceb-ea69-419a-8c52-10c33db7064b.png" />
 </td><td style="border: 1px solid black;">
-<img alt="Dark theme desktop screenshot" src="https://user-images.githubusercontent.com/699572/102729248-2fb4ea00-42ed-11eb-9a3b-437bd16ce8fb.png" />
+<img alt="Dark theme desktop screenshot" src="https://user-images.githubusercontent.com/699572/127556854-71a053ec-5b91-4cce-aa61-7bf9c6e0860b.png" />
 </td></tr></table>
 
 ## Mobile-Friendly Screenshots
 <table style="border-collapse: collapse; border: 1px solid black;">
 <tr><td style="border: 1px solid black;">
-<img alt="Light theme mobile screenshot" src="https://user-images.githubusercontent.com/699572/102729253-317ead80-42ed-11eb-88d2-36b94480255d.png" />
+<img alt="Light theme mobile screenshot" src="https://user-images.githubusercontent.com/699572/127557629-d80af7a3-3fc8-44cc-8c6f-f3f1d08ba424.png" />
 </td><td style="border: 1px solid black;">
-<img alt="Dark theme mobile screenshot" src="https://user-images.githubusercontent.com/699572/102729252-30e61700-42ed-11eb-8f08-73d07c752fcb.png" />
+<img alt="Dark theme mobile screenshot" src="https://user-images.githubusercontent.com/699572/127557630-18b5d92d-2574-45eb-8d65-f0120ddc2f50.png" />
 </td></tr></table>
 
 ## Supported Languages
