@@ -34,21 +34,21 @@
     <p><small><i>(More bits = more security. 70-bits is the recommended minimum. 128-bits for password-based encryption.)</i></small></p>
     <strong>2) Select an output format:</strong>
     <select id="base-options">
-      <option onclick="generateRandom()">Base-94     </option>
-      <option onclick="generateRandom()">Base-85     </option>
-      <option onclick="generateRandom()">Base-64     </option>
-      <option onclick="generateRandom()">Base-62     </option>
-      <option onclick="generateRandom()">Base-58     </option>
-      <option onclick="generateRandom()">Base-52     </option>
-      <option onclick="generateRandom()">Base-45     </option>
-      <option onclick="generateRandom()">Base-36     </option>
-      <option onclick="generateRandom()">Base-32     </option>
-      <option onclick="generateRandom()">Base-26     </option>
-      <option onclick="generateRandom()">Base-16     </option>
-      <option onclick="generateRandom()">Base-10     </option>
-      <option onclick="generateRandom()">Base-8      </option>
-      <option onclick="generateRandom()">Base-4      </option>
-      <option onclick="generateRandom()">Base-2      </option>
+      <option onclick="generateRandom()">Base-94</option>
+      <option onclick="generateRandom()">Base-85</option>
+      <option onclick="generateRandom()">Base-64</option>
+      <option onclick="generateRandom()">Base-62</option>
+      <option onclick="generateRandom()">Base-58</option>
+      <option onclick="generateRandom()">Base-52</option>
+      <option onclick="generateRandom()">Base-45</option>
+      <option onclick="generateRandom()">Base-36</option>
+      <option onclick="generateRandom()">Base-32</option>
+      <option onclick="generateRandom()">Base-26</option>
+      <option onclick="generateRandom()">Base-16</option>
+      <option onclick="generateRandom()">Base-10</option>
+      <option onclick="generateRandom()">Base-8 </option>
+      <option onclick="generateRandom()">Base-4 </option>
+      <option onclick="generateRandom()">Base-2 </option>
     </select>
     <p><small>(All output formats deliver aproximately the same password strength.)</small></p>
     <strong>3)</strong>
@@ -67,16 +67,21 @@
       function secRand (count) {
         const min = 2**16 % count
         const rand = new Uint16Array(1)
+
         do { crypto.getRandomValues(rand) } while (rand[0] < min)
+
         return rand[0] % count
       }
 
       function generatePass (len, set) {
         let pass = ''
         let passArr = ''
+
         if (typeof set === 'string') { passArr = set.split('') }
         else                         { passArr = set }
-        for (let i = len; i > 0; i--)  pass   += passArr[secRand(set.length)]
+
+        for (let i = len; i > 0; i--){ pass   += passArr[secRand(set.length)]}
+
         return pass.trim()
       }
 
@@ -87,25 +92,26 @@
         const passLength  = document.getElementById('random-length')
         const passEntropy = document.getElementById('random-entropy')
         const option      = document.getElementById('base-options').value
-        switch (option) {
-	  case 'Base-94': for (let i = 0; i < 94; i++) { s += String.fromCharCode(33 + i) }; break
-	  case 'Base-85':      s = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!#$%&()*+-;<=>?@^_`{|}~'; break
-	  case 'Base-64':      s = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ`!"#$%&\'()*+,-./:;<=>?@[\\]^_'; break
-	  case 'Base-62':      s = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'; break
-	  case 'Base-58':      s =  '123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ'; break
-	  case 'Base-52':      s =           'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'; break
-	  case 'Base-45':      s = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_$%*+-./:'; break
-	  case 'Base-36':      s = '0123456789abcdefghijklmnopqrstuvwxyz'; break
-	  case 'Base-32':      s = '0123456789abcdefghjkmnpqrstvwxyz'; break
-	  case 'Base-26':      s =           'abcdefghijklmnopqrstuvwxyz'; break
-	  case 'Base-16':      s = '0123456789abcdef'; break
-	  case 'Base-10':      s = '0123456789'; break
-	  case 'Base-8':       s = '01234567'; break
-	  case 'Base-4':       s = 'ACGT'; break
-	  case 'Base-2':       s = '01'; break
-        }
+
+             if (option === 'Base-94') {for (let i = 0; i < 94; i++) { s += String.fromCharCode(33 + i) }}
+	else if (option === 'Base-85') {s = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!#$%&()*+-;<=>?@^_`{|}~'}
+	else if (option === 'Base-64') {s = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ`!"#$%&\'()*+,-./:;<=>?@[\\]^_'}
+	else if (option === 'Base-62') {s = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'}
+	else if (option === 'Base-58') {s =  '123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ'}
+	else if (option === 'Base-52') {s =           'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'}
+	else if (option === 'Base-45') {s = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_$%*+-./:'}
+	else if (option === 'Base-36') {s = '0123456789abcdefghijklmnopqrstuvwxyz'}
+	else if (option === 'Base-32') {s = '0123456789abcdefghjkmnpqrstvwxyz'}
+	else if (option === 'Base-26') {s =           'abcdefghijklmnopqrstuvwxyz'}
+	else if (option === 'Base-16') {s = '0123456789abcdef'}
+	else if (option === 'Base-10') {s = '0123456789'}
+	else if (option === 'Base-8' ) {s = '01234567'}
+	else if (option === 'Base-4' ) {s = 'ACGT'}
+	else if (option === 'Base-2' ) {s = '01'}
+
         const len = Math.ceil(entropy / Math.log2(s.length))
         const pass = generatePass(len, s)
+
         //Set values in html
              passId.innerText = pass
          passLength.innerHTML = len
