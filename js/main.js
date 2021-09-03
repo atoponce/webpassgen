@@ -14,16 +14,16 @@ function setDarkTheme() {
   PAGECONTAINER.classList.add('dark-theme')
   localStorage.setItem('theme', 'dark')
   THEMESWITCHER.innerHTML = `
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun">
-      <circle cx="12" cy="12" r="5"></circle>
-      <line x1="12" y1="1" x2="12" y2="3"></line>
-      <line x1="12" y1="21" x2="12" y2="23"></line>
-      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-      <line x1="1" y1="12" x2="3" y2="12"></line>
-      <line x1="21" y1="12" x2="23" y2="12"></line>
-      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='currentColor' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-sun'>
+      <circle cx='12' cy='12' r='5'></circle>
+      <line x1='12' y1='1' x2='12' y2='3'></line>
+      <line x1='12' y1='21' x2='12' y2='23'></line>
+      <line x1='4.22' y1='4.22' x2='5.64' y2='5.64'></line>
+      <line x1='18.36' y1='18.36' x2='19.78' y2='19.78'></line>
+      <line x1='1' y1='12' x2='3' y2='12'></line>
+      <line x1='21' y1='12' x2='23' y2='12'></line>
+      <line x1='4.22' y1='19.78' x2='5.64' y2='18.36'></line>
+      <line x1='18.36' y1='5.64' x2='19.78' y2='4.22'></line>
     </svg>
   `
 }
@@ -32,8 +32,8 @@ function setLightTheme() {
   PAGECONTAINER.classList.remove('dark-theme')
   localStorage.setItem('theme', 'light')
   THEMESWITCHER.innerHTML = `
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon">
-      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+    <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='currentColor' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-moon'>
+      <path d='M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z'></path>
     </svg>
   `
 }
@@ -258,7 +258,7 @@ function generateDiceware(selection) {
   }
 
   if (wordList.filter(Array.isArray).length === 2) {
-    // We're working on the "Natural Language Passwords" list
+    // We're working on the 'Natural Language Passwords' list
     const len1 = Math.ceil(entropy / Math.log2(wordList[0].length)) // adjectives
     const len2 = Math.ceil(entropy / Math.log2(wordList[1].length)) // nouns
     const adjs = generatePass(len1, wordList[0], true, useEntropy).split(' ')
@@ -1102,15 +1102,15 @@ function generateRandom() {
 
   if (option === 'Base32') {
     // Add Crockford's modulo 37 checksum
-    let check = 0n
-    s += '*~$=u'
+    let res = 0n
+    const check = s + '*~$=u'
     displayCheck = true
 
     for (let i = 0; i < pass.length; i++) {
-      check += BigInt(s.indexOf(pass[i]) * 32 ** (pass.length - i - 1))
+      res += BigInt(s.indexOf(pass[i]) * 32 ** (pass.length - i - 1))
     }
 
-    pass += s[check % 37n]
+    pass += check[res % 37n]
   }
 
   passLength.innerText = pass.length + ' characters.'
@@ -1123,6 +1123,7 @@ function generateRandom() {
   } else {
     passCheck.innerText = ''
   }
+
 }
 
 function generateEmoji() {
