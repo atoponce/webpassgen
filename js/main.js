@@ -985,7 +985,7 @@ function generateUrbit() {
     "rem", "lys", "fyn", "wer", "ryc", "sug", "nys", "nyl", "lyn", "dyn", "dem", "lux", "fed", "sed", "bec", "mun",
     "lyr", "tes", "mud", "nyt", "byr", "sen", "weg", "fyr", "mur", "tel", "rep", "teg", "pec", "nel", "nev", "fes"]
   const entropy = getEntropy()
-  const len = Math.ceil(entropy / 16) // 8 bits per "word"
+  const len = Math.ceil(entropy / 16) // 16 bits per "word"
   const entropyCheck = document.getElementById('pseudo-entropy-check')
 
   let useEntropy = false
