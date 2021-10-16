@@ -12,8 +12,16 @@ const ENTROPYRESULT2 = document.getElementById('entropyResult2')
 
 function awardOfficerRank (bits) {
   // Thank you https://feathericons.com/
-  const openPip = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#333333" stroke="#d1a52c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-circle"><circle cx="12" cy="12" r="10"></circle></svg>'
-  const closedPip = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#d1a52c" stroke="#d1a52c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-circle"><circle cx="12" cy="12" r="10"></circle></svg>'
+  const openPip = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#333333" stroke="#d1a52c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-circle">
+      <circle cx="12" cy="12" r="10"></circle>
+    </svg>
+  `
+  const closedPip = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#d1a52c" stroke="#d1a52c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-circle">
+      <circle cx="12" cy="12" r="10"></circle>
+    </svg>
+  `
 
   /*
     For each key (rank), the value is the pip assignment as an array of 2 elements.:
@@ -74,8 +82,12 @@ function awardOfficerRank (bits) {
   localStorage.lifetimeBits = bits
 
   let rank
-  if (bits < 64) rank = rankOrder[0]
-  else rank = rankOrder[Math.floor(Math.log2(bits / 16)) - 1]
+
+  if (bits < 64) {
+    rank = rankOrder[0]
+  } else {
+    rank = rankOrder[Math.floor(Math.log2(bits / 16)) - 1]
+  }
 
   let nextRank = rankOrder[rankOrder.indexOf(rank) + 1]
 
@@ -105,7 +117,9 @@ function awardOfficerRank (bits) {
 function concatenate (resultConstructor, ...arrays) {
   let totalLength = 0
 
-  for (const arr of arrays) totalLength += arr.length
+  for (const arr of arrays) {
+    totalLength += arr.length
+  }
 
   const result = new resultConstructor(totalLength)
   let offset = 0
@@ -151,7 +165,9 @@ function drawRandogram () {
 function updateEntropyCounts () {
   let items = 0
 
-  if (localStorage.hasOwnProperty('entropy')) items = JSON.parse(localStorage.entropy).length
+  if (localStorage.hasOwnProperty('entropy')) {
+    items = JSON.parse(localStorage.entropy).length
+  }
 
   ENTROPYRESULT1.innerText = 16 * items
   ENTROPYRESULT2.innerText = items
