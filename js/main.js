@@ -949,6 +949,92 @@ function generateLetterblock() {
   return [pw, pw.length, totalEntropy]
 }
 
+function generateDaefen() {
+  const syllables = []
+  const consonants = 'bcdfghjklmnprstvwz'
+  const vowels = 'aeiouy'
+  const entropy = getEntropy()
+  const entropyCheck = document.getElementById('pseudo-entropy-check')
+
+  let pass = ''
+  let useEntropy = false
+
+  if (entropyCheck.checked) {
+    useEntropy = true
+  }
+
+  // taken from https://github.com/alexvandesande/Daefen/blob/master/index.js
+  // vowel + consonant
+  for (let i = 0; i < vowels.length; i++) {
+    for (let j = 0; j < consonants.length; j++) {
+      syllables.push(vowels[i] + consonants[j])
+    }
+  }
+
+  // consonant + vowel
+  for (let i = 0; i < consonants.length; i++) {
+    for (let j = 0; j < vowels.length; j++) {
+      syllables.push(consonants[i] + vowels[j])
+    }
+  }
+
+  // consonant + vowel + vowel
+  for (let i = 0; i < consonants.length; i++) {
+    for (let j = 0; j < vowels.length; j++) {
+      for (let k = 0; k < vowels.length; k++) {
+        syllables.push(consonants[i] + vowels[j] + vowels[k])
+      }
+    }
+  }
+
+  // consonant + vowel + consonant
+  for (let i = 0; i < consonants.length; i++) {
+    for (let j = 0; j < vowels.length; j++) {
+      for (let k = 0; k < consonants.length; k++) {
+        syllables.push(consonants[i] + vowels[j] + consonants[k])
+      }
+    }
+  }
+
+  // vowel + consonant + vowel
+  for (let i = 0; i < vowels.length; i++) {
+    for (let j = 0; j < consonants.length; j++) {
+      for (let k = 0; k < vowels.length; k++) {
+        syllables.push(vowels[i] + consonants[j] + vowels[k])
+      }
+    }
+  }
+
+  const len = Math.ceil(entropy / Math.log2(syllables.length)) // 16 bits per "word"
+
+  var isConsonant = function (letter) {
+    return consonants.indexOf(letter) >= 0
+  }
+
+  for (let i = 0; i < len; i ++) {
+    let n = secRand(syllables.length, useEntropy)
+    let lastWord = pass.split('-').slice(-1)[0]
+
+    if (
+      pass === '' || lastWord.length === syllables[n].length ||
+      (
+        lastWord.length < 5 &&
+        isConsonant(lastWord.slice(-1)) &&
+        isConsonant(syllables[n].slice(0, 1))
+      )) {
+      pass += syllables[n]
+    } else {
+      pass += '-' + syllables[n]
+    }
+  }
+
+  pass = pass.replace(/\b[a-z]/g, function(f) {
+    return f.toUpperCase()
+  })
+
+  return [pass, pass.length, Math.floor(len * Math.log2(syllables.length))]
+}
+
 function generateUrbit() {
   const prefixes = [
     "doz", "mar", "bin", "wan", "sam", "lit", "sig", "hid", "fid", "lis", "sog", "dir", "wac", "sab", "wis", "sib",
@@ -1041,6 +1127,8 @@ function generatePseudowords() {
   } else if (pseudo === 'Bubble Babble') {
     ret = generateBabble()
     displayCheck = true
+  } else if (pseudo === 'Daefen') {
+    ret = generateDaefen()
   } else if (pseudo === 'Letterblock Diceware') {
     ret = generateLetterblock()
     displayCheck = true
@@ -1183,7 +1271,6 @@ function generateRandom() {
   } else {
     passCheck.innerText = ''
   }
-
 }
 
 function generateEmoji() {
