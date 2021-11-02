@@ -351,8 +351,14 @@ function generateAlternate(selection) {
   let pass = ''
   let wordList = ''
 
-  if (selection === 'Colors') {
+  if (selection === 'Afrikaans') {
+    wordList = alternateAF
+  } else if (selection === 'Belarusian') {
+    wordList = alternateBE
+  } else if (selection === 'Colors') {
     return generateColors()
+  } else if (selection === 'Croatian') {
+    wordList = alternateHR
   } else if (selection === 'Elvish') {
     wordList = alternateElvish
   } else if (selection === 'English (All)') {
@@ -381,6 +387,8 @@ function generateAlternate(selection) {
     wordList = alternateShavian
   } else if (selection === 'Klingon') {
     wordList = alternateKlingon
+  } else if (selection === 'Mongolian') {
+    wordList = alternateMN
   } else if (selection === 'PGP') {
     wordList = alternatePgp
   } else if (selection === 'Pokerware') {
@@ -389,10 +397,14 @@ function generateAlternate(selection) {
     wordList = alternateRockyou
   } else if (selection === 'Simpsons') {
     wordList = alternateSimpsons
+  } else if (selection === 'Serbian') {
+    wordList = alternateSR
   } else if (selection === 'S/KEY') {
     wordList = alternateSkey
   } else if (selection === 'Trump') {
     wordList = alternateTrump
+  } else if (selection === 'Ukranian') {
+    wordList = alternateUK
   }
 
   wordList = uniquesOnly(wordList)
