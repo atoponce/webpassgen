@@ -3,6 +3,7 @@ const PAGECONTAINER = document.getElementsByTagName('body')[0]
 const PREFERSDARKTHEME = window.matchMedia('(prefers-color-scheme: dark)')
 const THEMESWITCHER = document.getElementById('theme_switcher')
 
+/** Provide a warning when any of the Unicode generators are chosen. */
 function unicodeWarn() {
   if (localStorage.getItem('unicode_warned') === null) {
     document.getElementById('overlay').style.display = 'block'
@@ -10,9 +11,11 @@ function unicodeWarn() {
   }
 }
 
+/** Toggle the theme to dark. Uses #000000 for OLED efficiency. */
 function setDarkTheme() {
   PAGECONTAINER.classList.add('dark-theme')
   localStorage.setItem('theme', 'dark')
+  // SVG sun
   THEMESWITCHER.innerHTML = `
     <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='currentColor' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-sun'>
       <circle cx='12' cy='12' r='5'></circle>
@@ -28,9 +31,11 @@ function setDarkTheme() {
   `
 }
 
+/** Toggle the theme to light. */
 function setLightTheme() {
   PAGECONTAINER.classList.remove('dark-theme')
   localStorage.setItem('theme', 'light')
+  // SVG moon
   THEMESWITCHER.innerHTML = `
     <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='currentColor' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-moon'>
       <path d='M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z'></path>
@@ -38,6 +43,7 @@ function setLightTheme() {
   `
 }
 
+/** Initialize the theme from previous setting, or default to light. */
 function initTheme() {
   if (localStorage.getItem('theme') === 'dark') {
     // Dark Theme was set on page load because of previously set preference.
@@ -55,6 +61,7 @@ function initTheme() {
   }
 }
 
+/** Toggle theme between light and dark. */
 function toggleTheme() {
   if (PAGECONTAINER.classList.contains('dark-theme')) {
     setLightTheme()
@@ -63,39 +70,55 @@ function toggleTheme() {
   }
 }
 
+/** Return selected entropy (55, 60, 65, 70, 75, or 80). */
 function getEntropy() {
   return parseInt(document.querySelector("input[name='entropy']:checked").value)
 }
 
+/**
+ * Return a word list from the Alternate, Bitcoin, Diceware, or EFF generator.
+ * @param {string} source - The selected passphrase wordlist.
+ * @returns {string}
+ */
 function getSourceList(source) {
   let sourceList
 
-  if (source === 'diceware') {
-    sourceList = document.getElementById('diceware-options').value
-  } else if (source === 'eff') {
-    sourceList = document.getElementById('eff-options').value
-  } else if (source === 'alternate') {
+  if (source === 'alternate') {
     sourceList = document.getElementById('alt-options').value
   } else if (source === 'bitcoin') {
     sourceList = document.getElementById('bitcoin-options').value
+  } else if (source === 'diceware') {
+    sourceList = document.getElementById('diceware-options').value
+  } else if (source === 'eff') {
+    sourceList = document.getElementById('eff-options').value
   }
 
   return sourceList
 }
 
+/**
+ * Generate a passphrase based on the button the user presses.
+ * @param {string} source - The selected passphrase generator.
+ */
 function generatePassphrase(source) {
   const sourceList = getSourceList(source)
 
-  if (source === 'diceware') {
-    generateDiceware(sourceList)
-  } else if (source === 'eff') {
-    generateEff(sourceList)
-  } else if (source === 'alternate') {
+  if (source === 'alternate') {
     generateAlternate(sourceList)
   } else if (source === 'bitcoin') {
     generateBitcoin(sourceList)
-  }
+  } else if (source === 'diceware') {
+    generateDiceware(sourceList)
+  } else if (source === 'eff') {
+    generateEff(sourceList)
+  } 
 }
+
+/** 
+ * Add a checkbox to use entropy if its present in localStorage.entropy.
+ * Mozilla will not store localStorage key values to disk under the file:// protocol.
+ * See https://bugzilla.mozilla.org/show_bug.cgi?id=507361 for more information.
+ */
 
 function toggleEntropyVisibility() {
   const classes = document.getElementsByClassName('use-entropy')
@@ -114,6 +137,12 @@ function toggleEntropyVisibility() {
   }
 }
 
+/**
+ * A cryptographically secure uniform random number generator.
+ * @param {number} count - The max number a random number can be.
+ * @param {boolean} useEntropy - Whether or not to use the data in localStorage.entropy.
+ * @returns {number}
+ */
 function secRand(count, useEntropy) {
   let num = 0
   const min = 2 ** 16 % count
@@ -138,10 +167,23 @@ function secRand(count, useEntropy) {
   return num % count
 }
 
+/**
+ * Remove any and all duplicates from an array. Case sensitive.
+ * @param {Array} list - An array of strings or numbers which might contain duplicates.
+ * @returns {Array}
+ */
 function uniquesOnly(list) {
   return [...new Set(list)] // enforce unique elements in array
 }
 
+/**
+ * The critical password generation function. Generates a password from a given set of data.
+ * @param {number} len - How many characters/words to pick.
+ * @param {string|Array} set - The data set to pick from.
+ * @param {boolean} spaces - Whether or not to space-separate the password.
+ * @param {boolean} useEntropy - Whether or not to use save entropy in localStorage.entropy.
+ * @returns {string}
+ */
 function generatePass(len, set, spaces, useEntropy) {
   let pass = ''
   let passArr = ''
@@ -173,6 +215,10 @@ function generatePass(len, set, spaces, useEntropy) {
   return pass.trim()
 }
 
+/**
+ * Generate a Diceware passphrase based on the chosen language word list.
+ * @param {string} selection - A Diceware language word list
+ */
 function generateDiceware(selection) {
   let pass = ''
   let wordList = ''
@@ -305,6 +351,10 @@ function generateDiceware(selection) {
   passLength.innerText = pass.length + ' characters.'
 }
 
+/**
+ * Generate an EFF passphrase based on the chosen word list.
+ * @param {string} selection - An EFF word list
+ */
 function generateEff(selection) {
   let pass = ''
   let wordList = ''
@@ -347,6 +397,11 @@ function generateEff(selection) {
   passEntropy.innerText = Math.floor(len * Math.log2(wordList.length)) + ' bits,'
 }
 
+/**
+ * Generate an Alternate passphrase based on the chosen word list.
+ * @param {string} selection - An Alternate word list
+ * @returns 
+ */
 function generateAlternate(selection) {
   let pass = ''
   let wordList = ''
@@ -429,6 +484,11 @@ function generateAlternate(selection) {
   passEntropy.innerText = Math.floor(len * Math.log2(wordList.length)) + ' bits,'
 }
 
+/**
+ * 
+ * @param {number} hex 
+ * @returns 
+ */
 function isTooDark(hex) {
   const rgb = parseInt(hex, 16)
   const r = (rgb >> 16) & 0xff
@@ -1306,4 +1366,29 @@ function generateEmoji() {
   passId.style.fontFamily = 'Twemoji Mozilla'
   passId.innerText = pass
   passEntropy.innerText = Math.floor(len * Math.log2(randomEmoji.length)) + ' bits,'
+}
+
+/**
+ * Add entropy from an external source, such as an HWRNG.
+ * @param {string} hex - Hexadecimal input
+ */
+function addEntropy(hex) {
+  var isHex = function(hex) {
+    return typeof hex === 'string' && hex.length % 4 === 0 && !isNaN(Number('0x' + hex))
+  }
+
+  if (isHex(hex)) {
+    let entropy = JSON.parse(localStorage.entropy)
+    let lifetimeBits = JSON.parse(localStorage.lifetimeBits)
+
+    for (let i = 0; i < hex.length; i+=4) {
+      let num = hex.substring(i, i+4)
+      entropy.push(parseInt(num, 16))
+    }
+
+    localStorage.lifetimeBits = JSON.stringify(lifetimeBits + hex.length * 4)
+    localStorage.entropy = JSON.stringify(entropy)
+  } else {
+    console.error('Argument must be a hex string with a length that is a multple of 4 characters.')
+  }
 }
