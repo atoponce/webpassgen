@@ -26,47 +26,47 @@ and run it offline, if you're truly paranoid.
 ## Supported Languages
 Here is the full breakdown of language support across the passphrase generators:
 
-| ID | ISO | Language   | Unique | Alt. | Bit. | Dice | EFF | Notes                                           |
-|:--:|:---:|:-----------|:------:|:----:|:----:|:----:|:---:|:------------------------------------------------|
-|  1 | --  | Elvish     | 7,776  |  ✔️   |      |      |     |                                                 |
-|  2 | --  | Klingon    | 2,604  |  ✔️   |      |      |     |                                                 |
-| 34 | AF  | Afrikaans  | 6,567  |  ✔️   |      |      |     |                                                 | 
-| 35 | BE  | Belrusian  | 5,676  |  ✔️   |      |      |     |                                                 | 
-|  3 | BG  | Bulgarian  | 7,596  |      |      |  ✔️   |     | https://github.com/atoponce/webpassgen/issues/4 |
-|  4 | CA  | Catalan    | 7,776  |      |      |  ✔️   |     |                                                 |
-|  5 | CN  | Chinese    |  var.  |      |  ✔️   |  ✔️   |     |                                                 |
-|  6 | CZ  | Czech      |  var.  |      |  ✔️   |  ✔️   |     |                                                 |
-|  7 | DA  | Danish     | 7,776  |      |      |  ✔️   |     |                                                 |
-|  8 | DE  | German     | 7,776  |      |      |  ✔️   |     |                                                 |
-|  9 | EL  | Greek      | 7,776  |      |      |  ✔️   |     |                                                 |
-| 10 | EN  | English    |  var.  |  ✔️   |  ✔️   |  ✔️   |  ✔️  |                                                 |
-| 11 | EO  | Esperanto  | 7,776  |      |      |  ✔️   |     |                                                 |
-| 12 | ES  | Spanish    |  var.  |      |  ✔️   |  ✔️   |     |                                                 |
-| 13 | ET  | Estonian   | 7,776  |      |      |  ✔️   |     |                                                 |
-| 14 | EU  | Basque     | 7,776  |      |      |  ✔️   |     |                                                 |
-| 15 | FI  | Finnish    | 7,776  |      |      |  ✔️   |     |                                                 |
-| 16 | FR  | French     |  var.  |      |  ✔️   |  ✔️   |     |                                                 |
-| 36 | HR  | Croatian   | 9,204  |  ✔️   |      |      |     |                                                 | 
-| 17 | HU  | Hungarian  | 7,776  |      |      |  ✔️   |     |                                                 |
-| 18 | IT  | Italian    |  var.  |      |  ✔️   |  ✔️   |     |                                                 |
-| 19 | IW  | Hebrew     | 7,776  |      |      |  ✔️   |     |                                                 |
-| 20 | JP  | Japanese   |  var.  |      |  ✔️   |  ✔️   |     |                                                 |
-| 21 | KO  | Korean     | 2,048  |      |  ✔️   |      |     |                                                 |
-| 22 | LA  | Latin      | 7,776  |      |      |  ✔️   |     |                                                 |
-| 23 | MI  | Maori      | 7,776  |      |      |  ✔️   |     |                                                 |
-| 37 | MN  | Mongolian  | 4,124  |  ✔️   |      |      |     |                                                 | 
-| 24 | NL  | Dutch      | 7,776  |      |      |  ✔️   |     | Alternate composite                             |
-| 25 | NO  | Norwegian  | 7,776  |      |      |  ✔️   |     |                                                 |
-| 26 | PL  | Polish     | 7,776  |      |      |  ✔️   |     |                                                 |
-| 27 | PT  | Portuguese |  var.  |      |  ✔️   |  ✔️   |     |                                                 |
-| 28 | RO  | Romanian   | 7,776  |      |      |  ✔️   |     |                                                 |
-| 29 | RU  | Russian    | 7,776  |      |      |  ✔️   |     |                                                 |
-| 30 | SK  | Slovak     | 7,776  |      |      |  ✔️   |     |                                                 |
-| 31 | SL  | Slovenian  | 7,776  |      |      |  ✔️   |     |                                                 |
-| 38 | SR  | Serbian    | 8,670  |  ✔️   |      |      |     |                                                 | 
-| 32 | SV  | Swedish    | 7,776  |      |      |  ✔️   |     | 7,775 unique at first. Added "2a".              |
-| 33 | TR  | Turkish    | 7,776  |      |      |  ✔️   |     | 7,775 unique at first. Added "2a".              |
-| 39 | UK  | Ukranian   | 7,000  |  ✔️   |      |      |     |                                                 | 
+| ID | ISO | Language   | Unique | Alt. | Bit. | Dice | EFF | Notes                              |
+|:--:|:---:|:-----------|:------:|:----:|:----:|:----:|:---:|:-----------------------------------|
+|  1 | --  | Elvish     | 7,776  |  ✔️   |      |      |     |                                    |
+|  2 | --  | Klingon    | 2,604  |  ✔️   |      |      |     |                                    |
+| 34 | AF  | Afrikaans  | 6,567  |  ✔️   |      |      |     |                                    | 
+| 35 | BE  | Belrusian  | 5,676  |  ✔️   |      |      |     |                                    | 
+|  3 | BG  | Bulgarian  | 7,775  |      |      |  ✔️   |     |                                    |
+|  4 | CA  | Catalan    | 7,776  |      |      |  ✔️   |     |                                    |
+|  5 | CN  | Chinese    |  var.  |      |  ✔️   |  ✔️   |     |                                    |
+|  6 | CZ  | Czech      |  var.  |      |  ✔️   |  ✔️   |     |                                    |
+|  7 | DA  | Danish     | 7,776  |      |      |  ✔️   |     |                                    |
+|  8 | DE  | German     | 7,776  |      |      |  ✔️   |     |                                    |
+|  9 | EL  | Greek      | 7,776  |      |      |  ✔️   |     |                                    |
+| 10 | EN  | English    |  var.  |  ✔️   |  ✔️   |  ✔️   |  ✔️  |                                    |
+| 11 | EO  | Esperanto  | 7,776  |      |      |  ✔️   |     |                                    |
+| 12 | ES  | Spanish    |  var.  |      |  ✔️   |  ✔️   |     |                                    |
+| 13 | ET  | Estonian   | 7,776  |      |      |  ✔️   |     |                                    |
+| 14 | EU  | Basque     | 7,776  |      |      |  ✔️   |     |                                    |
+| 15 | FI  | Finnish    | 7,776  |      |      |  ✔️   |     |                                    |
+| 16 | FR  | French     |  var.  |      |  ✔️   |  ✔️   |     |                                    |
+| 36 | HR  | Croatian   | 9,204  |  ✔️   |      |      |     |                                    | 
+| 17 | HU  | Hungarian  | 7,776  |      |      |  ✔️   |     |                                    |
+| 18 | IT  | Italian    |  var.  |      |  ✔️   |  ✔️   |     |                                    |
+| 19 | IW  | Hebrew     | 7,776  |      |      |  ✔️   |     |                                    |
+| 20 | JP  | Japanese   |  var.  |      |  ✔️   |  ✔️   |     |                                    |
+| 21 | KO  | Korean     | 2,048  |      |  ✔️   |      |     |                                    |
+| 22 | LA  | Latin      | 7,776  |      |      |  ✔️   |     |                                    |
+| 23 | MI  | Maori      | 7,776  |      |      |  ✔️   |     |                                    |
+| 37 | MN  | Mongolian  | 4,124  |  ✔️   |      |      |     |                                    | 
+| 24 | NL  | Dutch      | 7,776  |      |      |  ✔️   |     | Alternate composite                |
+| 25 | NO  | Norwegian  | 7,776  |      |      |  ✔️   |     |                                    |
+| 26 | PL  | Polish     | 7,776  |      |      |  ✔️   |     |                                    |
+| 27 | PT  | Portuguese |  var.  |      |  ✔️   |  ✔️   |     |                                    |
+| 28 | RO  | Romanian   | 7,776  |      |      |  ✔️   |     |                                    |
+| 29 | RU  | Russian    | 7,776  |      |      |  ✔️   |     |                                    |
+| 30 | SK  | Slovak     | 7,776  |      |      |  ✔️   |     |                                    |
+| 31 | SL  | Slovenian  | 7,776  |      |      |  ✔️   |     |                                    |
+| 38 | SR  | Serbian    | 8,670  |  ✔️   |      |      |     |                                    | 
+| 32 | SV  | Swedish    | 7,776  |      |      |  ✔️   |     | 7,775 unique at first. Added "2a". |
+| 33 | TR  | Turkish    | 7,776  |      |      |  ✔️   |     | 7,775 unique at first. Added "2a". |
+| 39 | UK  | Ukranian   | 7,000  |  ✔️   |      |      |     |                                    | 
 
 Here is the Chinese breakdown:
 
