@@ -32,7 +32,7 @@ Here is the full breakdown of language support across the passphrase generators:
 |  2 | --  | Klingon    | 2,604  |  ✔️   |      |      |     |                                    |
 | 34 | AF  | Afrikaans  | 6,567  |  ✔️   |      |      |     |                                    | 
 | 35 | BE  | Belrusian  | 5,676  |  ✔️   |      |      |     |                                    | 
-|  3 | BG  | Bulgarian  | 7,775  |      |      |  ✔️   |     |                                    |
+|  3 | BG  | Bulgarian  | 7,775  |      |      |  ✔️   |     | List by Assen Vassilev             |
 |  4 | CA  | Catalan    | 7,776  |      |      |  ✔️   |     |                                    |
 |  5 | CN  | Chinese    |  var.  |      |  ✔️   |  ✔️   |     |                                    |
 |  6 | CZ  | Czech      |  var.  |      |  ✔️   |  ✔️   |     |                                    |
