@@ -424,6 +424,7 @@ function generateAlternate(selection) {
     wordList = wordList.concat(alternateSimpsons)     // 5000 words
     wordList = wordList.concat(alternateSkey)         // 2048 words
     wordList = wordList.concat(alternateTrump)        // 8192 words
+    wordList = wordList.concat(alternateWordle)       // 5790 words
     wordList = wordList.concat(bitcoinEN)             // 2048 words
     wordList = wordList.concat(dicewareEN)            // 8192 words
     wordList = wordList.concat(dicewareBeale)         // 7776 words
@@ -460,6 +461,8 @@ function generateAlternate(selection) {
     wordList = alternateTrump
   } else if (selection === 'Ukranian') {
     wordList = alternateUK
+  } else if (selection === 'Wordle') {
+    wordList = alternateWordle
   }
 
   wordList = uniquesOnly(wordList)

@@ -85,25 +85,26 @@ Here is the Czech breakdown:
 
 Here is the English breakdown:
 
-| ID | Name            | Wordlist  | Unique | Notes                         |
-|:--:|:----------------|:----------|:------:|:------------------------------|
-| 9a | Colors          | Alternate | 1,029  | More available in the project |
-| 9b | Deseret         | Alternate | 7,776  | Alternate English alphabet    |
-| 9c | Distant         | EFF       | 1,296  |                               |
-| 9d | English         | Bitcoin   | 2,048  |                               |
-| 9e | English         | Diceware  | 8,192  | 8k word list                  |
-| 9f | English (Beale) | Diceware  | 7,776  |                               |
-| 9f | English (NLP)   | Diceware  |  var.  | 1,296 adjectives, 7,776 nouns |
-| 9h | Game of Thrones | EFF       | 4,000  | Unofficial                    |
-| 9i | Harry Potter    | EFF       | 4,000  | Unofficial                    |
-| 9j | Long            | EFF       | 1,296  |                               |
-| 9k | PGP             | Alternate |   512  |                               |
-| 9l | Short           | EFF       | 1,296  |                               |
-| 9m | Shavian         | Alternate | 7,776  | Alternate English alphabet    |
-| 9n | Simpsons        | Alternate | 5,000  | From Peerio                   |
-| 9o | Star Trek       | EFF       | 4,000  | Unofficial                    |
-| 9p | Star Wars       | EFF       | 4,000  | Unofficial                    |
-| 9q | Trump           | Alternate | 8,192  | From his Twitter account      |
+| ID  | Name            | Wordlist  | Unique | Notes                         |
+|:---:|:----------------|:----------|:------:|:------------------------------|
+| 10a | Colors          | Alternate | 1,029  | More available in the project |
+| 10b | Deseret         | Alternate | 7,776  | Alternate English alphabet    |
+| 10c | Distant         | EFF       | 1,296  |                               |
+| 10d | English         | Bitcoin   | 2,048  |                               |
+| 10e | English         | Diceware  | 8,192  | 8k word list                  |
+| 10f | English (Beale) | Diceware  | 7,776  |                               |
+| 10f | English (NLP)   | Diceware  | 9,072  | 1,296 adjectives, 7,776 nouns |
+| 10h | Game of Thrones | EFF       | 4,000  | Unofficial                    |
+| 10i | Harry Potter    | EFF       | 4,000  | Unofficial                    |
+| 10j | Long            | EFF       | 1,296  |                               |
+| 10k | PGP             | Alternate |   512  |                               |
+| 10l | Short           | EFF       | 1,296  |                               |
+| 10m | Shavian         | Alternate | 7,776  | Alternate English alphabet    |
+| 10n | Simpsons        | Alternate | 5,000  | From Peerio                   |
+| 10o | Star Trek       | EFF       | 4,000  | Unofficial                    |
+| 10p | Star Wars       | EFF       | 4,000  | Unofficial                    |
+| 10q | Trump           | Alternate | 8,192  | From his Twitter account      |
+| 10r | Wordle          | Alternate | 5,790  | See comment in word list      |
 
 Here is the Spanish breakdown:
 
