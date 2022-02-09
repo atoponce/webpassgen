@@ -78,7 +78,7 @@ function getEntropy() {
 /**
  * Return a word list from the Alternate, Bitcoin, Diceware, or EFF generator.
  * @param {string} source - The selected passphrase wordlist.
- * @returns {string}
+ * @returns {string} The HTML selected option.
  */
 function getSourceList(source) {
   let sourceList
@@ -119,7 +119,6 @@ function generatePassphrase(source) {
  * Mozilla will not store localStorage key values to disk under the file:// protocol.
  * See https://bugzilla.mozilla.org/show_bug.cgi?id=507361 for more information.
  */
-
 function toggleEntropyVisibility() {
   const classes = document.getElementsByClassName('use-entropy')
 
@@ -141,7 +140,7 @@ function toggleEntropyVisibility() {
  * A cryptographically secure uniform random number generator.
  * @param {number} count - The max number a random number can be.
  * @param {boolean} useEntropy - Whether or not to use the data in localStorage.entropy.
- * @returns {number}
+ * @returns {number} Uniform random number.
  */
 function secRand(count, useEntropy) {
   let num = 0
@@ -170,7 +169,7 @@ function secRand(count, useEntropy) {
 /**
  * Remove any and all duplicates from an array. Case sensitive.
  * @param {Array} list - An array of strings or numbers which might contain duplicates.
- * @returns {Array}
+ * @returns {Array} The array with duplicates removed.
  */
 function uniquesOnly(list) {
   return [...new Set(list)] // enforce unique elements in array
@@ -182,7 +181,7 @@ function uniquesOnly(list) {
  * @param {string|Array} set - The data set to pick from.
  * @param {boolean} spaces - Whether or not to space-separate the password.
  * @param {boolean} useEntropy - Whether or not to use save entropy in localStorage.entropy.
- * @returns {string}
+ * @returns {string} The generated password.
  */
 function generatePass(len, set, spaces, useEntropy) {
   let pass = ''
@@ -217,7 +216,7 @@ function generatePass(len, set, spaces, useEntropy) {
 
 /**
  * Generate a Diceware passphrase based on the chosen language word list.
- * @param {string} selection - A Diceware language word list
+ * @param {string} selection - A Diceware language word list.
  */
 function generateDiceware(selection) {
   let pass = ''
@@ -289,7 +288,7 @@ function generateDiceware(selection) {
     wordList = dicewareTR
   }
 
-  wordList = uniquesOnly(wordList)
+  wordList = uniquesOnly(wordList)  // Force unique elements in array.
 
   const entropy = getEntropy()
   const passId = document.getElementById('diceware-pass')
@@ -353,7 +352,7 @@ function generateDiceware(selection) {
 
 /**
  * Generate an EFF passphrase based on the chosen word list.
- * @param {string} selection - An EFF word list
+ * @param {string} selection - An EFF word list.
  */
 function generateEff(selection) {
   let pass = ''
@@ -375,7 +374,7 @@ function generateEff(selection) {
     wordList = effStarWars
   }
 
-  wordList = uniquesOnly(wordList)
+  wordList = uniquesOnly(wordList)  // Force unique elements in array.
 
   const entropy = getEntropy()
   const len = Math.ceil(entropy / Math.log2(wordList.length))
@@ -399,8 +398,7 @@ function generateEff(selection) {
 
 /**
  * Generate an Alternate passphrase based on the chosen word list.
- * @param {string} selection - An Alternate word list
- * @returns 
+ * @param {string} selection - An Alternate word list.
  */
 function generateAlternate(selection) {
   let pass = ''
@@ -465,7 +463,7 @@ function generateAlternate(selection) {
     wordList = alternateWordle
   }
 
-  wordList = uniquesOnly(wordList)
+  wordList = uniquesOnly(wordList)  // Force unique elements in array.
 
   const entropy = getEntropy()
   const len = Math.ceil(entropy / Math.log2(wordList.length))
@@ -488,9 +486,9 @@ function generateAlternate(selection) {
 }
 
 /**
- * 
- * @param {number} hex 
- * @returns 
+ * Determine if the color name needs to be outlined with CSS.
+ * @param {number} hex - The hex value of the color.
+ * @returns true if color is too dark, false if light enough.
  */
 function isTooDark(hex) {
   const rgb = parseInt(hex, 16)
@@ -506,6 +504,11 @@ function isTooDark(hex) {
   return true
 }
 
+/**
+ * Determine if the color name needs to be outlined with CSS.
+ * @param {number} hex - The hex value of the color.
+ * @returns true if the color is too light, false if dark enough
+ */
 function isTooLight(hex) {
   const rgb = parseInt(hex, 16)
   const r = (rgb >> 16) & 0xff
@@ -520,6 +523,7 @@ function isTooLight(hex) {
   return true
 }
 
+/** Generate a color passphrase */
 function generateColors() {
   let tmp = ''
   const colorKeys = Object.keys(alternateColors)
@@ -572,6 +576,10 @@ function generateColors() {
   passEntropy.innerText = Math.floor(len * Math.log2(colorKeys.length)) + ' bits,'
 }
 
+/**
+ * Generate a Bitcoin BIPS39-complaint passphrase (seed). Contains checksum.
+ * @param {string} selection - The selection option chosen by the user.
+ */
 function generateBitcoin(selection) {
   let pass = ''
   let wordList = ''
@@ -598,8 +606,13 @@ function generateBitcoin(selection) {
     wordList = bitcoinES
   }
 
-  wordList = uniquesOnly(wordList)
+  wordList = uniquesOnly(wordList)  // Force unique elements in array.
 
+  /**
+   * Convert 8-bit byte objects to binary strings.
+   * @param {Object} bytes - Unsigned 8-bit Array.
+   * @returns {string} Binary string.
+   */
   var bytesToBinary = function (bytes) {
     let total = 0n
 
@@ -610,6 +623,11 @@ function generateBitcoin(selection) {
     return total.toString(2)
   }
 
+  /**
+   * The SHA-256 hash function.
+   * @param {Object} bytes - Unsigned 8-bit Array.
+   * @returns {Object} Unsigned 8-bit Array
+   */
   var sha256 = function (bytes) {
     const crypto = window.crypto || window.msCrypto
 
@@ -662,7 +680,16 @@ function generateBitcoin(selection) {
   })
 }
 
+/**
+ * Generate an Keychain formatted password.
+ * @returns {Array} The password string, the length of the password, and the entropy of the password.
+ */
 function generateApple() {
+  /**
+   * Calculate the entropy of an Apple password containing n-blocks.
+   * @param {number} n - The number of blocks in the password.
+   * @returns {number} Entropy in bits.
+   */
   var apple = function (n) {
     /*
       See https://twitter.com/AaronToponce/status/1131406726069084160 for full analysis.
@@ -739,6 +766,10 @@ function generateApple() {
   return [pass.join(''), pass.length, apple(n)]
 }
 
+/**
+ * Generate a Bubble Babble complaint password. Contains checksum.
+ * @returns {Array} The password string, the length of the password, and the entropy of the password.
+ */
 function generateBabble() {
   // Spec: https://web.mit.edu/kenta/www/one/bubblebabble/spec/jrtrjwzi/draft-huima-01.txt
   // Code based on https://github.com/kpalin/bubblepy
@@ -788,8 +819,18 @@ function generateBabble() {
   return [pass, pass.length, entropy.length * 8]
 }
 
+/**
+ * Generate a Munemo password.
+ * @returns {Array} The password string, the length of the password, and the entropy of the password.
+ */
 function generateMunemo() {
   // https://github.com/jmettraux/munemo
+  /**
+   * Recursive function to build an encoded string from a given number.
+   * @param {number} num - The number to encode.
+   * @param {string} str - The encoded string.
+   * @returns {string} The encoded string.
+   */
   var tos = function (num, str) {
     const munemo = [
       'ba',  'bi',  'bu',  'be',  'bo',  'cha', 'chi', 'chu', 'che', 'cho',
@@ -844,6 +885,10 @@ function generateMunemo() {
   return [pass, pass.length, minEntropy]
 }
 
+/**
+ * Generate a Proquints-complaint password.
+ * @returns {Array} The password string, the length of the password, and the entropy of the password.
+ */
 function generateProquints() {
   // https://arxiv.org/html/0901.4016
   const vowels = 'aiou'
@@ -879,15 +924,29 @@ function generateProquints() {
   return [pass, pass.length, len * 16]
 }
 
+/**
+ * Generate a Letterblock password. Contains checksum.
+ * @returns {Array} The password string, the length of the password, and the entropy of the password.
+ */
 function generateLetterblock() {
   // https://www.draketo.de/software/letterblock-diceware
   // Diverged from above with:
   //  - '$' and '%' appended to make the checksum delimiters 6 characters
   //  - Treating digits as leet-speak
+  /**
+   * Determines if the string is a digit.
+   * @param {string} str - The string to check.
+   * @returns True if the string is a digit, false otherwise.
+   */
   var isDigit = function (str) {
     return str.length === 1 && str.match(/[0-9]/)
   }
 
+  /**
+   * Replace a string with a leet-speak version.
+   * @param {string} str - A stringified number.
+   * @returns A leet-speak version of the number.
+   */
   var replaceDigit = function (str) {
     if (str === '0') {
       return 'o'
@@ -912,11 +971,17 @@ function generateLetterblock() {
     }
   }
 
+  /**
+   * A recursive function to build a cross-product array of strings based on the contents of "arr".
+   * @param {Array} arr - An array of four random strings from the "letters" multi-dimensional array.
+   * @param {Array} res - The cross-product of the elements on "arr".
+   * @param {number} ctr - A counter to keep track of the number of digits in the string.
+   */
   var getCombos = function (arr, res, ctr) {
-    const ptr0 = ctr.toString(2).padStart(4, '0')[0]
+    const ptr0 = ctr.toString(2).padStart(4, '0')[0]  // most significant bit in bin(ctr)
     const ptr1 = ctr.toString(2).padStart(4, '0')[1]
     const ptr2 = ctr.toString(2).padStart(4, '0')[2]
-    const ptr3 = ctr.toString(2).padStart(4, '0')[3]
+    const ptr3 = ctr.toString(2).padStart(4, '0')[3]  // least significant bit in bin(ctr)
 
     if (
       arr[0][ptr0] !== undefined &&
@@ -924,16 +989,21 @@ function generateLetterblock() {
       arr[2][ptr2] !== undefined &&
       arr[3][ptr3] !== undefined
     ) {
-      res.push(arr[0][ptr0] + arr[1][ptr1] + arr[2][ptr2] + arr[3][ptr3])
+      res.push(arr[0][ptr0] + arr[1][ptr1] + arr[2][ptr2] + arr[3][ptr3]) // the cross-product of "arr"
     }
 
     ctr++
 
-    if (ctr < 16) {
+    if (ctr < 16) { // 0 ('0000') through 15 ('1111')
       getCombos(arr, res, ctr)
     }
   }
 
+  /**
+   * Get the highest weighted bigram in the array.
+   * @param {Array} arr - An array of bigram candidates.
+   * @returns The highest weighted bigram.
+   */
   var calculateScores = function (arr) {
     let results = {}
 
@@ -1024,6 +1094,10 @@ function generateLetterblock() {
   return [pw, pw.length, totalEntropy]
 }
 
+/**
+ * Generate a Daefen-compliant password.
+ * @returns {Array} An array containing the password, its length, and the entropy.
+ */
 function generateDaefen() {
   const syllables = []
   const consonants = 'bcdfghjklmnprstvwz'
@@ -1082,6 +1156,11 @@ function generateDaefen() {
 
   const len = Math.ceil(entropy / Math.log2(syllables.length)) // 16 bits per "word"
 
+  /**
+   * Determine if the letter is a conosonant.
+   * @param {string} letter - A letter to be added to the password.
+   * @returns True if the letter is a consonant, false if it is a vowel.
+   */
   var isConsonant = function (letter) {
     return consonants.indexOf(letter) >= 0
   }
@@ -1110,6 +1189,10 @@ function generateDaefen() {
   return [pass, pass.length, Math.floor(len * Math.log2(syllables.length))]
 }
 
+/**
+ * Generate an Urbit phonetic password.
+ * @returns {Array} An array containing the password, its length, and the entropy.
+ */
 function generateUrbit() {
   const prefixes = [
     "doz", "mar", "bin", "wan", "sam", "lit", "sig", "hid", "fid", "lis", "sog", "dir", "wac", "sab", "wis", "sib",
@@ -1168,8 +1251,12 @@ function generateUrbit() {
   return [pass, pass.length, len * 16]
 }
 
+/**
+ * Generate an SKEY passphrase.
+ * @returns {Array} An array containing the password, its length and the entropy.
+ */
 function generateSKey() {
-  const wordList = uniquesOnly(pseudoSKey)
+  const wordList = uniquesOnly(pseudoSKey)  // Force unique elements in array.
   const entropy = getEntropy()
   const len = Math.ceil(entropy / Math.log2(wordList.length))
   const entropyCheck = document.getElementById('alt-entropy-check')
@@ -1192,6 +1279,7 @@ function generateSKey() {
   return [pass, wordList.length, Math.floor(len * Math.log2(wordList.length))]
 }
 
+/** Generate a pseudowords password. */
 function generatePseudowords() {
   let ret = []
   let displayCheck = false
@@ -1233,6 +1321,7 @@ function generatePseudowords() {
   }
 }
 
+/** Generate a random meaningless password string. */
 function generateRandom() {
   let s = ''
   let check = ''
@@ -1348,6 +1437,7 @@ function generateRandom() {
   }
 }
 
+/** Generate an emoji password. */
 function generateEmoji() {
   unicodeWarn()
 
