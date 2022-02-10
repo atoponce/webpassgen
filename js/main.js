@@ -577,7 +577,7 @@ function generateColors() {
 }
 
 /**
- * Generate a Bitcoin BIPS39-complaint passphrase (seed). Contains checksum.
+ * Generate a Bitcoin BIPS39-compliant passphrase (seed). Contains checksum.
  * @param {string} selection - The selection option chosen by the user.
  */
 function generateBitcoin(selection) {
@@ -681,7 +681,7 @@ function generateBitcoin(selection) {
 }
 
 /**
- * Generate an Keychain formatted password.
+ * Generate a Keychain formatted password.
  * @returns {Array} The password string, the length of the password, and the entropy of the password.
  */
 function generateApple() {
@@ -767,7 +767,7 @@ function generateApple() {
 }
 
 /**
- * Generate a Bubble Babble complaint password. Contains checksum.
+ * Generate a Bubble Babble compliant password. Contains checksum.
  * @returns {Array} The password string, the length of the password, and the entropy of the password.
  */
 function generateBabble() {
@@ -886,7 +886,7 @@ function generateMunemo() {
 }
 
 /**
- * Generate a Proquints-complaint password.
+ * Generate a Proquints-compliant password.
  * @returns {Array} The password string, the length of the password, and the entropy of the password.
  */
 function generateProquints() {
