@@ -39,25 +39,30 @@
           <p class='cell-title'><strong>Alternate</strong></p>
           <div class='optional'>
             <select id='alt-options'>
-              <option>Afrikaans</option>
-              <option>Belarusian</option>
-              <option selected='selected'>Colors</option>
-              <option>Croatian</option>
-              <option>Elvish</option>
-              <option>English (All)</option>
-              <option>English (Deseret)</option>
-              <option>English (Shavian)</option>
-              <option>Klingon</option>
-              <option>Mongolian</option>
-              <option>PGP</option>
-              <option>Pokerware</option>
-              <option>RockYou</option>
-              <option>Serbian</option>
-              <option>Simpsons</option>
-              <option>S/KEY</option>
-              <option>Trump</option>
-              <option>Ukranian</option>
-              <option>Wordle</option>
+              <optgroup label='English'>
+                <option>Colors</option>
+                <option selected='selected'>Common Words</option>
+                <option>Deseret Alphabet</option>
+                <option>Everything</option>
+                <option>PGP</option>
+                <option>Pokerware</option>
+                <option>RockYou</option>
+                <option>Shavian Alphabet</option>
+                <option>Simpsons</option>
+                <option>S/KEY</option>
+                <option>Trump</option>
+                <option>Wordle</option>
+              </optgroup>
+              <optgroup label='Non-English'>
+                <option>Afrikaans</option>
+                <option>Belarusian</option>
+                <option>Croatian</option>
+                <option>Elvish</option>
+                <option>Klingon</option>
+                <option>Mongolian</option>
+                <option>Serbian</option>
+                <option>Ukranian</option>
+              </optgroup>
             </select>
           </div>
           <button class='pass-button' value='Generate' onclick='generatePassphrase("alternate");'>Generate</button>

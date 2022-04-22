@@ -414,7 +414,7 @@ function generateAlternate(selection) {
     wordList = alternateHR
   } else if (selection === 'Elvish') {
     wordList = alternateElvish
-  } else if (selection === 'English (All)') {
+  } else if (selection === 'Everything') {
     wordList = Object.keys(alternateColors)           // 1029 words
     wordList = wordList.concat(alternatePgp)          //  512 words
     wordList = wordList.concat(alternatePokerware)    // 5304 words
@@ -435,9 +435,19 @@ function generateAlternate(selection) {
     wordList = wordList.concat(effShort)              // 1296 words
     wordList = wordList.concat(effStarTrek)           // 4000 words
     wordList = wordList.concat(effStarWars)           // 4000 words
-  } else if (selection === 'English (Deseret)') {
+  } else if (selection === 'Common Words') {
+    wordList = alternatePgp
+    wordList = wordList.concat(alternatePokerware)
+    wordList = wordList.concat(alternateWordle)
+    wordList = wordList.concat(bitcoinEN)
+    wordList = wordList.concat(dicewareNLP[0])
+    wordList = wordList.concat(dicewareNLP[1])
+    wordList = wordList.concat(effDistant)
+    wordList = wordList.concat(effLong)
+    wordList = wordList.concat(effShort)
+  } else if (selection === 'Deseret Alphabet') {
     wordList = alternateDeseret
-  } else if (selection === 'English (Shavian)') {
+  } else if (selection === 'Shavian Alphabet') {
     wordList = alternateShavian
   } else if (selection === 'Klingon') {
     wordList = alternateKlingon
