@@ -414,7 +414,7 @@ function generateAlternate(selection) {
     wordList = alternateHR
   } else if (selection === 'Elvish') {
     wordList = alternateElvish
-  } else if (selection === 'Everything') {
+  } else if (selection === 'Every Word List') {
     wordList = Object.keys(alternateColors)           // 1029 words
     wordList = wordList.concat(alternatePgp)          //  512 words
     wordList = wordList.concat(alternatePokerware)    // 5304 words
@@ -435,7 +435,7 @@ function generateAlternate(selection) {
     wordList = wordList.concat(effShort)              // 1296 words
     wordList = wordList.concat(effStarTrek)           // 4000 words
     wordList = wordList.concat(effStarWars)           // 4000 words
-  } else if (selection === 'Common Words') {
+  } else if (selection === 'Common Words Only') {
     wordList = alternatePgp
     wordList = wordList.concat(alternatePokerware)
     wordList = wordList.concat(alternateWordle)
