@@ -70,9 +70,10 @@ function toggleTheme() {
   }
 }
 
-/** Return selected entropy (55, 60, 65, 70, 75, or 80). */
+/** Return selected entropy (56, 64, 72, 80, 88, 96, 104, 112, 120, or 128). */
 function getEntropy() {
-  return parseInt(document.querySelector("input[name='entropy']:checked").value)
+  return parseInt(document.querySelector('#output').value)
+  //return parseInt(document.querySelector("input[name='entropy']:checked").value)
 }
 
 /**
@@ -304,10 +305,9 @@ function generateDiceware(selection) {
 
   if (wordList.filter(Array.isArray).length === 2) {
     // We're working on the 'Natural Language Passwords' list
-    const len1 = Math.ceil(entropy / Math.log2(wordList[0].length)) // adjectives
-    const len2 = Math.ceil(entropy / Math.log2(wordList[1].length)) // nouns
-    const adjs = generatePass(len1, wordList[0], true, useEntropy).split(' ')
-    const nouns = generatePass(len2, wordList[1], true, useEntropy).split(' ')
+    const len = Math.ceil(entropy / Math.log2(wordList[0].length)) // adjectives
+    const adjs = generatePass(len, wordList[0], true, useEntropy).split(' ')
+    const nouns = generatePass(len, wordList[1], true, useEntropy).split(' ')
 
     let bits = 0
     let counter = 0

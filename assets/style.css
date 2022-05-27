@@ -98,7 +98,7 @@ button:hover {
     border: 1px solid black;
     display: table-cell;
     float: left;
-    height: 180px;
+    height: 210px;
     margin: 5px;
     position: relative;
     width: 372px;
@@ -194,48 +194,13 @@ button:hover {
 #random-pass {
     word-break: break-all;
 }
-#entropy-toolbar { margin: 10px auto; }
-#entropy-toolbar input[type="radio"] { display: none; }
-#entropy-toolbar input[type="radio"] + label {
-    border: 1px solid #ccc;
-    border-color: #e6e6e6 #e6e6e6 #bfbfbf;
-    border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
-    border-bottom-color: #b3b3b3;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
-    color: #333;
-    cursor: pointer;
-    display:inline-block;
-    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff',endColorstr='#ffe6e6e6',GradientType=0);
-    font-size: 14px;
-    height: 20px;
-    line-height: 20px;
-    margin: -2px;
-    padding: 4px 12px;
-    text-align: center;
-    text-shadow: 0 1px 1px rgba(255,255,255,0.75);
-    width: 40px;
-    vertical-align: middle;
+#password-strength{
+  margin: 0px auto;
 }
-#entropy-toolbar input[type="radio"]:checked + label {
-    background-image: none;
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.15),0 1px 2px rgba(0,0,0,0.05);
-    font-weight: bold;
-    outline: 0;
+#input {
+    display: block;
+    margin: 0 auto;
 }
-
-#entropy-55 { background: #ff7171; } /* red */
-#entropy-55:hover, #entropy-toolbar input[type="radio"]:checked + #entropy-55 { background: #ff3f3f; } /* red */
-#entropy-60 { background: #ffcd71; } /* orange */
-#entropy-60:hover, #entropy-toolbar input[type="radio"]:checked + #entropy-60 { background: #ffbc3f; } /* orange */
-#entropy-65 { background: #ffff71; } /* yellow */
-#entropy-65:hover, #entropy-toolbar input[type="radio"]:checked + #entropy-65 { background: #ffff3f; } /* yellow */
-#entropy-70 { background: #74e163; } /* green */
-#entropy-70:hover, #entropy-toolbar input[type="radio"]:checked + #entropy-70 { background: #4db635; } /* green */
-#entropy-75 { background: #74e163; } /* green */
-#entropy-75:hover, #entropy-toolbar input[type="radio"]:checked + #entropy-75 { background: #4db635; } /* green */
-#entropy-80 { background: #74e163; } /* green */
-#entropy-80:hover, #entropy-toolbar input[type="radio"]:checked + #entropy-80 { background: #4db635; } /* green */
 
 /* Mouse Entropy CSS */
 #randogram {

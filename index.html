@@ -24,14 +24,11 @@
             </a>
           </li>
         </ul>
-        <p>Select minimum security margin (in bits): </p>
-        <div id='entropy-toolbar'>
-          <input type='radio' name='entropy' value='55' id='rtb1' onclick='localStorage["security"]=55;loadPasses()'><label id='entropy-55' for='rtb1'>55</label>
-          <input type='radio' name='entropy' value='60' id='rtb2' onclick='localStorage["security"]=60;loadPasses()'><label id='entropy-60' for='rtb2'>60</label>
-          <input type='radio' name='entropy' value='65' id='rtb3' onclick='localStorage["security"]=65;loadPasses()'><label id='entropy-65' for='rtb3'>65</label>
-          <input type='radio' name='entropy' value='70' id='rtb4' onclick='localStorage["security"]=70;loadPasses()'><label id='entropy-70' for='rtb4'>70</label>
-          <input type='radio' name='entropy' value='75' id='rtb5' onclick='localStorage["security"]=75;loadPasses()'><label id='entropy-75' for='rtb5'>75</label>
-          <input type='radio' name='entropy' value='80' id='rtb6' onclick='localStorage["security"]=80;loadPasses()'><label id='entropy-80' for='rtb6'>80</label>
+        <div id='password-strength'>
+          <span>Password strength: </span>
+          <output id='output' for=value>72</output>
+          <span> bits</span>
+          <input id='input' type='range' min='56' max='128' step='8' value='72' oninput='updateSlider(value); loadPasses();'>
         </div>
       </div>
       <div id='table'>
@@ -367,7 +364,12 @@
     <script src='lists/randomEmoji.js'></script>
 
     <script>
+      function updateSlider(n) {
+        document.querySelector('#output').value = n
+      }
+
       function loadPasses () {
+      /*
         if (localStorage.getItem('security') === null) {
           localStorage.setItem('security', 70)
         }
@@ -387,6 +389,7 @@
         } else if (security === 80) {
           document.getElementById('rtb6').checked = true
         }
+      */
 
         generatePassphrase('diceware')
         generatePassphrase('eff')
