@@ -94,7 +94,7 @@ function awardOfficerRank (bits) {
   localStorage.rank = rank
   OFFICERRANK.innerText = rank
   NEXTRANK.innerText = nextRank
-  REMAININGRANKBITS.innerText = 16 * 2 ** (rankOrder.indexOf(nextRank) + 1) - localStorage.lifetimeBits
+  REMAININGRANKBITS.innerText = (2 ** (rankOrder.indexOf(nextRank) + 1) << 4) - localStorage.lifetimeBits
 
   // openPip, closedPip
   let pipString = ''
@@ -171,7 +171,7 @@ function updateEntropyCounts () {
     items = JSON.parse(localStorage.entropy).length
   }
 
-  ENTROPYRESULT1.innerText = 16 * items
+  ENTROPYRESULT1.innerText = items << 4
   ENTROPYRESULT2.innerText = items
 }
 
