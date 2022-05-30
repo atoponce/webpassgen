@@ -1,7 +1,7 @@
 const LENGTH = 400
 
 const CANVAS = document.getElementById('randogram')
-const CTX = CANVAS.getContext('2d', {alpha: false})
+const CTX = CANVAS.getContext('2d')
 
 const OFFICERRANK = document.getElementById('officerRank')
 const RANKPIPS = document.getElementById('rankPips')
@@ -145,7 +145,7 @@ function drawRandogram () {
   const pixels = genPixels()
 
   for (let i = 0; i < imgData.data.length; i += 4) {
-    if (pixels[i / 4] % 2 === 0) {
+    if (pixels[i >> 2] < 128) {
       imgData.data[i] = 0
       imgData.data[i + 1] = 0
       imgData.data[i + 2] = 0
@@ -154,6 +154,8 @@ function drawRandogram () {
       imgData.data[i + 1] = 255
       imgData.data[i + 2] = 255
     }
+
+    imgData.data[i + 3] = 255
   }
 
   CTX.putImageData(imgData, 0, 0)
