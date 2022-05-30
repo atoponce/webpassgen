@@ -52,7 +52,7 @@ function awardOfficerRank (bits) {
   }
 
   /*
-    Rank is awarded exponentially based on the number of bits generated as 2**bits / 16.
+    Rank is awarded exponentially based on the number of bits generated as 2**bits >> 4.
 
     For example:
       - Until you generate less than 64 bits, you are a cadet in the academy.
@@ -86,7 +86,7 @@ function awardOfficerRank (bits) {
   if (bits < 64) {
     rank = rankOrder[0]
   } else {
-    rank = rankOrder[Math.floor(Math.log2(bits / 16)) - 1]
+    rank = rankOrder[Math.floor(Math.log2(bits >> 4)) - 1]
   }
 
   let nextRank = rankOrder[rankOrder.indexOf(rank) + 1]
@@ -199,7 +199,7 @@ function getEntropy () {
     if (0 <= x && x < LENGTH && 0 <= y && y < LENGTH) {
       const p = LENGTH * y + x
 
-      neumann.push(pixels[p] % 2)
+      neumann.push(pixels[p] & 1)
 
       // john von neumann randomness extractor
       if (neumann.length === 2) {
