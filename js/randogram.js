@@ -141,21 +141,19 @@ function genPixels () {
 }
 
 function drawRandogram () {
+  CTX.clearRect(0, 0, LENGTH, LENGTH)
+
   const imgData = CTX.getImageData(0, 0, LENGTH, LENGTH)
   const pixels = genPixels()
 
   for (let i = 0; i < imgData.data.length; i += 4) {
     if (pixels[i >> 2] < 128) {
-      imgData.data[i] = 0
-      imgData.data[i + 1] = 0
-      imgData.data[i + 2] = 0
-    } else {
-      imgData.data[i] = 255
-      imgData.data[i + 1] = 255
-      imgData.data[i + 2] = 255
+      imgData.data[i]     = 255 // red
+      imgData.data[i + 1] = 255 // green
+      imgData.data[i + 2] = 255 // blue
     }
 
-    imgData.data[i + 3] = 255
+    imgData.data[i + 3] = 255   // alpha
   }
 
   CTX.putImageData(imgData, 0, 0)
