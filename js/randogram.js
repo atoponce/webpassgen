@@ -10,6 +10,8 @@ const REMAININGRANKBITS = document.getElementById('remainingRankBits')
 const ENTROPYRESULT1 = document.getElementById('entropyResult1')
 const ENTROPYRESULT2 = document.getElementById('entropyResult2')
 
+let BITS = []
+
 function awardOfficerRank (bits) {
   // Thank you https://feathericons.com/
   const openPip = `
@@ -141,10 +143,17 @@ function genPixels () {
 }
 
 function drawRandogram () {
-  CTX.clearRect(0, 0, LENGTH, LENGTH)
-
-  const imgData = CTX.getImageData(0, 0, LENGTH, LENGTH)
+  let entropy
+  let neumann = []
+  let lifetimeBits = parseInt(localStorage.lifetimeBits, 10) || 0
+  const imgData = CTX.createImageData(LENGTH, LENGTH)
   const pixels = genPixels()
+
+  if (localStorage.hasOwnProperty('entropy')) {
+    entropy = JSON.parse(localStorage.entropy)
+  } else {
+    entropy = []
+  }
 
   for (let i = 0; i < imgData.data.length; i += 4) {
     if (pixels[i >> 2] < 128) {
@@ -156,10 +165,42 @@ function drawRandogram () {
     imgData.data[i + 3] = 255   // alpha
   }
 
+  updateEntropyCounts() // set count initially
+  awardOfficerRank(lifetimeBits)
+
   CTX.putImageData(imgData, 0, 0)
   requestAnimationFrame(drawRandogram)
 
-  return pixels
+  document.getElementById('randogram').onpointermove = function (e) {
+    const x = Math.floor(e.offsetX)
+    const y = Math.floor(e.offsetY)
+
+    localStorage.entropy = JSON.stringify(entropy)
+
+    if (0 <= x && x < LENGTH && 0 <= y && y < LENGTH) {
+      const index = LENGTH * y + x
+
+      neumann.push(pixels[index] & 1)
+
+      // john von neumann randomness extractor
+      if (neumann.length === 2) {
+        if (neumann[0] !== neumann[1]) {
+          BITS.push(neumann[0])
+          lifetimeBits++
+
+          if (BITS.length === 16) {
+            entropy.push(parseInt(BITS.join(''), 2))
+            BITS = []
+          }
+        }
+
+        neumann = []
+      }
+    } // if 0 <= x < LENGTH && 0 <= y < LENGTH
+
+    updateEntropyCounts() // update counts on mouse movement
+    awardOfficerRank(lifetimeBits)
+  } // onpointermove
 }
 
 function updateEntropyCounts () {
@@ -173,52 +214,4 @@ function updateEntropyCounts () {
   ENTROPYRESULT2.innerText = items
 }
 
-function getEntropy () {
-  let entropy
-  let bits = neumann = []
-  let lifetimeBits = parseInt(localStorage.lifetimeBits, 10) || 0
-  const pixels = drawRandogram()
-
-  if (localStorage.hasOwnProperty('entropy')) {
-    entropy = JSON.parse(localStorage.entropy)
-  } else {
-    entropy = []
-  }
-
-  updateEntropyCounts() // set count initially
-  awardOfficerRank(lifetimeBits)
-
-  document.getElementById('randogram').onpointermove = function (e) {
-    const x = Math.floor(e.offsetX)
-    const y = Math.floor(e.offsetY)
-
-    localStorage.entropy = JSON.stringify(entropy)
-
-    if (0 <= x && x < LENGTH && 0 <= y && y < LENGTH) {
-      const p = LENGTH * y + x
-
-      neumann.push(pixels[p] & 1)
-
-      // john von neumann randomness extractor
-      if (neumann.length === 2) {
-        if (neumann[0] !== neumann[1]) {
-          bits.push(neumann[0])
-          lifetimeBits++
-
-          if (bits.length === 16) {
-            entropy.push(parseInt(bits.join(''), 2))
-            bits = []
-          }
-        }
-
-        neumann = []
-      }
-    } // if 0 <= x < LENGTH && 0 <= y < LENGTH
-
-    updateEntropyCounts() // update counts on mouse movement
-    awardOfficerRank(lifetimeBits)
-  } // onpointermove
-  requestAnimationFrame(drawRandogram)
-} // getEntropy()
-
-getEntropy()
+drawRandogram()
