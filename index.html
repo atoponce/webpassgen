@@ -364,33 +364,52 @@
     <script src='lists/randomEmoji.js'></script>
 
     <script>
-      function updateSlider(n) {
-        document.querySelector('#output').value = n
-      }
-
-      function loadPasses () {
-      /*
+      function setSecurity() {
         if (localStorage.getItem('security') === null) {
           localStorage.setItem('security', 70)
         }
 
         let security = parseInt(localStorage.getItem('security'))
 
-        if (security === 55) {
-          document.getElementById('rtb1').checked = true
-        } else if (security === 60) {
-          document.getElementById('rtb2').checked = true
-        } else if (security === 65) {
-          document.getElementById('rtb3').checked = true
-        } else if (security === 70) {
-          document.getElementById('rtb4').checked = true
-        } else if (security === 75) {
-          document.getElementById('rtb5').checked = true
+        if (security === 56) {
+          document.querySelector('#output').value = 56
+          document.querySelector('input[type=range]').value = 56;
+        } else if (security === 64) {
+          document.querySelector('#output').value = 64
+          document.querySelector('input[type=range]').value = 64;
+        } else if (security === 72) {
+          document.querySelector('#output').value = 72
+          document.querySelector('input[type=range]').value = 72;
         } else if (security === 80) {
-          document.getElementById('rtb6').checked = true
+          document.querySelector('#output').value = 80
+          document.querySelector('input[type=range]').value = 80;
+        } else if (security === 88) {
+          document.querySelector('#output').value = 88
+          document.querySelector('input[type=range]').value = 88;
+        } else if (security === 96) {
+          document.querySelector('#output').value = 96
+          document.querySelector('input[type=range]').value = 96;
+        } else if (security === 104) {
+          document.querySelector('#output').value = 104
+          document.querySelector('input[type=range]').value = 104;
+        } else if (security === 112) {
+          document.querySelector('#output').value = 112
+          document.querySelector('input[type=range]').value = 112;
+        } else if (security === 120) {
+          document.querySelector('#output').value = 120
+          document.querySelector('input[type=range]').value = 120;
+        } else if (security === 128) {
+          document.querySelector('#output').value = 128
+          document.querySelector('input[type=range]').value = 128;
         }
-      */
+      }
 
+      function updateSlider(n) {
+        document.querySelector('#output').value = n
+        localStorage.setItem('security', n)
+      }
+
+      function loadPasses () {
         generatePassphrase('diceware')
         generatePassphrase('eff')
         generatePassphrase('alternate')
@@ -398,8 +417,10 @@
         generatePseudowords()
         generateRandom()
       }
+
       window.onload = function () {
         initTheme()
+        setSecurity()
         loadPasses()
       }
     </script>
