@@ -185,7 +185,6 @@ function drawRandogram () {
           lifetimeBits++
 
           if (BITS.length === 16) {
-            console.log(BITS)
             ENTROPY.push(parseInt(BITS.join(''), 2))
             BITS = []
           }
