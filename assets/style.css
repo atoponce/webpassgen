@@ -204,7 +204,7 @@ button:hover {
 
 /* Mouse Entropy CSS */
 #randogram {
-    cursor: url('data:image/gif;base64,R0lGODlhFAAUAIQUAP8/P/9AQP9QUP9iYv9mZv+AgP+EhP+fn/+vr//Y2P/a2v/c3P/d3f/p6f/q6v/r6//u7v/x8f/9/f/+/v///////////////////////////////////////////////yH5BAEKAB8ALAAAAAAUABQAAAW54CeOH0VJkkmu45QcRBAQRzKxItUUQO/3hQZlRVkIegZED2HoCRbDUeM4UFAevQdFMQAIGi3eADKMyCIlSLdw+yR61hyDEd32EqUDwBDFlZoHJgQACA8RfSMUEQ9KBCcBPgEMLAyQPQETEpYAkpSbmBSDCA6HLIoOjSZ6fH45gENvAHElc3UKdyITYmQfZgFoFGoAbFJUVlgAWlxeYIlGSEqETV5QRDs/P0GIJC4wMjQ2rYkUExMqLCEAOw=='), crosshair;
+    cursor: url('data:image/gif;base64,R0lGODlhFAAUAPABAKoAAP///yH5BAUKAAEALAAAAAAUABQAQAIsRI6pCe2+1Is0PFPl3Vj3zGzgwU2UOFpfqrJh46rmWNLl6t3nPSOXC4nhUgUAOw=='), crosshair;
     margin: 0 calc((100% - 400px)/2);
     touch-action: none;
 }
