@@ -1,141 +1,141 @@
 @font-face {
-    font-family: "Twemoji Mozilla";
-    src: url("./twemoji.woff2") format("woff2");
+  font-family: "Twemoji Mozilla";
+  src: url("./twemoji.woff2") format("woff2");
 }
 /* body tags */
 body {
-    color: black; background-color: white;
+  color: black; background-color: white;
 }
 
 select {
-    appearance: none;
-    background-color: #dddddd;
-    border:1px solid black;
-    border-radius: 2px;
-    color: black;
-    cursor: pointer;
-    font-size: 12px;
-    height: 25px;
-    padding: 3px 22px 3px 6px;
-    width: 165px;
+  appearance: none;
+  background-color: #dddddd;
+  border:1px solid black;
+  border-radius: 2px;
+  color: black;
+  cursor: pointer;
+  font-size: 12px;
+  height: 25px;
+  padding: 3px 22px 3px 6px;
+  width: 165px;
 }
 select option {
-    background-color: #dddddd;
-    color :black;
+  background-color: #dddddd;
+  color :black;
 }
 select:hover {
-    background-color: #cccccc;
+  background-color: #cccccc;
 }
 button {
-    background-color: #9b5ec5; /* purple */
-    border: #9b5ec5; /* purple */
-    border-radius: 2px;
-    color: #FFFFFF;
-    cursor: pointer;
-    font-size: 14px;
-    height: 25px;
-    line-height: 25px;
-    padding: 0px;
-    text-decoration: none;
-    width: 80px;
+  background-color: #9b5ec5; /* purple */
+  border: #9b5ec5; /* purple */
+  border-radius: 2px;
+  color: #FFFFFF;
+  cursor: pointer;
+  font-size: 14px;
+  height: 25px;
+  line-height: 25px;
+  padding: 0px;
+  text-decoration: none;
+  width: 80px;
 }
 button:hover {
-    background: #7f34b1; /* purple */
-    text-decoration: none;
+  background: #7f34b1; /* purple */
+  text-decoration: none;
 }
 button:hover {
-    box-shadow: 1px 1px 0px #CCC;
+  box-shadow: 1px 1px 0px #CCC;
 }
 .pass-button {
-    display: inline-block;
-    position: absolute;
-    right: 10px;
-    top: 40px;
+  display: inline-block;
+  position: absolute;
+  right: 10px;
+  top: 40px;
 }
 /* classes */
 .clear { clear: both; }
 .dark_contrast {
-    text-shadow:
-        -1px -1px 0 #bbb,  0px -1px 0 #bbb,
-         1px -1px 0 #bbb, -1px  0px 0 #bbb,
-        -1px  1px 0 #bbb,  0px  1px 0 #bbb,
-         1px  1px 0 #bbb,  1px  0px #bbb;
+  text-shadow:
+    -1px -1px 0 #bbb,  0px -1px 0 #bbb,
+     1px -1px 0 #bbb, -1px  0px 0 #bbb,
+    -1px  1px 0 #bbb,  0px  1px 0 #bbb,
+     1px  1px 0 #bbb,  1px  0px 0 #bbb;
 }
 .light_contrast {
-    text-shadow:
-        -1px -1px 0 #444,  0px -1px 0 #444,
-         1px -1px 0 #444, -1px  0px 0 #444,
-        -1px  1px 0 #444,  0px  1px 0 #444,
-         1px  1px 0 #444,  1px  0px #444;
+  text-shadow:
+    -1px -1px 0 #444,  0px -1px 0 #444,
+     1px -1px 0 #444, -1px  0px 0 #444,
+    -1px  1px 0 #444,  0px  1px 0 #444,
+     1px  1px 0 #444,  1px  0px 0 #444;
 }
 .bold {
-    font-weight: bold;
+  font-weight: bold;
 }
 .use-entropy {
-    bottom: 5px;
-    left: 5px;
-    font-size: 12px;
-    position: absolute;
-    visibility: hidden;
+  bottom: 5px;
+  left: 5px;
+  font-size: 12px;
+  position: absolute;
+  visibility: hidden;
 }
 .stats {
-    bottom: 5px;
-    right: 5px;
-    font-size: 12px;
-    position: absolute;
+  bottom: 5px;
+  right: 5px;
+  font-size: 12px;
+  position: absolute;
 }
 .entropy {
-    right: 50%;
-    position: absolute;
+  right: 50%;
+  position: absolute;
 }
 .checksum {
-    bottom: 22px;
-    right: 5px;
-    font-size: 12px;
-    position: absolute;
+  bottom: 22px;
+  right: 5px;
+  font-size: 12px;
+  position: absolute;
 }
 .cell {
-    border: 1px solid black;
-    display: table-cell;
-    float: left;
-    height: 210px;
-    margin: 5px;
-    position: relative;
-    width: 372px;
+  border: 1px solid black;
+  display: table-cell;
+  float: left;
+  height: 210px;
+  margin: 5px;
+  position: relative;
+  width: 372px;
 }
 .password {
-    font-family: "Dejavu Sans Mono", "Courier New", "Lucidia Console", Monaco, monospace;
-    font-size: 18px;
-    margin: 50px 10px 0px 10px;
-    text-align: center;
+  font-family: "Dejavu Sans Mono", "Courier New", "Lucidia Console", Monaco, monospace;
+  font-size: 18px;
+  margin: 50px 10px 0px 10px;
+  text-align: center;
 }
 .cell-title {
-    background-color: #6280c5; /* blue */
-    border-bottom: 1px solid black;
-    color: white;
-    margin-top: 0px;
-    padding: 5px;
-    text-align: center;
+  background-color: #6280c5; /* blue */
+  border-bottom: 1px solid black;
+  color: white;
+  margin-top: 0px;
+  padding: 5px;
+  text-align: center;
 }
 .info-link {
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
 }
 .optional {
-    left: 10px;
-    position: absolute;
-    top: 40px;
+  left: 10px;
+  position: absolute;
+  top: 40px;
 }
 .optional:after {
-    bottom: 3px;
-    color: black;
-    content: '▶';
-    font-size: 13px;
-    left: 145px;
-    pointer-events: none;
-    position: absolute;
-    transform: rotate(90deg);
+  bottom: 3px;
+  color: black;
+  content: '▶';
+  font-size: 13px;
+  left: 145px;
+  pointer-events: none;
+  position: absolute;
+  transform: rotate(90deg);
 }
 .feather {
   vertical-align: text-bottom;
@@ -143,96 +143,96 @@ button:hover {
 
 /* ids */
 #container {
-    margin: 0 auto;
-    pointer-events: auto;
-    width: 768px;
+  margin: 0 auto;
+  pointer-events: auto;
+  width: 768px;
 }
 #header {
-    display: inline-block;
-    text-align: center;
-    width: 100%;
+  display: inline-block;
+  text-align: center;
+  width: 100%;
 }
 #footer {
-    text-align: center;
+  text-align: center;
 }
 #version {
-    font-size: 10pt;
+  font-size: 10pt;
 }
 #overlay {
-    position: fixed;
-    display: none;
-    width: 100%;
-    height: 100%;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-color: rgba(0, 0, 0, 0.85);
-    z-index: 1;
-    cursor: pointer;
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+  z-index: 1;
+  cursor: pointer;
 }
 #overlay_text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    font-size: 18pt;
-    color: white;
-    text-align: center;
-    transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 18pt;
+  color: white;
+  text-align: center;
+  transform: translate(-50%, -50%);
 }
 #table {
-    display: table;
+  display: table;
 }
 #navigation li {
-    display: inline;
-    list-style-type: none;
-    padding-right: 20px;
+  display: inline;
+  list-style-type: none;
+  padding-right: 20px;
 }
 #content {
-    padding: 10px;
+  padding: 10px;
 }
 #alt-pass, #btc-pass, #diceware-pass, #eff-pass, #pseudo-pass {
-    word-break: break-word;
+  word-break: break-word;
 }
 #random-pass {
-    word-break: break-all;
+  word-break: break-all;
 }
 #password-strength{
   margin: 0px auto;
 }
 #input {
-    display: block;
-    margin: 0 auto;
+  display: block;
+  margin: 0 auto;
 }
 
 /* Mouse Entropy CSS */
 #randogram {
-    cursor: url('data:image/gif;base64,R0lGODlhFAAUAPABAKoAAP///yH5BAUKAAEALAAAAAAUABQAQAIsRI6pCe2+1Is0PFPl3Vj3zGzgwU2UOFpfqrJh46rmWNLl6t3nPSOXC4nhUgUAOw=='), crosshair;
-    margin: 0 calc((100% - 400px)/2);
-    touch-action: none;
+  cursor: url('data:image/gif;base64,R0lGODlhFAAUAPABAKoAAP///yH5BAUKAAEALAAAAAAUABQAQAIsRI6pCe2+1Is0PFPl3Vj3zGzgwU2UOFpfqrJh46rmWNLl6t3nPSOXC4nhUgUAOw=='), crosshair;
+  margin: 0 calc((100% - 400px)/2);
+  touch-action: none;
 }
 .collected {
-    font-family: monospace;
-    font-weight: bold;
-    height: 40px;
-    line-height: 40px;
-    text-align: center;
+  font-family: monospace;
+  font-weight: bold;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
 }
 
 @media only screen and (max-width: 767px) {
-    #container { width: 480px; }
-    .cell { margin: 5px 10px; width: 460px; }
+  #container { width: 480px; }
+  .cell { margin: 5px 10px; width: 460px; }
 
-    #entropy-toolbar { width: 240px; }
-    #entropy-70 { margin-top: 2px; }
-    #entropy-75 { margin-top: 2px; }
-    #entropy-80 { margin-top: 2px; }
+  #entropy-toolbar { width: 240px; }
+  #entropy-70 { margin-top: 2px; }
+  #entropy-75 { margin-top: 2px; }
+  #entropy-80 { margin-top: 2px; }
 }
 @media only screen and (max-width: 479px) {
-    #container { width: 100%; }
-    .cell { width: 95%; }
+  #container { width: 100%; }
+  .cell { width: 95%; }
 
-    #entropy-toolbar { width: 240px; }
-    #entropy-70 { margin-top: 2px; }
-    #entropy-75 { margin-top: 2px; }
-    #entropy-80 { margin-top: 2px; }
+  #entropy-toolbar { width: 240px; }
+  #entropy-70 { margin-top: 2px; }
+  #entropy-75 { margin-top: 2px; }
+  #entropy-80 { margin-top: 2px; }
 }
 
 /* override styles for Dark Theme */
