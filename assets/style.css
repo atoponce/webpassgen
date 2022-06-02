@@ -179,6 +179,7 @@ button:hover {
 }
 #table {
   display: table;
+  margin-top: 10px;
 }
 #navigation li {
   display: inline;
@@ -194,12 +195,12 @@ button:hover {
 #random-pass {
   word-break: break-all;
 }
-#password-strength{
+#password-strength {
   margin: 0px auto;
 }
 #input {
   display: block;
-  margin: 0 auto;
+  margin: 10px auto;
 }
 
 /* Mouse Entropy CSS */
