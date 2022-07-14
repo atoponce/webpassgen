@@ -25,7 +25,7 @@
           </li>
         </ul>
         <div id='password-strength'>
-          <input id='input' type='range' min='56' max='128' step='8' value='72' oninput='updateSlider(value); loadPasses();'>
+          <input id='input' type='range' min='48' max='128' step='8' value='72' oninput='updateSlider(parseInt(value)); loadPasses();'>
           <span>Password strength: </span>
           <output id='output' for=value>72</output>
           <span> bits</span>
@@ -364,47 +364,43 @@
     <script src='lists/randomEmoji.js'></script>
 
     <script>
+      const COLORS = {
+        // added bold variants, just in case I want them later.
+        red:    '#ff6464', redBold:    '#ff3939',
+        orange: '#ffcb64', orangeBold: '#ffbd39',
+        yellow: '#ffff64', yellowBold: '#ffff39',
+        green:  '#55d955', greenBold:  '#2fcf2f',
+        // new blue and purple that differ from style.css, again, just in case.
+        blue:   '#5777c0', blueBold:   '#365bb0',
+        purple: '#9951c0', purpleBold: '#822fb0'
+      }
+
       function setSecurity() {
         if (localStorage.getItem('security') === null) {
           localStorage.setItem('security', 70)
         }
 
-        let security = parseInt(localStorage.getItem('security'))
+        const security = parseInt(localStorage.getItem('security'))
 
-        if (security === 56) {
-          document.querySelector('#output').value = 56
-          document.querySelector('input[type=range]').value = 56;
-        } else if (security === 64) {
-          document.querySelector('#output').value = 64
-          document.querySelector('input[type=range]').value = 64;
-        } else if (security === 72) {
-          document.querySelector('#output').value = 72
-          document.querySelector('input[type=range]').value = 72;
-        } else if (security === 80) {
-          document.querySelector('#output').value = 80
-          document.querySelector('input[type=range]').value = 80;
-        } else if (security === 88) {
-          document.querySelector('#output').value = 88
-          document.querySelector('input[type=range]').value = 88;
-        } else if (security === 96) {
-          document.querySelector('#output').value = 96
-          document.querySelector('input[type=range]').value = 96;
-        } else if (security === 104) {
-          document.querySelector('#output').value = 104
-          document.querySelector('input[type=range]').value = 104;
-        } else if (security === 112) {
-          document.querySelector('#output').value = 112
-          document.querySelector('input[type=range]').value = 112;
-        } else if (security === 120) {
-          document.querySelector('#output').value = 120
-          document.querySelector('input[type=range]').value = 120;
-        } else if (security === 128) {
-          document.querySelector('#output').value = 128
-          document.querySelector('input[type=range]').value = 128;
-        }
+        document.querySelector('#output').value = security
+        document.querySelector('input[type=range]').value = security
+
+        updateSlider(security)
       }
 
       function updateSlider(n) {
+        const slider = document.getElementById('input')
+
+        if (n === 48) {
+          slider.style.setProperty('--track-background', COLORS.red)
+        } else if (n === 56) {
+          slider.style.setProperty('--track-background', COLORS.orange)
+        } else if (n === 64) {
+          slider.style.setProperty('--track-background', COLORS.yellow)
+        } else if (n >= 72) {
+          slider.style.setProperty('--track-background', COLORS.green)
+        }
+
         document.querySelector('#output').value = n
         localStorage.setItem('security', n)
       }

@@ -198,9 +198,51 @@ button:hover {
 #password-strength {
   margin: 0px auto;
 }
+
 #input {
   display: block;
   margin: 10px auto;
+}
+
+input[type=range] {
+  -webkit-appearance: none;
+  background: none;
+}
+
+input[type=range]:focus {
+  outline: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+  background: var(--track-background, none);
+  border: 1px solid black;
+  border-radius: 3px;
+  height: 6px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  background: rgb(128, 128, 128);
+  border: 1px solid black;
+  border-radius: 50%;
+  height: 16px;
+  margin-top: -6px;
+  width: 16px;
+}
+
+input[type=range]::-moz-range-track {
+  background: var(--track-background, none);
+  border: 1px solid black;
+  border-radius: 3px;
+  height: 6px;
+}
+
+input[type=range]::-moz-range-thumb {
+  background: rgb(128, 128, 128);
+  border: 1px solid black;
+  border-radius: 50%;
+  height: 16px;
+  width: 16px;
 }
 
 /* Mouse Entropy CSS */
@@ -242,6 +284,8 @@ body.dark-theme {color: white; background-color: black;}
 .dark-theme a {color: yellow;}
 .dark-theme a:visited {color: orange;}
 .dark-theme img {filter: invert(1);}
+.dark-theme input[type=range]::-webkit-slider-runnable-track {border: 1px solid white;}
+.dark-theme input[type=range]::-moz-range-track {border: 1px solid white;}
 
 #theme_switcher {
   text-decoration: none;
