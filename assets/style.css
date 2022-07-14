@@ -285,7 +285,9 @@ body.dark-theme {color: white; background-color: black;}
 .dark-theme a:visited {color: orange;}
 .dark-theme img {filter: invert(1);}
 .dark-theme input[type=range]::-webkit-slider-runnable-track {border: 1px solid white;}
+.dark-theme input[type=range]::-webkit-slider-thumb {border: 1px solid white;}
 .dark-theme input[type=range]::-moz-range-track {border: 1px solid white;}
+.dark-theme input[type=range]::-moz-range-thumb {border: 1px solid white;}
 
 #theme_switcher {
   text-decoration: none;
