@@ -2,6 +2,16 @@
 const PAGECONTAINER = document.getElementsByTagName('body')[0]
 const PREFERSDARKTHEME = window.matchMedia('(prefers-color-scheme: dark)')
 const THEMESWITCHER = document.getElementById('theme_switcher')
+const SITECOLORS = {
+  // added bold variants, just in case I want them later.
+  red:    '#ff6464', redBold:    '#ff3939',
+  orange: '#ffcb64', orangeBold: '#ffbd39',
+  yellow: '#ffff64', yellowBold: '#ffff39',
+  green:  '#55d955', greenBold:  '#2fcf2f',
+  // new blue and purple that differ from style.css, again, just in case.
+  blue:   '#5777c0', blueBold:   '#365bb0',
+  purple: '#9951c0', purpleBold: '#822fb0'
+}
 
 /** Provide a warning when any of the Unicode generators are chosen. */
 function unicodeWarn() {
@@ -1499,25 +1509,15 @@ function addEntropy(hex) {
 
 function updateSlider(n) {
   const slider = document.getElementById('input')
-  const colors = {
-    // added bold variants, just in case I want them later.
-    red:    '#ff6464', redBold:    '#ff3939',
-    orange: '#ffcb64', orangeBold: '#ffbd39',
-    yellow: '#ffff64', yellowBold: '#ffff39',
-    green:  '#55d955', greenBold:  '#2fcf2f',
-    // new blue and purple that differ from style.css, again, just in case.
-    blue:   '#5777c0', blueBold:   '#365bb0',
-    purple: '#9951c0', purpleBold: '#822fb0'
-  }
 
   if (n === 48) {
-    slider.style.setProperty('--track-background', colors.red)
+    slider.style.setProperty('--track-background', SITECOLORS.red)
   } else if (n === 56) {
-    slider.style.setProperty('--track-background', colors.orange)
+    slider.style.setProperty('--track-background', SITECOLORS.orange)
   } else if (n === 64) {
-    slider.style.setProperty('--track-background', colors.yellow)
+    slider.style.setProperty('--track-background', SITECOLORS.yellow)
   } else if (n >= 72) {
-    slider.style.setProperty('--track-background', colors.green)
+    slider.style.setProperty('--track-background', SITECOLORS.green)
   }
 
   document.querySelector('#output').value = n

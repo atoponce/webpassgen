@@ -27,8 +27,8 @@ select:hover {
   background-color: #cccccc;
 }
 button {
-  background-color: #9b5ec5; /* purple */
-  border: #9b5ec5; /* purple */
+  background-color: #9951c0; /* purple */
+  border: #9951c0; /* purple */
   border-radius: 2px;
   color: #FFFFFF;
   cursor: pointer;
@@ -40,7 +40,7 @@ button {
   width: 80px;
 }
 button:hover {
-  background: #7f34b1; /* purple */
+  background: #822fb0; /* purple */
   text-decoration: none;
 }
 button:hover {
@@ -111,7 +111,7 @@ button:hover {
   text-align: center;
 }
 .cell-title {
-  background-color: #6280c5; /* blue */
+  background-color: #5777c0; /* blue */
   border-bottom: 1px solid black;
   color: white;
   margin-top: 0px;
