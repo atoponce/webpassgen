@@ -641,6 +641,7 @@ function generateBitcoin(selection) {
   var sha256 = function (bytes) {
     const crypto = window.crypto || window.msCrypto
 
+    // Note: This only works under HTTPS or localhost.
     return crypto.subtle.digest('SHA-256', bytes).then(function (hash) {
       return hash
     })
@@ -1495,3 +1496,53 @@ function addEntropy(hex) {
     console.error('Argument must be a hex string with a length that is a multple of 4 characters.')
   }
 }
+
+function updateSlider(n) {
+  const slider = document.getElementById('input')
+  const colors = {
+    // added bold variants, just in case I want them later.
+    red:    '#ff6464', redBold:    '#ff3939',
+    orange: '#ffcb64', orangeBold: '#ffbd39',
+    yellow: '#ffff64', yellowBold: '#ffff39',
+    green:  '#55d955', greenBold:  '#2fcf2f',
+    // new blue and purple that differ from style.css, again, just in case.
+    blue:   '#5777c0', blueBold:   '#365bb0',
+    purple: '#9951c0', purpleBold: '#822fb0'
+  }
+
+  if (n === 48) {
+    slider.style.setProperty('--track-background', colors.red)
+  } else if (n === 56) {
+    slider.style.setProperty('--track-background', colors.orange)
+  } else if (n === 64) {
+    slider.style.setProperty('--track-background', colors.yellow)
+  } else if (n >= 72) {
+    slider.style.setProperty('--track-background', colors.green)
+  }
+
+  document.querySelector('#output').value = n
+  localStorage.setItem('security', n)
+}
+
+function setSecurity() {
+  if (localStorage.getItem('security') === null) {
+    localStorage.setItem('security', 72)
+  }
+
+  const security = parseInt(localStorage.getItem('security'))
+
+  document.querySelector('#output').value = security
+  document.querySelector('input[type=range]').value = security
+
+  updateSlider(security)
+}
+
+function loadPasses() {
+  generatePassphrase('alternate')
+  generatePassphrase('bitcoin')
+  generatePassphrase('diceware')
+  generatePassphrase('eff')
+  generatePseudowords()
+  generateRandom()
+}
+

@@ -31,7 +31,7 @@
           <span> bits</span>
         </div>
       </div>
-      <div id='table'>
+      <div id='content'>
         <div id='alt-default' class='cell'>
           <p class='cell-title'><strong>Alternate</strong></p>
           <div class='optional'>
@@ -364,57 +364,7 @@
     <script src='lists/randomEmoji.js'></script>
 
     <script>
-      const COLORS = {
-        // added bold variants, just in case I want them later.
-        red:    '#ff6464', redBold:    '#ff3939',
-        orange: '#ffcb64', orangeBold: '#ffbd39',
-        yellow: '#ffff64', yellowBold: '#ffff39',
-        green:  '#55d955', greenBold:  '#2fcf2f',
-        // new blue and purple that differ from style.css, again, just in case.
-        blue:   '#5777c0', blueBold:   '#365bb0',
-        purple: '#9951c0', purpleBold: '#822fb0'
-      }
-
-      function setSecurity() {
-        if (localStorage.getItem('security') === null) {
-          localStorage.setItem('security', 72)
-        }
-
-        const security = parseInt(localStorage.getItem('security'))
-
-        document.querySelector('#output').value = security
-        document.querySelector('input[type=range]').value = security
-
-        updateSlider(security)
-      }
-
-      function updateSlider(n) {
-        const slider = document.getElementById('input')
-
-        if (n === 48) {
-          slider.style.setProperty('--track-background', COLORS.red)
-        } else if (n === 56) {
-          slider.style.setProperty('--track-background', COLORS.orange)
-        } else if (n === 64) {
-          slider.style.setProperty('--track-background', COLORS.yellow)
-        } else if (n >= 72) {
-          slider.style.setProperty('--track-background', COLORS.green)
-        }
-
-        document.querySelector('#output').value = n
-        localStorage.setItem('security', n)
-      }
-
-      function loadPasses () {
-        generatePassphrase('diceware')
-        generatePassphrase('eff')
-        generatePassphrase('alternate')
-        generatePassphrase('bitcoin')
-        generatePseudowords()
-        generateRandom()
-      }
-
-      window.onload = function () {
+      window.onload = function() {
         initTheme()
         setSecurity()
         loadPasses()
