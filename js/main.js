@@ -609,6 +609,11 @@ function generateColors() {
  * @param {string} selection - The selection option chosen by the user.
  */
 function generateMonero(selection) {
+  /**
+   * Calculate the CRC32 of a string.
+   * @param {string} string - The string to calculate.
+   * @returns {number} A 32-bit integer.
+   */
   var crc32 = function (str) {
     // https://gist.github.com/lenqwang/1be7b4843a580f2c1df84d5360e5e88c
     let crc = 0 ^ -1
@@ -1605,6 +1610,10 @@ function addEntropy(hex) {
   }
 }
 
+/**
+ * An input slider ranging from values 48 to 128 stepping every 8.
+ * @param {number} integer - An 8-bit value
+ */
 function updateSlider(n) {
   const slider = document.getElementById('input')
 
@@ -1622,6 +1631,7 @@ function updateSlider(n) {
   localStorage.setItem('security', n)
 }
 
+/** Update localStorage with a key-value of the selected security margin when using the slider. */
 function setSecurity() {
   if (localStorage.getItem('security') === null) {
     localStorage.setItem('security', 72)
@@ -1635,6 +1645,7 @@ function setSecurity() {
   updateSlider(security)
 }
 
+/** Generate all passwords (called from index.html only on page load/refresh). */
 function loadPasses() {
   generatePassphrase('alternate')
   generatePassphrase('cryptocurrency')
