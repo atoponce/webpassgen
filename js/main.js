@@ -748,7 +748,7 @@ function generateApple() {
 
   let n = 1 // number of blocks
 
-  while (apple(n) <= entropy) {
+  while (apple(n) < entropy) {
     n++
   }
 
