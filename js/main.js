@@ -8,7 +8,7 @@ const SITECOLORS = {
   orange: '#ffcb64', orangeBold: '#ffbd39',
   yellow: '#ffff64', yellowBold: '#ffff39',
   green:  '#55d955', greenBold:  '#2fcf2f',
-  // new blue and purple that differ from style.css, again, just in case.
+  // new blue and purple, again just in case.
   blue:   '#5777c0', blueBold:   '#365bb0',
   purple: '#9951c0', purpleBold: '#822fb0'
 }
@@ -96,8 +96,8 @@ function getSourceList(source) {
 
   if (source === 'alternate') {
     sourceList = document.getElementById('alt-options').value
-  } else if (source === 'bitcoin') {
-    sourceList = document.getElementById('bitcoin-options').value
+  } else if (source === 'cryptocurrency') {
+    sourceList = document.getElementById('cryptocurrency-options').value
   } else if (source === 'diceware') {
     sourceList = document.getElementById('diceware-options').value
   } else if (source === 'eff') {
@@ -116,8 +116,14 @@ function generatePassphrase(source) {
 
   if (source === 'alternate') {
     generateAlternate(sourceList)
-  } else if (source === 'bitcoin') {
-    generateBitcoin(sourceList)
+  } else if (source === 'cryptocurrency') {
+    const optGroup = document.querySelector('#cryptocurrency-options option:checked').parentElement.label
+
+    if (optGroup === 'Bitcoin') {
+      generateBitcoin(sourceList)
+    } else if (optGroup === 'Monero') {
+      generateMonero(sourceList)
+    }
   } else if (source === 'diceware') {
     generateDiceware(sourceList)
   } else if (source === 'eff') {
@@ -445,6 +451,7 @@ function generateAlternate(selection) {
     wordList = wordList.concat(effShort)              // 1296 words
     wordList = wordList.concat(effStarTrek)           // 4000 words
     wordList = wordList.concat(effStarWars)           // 4000 words
+    wordList = wordList.concat(moneroEN)              // 1626 words
   } else if (selection === 'Common Words Only') {
     wordList = alternatePgp
     wordList = wordList.concat(alternatePokerware)
@@ -455,6 +462,7 @@ function generateAlternate(selection) {
     wordList = wordList.concat(effDistant)
     wordList = wordList.concat(effLong)
     wordList = wordList.concat(effShort)
+    wordList = wordList.concat(moneroEN)
   } else if (selection === 'Deseret Alphabet') {
     wordList = alternateDeseret
   } else if (selection === 'Shavian Alphabet') {
@@ -597,6 +605,97 @@ function generateColors() {
 }
 
 /**
+ * Generate a Monero-based passphrase (seed). Contains checksum.
+ * @param {string} selection - The selection option chosen by the user.
+ */
+function generateMonero(selection) {
+  var crc32 = function (str) {
+    // https://gist.github.com/lenqwang/1be7b4843a580f2c1df84d5360e5e88c
+    let crc = 0 ^ -1
+    const crcTable = []
+
+    for (let i = 0; i < 256; i++) {
+      c = i
+
+      for (let j = 0; j < 8; j++) {
+        c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1
+      }
+
+      crcTable[i] = c
+    }
+
+    for (let i = 0; i < str.length; i++) {
+      crc = (crc >>> 8) ^ crcTable[(crc ^ str.charCodeAt(i)) & 0xff]
+    }
+
+    return (crc ^ -1) >>> 0
+  }
+
+  let pass = ''
+  let wordList = ''
+
+  if (selection === 'Chinese') {
+    wordList = moneroCN
+  } else if (selection === 'Dutch') {
+    wordList = moneroNL
+  } else if (selection === 'English') {
+    wordList = moneroEN
+  } else if (selection === 'Esperanto') {
+    wordList = moneroEO
+  } else if (selection === 'French') {
+    wordList = moneroFR
+  } else if (selection === 'German') {
+    wordList = moneroDE
+  } else if (selection === 'Italian') {
+    wordList = moneroIT
+  } else if (selection === 'Japanese') {
+    wordList = moneroJP
+  } else if (selection === 'Lojban') {
+    wordList = moneroJBO
+  } else if (selection === 'Portuguese') {
+    wordList = moneroPT
+  } else if (selection === 'Russian') {
+    wordList = moneroRU
+  } else if (selection === 'Spanish') {
+    wordList = moneroES
+  }
+
+  wordList = uniquesOnly(wordList)  // Force unique elements in array.
+
+  const entropy = Math.ceil(getEntropy() / 32) * 32 // Multiple of 32 bits
+  const len = Math.ceil(entropy / Math.log2(wordList.length))
+  const passId = document.getElementById('btc-pass')
+  const passLength = document.getElementById('btc-length')
+  const passEntropy = document.getElementById('btc-entropy')
+  const entropyCheck = document.getElementById('btc-entropy-check')
+  const passCheck = document.getElementById('btc-check')
+
+  let useEntropy = false
+
+  if (entropyCheck.checked) {
+    useEntropy = true
+  }
+
+  pass = generatePass(len, wordList, true, useEntropy).split(' ')
+
+  let prefixes = ''
+
+  for (let i = 0; i < pass.length; i++) {
+    prefixes += pass[i].substring(0, 3)
+  }
+
+  const checksum = crc32(prefixes)
+  const checkWord = pass[checksum % pass.length]
+  pass.push(checkWord)
+
+  pass = pass.join('-')
+  passId.innerText = pass
+  passLength.innerText = pass.length + ' characters.'
+  passEntropy.innerText = entropy + ' bits,'
+  passCheck.innerText = 'Integrated checksum.'
+}
+
+/**
  * Generate a Bitcoin BIPS39-compliant passphrase (seed). Contains checksum.
  * @param {string} selection - The selection option chosen by the user.
  */
@@ -657,8 +756,7 @@ function generateBitcoin(selection) {
     })
   }
 
-  const entropy = getEntropy()
-  const requiredEntropy = Math.ceil(entropy / 32) * 32 // Multiple of 32 bits, per the bip39 spec
+  const entropy = Math.ceil(getEntropy() / 32) * 32 // Multiple of 32 bits, per the bip39 spec
   const entropyCheck = document.getElementById('btc-entropy-check')
 
   let useEntropy = false
@@ -667,7 +765,7 @@ function generateBitcoin(selection) {
     useEntropy = true
   }
 
-  const entropyBuffer = new Uint8Array(Math.ceil(requiredEntropy / 8))
+  const entropyBuffer = new Uint8Array(Math.ceil(entropy / 8))
 
   for (let i = 0; i < entropyBuffer.length; i++) {
     entropyBuffer[i] = secRand(256, useEntropy)
@@ -676,10 +774,10 @@ function generateBitcoin(selection) {
   sha256(entropyBuffer).then(function (digest) {
     sha256Digest = new Uint8Array(digest)
 
-    const entropyBits = bytesToBinary(entropyBuffer).padStart(requiredEntropy, '0')
+    const entropyBits = bytesToBinary(entropyBuffer).padStart(entropy, '0')
     const checkBits = bytesToBinary(sha256Digest)
       .padStart(256, '0')
-      .substr(0, 11 - (requiredEntropy % 11))
+      .substring(0, 11 - (entropy % 11))
     const allBits = entropyBits + checkBits
 
     const bitWords = allBits.match(/(.{1,11})/g)
@@ -696,7 +794,7 @@ function generateBitcoin(selection) {
     pass = words.join('-')
     passId.innerText = pass
     passLength.innerText = pass.length + ' characters.'
-    passEntropy.innerText = requiredEntropy + ' bits,'
+    passEntropy.innerText = entropy + ' bits,'
     passCheck.innerText = 'Integrated checksum.'
   })
 }
@@ -1539,10 +1637,9 @@ function setSecurity() {
 
 function loadPasses() {
   generatePassphrase('alternate')
-  generatePassphrase('bitcoin')
+  generatePassphrase('cryptocurrency')
   generatePassphrase('diceware')
   generatePassphrase('eff')
   generatePseudowords()
   generateRandom()
 }
-
