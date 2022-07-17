@@ -10,6 +10,6 @@ del[6] = 'αβαθέςαβαθήςάβαθοςαβαθώςάβακαςαβάνη
 
 for (let i = 1; i < 7; i++) {
   for (let j = 0; j < del[i].length; j += i) {
-    dicewareEL.push(del[i].substr(j, i))
+    dicewareEL.push(del[i].substring(j, j + i))
   }
 }

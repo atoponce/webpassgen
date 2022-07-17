@@ -11,6 +11,6 @@ dmi[8] = 'maniaitimatetotopuketututoketoketokitokiurunumia'
 
 for (let i = 2; i < 9; i++) {
   for (let j = 0; j < dmi[i].length; j += i) {
-    dicewareMI.push(dmi[i].substr(j, i))
+    dicewareMI.push(dmi[i].substring(j, j + i))
   }
 }

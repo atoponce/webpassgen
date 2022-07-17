@@ -18,6 +18,6 @@ akl[14] = 'lo`laHbe`ghach`orghenya`nganro`qegh`Iwchab'
 
 for (let i = 1; i < 15; i++) {
   for (let j = 0; j < akl[i].length; j += i) {
-    alternateKlingon.push(akl[i].substr(j, i))
+    alternateKlingon.push(akl[i].substring(j, j + i))
   }
 }

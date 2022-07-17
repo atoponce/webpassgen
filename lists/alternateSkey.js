@@ -8,6 +8,6 @@ ask[4] = 'ABEDABELABETABLEABUTACHEACIDACMEACREACTAACTSADAMADDSADENAFARAFROAGEEAH
 
 for (let i = 1; i < 5; i++) {
   for (let j = 0; j < ask[i].length; j += i) {
-    alternateSkey.push(ask[i].substr(j, i))
+    alternateSkey.push(ask[i].substring(j, j + i))
   }
 }

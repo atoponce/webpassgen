@@ -10,6 +10,6 @@ den[6] = 'abbottabjectablazeabradeabsorbacadiaaccrueaceticacidicacuityadagioaddi
 
 for (let i = 1; i < 7; i++) {
   for (let j = 0; j < den[i].length; j += i) {
-    dicewareEN.push(den[i].substr(j, i))
+    dicewareEN.push(den[i].substring(j, j + i))
   }
 }

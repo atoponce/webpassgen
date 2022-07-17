@@ -19,7 +19,7 @@ deo[15] = 'misadministradopluskvamperfekt'
 for (let i = 1; i < 16; i++) {
   if (i !== 14) {
     for (let j = 0; j < deo[i].length; j += i) {
-      dicewareEO.push(deo[i].substr(j, i))
+      dicewareEO.push(deo[i].substring(j, j + i))
     }
   }
 }

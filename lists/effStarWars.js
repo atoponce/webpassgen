@@ -14,6 +14,6 @@ esw[10] = 'lightsaber'
 
 for (let i = 1; i < 11; i++) {
   for (let j = 0; j < esw[i].length; j += i) {
-    effStarWars.push(esw[i].substr(j, i))
+    effStarWars.push(esw[i].substring(j, j + i))
   }
 }

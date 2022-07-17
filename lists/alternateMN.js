@@ -8,6 +8,6 @@ amn[4] = 'ӨгийҮенчАНЭУАУДСАУИСАбебАбишАбогАбо
 
 for (let i = 1; i < 5; i++) {
   for (let j = 0; j < amn[i].length; j += i) {
-    alternateMN.push(amn[i].substr(j, i))
+    alternateMN.push(amn[i].substring(j, j + i))
   }
 }

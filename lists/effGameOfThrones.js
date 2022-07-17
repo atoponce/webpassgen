@@ -11,6 +11,6 @@ egt[8] = 'accentedaccidentadmiringadvocateagrivanealertingallyrionalysanneancien
 
 for (let i = 2; i < 9; i++) {
   for (let j = 0; j < egt[i].length; j += i) {
-    effGameOfThrones.push(egt[i].substr(j, i))
+    effGameOfThrones.push(egt[i].substring(j, j + i))
   }
 }

@@ -10,6 +10,6 @@ den2[6] = 'abacusabductablazeaboardabsentabsorbacceptaccuseacidicacquitadagioadd
 
 for (let i = 1; i < 7; i++) {
   for (let j = 0; j < den2[i].length; j += i) {
-    dicewareBeale.push(den2[i].substr(j, i))
+    dicewareBeale.push(den2[i].substring(j, j + i))
   }
 }

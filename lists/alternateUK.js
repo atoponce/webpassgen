@@ -7,6 +7,6 @@ auk[4] = "ЄвоюЄгорЄжовЄменЄмцюЄмцяЄмціЄнінЄфи
 
 for (let i = 2; i < 5; i++) {
   for (let j = 0; j < auk[i].length; j += i) {
-    alternateUK.push(auk[i].substr(j, i))
+    alternateUK.push(auk[i].substring(j, j + i))
   }
 }

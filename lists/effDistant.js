@@ -12,6 +12,6 @@ edi[10] = 'abbreviateabhorrenceaccountantaftershavealarmclockammunitionanesthesi
 
 for (let i = 3; i < 11; i++) {
   for (let j = 0; j < edi[i].length; j += i) {
-    effDistant.push(edi[i].substr(j, i))
+    effDistant.push(edi[i].substring(j, j + i))
   }
 }

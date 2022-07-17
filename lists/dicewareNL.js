@@ -9,6 +9,6 @@ dnl[6] = 'aambeiaanbodaaneenaanlegaanpakaantalaanvalaanwasaanzetaapjesaardasaard
 
 for (let i = 2; i < 7; i++) {
   for (let j = 0; j < dnl[i].length; j += i) {
-    dicewareNL.push(dnl[i].substr(j, i))
+    dicewareNL.push(dnl[i].substring(j, j + i))
   }
 }

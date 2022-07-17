@@ -7,6 +7,6 @@ dcn[3] = '一大批一肚子一骨碌不亚于不得不不得已个体户乐呵�
 
 for (let i = 1; i < 4; i++) {
   for (let j = 0; j < dcn[i].length; j += i) {
-    dicewareCN.push(dcn[i].substr(j, i))
+    dicewareCN.push(dcn[i].substring(j, j + i))
   }
 }

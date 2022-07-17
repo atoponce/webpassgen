@@ -11,6 +11,6 @@ ael[7] = 'ArdórinCathriwEldalieErkoireErlaireEärenyaFiriethLótesseLótessëN�
 
 for (let i = 1; i < 8; i++) {
   for (let j = 0; j < ael[i].length; j += i) {
-    alternateElvish.push(ael[i].substr(j, i))
+    alternateElvish.push(ael[i].substring(j, j + i))
   }
 }

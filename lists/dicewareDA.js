@@ -10,6 +10,6 @@ dda[6] = 'aborreadvareadventballetbogbuscaddiecadeaucafeencafeercampuscancancany
 
 for (let i = 1; i < 7; i++) {
   for (let j = 0; j < dda[i].length; j += i) {
-    dicewareDA.push(dda[i].substr(j, i))
+    dicewareDA.push(dda[i].substring(j, j + i))
   }
 }

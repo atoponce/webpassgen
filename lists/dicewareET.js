@@ -10,6 +10,6 @@ det[6] = "aabitsaadlikaasamaaasimaaastakabajasabakusabhaasabieluabsatsabtissacti
 
 for (let i = 1; i < 7; i++) {
   for (let j = 0; j < det[i].length; j += i) {
-    dicewareET.push(det[i].substr(j, i))
+    dicewareET.push(det[i].substring(j, j + i))
   }
 }

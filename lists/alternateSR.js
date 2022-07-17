@@ -9,6 +9,6 @@ asr[6] = 'ЂачкомЂеновиЂованиЈакшићЈедемоЈемен
 
 for (let i = 2; i < 7; i++) {
   for (let j = 0; j < asr[i].length; j += i) {
-    alternateSR.push(asr[i].substr(j, i))
+    alternateSR.push(asr[i].substring(j, j + i))
   }
 }

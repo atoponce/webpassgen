@@ -10,6 +10,6 @@ dro[6] = 'abagerabagiuabajurabanosabatajabatorabazieabdicaabhoraabisalabitirabje
 
 for (let i = 1; i < 7; i++) {
   for (let j = 0; j < dro[i].length; j += i) {
-    dicewareRO.push(dro[i].substr(j, i))
+    dicewareRO.push(dro[i].substring(j, j + i))
   }
 }

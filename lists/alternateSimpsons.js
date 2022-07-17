@@ -20,6 +20,6 @@ asi[16] = 'anesthesiologist'
 
 for (let i = 1; i < 17; i++) {
   for (let j = 0; j < asi[i].length; j += i) {
-    alternateSimpsons.push(asi[i].substr(j, i))
+    alternateSimpsons.push(asi[i].substring(j, j + i))
   }
 }

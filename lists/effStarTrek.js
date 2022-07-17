@@ -13,6 +13,6 @@ est[10] = 'enterprise'
 
 for (let i = 2; i < 11; i++) {
   for (let j = 0; j < est[i].length; j += i) {
-    effStarTrek.push(est[i].substr(j, i))
+    effStarTrek.push(est[i].substring(j, j + i))
   }
 }

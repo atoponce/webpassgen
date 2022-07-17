@@ -11,6 +11,6 @@ dde[7] = 'abdomenabladenahndeteamateuranemoneankunftautogenballadebauzaunbeiwort
 
 for (let i = 1; i < 8; i++) {
   for (let j = 0; j < dde[i].length; j += i) {
-    dicewareDE.push(dde[i].substr(j, i))
+    dicewareDE.push(dde[i].substring(j, j + i))
   }
 }

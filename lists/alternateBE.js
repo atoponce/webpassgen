@@ -8,6 +8,6 @@ abe[4] = "абакабатабвіабегабедабзаабзеабзуабз
 
 for (let i = 1; i < 5; i++) {
   for (let j = 0; j < abe[i].length; j += i) {
-    alternateBE.push(abe[i].substr(j, i))
+    alternateBE.push(abe[i].substring(j, j + i))
   }
 }

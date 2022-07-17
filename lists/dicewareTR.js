@@ -11,6 +11,6 @@ dtr[7] = 'abanmakabazacaablatyaabonmanabramakabuhavaaceleciadisyonaerobikaferist
 
 for (let i = 1; i < 8; i++) {
   for (let j = 0; j < dtr[i].length; j += i) {
-    dicewareTR.push(dtr[i].substr(j, i))
+    dicewareTR.push(dtr[i].substring(j, j + i))
   }
 }

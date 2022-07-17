@@ -9,6 +9,6 @@ dno[5] = 'abbedabborabortadleraftenagderagentagereagertaggetagraragurkakkarakryl
 
 for (let i = 1; i < 6; i++) {
   for (let j = 0; j < dno[i].length; j += i) {
-    dicewareNO.push(dno[i].substr(j, i))
+    dicewareNO.push(dno[i].substring(j, j + i))
   }
 }

@@ -12,6 +12,6 @@ apg[11] = 'belowgroundbusinessmanchambermaidmillionairepaperweightperformanceste
 
 for (let i = 4; i < 12; i++) {
   for (let j = 0; j < apg[i].length; j += i) {
-    alternatePgp.push(apg[i].substr(j, i))
+    alternatePgp.push(apg[i].substring(j, j + i))
   }
 }

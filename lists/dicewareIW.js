@@ -8,6 +8,6 @@ diw[5] = 'אדוניאהבתיאהרוגאוהבתאוויראומרתאוקיי
 
 for (let i = 2; i < 6; i++) {
   for (let j = 0; j < diw[i].length; j += i) {
-    dicewareIW.push(diw[i].substr(j, i))
+    dicewareIW.push(diw[i].substring(j, j + i))
   }
 }

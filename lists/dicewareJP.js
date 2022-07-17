@@ -10,6 +10,6 @@ djp[6] = 'abunaiaburaeachiraaidokuaijakuaikokuainikuainoriaishouaishuuaisuruajiw
 
 for (let i = 1; i < 7; i++) {
   for (let j = 0; j < djp[i].length; j += i) {
-    dicewareJP.push(djp[i].substr(j, i))
+    dicewareJP.push(djp[i].substring(j, j + i))
   }
 }

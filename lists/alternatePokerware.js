@@ -8,6 +8,6 @@ apw[6] = 'aboardabroadabsentabsorbabsurdabusedabusesaccentacceptaccessaccordacro
 
 for (let i = 3; i < 7; i++) {
   for (let j = 0; j < apw[i].length; j += i) {
-    alternatePokerware.push(apw[i].substr(j, i))
+    alternatePokerware.push(apw[i].substring(j, j + i))
   }
 }

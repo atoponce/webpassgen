@@ -10,6 +10,6 @@ des[6] = 'abedulabisalabismoabogarabolirabonarabordoabrazoabrigoabueloabundoabus
 
 for (let i = 1; i < 7; i++) {
   for (let j = 0; j < des[i].length; j += i) {
-    dicewareES.push(des[i].substr(j, i))
+    dicewareES.push(des[i].substring(j, j + i))
   }
 }

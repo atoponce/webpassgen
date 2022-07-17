@@ -10,6 +10,6 @@ dfi[6] = 'aaltoaaamujaaamuniaamuyoaapalaaapeliaapojaaariaaaarnioaasejaaasienaasi
 
 for (let i = 1; i < 7; i++) {
   for (let j = 0; j < dfi[i].length; j += i) {
-    dicewareFI.push(dfi[i].substr(j, i))
+    dicewareFI.push(dfi[i].substring(j, j + i))
   }
 }

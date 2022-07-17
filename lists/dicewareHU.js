@@ -9,6 +9,6 @@ dhu[5] = 'abaloabaltabaraabbanabbolabdaiabeceablakabonyabrakacsadacsoladacsadand
 
 for (let i = 1; i < 6; i++) {
   for (let j = 0; j < dhu[i].length; j += i) {
-    dicewareHU.push(dhu[i].substr(j, i))
+    dicewareHU.push(dhu[i].substring(j, j + i))
   }
 }

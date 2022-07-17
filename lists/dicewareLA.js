@@ -8,6 +8,6 @@ dla[7] = 'abantesabducitabductaabductoabduxitaberantaberratabessetabeunteabierat
 
 for (let i = 4; i < 8; i++) {
   for (let j = 0; j < dla[i].length; j += i) {
-    dicewareLA.push(dla[i].substr(j, i))
+    dicewareLA.push(dla[i].substring(j, j + i))
   }
 }

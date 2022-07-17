@@ -9,6 +9,6 @@ ahr[6] = 'ćaknutćelijaćerpiččahuračajanačajnikčakijačakljačamčićčap
 
 for (let i = 2; i < 7; i++) {
   for (let j = 0; j < ahr[i].length; j += i) {
-    alternateHR.push(ahr[i].substr(j, i))
+    alternateHR.push(ahr[i].substring(j, j + i))
   }
 }

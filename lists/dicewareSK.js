@@ -19,6 +19,6 @@ dsk[15] = 'administratívneAdministratívneČeskoslovenskejCharakteristikanajdô
 
 for (let i = 1; i < 16; i++) {
   for (let j = 0; j < dsk[i].length; j += i) {
-    dicewareSK.push(dsk[i].substr(j, i))
+    dicewareSK.push(dsk[i].substring(j, j + i))
   }
 }

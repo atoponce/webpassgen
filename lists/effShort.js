@@ -7,6 +7,6 @@ esh[5] = 'acornaffixagentagileagingagonyaheadalarmaliasalibialienalikealivealoft
 
 for (let i = 3; i < 6; i++) {
   for (let j = 0; j < esh[i].length; j += i) {
-    effShort.push(esh[i].substr(j, i))
+    effShort.push(esh[i].substring(j, j + i))
   }
 }

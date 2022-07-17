@@ -9,6 +9,6 @@ dbg[5] = 'абатаабортавансавоарагитеагненадаши
 
 for (let i = 1; i < 6; i++) {
   for (let j = 0; j < dbg[i].length; j += i) {
-    dicewareBG.push(dbg[i].substr(j, i))
+    dicewareBG.push(dbg[i].substring(j, j + i))
   }
 }

@@ -10,6 +10,6 @@ dcz[6] = 'ačkoliadopceadresaadventafrikaagendaakcentakorátakutníalbertalpský
 
 for (let i = 1; i < 7; i++) {
   for (let j = 0; j < dcz[i].length; j += i) {
-    dicewareCZ.push(dcz[i].substr(j, i))
+    dicewareCZ.push(dcz[i].substring(j, j + i))
   }
 }

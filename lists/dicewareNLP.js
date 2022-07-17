@@ -25,13 +25,13 @@ dnoun[10]='antibodies'
 
 for (let i = 2; i < 10; i++) {
   for (let j = 0; j < dadj[i].length; j += i) {
-    dicewareNLPadj.push(dadj[i].substr(j, i))
+    dicewareNLPadj.push(dadj[i].substring(j, j + i))
   }
 }
 
 for (let i = 2; i < 11; i++) {
   for (let j = 0; j < dnoun[i].length; j += i) {
-    dicewareNLPnoun.push(dnoun[i].substr(j, i))
+    dicewareNLPnoun.push(dnoun[i].substring(j, j + i))
   }
 }
 

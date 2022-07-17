@@ -12,6 +12,6 @@ dca[8] = 'abasteixabilladaabrinadaabrioleuabstingaabundavaacabableacaloraracanta
 
 for (let i = 1; i < 9; i++) {
   for (let j = 0; j < dca[i].length; j += i) {
-    dicewareCA.push(dca[i].substr(j, i))
+    dicewareCA.push(dca[i].substring(j, j + i))
   }
 }

@@ -8,6 +8,6 @@ dru[6] = 'абажураблаутабсентабсидаабсурдабули
 
 for (let i = 3; i < 7; i++) {
   for (let j = 0; j < dru[i].length; j += i) {
-    dicewareRU.push(dru[i].substr(j, i))
+    dicewareRU.push(dru[i].substring(j, j + i))
   }
 }

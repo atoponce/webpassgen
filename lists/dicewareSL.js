@@ -10,6 +10,6 @@ dsl[6] = 'abonmaabsintabsurdacetonaditivadventafrontagendaagilenagrumiahilovakci
 
 for (let i = 1; i < 7; i++) {
   for (let j = 0; j < dsl[i].length; j += i) {
-    dicewareSL.push(dsl[i].substr(j, i))
+    dicewareSL.push(dsl[i].substring(j, j + i))
   }
 }

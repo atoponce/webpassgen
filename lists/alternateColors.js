@@ -19,6 +19,6 @@ ach[8] = '7CB0A10076A3E52B509966CC014B43EDF5F597CD2DFDEE0089CFF0F4C2C221ABCDDED7
 
 for (let i = 2; i < 9; i++) {
   for (let j = 0; j < acn[i].length; j += i) {
-    alternateColors[acn[i].substr(j, i)] = ach[i].substr(j * 6 / i, 6)
+    alternateColors[acn[i].substring(j, j + i)] = ach[i].substr(j * 6 / i, 6)
   }
 }

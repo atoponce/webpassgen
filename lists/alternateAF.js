@@ -9,6 +9,6 @@ aaf[5] = "a-bomaandeaanhuaanhêaanjaaanlêaanryaansêaardeaardsabdisabdyeabebaab
 
 for (let i = 1; i < 6; i++) {
   for (let j = 0; j < aaf[i].length; j += i) {
-    alternateAF.push(aaf[i].substr(j, i))
+    alternateAF.push(aaf[i].substring(j, j + i))
   }
 }

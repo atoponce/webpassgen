@@ -10,6 +10,6 @@ dpl[6] = 'abakanabakusabscesabsurdabsydaabsyntabulikaddendadidasadonisadwentafat
 
 for (let i = 1; i < 7; i++) {
   for (let j = 0; j < dpl[i].length; j += i) {
-    dicewarePL.push(dpl[i].substr(j, i))
+    dicewarePL.push(dpl[i].substring(j, j + i))
   }
 }

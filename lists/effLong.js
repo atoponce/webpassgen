@@ -11,6 +11,6 @@ elo[9] = 'abdominalacclimateaccompanyactivatoracutenessaerospaceaffectingaffecti
 
 for (let i = 3; i < 10; i++) {
   for (let j = 0; j < elo[i].length; j += i) {
-    effLong.push(elo[i].substr(j, i))
+    effLong.push(elo[i].substring(j, j + i))
   }
 }

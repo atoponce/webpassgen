@@ -13,6 +13,6 @@ atr[9] = "$1BILLIONabandonedabundanceaccordingaccountedachievingactivistsactress
 
 for (let i = 1; i < 10; i++) {
   for (let j = 0; j < atr[i].length; j += i) {
-    alternateTrump.push(atr[i].substr(j, i))
+    alternateTrump.push(atr[i].substring(j, j + i))
   }
 }

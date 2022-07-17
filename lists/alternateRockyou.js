@@ -21,6 +21,6 @@ ary[17] = 'highschoolmusicalmychemicalromance'
 
 for (let i = 1; i < 18; i++) {
   for (let j = 0; j < ary[i].length; j += i) {
-    alternateRockyou.push(ary[i].substr(j, i))
+    alternateRockyou.push(ary[i].substring(j, j + i))
   }
 }

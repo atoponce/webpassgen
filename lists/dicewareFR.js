@@ -10,6 +10,6 @@ dfr[6] = '100emeabatteabjectabondaabonneabordaabordeabordsaboutiaboyerabritaabri
 
 for (let i = 1; i < 7; i++) {
   for (let j = 0; j < dfr[i].length; j += i) {
-    dicewareFR.push(dfr[i].substr(j, i))
+    dicewareFR.push(dfr[i].substring(j, j + i))
   }
 }

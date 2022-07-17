@@ -11,6 +11,6 @@ dpt[7] = 'abdicarabobadaabobadoabruptoacanharacarajeacessaraderecoafogadoagarrar
 
 for (let i = 1; i < 8; i++) {
   for (let j = 0; j < dpt[i].length; j += i) {
-    dicewarePT.push(dpt[i].substr(j, i))
+    dicewarePT.push(dpt[i].substring(j, j + i))
   }
 }

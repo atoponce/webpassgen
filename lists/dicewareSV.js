@@ -10,6 +10,6 @@ dsv[6] = 'abakusabsintacetonadderaadventagningakolytalbinoallenaallvaralsteramba
 
 for (let i = 1; i < 7; i++) {
   for (let j = 0; j < dsv[i].length; j += i) {
-    dicewareSV.push(dsv[i].substr(j, i))
+    dicewareSV.push(dsv[i].substring(j, j + i))
   }
 }
