@@ -77,22 +77,38 @@
           <div class='checksum'><span id='alt-check'></span></div>
         </div>
         <div id='btc-default' class='cell'>
-          <p class='cell-title'><strong>Bitcoin</strong></p>
+          <p class='cell-title'><strong>Cryptocurrency</strong></p>
           <div class='optional'>
-            <select id='bitcoin-options'>
-              <option>Chinese (Simp)</option>
-              <option>Chinese (Trad)</option>
-              <option>Czech</option>
-              <option selected='selected'>English</option>
-              <option>French</option>
-              <option>Italian</option>
-              <option>Japanese</option>
-              <option>Korean</option>
-              <option>Portuguese</option>
-              <option>Spanish</option>
+            <select id='cryptocurrency-options'>
+              <optgroup label='Bitcoin'>
+                <option>Chinese (Simp)</option>
+                <option>Chinese (Trad)</option>
+                <option>Czech</option>
+                <option selected='selected'>English</option>
+                <option>French</option>
+                <option>Italian</option>
+                <option>Japanese</option>
+                <option>Korean</option>
+                <option>Portuguese</option>
+                <option>Spanish</option>
+              </optgroup>
+              <optgroup label="Monero">
+                <option>Chinese</option>
+                <option>Dutch</option>
+                <option>English</option>
+                <option>Esperanto</option>
+                <option>French</option>
+                <option>German</option>
+                <option>Italian</option>
+                <option>Japanese</option>
+                <option>Lojban</option>
+                <option>Portuguese</option>
+                <option>Russian</option>
+                <option>Spanish</option>
+              </optgroup>
             </select>
           </div>
-          <button class='pass-button' value='Generate' onclick='generatePassphrase("bitcoin");'>Generate</button>
+          <button class='pass-button' value='Generate' onclick='generatePassphrase("cryptocurrency");'>Generate</button>
           <div id='btc-pass' class='password'></div>
           <div class='use-entropy'>
             <input type='checkbox' id='btc-entropy-check' name='entropy-check' value='btc-entropy'>
@@ -302,7 +318,7 @@
     <script src='lists/alternateUK.js'></script>
     <script src='lists/alternateWordle.js'></script>
 
-    <!-- bitcoin passphrase generator -->
+    <!-- cryptocurrency passphrase generator -->
     <script src='lists/bitcoinCNSimp.js'></script>
     <script src='lists/bitcoinCNTrad.js'></script>
     <script src='lists/bitcoinCZ.js'></script>
@@ -313,6 +329,18 @@
     <script src='lists/bitcoinJP.js'></script>
     <script src='lists/bitcoinKR.js'></script>
     <script src='lists/bitcoinPT.js'></script>
+    <script src='lists/moneroCN.js'></script>
+    <script src='lists/moneroDE.js'></script>
+    <script src='lists/moneroEN.js'></script>
+    <script src='lists/moneroEO.js'></script>
+    <script src='lists/moneroES.js'></script>
+    <script src='lists/moneroFR.js'></script>
+    <script src='lists/moneroIT.js'></script>
+    <script src='lists/moneroJBO.js'></script>
+    <script src='lists/moneroJP.js'></script>
+    <script src='lists/moneroNL.js'></script>
+    <script src='lists/moneroPT.js'></script>
+    <script src='lists/moneroRU.js'></script>
 
     <!-- diceware passphrase generator -->
     <script src='lists/dicewareBG.js'></script>
