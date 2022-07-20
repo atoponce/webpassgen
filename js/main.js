@@ -1499,7 +1499,7 @@ function generatePseudowords() {
   let displayCheck = false
   const pseudo = document.getElementById('pseudo-options').value
 
-  if (pseudo === 'Apple, Inc.') {
+  if (pseudo === 'Apple Keychain') {
     ret = generateApple()
   } else if (pseudo === 'Bubble Babble') {
     ret = generateBabble()
