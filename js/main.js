@@ -1049,6 +1049,96 @@ function generateProquints() {
 }
 
 /**
+ * Generate a Lepron pseudoword password.
+ * @returns {Array} The password string, the length of the password, and the entropy of the password.
+ */
+function generateLepron() {
+  // https://www.cambridgeclarion.org/34.html
+  const start = [
+   ['c','cp'], ['b','bh'], ['p','xm'], ['d','bs'], ['r','ts'], ['s','chl'],
+   ['m','kh'], ['l','dw'], ['t','kl'], ['h','kr'], ['f','chr'], ['g','ps'],
+   ['n','x'], ['w','sch'], ['v','gn'], ['j','gh'], ['pr','spl'], ['st','shr'],
+   ['tr','spr'], ['ch','sk'], ['br','kn'], ['fl','squ'], ['cr','thr'], ['gr','tw'],
+   ['k','rh'], ['sh','scr'], ['qu','sm'], ['fr','ph'], ['bl','wr'], ['sp','str'],
+   ['cl','sn'], ['dr','sw'], ['sl','z'], ['pl','th'], ['y','sc'], ['gl','wh'],
+  ]
+
+  const vowel = [
+    ['a'], ['e'], ['i'], ['o'], ['u', 'oi'], ['ee', 'ea', 'au', 'ua', 'ya', 'y', 'oo', 'ai', 'io']
+  ]
+
+  const middle = [
+    ['t', 'mpl'], ['l', 'nf'], ['r', 'gg'], ['n', 'nv'], ['m', 'lt'], ['v', 'dd'],
+    ['c', 'rb'], ['d', 'bb'], ['s', 'ch'], ['g', 'rl'], ['p', 'pl'], ['b', 'pr'],
+    ['st', 'sp'], ['ll', 'sh'], ['nt', 'bl'], ['nd', 'str'], ['ss', 'rs'], ['rr', 'br'],
+    ['w', 'gn'], ['f', 'rg'], ['mp', 'tr'], ['ct', 'j'], ['rt', 'cr'], ['tt', 'cc'],
+    ['mb', 'y'], ['ff', 'rc'], ['x', 'gr'], ['h', 'rd'], ['th', 'pt'], ['nn', 'nc'],
+    ['qu', 'ph'], ['rm', 'pp'], ['sc', 'k'], ['ns', 'rn'], ['mm', 'ng'], ['z', 'ck'],
+  ]
+
+  const end = [
+    ['r', 'rry'], ['n', 'gh'], ['t', 'wl'], ['l', 'lk'], ['te', 'nge'], ['nt', 'ft'],
+    ['m', 'sk'], ['d', 'wn'], ['s', 'na'], ['re', 'be'], ['ne', 'gy'], ['p', 'rm'],
+    ['st', 'ny'], ['y', 'cs'], ['w', 'sm'], ['se', 'nch'], ['ck', 'f'], ['nd', 'ld'],
+    ['ll', 'dge'], ['ry', 'ght'], ['de', 'rk'], ['ss', 'ze'], ['c', 'th'], ['ve', 'ff'],
+    ['g', 'ch'], ['le', 'ble'], ['nce', 'rn'], ['sh', 'tch'], ['ty', 'mp'], ['ce', 'lt'],
+    ['ge', 'pe'], ['ng', 'nk'], ['ct', 'k'], ['b', 'ke'], ['me', 'rd'], ['rt', 'x'],
+  ]
+
+  const entropy = getEntropy()
+  const minEntropy = Math.log2(36 ** 4 * 6 ** 3)
+  const entropyCheck = document.getElementById('pseudo-entropy-check')
+
+  let useEntropy = false
+
+  if (entropyCheck.checked) {
+    useEntropy = true
+  }
+
+  // <start><vowel><middle><vowel><middle><vowel><end>
+  const len = Math.ceil(entropy / minEntropy)
+
+  let pass = []
+
+  // There is probably a cleaner way to do this, but at least it's readable.
+  for (let i = 0; i < len; i++) {
+    let idx1 = secRand(start.length, useEntropy)
+    let idx2 = secRand(start[idx1].length, useEntropy)
+    let tmp = start[idx1][idx2]
+
+    idx1 = secRand(vowel.length, useEntropy)
+    idx2 = secRand(vowel[idx1].length, useEntropy)
+    tmp += vowel[idx1][idx2]
+
+    idx1 = secRand(middle.length, useEntropy)
+    idx2 = secRand(middle[idx1].length, useEntropy)
+    tmp += middle[idx1][idx2]
+
+    idx1 = secRand(vowel.length, useEntropy)
+    idx2 = secRand(vowel[idx1].length, useEntropy)
+    tmp += vowel[idx1][idx2]
+
+    idx1 = secRand(middle.length, useEntropy)
+    idx2 = secRand(middle[idx1].length, useEntropy)
+    tmp += middle[idx1][idx2]
+
+    idx1 = secRand(vowel.length, useEntropy)
+    idx2 = secRand(vowel[idx1].length, useEntropy)
+    tmp += vowel[idx1][idx2]
+
+    idx1 = secRand(end.length, useEntropy)
+    idx2 = secRand(end[idx1].length, useEntropy)
+    tmp += end[idx1][idx2]
+
+    pass.push(tmp)
+  }
+
+  pass = pass.join('-')
+
+  return [pass, pass.length, Math.floor(len * minEntropy)]
+}
+
+/**
  * Generate a Letterblock password. Contains checksum.
  * @returns {Array} The password string, the length of the password, and the entropy of the password.
  */
@@ -1416,6 +1506,8 @@ function generatePseudowords() {
     displayCheck = true
   } else if (pseudo === 'Daefen') {
     ret = generateDaefen()
+  } else if (pseudo === 'Lepron') {
+    ret = generateLepron()
   } else if (pseudo === 'Letterblock Diceware') {
     ret = generateLetterblock()
     displayCheck = true
