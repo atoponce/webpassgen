@@ -97,8 +97,7 @@ function generateAlternate(selection) {
 
   if (selection === 'Acronyms') {
     let counter = 2
-    let results = generateAcronym(counter, wordList, useEntropy)
-
+    let results
     do {
       results = generateAcronym(counter, wordList, useEntropy)
       counter++
