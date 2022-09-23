@@ -6,30 +6,7 @@ function generateAlternate(selection) {
   let pass = ''
   let wordList = ''
 
-  if (selection === 'Acronyms') {
-    wordList = Object.keys(alternateColors)           // 1029 words
-    wordList = wordList.concat(alternatePgp)          //  512 words
-    wordList = wordList.concat(alternatePokerware)    // 5304 words
-    wordList = wordList.concat(alternateRockyou)      // 7776 words
-    wordList = wordList.concat(alternateSimpsons)     // 5000 words
-    wordList = wordList.concat(alternateSkey)         // 2048 words
-    wordList = wordList.concat(alternateTrump)        // 8192 words
-    wordList = wordList.concat(alternateWordle)       // 5790 words
-    wordList = wordList.concat(bitcoinEN)             // 2048 words
-    wordList = wordList.concat(dicewareEN)            // 8192 words
-    wordList = wordList.concat(dicewareBeale)         // 7776 words
-    wordList = wordList.concat(dicewareNLP[0])        // 1296 words
-    wordList = wordList.concat(dicewareNLP[1])        // 7776 words
-    wordList = wordList.concat(effDistant)            // 1296 words
-    wordList = wordList.concat(effGameOfThrones)      // 4000 words
-    wordList = wordList.concat(effHarryPotter)        // 4000 words
-    wordList = wordList.concat(effLong)               // 7776 words
-    wordList = wordList.concat(effShort)              // 1296 words
-    wordList = wordList.concat(effStarTrek)           // 4000 words
-    wordList = wordList.concat(effStarWars)           // 4000 words
-    wordList = wordList.concat(moneroEN)              // 1626 words
-    wordList = wordList.filter(element => /^[a-z]+$/gi.test(element))
-  } else if (selection === 'Afrikaans') {
+  if (selection === 'Afrikaans') {
     wordList = alternateAF
   } else if (selection === 'Belarusian') {
     wordList = alternateBE
@@ -39,7 +16,7 @@ function generateAlternate(selection) {
     wordList = alternateHR
   } else if (selection === 'Elvish') {
     wordList = alternateElvish
-  } else if (selection === 'Every Word List') {
+  } else if (selection === 'Acronyms' || selection === 'Every Word List') {
     wordList = Object.keys(alternateColors)           // 1029 words
     wordList = wordList.concat(alternatePgp)          //  512 words
     wordList = wordList.concat(alternatePokerware)    // 5304 words
@@ -61,6 +38,9 @@ function generateAlternate(selection) {
     wordList = wordList.concat(effStarTrek)           // 4000 words
     wordList = wordList.concat(effStarWars)           // 4000 words
     wordList = wordList.concat(moneroEN)              // 1626 words
+    if (selection === 'Acronyms') {
+      wordList = wordList.filter(element => /^[a-z]+$/gi.test(element))
+    }
   } else if (selection === 'Common Words Only') {
     wordList = alternatePgp
     wordList = wordList.concat(alternatePokerware)
