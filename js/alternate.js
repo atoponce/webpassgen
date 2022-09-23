@@ -141,7 +141,7 @@ function generateAcronym(wordCount, wordList, useEntropy) {
 
   const num = secRand(candidates.length, useEntropy)
   const acronym = candidates[num]
-  const initEntropy = Math.log2(candidates.length)
+  const initEntropy = candidates.length
   const entropies = [initEntropy]
   const passphraseWords = []
 
