@@ -141,6 +141,14 @@ button:hover {
 .feather {
   vertical-align: text-bottom;
 }
+.acronym span {
+  display: inline-block;
+}
+.acronym span::first-letter {
+  color: red;
+  font-weight: bold;
+  text-transform: uppercase;
+}
 
 /* ids */
 #container {

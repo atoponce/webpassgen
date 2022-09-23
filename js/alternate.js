@@ -6,7 +6,30 @@ function generateAlternate(selection) {
   let pass = ''
   let wordList = ''
 
-  if (selection === 'Afrikaans') {
+  if (selection === 'Acronyms') {
+    wordList = Object.keys(alternateColors)           // 1029 words
+    wordList = wordList.concat(alternatePgp)          //  512 words
+    wordList = wordList.concat(alternatePokerware)    // 5304 words
+    wordList = wordList.concat(alternateRockyou)      // 7776 words
+    wordList = wordList.concat(alternateSimpsons)     // 5000 words
+    wordList = wordList.concat(alternateSkey)         // 2048 words
+    wordList = wordList.concat(alternateTrump)        // 8192 words
+    wordList = wordList.concat(alternateWordle)       // 5790 words
+    wordList = wordList.concat(bitcoinEN)             // 2048 words
+    wordList = wordList.concat(dicewareEN)            // 8192 words
+    wordList = wordList.concat(dicewareBeale)         // 7776 words
+    wordList = wordList.concat(dicewareNLP[0])        // 1296 words
+    wordList = wordList.concat(dicewareNLP[1])        // 7776 words
+    wordList = wordList.concat(effDistant)            // 1296 words
+    wordList = wordList.concat(effGameOfThrones)      // 4000 words
+    wordList = wordList.concat(effHarryPotter)        // 4000 words
+    wordList = wordList.concat(effLong)               // 7776 words
+    wordList = wordList.concat(effShort)              // 1296 words
+    wordList = wordList.concat(effStarTrek)           // 4000 words
+    wordList = wordList.concat(effStarWars)           // 4000 words
+    wordList = wordList.concat(moneroEN)              // 1626 words
+    wordList = wordList.filter(element => /^[a-z]+$/gi.test(element))
+  } else if (selection === 'Afrikaans') {
     wordList = alternateAF
   } else if (selection === 'Belarusian') {
     wordList = alternateBE
@@ -92,11 +115,74 @@ function generateAlternate(selection) {
     useEntropy = true
   }
 
-  pass = generatePass(len, wordList, true, useEntropy)
-  pass = pass.replace(/ /g, '-')
-  passId.innerText = pass
-  passEntropy.innerText = Math.floor(len * Math.log2(wordList.length)) + ' bits,'
+  if (selection === 'Acronyms') {
+    let counter = 2
+    let results = generateAcronym(counter, wordList, useEntropy)
+
+    do {
+      results = generateAcronym(counter, wordList, useEntropy)
+      counter++
+    } while (results.security < entropy)
+
+    pass = results.passphrase
+    passId.classList.add('acronym')
+    passId.innerHTML = pass
+    passEntropy.innerText = results.security + ' bits,'
+  } else {
+    pass = generatePass(len, wordList, true, useEntropy)
+    pass = pass.replace(/ /g, '-')
+    passId.classList.remove('acronym')
+    passId.innerText = pass
+    passEntropy.innerText = Math.floor(len * Math.log2(wordList.length)) + ' bits,'
+  }
+
   passLength.innerText = [...pass].length + ' characters.'
+}
+
+/** Generate a passphrase based on an acronym */
+function generateAcronym(wordCount, wordList, useEntropy) {
+  var getSecurity = function (entropyList) {
+    let total = 0
+
+    for (let i = 0; i < entropyList.length; i++) {
+      total += Math.log2(entropyList[i])
+    }
+
+    return Math.floor(total)
+  }
+
+  const candidates = []
+
+  for (let i = 0; i < wordList.length; i++) {
+    if (wordList[i].length === wordCount) {
+      candidates.push(wordList[i])
+    }
+  }
+
+  const num = secRand(candidates.length, useEntropy)
+  const acronym = candidates[num]
+  const initEntropy = Math.log2(candidates.length)
+  const entropies = [initEntropy]
+  const passphraseWords = []
+
+  for (let i = 0; i < acronym.length; i++) {
+    const candidates = []
+
+    for (let j = 0; j < wordList.length; j++) {
+      if (wordList[j].charAt(0).toLowerCase() === acronym[i].charAt(0).toLowerCase()) {
+        candidates.push("<span>" + wordList[j] + "</span>")
+      }
+    }
+
+    const word = candidates[secRand(candidates.length, useEntropy)]
+    passphraseWords.push(word)
+    entropies.push(candidates.length)
+  }
+
+  const security = getSecurity(entropies)
+  const passphrase = passphraseWords.join('-');
+
+  return {passphrase, security}
 }
 
 /** Generate a color passphrase */
