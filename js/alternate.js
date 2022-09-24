@@ -96,7 +96,7 @@ function generateAlternate(selection) {
   }
 
   if (selection === 'Acronyms') {
-    let counter = 2
+    let counter = 4
     let results
 
     do {
