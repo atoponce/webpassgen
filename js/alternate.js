@@ -108,15 +108,16 @@ function generateAlternate(selection) {
     passId.classList.add('acronym')
     passId.innerHTML = pass
     passEntropy.innerText = results.security + ' bits,'
+    passLength.innerText = pass.replace(/<\/?span>/g, '').length + ' charactars'
   } else {
     pass = generatePass(len, wordList, true, useEntropy)
     pass = pass.replace(/ /g, '-')
     passId.classList.remove('acronym')
     passId.innerText = pass
     passEntropy.innerText = Math.floor(len * Math.log2(wordList.length)) + ' bits,'
+    passLength.innerText = [...pass].length + ' characters.'
   }
 
-  passLength.innerText = [...pass].length + ' characters.'
 }
 
 /** Generate a passphrase based on an acronym */
