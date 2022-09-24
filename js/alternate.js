@@ -108,7 +108,7 @@ function generateAlternate(selection) {
     passId.classList.add('acronym')
     passId.innerHTML = pass
     passEntropy.innerText = results.security + ' bits,'
-    passLength.innerText = pass.replace(/<\/?span>/g, '').length + ' charactars'
+    passLength.innerText = pass.replace(/<\/?span>/g, '').length + ' characters'
   } else {
     pass = generatePass(len, wordList, true, useEntropy)
     pass = pass.replace(/ /g, '-')
