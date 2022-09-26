@@ -147,7 +147,6 @@ button:hover {
 .acronym span::first-letter {
   color: red;
   font-weight: bold;
-  text-transform: uppercase;
 }
 
 /* ids */
