@@ -11,6 +11,8 @@ function generatePseudowords() {
     displayCheck = true
   } else if (pseudo === 'Daefen') {
     ret = generateDaefen()
+  } else if (pseudo === 'Koremutake') {
+    ret = generateKoremutake()
   } else if (pseudo === 'Lepron') {
     ret = generateLepron()
   } else if (pseudo === 'Letterblock Diceware') {
@@ -209,7 +211,7 @@ function generateMunemo() {
 
     mod = num % 100n
     rem = num / 100n
-    str = munemo[mod] + str
+    str += munemo[mod]
 
     if (rem > 0) {
       return tos(rem, str)
@@ -243,6 +245,70 @@ function generateMunemo() {
     //  xafowohazehikorawihomeho = -1989259826396086294829
     pass = 'xa' + pass
   }
+
+  return [pass, pass.length, minEntropy]
+}
+
+/**
+ * Generate a Koremutake password.
+ * @returns {Array} The password string, the length of the password, and the entropy of the password.
+ */
+function generateKoremutake() {
+  // https://shorl.com/koremutake.php
+  /**
+   * Recursive function to build an encoded string from a given number.
+   * @param {number} num - The number to encode.
+   * @param {string} str - The encoded string.
+   * @returns {string} The encoded string.
+   */
+  var tos = function (num, str) {
+    const koremutake = [
+      'ba',  'be',  'bi',  'bo',  'bu',  'by',  'da',  'de',
+      'di',  'do',  'du',  'dy',  'fa',  'fe',  'fi',  'fo',
+      'fu',  'fy',  'ga',  'ge',  'gi',  'go',  'gu',  'gy',
+      'ha',  'he',  'hi',  'ho',  'hu',  'hy',  'ja',  'je',
+      'ji',  'jo',  'ju',  'jy',  'ka',  'ke',  'ki',  'ko',
+      'ku',  'ky',  'la',  'le',  'li',  'lo',  'lu',  'ly',
+      'ma',  'me',  'mi',  'mo',  'mu',  'my',  'na',  'ne',
+      'ni',  'no',  'nu',  'ny',  'pa',  'pe',  'pi',  'po',
+      'pu',  'py',  'ra',  're',  'ri',  'ro',  'ru',  'ry',
+      'sa',  'se',  'si',  'so',  'su',  'sy',  'ta',  'te',
+      'ti',  'to',  'tu',  'ty',  'va',  've',  'vi',  'vo',
+      'vu',  'vy',  'bra', 'bre', 'bri', 'bro', 'bru', 'bry',
+      'dra', 'dre', 'dri', 'dro', 'dru', 'dry', 'fra', 'fre',
+      'fri', 'fro', 'fru', 'fry', 'gra', 'gre', 'gri', 'gro',
+      'gru', 'gry', 'pra', 'pre', 'pri', 'pro', 'pru', 'pry',
+      'sta', 'ste', 'sti', 'sto', 'stu', 'sty', 'tra', 'tre'
+    ]
+
+    mod = num % 128n
+    rem = num / 128n
+    str += koremutake[mod]
+
+    if (rem > 0) {
+      return tos(rem, str)
+    }
+
+    return str
+  }
+
+  const entropyCheck = document.getElementById('pseudo-entropy-check')
+
+  let useEntropy = false
+
+  if (entropyCheck.checked) {
+    useEntropy = true
+  }
+
+  const minEntropy = getEntropy()
+  let num = 0n
+
+  // Unlike Munemo, Koremutake encodes unsigned integers.
+  for (let i = 0; i < minEntropy; i++) {
+    num += BigInt(secRand(2, useEntropy) * 2 ** i)
+  }
+
+  let pass = tos(num, '')
 
   return [pass, pass.length, minEntropy]
 }
