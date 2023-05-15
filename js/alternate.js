@@ -18,6 +18,7 @@ function generateAlternate(selection) {
     wordList = alternateElvish
   } else if (selection === 'Acronyms' || selection === 'Every Word List') {
     wordList = Object.keys(alternateColors)           // 1029 words
+    wordList = wordList.concat(alternateEyeware)      // 8192 words
     wordList = wordList.concat(alternatePgp)          //  512 words
     wordList = wordList.concat(alternatePokerware)    // 5304 words
     wordList = wordList.concat(alternateRockyou)      // 7776 words
@@ -58,6 +59,8 @@ function generateAlternate(selection) {
     wordList = alternateShavian
   } else if (selection === 'Klingon') {
     wordList = alternateKlingon
+  } else if (selection === 'Lord of the Rings') {
+    wordList = alternateEyeware
   } else if (selection === 'Mongolian') {
     wordList = alternateMN
   } else if (selection === 'PGP') {
