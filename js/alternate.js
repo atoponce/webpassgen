@@ -1,3 +1,5 @@
+"use strict"
+
 /**
  * Generate an Alternate passphrase based on the chosen word list.
  * @param {string} selection - An Alternate word list.
@@ -26,6 +28,9 @@ function generateAlternate(selection) {
     wordList = wordList.concat(alternateSkey)         // 2048 words
     wordList = wordList.concat(alternateTrump)        // 8192 words
     wordList = wordList.concat(alternateWordle)       // 5790 words
+    wordList = wordList.concat(alternateVAN[0])       //  432 words
+    wordList = wordList.concat(alternateVAN[1])       //  373 words
+    wordList = wordList.concat(alternateVAN[2])       //  402 words
     wordList = wordList.concat(bitcoinEN)             // 2048 words
     wordList = wordList.concat(dicewareEN)            // 8192 words
     wordList = wordList.concat(dicewareBeale)         // 7776 words
@@ -43,8 +48,11 @@ function generateAlternate(selection) {
       wordList = wordList.filter(element => /^[a-z]+$/gi.test(element))
     }
   } else if (selection === 'Common Words Only') {
-    wordList = alternatePgp
+    wordList = alternatePgp.map(v => v.toLowerCase())
     wordList = wordList.concat(alternatePokerware)
+    wordList = wordList.concat(alternateVAN[0].map(v => v.toLowerCase()))
+    wordList = wordList.concat(alternateVAN[1].map(v => v.toLowerCase()))
+    wordList = wordList.concat(alternateVAN[2].map(v => v.toLowerCase()))
     wordList = wordList.concat(alternateWordle)
     wordList = wordList.concat(bitcoinEN)
     wordList = wordList.concat(dicewareNLP[0])
@@ -79,6 +87,8 @@ function generateAlternate(selection) {
     wordList = alternateTrump
   } else if (selection === 'Ukranian') {
     wordList = alternateUK
+  } else if (selection = "Verb, Adjective, Noun") {
+    return generateVAN()
   } else if (selection === 'Wordle') {
     wordList = alternateWordle
   }
@@ -116,11 +126,42 @@ function generateAlternate(selection) {
     pass = generatePass(len, wordList, true, useEntropy)
     pass = pass.replace(/ /g, '-')
     passId.classList.remove('acronym')
-    passId.innerText = pass
     passEntropy.innerText = Math.floor(len * Math.log2(wordList.length)) + ' bits,'
+    passId.innerText = pass
     passLength.innerText = [...pass].length + ' characters.'
   }
+}
 
+function generateVAN() {
+  const entropy = getEntropy()
+  const vanEntropy = Math.log2(alternateVAN[0].length * alternateVAN[1].length * alternateVAN[2].length)
+  const len = Math.ceil(entropy / vanEntropy)
+
+  const passId = document.getElementById('alt-pass')
+  const passLength = document.getElementById('alt-length')
+  const passEntropy = document.getElementById('alt-entropy')
+  const entropyCheck = document.getElementById('alt-entropy-check')
+
+  passId.classList.remove("acronym") // Ensure leading word character is not red
+
+  let pass
+  let vans = []
+  let useEntropy = false
+
+  if (entropyCheck.checked) {
+    useEntropy = true
+  }
+
+  for (let i = 0; i < len; i++) {
+    vans[i]  = generatePass(1, alternateVAN[0], false, useEntropy)
+    vans[i] += generatePass(1, alternateVAN[1], false, useEntropy)
+    vans[i] += generatePass(1, alternateVAN[2], false, useEntropy)
+  }
+
+  pass = vans.join("-")
+  passId.innerText = pass
+  passEntropy.innerText = Math.floor(len * vanEntropy) + ' bits,'
+  passLength.innerText = pass.length + ' characters.'
 }
 
 /** Generate a passphrase based on an acronym */
@@ -179,6 +220,8 @@ function generateColors() {
   const passLength = document.getElementById('alt-length')
   const passEntropy = document.getElementById('alt-entropy')
   const entropyCheck = document.getElementById('alt-entropy-check')
+
+  passId.classList.remove("acronym") // Ensure leading word character is not red
 
   let useEntropy = false
 
