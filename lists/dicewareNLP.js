@@ -1,8 +1,8 @@
+"use strict"
+
 const dadj = []
 const dnoun = []
-const dicewareNLP = []
-const dicewareNLPadj = []
-const dicewareNLPnoun = []
+const dicewareNLP = [[], []]
 
 dadj[2]='myno'
 dadj[3]='aftanybadbigdryfarfatfitfunfurherhishoticylaxlitlowmadnewoddoldradrawredsadshyslytantintopwaxwet'
@@ -25,15 +25,12 @@ dnoun[10]='antibodies'
 
 for (let i = 2; i < 10; i++) {
   for (let j = 0; j < dadj[i].length; j += i) {
-    dicewareNLPadj.push(dadj[i].substring(j, j + i))
+    dicewareNLP[0].push(dadj[i].substring(j, j + i))
   }
 }
 
 for (let i = 2; i < 11; i++) {
   for (let j = 0; j < dnoun[i].length; j += i) {
-    dicewareNLPnoun.push(dnoun[i].substring(j, j + i))
+    dicewareNLP[1].push(dnoun[i].substring(j, j + i))
   }
 }
-
-dicewareNLP.push(dicewareNLPadj)
-dicewareNLP.push(dicewareNLPnoun)
