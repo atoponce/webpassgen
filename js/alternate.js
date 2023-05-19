@@ -132,38 +132,6 @@ function generateAlternate(selection) {
   }
 }
 
-function generateVAN() {
-  const entropy = getEntropy()
-  const vanEntropy = Math.log2(alternateVAN[0].length * alternateVAN[1].length * alternateVAN[2].length)
-  const len = Math.ceil(entropy / vanEntropy)
-
-  const passId = document.getElementById('alt-pass')
-  const passLength = document.getElementById('alt-length')
-  const passEntropy = document.getElementById('alt-entropy')
-  const entropyCheck = document.getElementById('alt-entropy-check')
-
-  passId.classList.remove("acronym") // Ensure leading word character is not red
-
-  let pass
-  let vans = []
-  let useEntropy = false
-
-  if (entropyCheck.checked) {
-    useEntropy = true
-  }
-
-  for (let i = 0; i < len; i++) {
-    vans[i]  = generatePass(1, alternateVAN[0], false, useEntropy)
-    vans[i] += generatePass(1, alternateVAN[1], false, useEntropy)
-    vans[i] += generatePass(1, alternateVAN[2], false, useEntropy)
-  }
-
-  pass = vans.join("-")
-  passId.innerText = pass
-  passEntropy.innerText = Math.floor(len * vanEntropy) + ' bits,'
-  passLength.innerText = pass.length + ' characters.'
-}
-
 /** Generate a passphrase based on an acronym */
 function generateAcronym(wordCount, wordList, useEntropy) {
   var getSecurity = function (entropyList) {
@@ -186,8 +154,7 @@ function generateAcronym(wordCount, wordList, useEntropy) {
 
   const num = secRand(candidates.length, useEntropy)
   const acronym = candidates[num]
-  const initEntropy = candidates.length
-  const entropies = [initEntropy]
+  const entropies = []
   const passphraseWords = []
 
   for (let i = 0; i < acronym.length; i++) {
@@ -291,4 +258,36 @@ function generateSKey() {
   }
 
   return [pass, wordList.length, Math.floor(len * Math.log2(wordList.length))]
+}
+
+function generateVAN() {
+  const entropy = getEntropy()
+  const vanEntropy = Math.log2(alternateVAN[0].length * alternateVAN[1].length * alternateVAN[2].length)
+  const len = Math.ceil(entropy / vanEntropy)
+
+  const passId = document.getElementById('alt-pass')
+  const passLength = document.getElementById('alt-length')
+  const passEntropy = document.getElementById('alt-entropy')
+  const entropyCheck = document.getElementById('alt-entropy-check')
+
+  passId.classList.remove("acronym") // Ensure leading word character is not red
+
+  let pass
+  let vans = []
+  let useEntropy = false
+
+  if (entropyCheck.checked) {
+    useEntropy = true
+  }
+
+  for (let i = 0; i < len; i++) {
+    vans[i]  = generatePass(1, alternateVAN[0], false, useEntropy)
+    vans[i] += generatePass(1, alternateVAN[1], false, useEntropy)
+    vans[i] += generatePass(1, alternateVAN[2], false, useEntropy)
+  }
+
+  pass = vans.join("-")
+  passId.innerText = pass
+  passEntropy.innerText = Math.floor(len * vanEntropy) + ' bits,'
+  passLength.innerText = pass.length + ' characters.'
 }
