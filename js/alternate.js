@@ -260,6 +260,7 @@ function generateSKey() {
   return [pass, wordList.length, Math.floor(len * Math.log2(wordList.length))]
 }
 
+/** Generate a Verbs/Adjectives/Nouns passphrase */
 function generateVAN() {
   const entropy = getEntropy()
   const vanEntropy = Math.log2(alternateVAN[0].length * alternateVAN[1].length * alternateVAN[2].length)
