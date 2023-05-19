@@ -1,3 +1,5 @@
+"use strict"
+
 const acn = [] // name
 const ach = [] // hex
 const alternateColors = {}

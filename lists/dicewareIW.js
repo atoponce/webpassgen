@@ -1,3 +1,5 @@
+"use strict"
+
 const diw = []
 const dicewareIW = []
 

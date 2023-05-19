@@ -1,3 +1,5 @@
+"use strict"
+
 const den2 = []
 const dicewareBeale = []
 

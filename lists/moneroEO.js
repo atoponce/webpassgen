@@ -1,3 +1,5 @@
+"use strict"
+
 const meo = []
 const moneroEO = []
 

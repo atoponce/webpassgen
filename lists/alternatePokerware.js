@@ -1,3 +1,5 @@
+"use strict"
+
 const apw = []
 const alternatePokerware = []
 

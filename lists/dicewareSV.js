@@ -1,3 +1,5 @@
+"use strict"
+
 const dsv = []
 const dicewareSV = []
 

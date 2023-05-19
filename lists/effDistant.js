@@ -1,3 +1,5 @@
+"use strict"
+
 const edi = []
 const effDistant = []
 

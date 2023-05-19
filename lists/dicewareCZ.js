@@ -1,3 +1,5 @@
+"use strict"
+
 const dcz = []
 const dicewareCZ = []
 

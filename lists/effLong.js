@@ -1,3 +1,5 @@
+"use strict"
+
 const elo = []
 const effLong = []
 

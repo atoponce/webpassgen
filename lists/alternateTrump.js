@@ -1,3 +1,5 @@
+"use strict"
+
 const atr = []
 const alternateTrump = []
 

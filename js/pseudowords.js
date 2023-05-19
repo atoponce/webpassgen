@@ -1,3 +1,5 @@
+"use strict"
+
 /** Generate a pseudowords password. */
 function generatePseudowords() {
   let ret = []
@@ -161,7 +163,7 @@ function generateBabble() {
       break
     }
 
-    byte1 = entropy[i]
+    const byte1 = entropy[i]
     pass += vowels[(((byte1 >> 6) & 3) + checksum) % 6]
     pass += consonants[(byte1 >> 2) & 15]
     pass += vowels[((byte1 & 3) + Math.floor(checksum / 6)) % 6]
@@ -170,7 +172,7 @@ function generateBabble() {
       break
     }
 
-    byte2 = entropy[i + 1]
+    const byte2 = entropy[i + 1]
     pass += consonants[(byte2 >> 4) & 15]
     pass += '-'
     pass += consonants[byte2 & 15]
@@ -209,8 +211,8 @@ function generateMunemo() {
       'ya',  'yi',  'yu',  'ye',  'yo',  'za',  'zi',  'zu',  'ze',  'zo'
     ]
 
-    mod = num % 100n
-    rem = num / 100n
+    const mod = num % 100n
+    const rem = num / 100n
     str += munemo[mod]
 
     if (rem > 0) {
@@ -281,8 +283,8 @@ function generateKoremutake() {
       'sta', 'ste', 'sti', 'sto', 'stu', 'sty', 'tra', 'tre'
     ]
 
-    mod = num % 128n
-    rem = num / 128n
+    const mod = num % 128n
+    const rem = num / 128n
     str += koremutake[mod]
 
     if (rem > 0) {

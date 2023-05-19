@@ -1,3 +1,5 @@
+"use strict"
+
 const LENGTH = 400
 
 const CANVAS = document.getElementById('randogram')

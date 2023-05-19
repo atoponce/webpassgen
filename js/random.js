@@ -1,3 +1,5 @@
+"use strict"
+
 /** Generate a random meaningless password string. */
 function generateRandom() {
   let s = ''
@@ -87,7 +89,7 @@ function generateRandom() {
     useEntropy = true
   }
 
-  pass = generatePass(len, s, false, useEntropy)
+  let pass = generatePass(len, s, false, useEntropy)
 
   if (option === 'Base32') {
     // Add Crockford's modulo 37 checksum

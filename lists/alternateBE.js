@@ -1,3 +1,5 @@
+"use strict"
+
 const abe = []
 const alternateBE = []
 

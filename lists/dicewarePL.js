@@ -1,3 +1,5 @@
+"use strict"
+
 const dpl = []
 const dicewarePL = []
 

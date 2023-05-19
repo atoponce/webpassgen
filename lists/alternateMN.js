@@ -1,4 +1,6 @@
-﻿const amn = []
+﻿"use strict"
+
+const amn = []
 const alternateMN = []
 
 amn[1] = 'лч'

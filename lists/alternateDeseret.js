@@ -1,3 +1,5 @@
+"use strict"
+
 const utah = []
 const alternateDeseret = []
 

@@ -1,3 +1,5 @@
+"use strict"
+
 const ahr = []
 const alternateHR = []
 

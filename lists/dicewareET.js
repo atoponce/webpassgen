@@ -1,3 +1,5 @@
+"use strict"
+
 const det = []
 const dicewareET = []
 

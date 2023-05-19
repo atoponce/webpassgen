@@ -1,3 +1,5 @@
+"use strict"
+
 const dro = []
 const dicewareRO = []
 

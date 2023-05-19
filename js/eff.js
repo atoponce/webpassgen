@@ -1,3 +1,5 @@
+"use strict"
+
 /**
  * Generate an EFF passphrase based on the chosen word list.
  * @param {string} selection - An EFF word list.

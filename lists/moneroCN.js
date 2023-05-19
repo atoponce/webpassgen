@@ -1,3 +1,5 @@
+"use strict"
+
 const mcn = []
 const moneroCN = []
 

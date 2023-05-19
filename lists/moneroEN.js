@@ -1,3 +1,5 @@
+"use strict"
+
 const men = []
 const moneroEN = []
 

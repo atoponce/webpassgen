@@ -1,3 +1,5 @@
+"use strict"
+
 const mde = []
 const moneroDE = []
 

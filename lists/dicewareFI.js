@@ -1,3 +1,5 @@
+"use strict"
+
 const dfi = []
 const dicewareFI = []
 

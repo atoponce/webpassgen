@@ -1,3 +1,5 @@
+"use strict"
+
 const deo = []
 const dicewareEO = []
 

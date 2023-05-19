@@ -1,3 +1,5 @@
+"use strict"
+
 // globals
 const PAGECONTAINER = document.getElementsByTagName('body')[0]
 const PREFERSDARKTHEME = window.matchMedia('(prefers-color-scheme: dark)')

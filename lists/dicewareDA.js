@@ -1,3 +1,5 @@
+"use strict"
+
 const dda = []
 const dicewareDA = []
 

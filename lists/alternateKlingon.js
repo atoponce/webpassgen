@@ -1,3 +1,5 @@
+"use strict"
+
 const akl = []
 const alternateKlingon = []
 

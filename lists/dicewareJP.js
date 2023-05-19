@@ -1,3 +1,5 @@
+"use strict"
+
 const djp = []
 const dicewareJP = []
 

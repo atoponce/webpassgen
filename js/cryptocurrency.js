@@ -1,3 +1,5 @@
+"use strict"
+
 /**
  * Generate a Monero-based passphrase (seed). Contains checksum.
  * @param {string} selection - The selection option chosen by the user.
@@ -14,7 +16,7 @@ function generateMonero(selection) {
     const crcTable = []
 
     for (let i = 0; i < 256; i++) {
-      c = i
+      let c = i
 
       for (let j = 0; j < 8; j++) {
         c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1
@@ -171,7 +173,7 @@ function generateBitcoin(selection) {
   }
 
   sha256(entropyBuffer).then(function (digest) {
-    sha256Digest = new Uint8Array(digest)
+    const sha256Digest = new Uint8Array(digest)
 
     const entropyBits = bytesToBinary(entropyBuffer).padStart(entropy, '0')
     const checkBits = bytesToBinary(sha256Digest)

@@ -1,3 +1,5 @@
+"use strict"
+
 /**
  * Generate a Diceware passphrase based on the chosen language word list.
  * @param {string} selection - A Diceware language word list.

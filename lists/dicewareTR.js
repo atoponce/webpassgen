@@ -1,3 +1,5 @@
+"use strict"
+
 const dtr = []
 const dicewareTR = []
 

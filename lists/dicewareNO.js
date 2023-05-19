@@ -1,3 +1,5 @@
+"use strict"
+
 const dno = []
 const dicewareNO = []
 

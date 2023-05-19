@@ -1,3 +1,5 @@
+"use strict"
+
 const est = []
 const effStarTrek = []
 
