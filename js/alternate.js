@@ -45,14 +45,15 @@ function generateAlternate(selection) {
     wordList = wordList.concat(effStarWars)           // 4000 words
     wordList = wordList.concat(moneroEN)              // 1626 words
     if (selection === 'Acronyms') {
+      // Ensure only alphabetic characters.
       wordList = wordList.filter(element => /^[a-z]+$/gi.test(element))
     }
   } else if (selection === 'Common Words Only') {
-    wordList = alternatePgp.map(v => v.toLowerCase())
+    wordList = alternatePgp
     wordList = wordList.concat(alternatePokerware)
-    wordList = wordList.concat(alternateVAN[0].map(v => v.toLowerCase()))
-    wordList = wordList.concat(alternateVAN[1].map(v => v.toLowerCase()))
-    wordList = wordList.concat(alternateVAN[2].map(v => v.toLowerCase()))
+    wordList = wordList.concat(alternateVAN[0])
+    wordList = wordList.concat(alternateVAN[1])
+    wordList = wordList.concat(alternateVAN[2])
     wordList = wordList.concat(alternateWordle)
     wordList = wordList.concat(bitcoinEN)
     wordList = wordList.concat(dicewareNLP[0])
@@ -61,6 +62,7 @@ function generateAlternate(selection) {
     wordList = wordList.concat(effLong)
     wordList = wordList.concat(effShort)
     wordList = wordList.concat(moneroEN)
+    wordList = wordList.map(v => v.toLowerCase()) // Lowercase every character.
   } else if (selection === 'Deseret Alphabet') {
     wordList = alternateDeseret
   } else if (selection === 'Shavian Alphabet') {
