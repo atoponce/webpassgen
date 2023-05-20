@@ -1,5 +1,14 @@
 "use strict"
 
+const pseudoProps = {
+  "passId": document.getElementById('pseudo-pass'),
+  "passLength": document.getElementById('pseudo-length'),
+  "passEntropy": document.getElementById('pseudo-entropy'),
+  "passCheck": document.getElementById('pseudo-check'),
+  "entropyCheck": document.getElementById('pseudo-entropy-check')
+}
+
+
 /** Generate a pseudowords password. */
 function generatePseudowords() {
   let ret = []
@@ -30,19 +39,15 @@ function generatePseudowords() {
 
   const pass = ret[0]
   const ent = ret[2]
-  const passId = document.getElementById('pseudo-pass')
-  const passLength = document.getElementById('pseudo-length')
-  const passEntropy = document.getElementById('pseudo-entropy')
-  const passCheck = document.getElementById('pseudo-check')
 
-  passId.innerText = pass
-  passLength.innerText = pass.length + ' characters.'
-  passEntropy.innerText = ent + ' bits,'
+  pseudoProps.passId.innerText = pass
+  pseudoProps.passLength.innerText = pass.length + ' characters.'
+  pseudoProps.passEntropy.innerText = ent + ' bits,'
 
   if (displayCheck) {
-    passCheck.innerText = 'Integrated checksum.'
+    pseudoProps.passCheck.innerText = 'Integrated checksum.'
   } else {
-    passCheck.innerText = ''
+    pseudoProps.passCheck.innerText = ''
   }
 }
 
@@ -58,7 +63,7 @@ function generateApple() {
    */
   var apple = function (n) {
     /*
-      See https://twitter.com/AaronToponce/status/1131406726069084160 for full analysis.
+      See https://web.archive.org/web/20210430183515/https://twitter.com/AaronToponce/status/1131406726069084160 for full analysis.
 
       For n ≥ 1 blocks, the entropy in bits per block is:
         log2(
@@ -83,13 +88,6 @@ function generateApple() {
   const vowels = 'aeiouy'
   const consonants = 'bcdfghjkmnpqrstvwxz'
   const entropy = getEntropy()
-  const entropyCheck = document.getElementById('pseudo-entropy-check')
-
-  let useEntropy = false
-
-  if (entropyCheck.checked) {
-    useEntropy = true
-  }
 
   let n = 1 // number of blocks
 
@@ -98,18 +96,18 @@ function generateApple() {
   }
 
   for (let i = 0; i < n; i++) {
-    pass[6 * i] = generatePass(1, consonants, false, useEntropy)
-    pass[6 * i + 1] = generatePass(1, vowels, false, useEntropy)
-    pass[6 * i + 2] = generatePass(1, consonants, false, useEntropy)
-    pass[6 * i + 3] = generatePass(1, consonants, false, useEntropy)
-    pass[6 * i + 4] = generatePass(1, vowels, false, useEntropy)
-    pass[6 * i + 5] = generatePass(1, consonants, false, useEntropy)
+    pass[6 * i] = generatePass(1, consonants, false, pseudoProps.entropyCheck.checked)
+    pass[6 * i + 1] = generatePass(1, vowels, false, pseudoProps.entropyCheck.checked)
+    pass[6 * i + 2] = generatePass(1, consonants, false, pseudoProps.entropyCheck.checked)
+    pass[6 * i + 3] = generatePass(1, consonants, false, pseudoProps.entropyCheck.checked)
+    pass[6 * i + 4] = generatePass(1, vowels, false, pseudoProps.entropyCheck.checked)
+    pass[6 * i + 5] = generatePass(1, consonants, false, pseudoProps.entropyCheck.checked)
   }
 
   let digitLoc = 0
   let charLoc = 0
-  const edge = secRand(2 * n, useEntropy) // [0, 2n)
-  const digit = generatePass(1, digits, false, useEntropy)
+  const edge = secRand(2 * n, pseudoProps.entropyCheck.checked) // [0, 2n)
+  const digit = generatePass(1, digits, false, pseudoProps.entropyCheck.checked)
 
   if (edge % 2 === 0) {
     digitLoc = 3 * edge
@@ -120,7 +118,7 @@ function generateApple() {
   pass[digitLoc] = digit
 
   do {
-    charLoc = secRand(pass.length, useEntropy)
+    charLoc = secRand(pass.length, pseudoProps.entropyCheck.checked)
   } while (charLoc === digitLoc)
 
   pass[charLoc] = pass[charLoc].toUpperCase()
@@ -143,18 +141,11 @@ function generateBabble() {
   const consonants = 'bcdfghklmnprstvzx'
   const bytes = Math.ceil(getEntropy() / 8)
   const entropy = new Uint8Array(bytes)
-  const entropyCheck = document.getElementById('pseudo-entropy-check')
   let pass = 'x'
   let checksum = 1
 
-  let useEntropy = false
-
-  if (entropyCheck.checked) {
-    useEntropy = true
-  }
-
   for (let i = 0; i < entropy.length; i++) {
-    entropy[i] = secRand(256, useEntropy)
+    entropy[i] = secRand(256, pseudoProps.entropyCheck.checked)
   }
 
   for (let i = 0; i <= entropy.length; i += 2) {
@@ -222,21 +213,13 @@ function generateMunemo() {
     return str
   }
 
-  const entropyCheck = document.getElementById('pseudo-entropy-check')
-
-  let useEntropy = false
-
-  if (entropyCheck.checked) {
-    useEntropy = true
-  }
-
   const minEntropy = getEntropy()
-  const isNegative = secRand(2, useEntropy)
+  const isNegative = secRand(2, pseudoProps.entropyCheck.checked)
   let num = 0n
 
   // Half the key space is negative, half is non-negative
   for (let i = 0; i < minEntropy - 1; i++) {
-    num += BigInt(secRand(2, useEntropy) * 2 ** i)
+    num += BigInt(secRand(2, pseudoProps.entropyCheck.checked) * 2 ** i)
   }
 
   let pass = tos(num, '')
@@ -294,20 +277,12 @@ function generateKoremutake() {
     return str
   }
 
-  const entropyCheck = document.getElementById('pseudo-entropy-check')
-
-  let useEntropy = false
-
-  if (entropyCheck.checked) {
-    useEntropy = true
-  }
-
   const minEntropy = getEntropy()
   let num = 0n
 
   // Unlike Munemo, Koremutake encodes unsigned integers.
   for (let i = 0; i < minEntropy; i++) {
-    num += BigInt(secRand(2, useEntropy) * 2 ** i)
+    num += BigInt(secRand(2, pseudoProps.entropyCheck.checked) * 2 ** i)
   }
 
   let pass = tos(num, '')
@@ -325,31 +300,24 @@ function generateProquints() {
   const consonants = 'bdfghjklmnprstvz'
   const entropy = getEntropy()
   const len = Math.ceil(entropy / 16)
-  const entropyCheck = document.getElementById('pseudo-entropy-check')
 
-  let useEntropy = false
-
-  if (entropyCheck.checked) {
-    useEntropy = true
-  }
-
-  let pass = consonants[secRand(16, useEntropy)]
+  let pass = consonants[secRand(16, pseudoProps.entropyCheck.checked)]
 
   for (let i = len; i > 0; i--) {
-    pass += vowels[secRand(4, useEntropy)]
-    pass += consonants[secRand(16, useEntropy)]
-    pass += vowels[secRand(4, useEntropy)]
+    pass += vowels[secRand(4, pseudoProps.entropyCheck.checked)]
+    pass += consonants[secRand(16, pseudoProps.entropyCheck.checked)]
+    pass += vowels[secRand(4, pseudoProps.entropyCheck.checked)]
 
     if (i === 1) {
       break
     }
 
-    pass += consonants[secRand(16, useEntropy)]
+    pass += consonants[secRand(16, pseudoProps.entropyCheck.checked)]
     pass += '-'
-    pass += consonants[secRand(16, useEntropy)]
+    pass += consonants[secRand(16, pseudoProps.entropyCheck.checked)]
   }
 
-  pass += consonants[secRand(16, useEntropy)]
+  pass += consonants[secRand(16, pseudoProps.entropyCheck.checked)]
 
   return [pass, pass.length, len * 16]
 }
@@ -393,13 +361,6 @@ function generateLepron() {
 
   const entropy = getEntropy()
   const minEntropy = Math.log2(36 ** 4 * 6 ** 3)
-  const entropyCheck = document.getElementById('pseudo-entropy-check')
-
-  let useEntropy = false
-
-  if (entropyCheck.checked) {
-    useEntropy = true
-  }
 
   // <start><vowel><middle><vowel><middle><vowel><end>
   const len = Math.ceil(entropy / minEntropy)
@@ -408,32 +369,32 @@ function generateLepron() {
 
   // There is probably a cleaner way to do this, but at least it's readable.
   for (let i = 0; i < len; i++) {
-    let idx1 = secRand(start.length, useEntropy)
-    let idx2 = secRand(start[idx1].length, useEntropy)
+    let idx1 = secRand(start.length, pseudoProps.entropyCheck.checked)
+    let idx2 = secRand(start[idx1].length, pseudoProps.entropyCheck.checked)
     let tmp = start[idx1][idx2]
 
-    idx1 = secRand(vowel.length, useEntropy)
-    idx2 = secRand(vowel[idx1].length, useEntropy)
+    idx1 = secRand(vowel.length, pseudoProps.entropyCheck.checked)
+    idx2 = secRand(vowel[idx1].length, pseudoProps.entropyCheck.checked)
     tmp += vowel[idx1][idx2]
 
-    idx1 = secRand(middle.length, useEntropy)
-    idx2 = secRand(middle[idx1].length, useEntropy)
+    idx1 = secRand(middle.length, pseudoProps.entropyCheck.checked)
+    idx2 = secRand(middle[idx1].length, pseudoProps.entropyCheck.checked)
     tmp += middle[idx1][idx2]
 
-    idx1 = secRand(vowel.length, useEntropy)
-    idx2 = secRand(vowel[idx1].length, useEntropy)
+    idx1 = secRand(vowel.length, pseudoProps.entropyCheck.checked)
+    idx2 = secRand(vowel[idx1].length, pseudoProps.entropyCheck.checked)
     tmp += vowel[idx1][idx2]
 
-    idx1 = secRand(middle.length, useEntropy)
-    idx2 = secRand(middle[idx1].length, useEntropy)
+    idx1 = secRand(middle.length, pseudoProps.entropyCheck.checked)
+    idx2 = secRand(middle[idx1].length, pseudoProps.entropyCheck.checked)
     tmp += middle[idx1][idx2]
 
-    idx1 = secRand(vowel.length, useEntropy)
-    idx2 = secRand(vowel[idx1].length, useEntropy)
+    idx1 = secRand(vowel.length, pseudoProps.entropyCheck.checked)
+    idx2 = secRand(vowel[idx1].length, pseudoProps.entropyCheck.checked)
     tmp += vowel[idx1][idx2]
 
-    idx1 = secRand(end.length, useEntropy)
-    idx2 = secRand(end[idx1].length, useEntropy)
+    idx1 = secRand(end.length, pseudoProps.entropyCheck.checked)
+    idx2 = secRand(end[idx1].length, pseudoProps.entropyCheck.checked)
     tmp += end[idx1][idx2]
 
     pass.push(tmp)
@@ -568,13 +529,6 @@ function generateLetterblock() {
   const numBlocks = totalEntropy / blockEntropy
   const blocks = []
   const checks = []
-  const entropyCheck = document.getElementById('pseudo-entropy-check')
-
-  let useEntropy = false
-
-  if (entropyCheck.checked) {
-    useEntropy = true
-  }
 
   let pw = ''
 
@@ -585,7 +539,7 @@ function generateLetterblock() {
     let check = 0
 
     for (let j = 0; j < 4; j++) {
-      const randNum = secRand(36, useEntropy)
+      const randNum = secRand(36, pseudoProps.entropyCheck.checked)
       const row = Math.floor(randNum / 6)
       const col = randNum % 6
 
@@ -623,14 +577,8 @@ function generateDaefen() {
   const consonants = 'bcdfghjklmnprstvwz'
   const vowels = 'aeiouy'
   const entropy = getEntropy()
-  const entropyCheck = document.getElementById('pseudo-entropy-check')
 
   let pass = ''
-  let useEntropy = false
-
-  if (entropyCheck.checked) {
-    useEntropy = true
-  }
 
   // taken from https://github.com/alexvandesande/Daefen/blob/master/index.js
   // vowel + consonant
@@ -686,7 +634,7 @@ function generateDaefen() {
   }
 
   for (let i = 0; i < len; i ++) {
-    let n = secRand(syllables.length, useEntropy)
+    let n = secRand(syllables.length, pseudoProps.entropyCheck.checked)
     let lastWord = pass.split('-').slice(-1)[0]
 
     if (
@@ -750,18 +698,11 @@ function generateUrbit() {
     "lyr", "tes", "mud", "nyt", "byr", "sen", "weg", "fyr", "mur", "tel", "rep", "teg", "pec", "nel", "nev", "fes"]
   const entropy = getEntropy()
   const len = Math.ceil(entropy / 16) // 16 bits per "word"
-  const entropyCheck = document.getElementById('pseudo-entropy-check')
-
-  let useEntropy = false
-
-  if (entropyCheck.checked) {
-    useEntropy = true
-  }
 
   let pass = '~'
 
   for (let i = len; i > 0; i--) {
-    pass += prefixes[secRand(256, useEntropy)] + suffixes[secRand(256, useEntropy)]
+    pass += prefixes[secRand(256, pseudoProps.entropyCheck.checked)] + suffixes[secRand(256, pseudoProps.entropyCheck.checked)]
 
     if (i > 1) {
       pass += '-'

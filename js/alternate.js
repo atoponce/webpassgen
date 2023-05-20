@@ -1,5 +1,12 @@
 "use strict"
 
+const altProps = {
+  "passId": document.getElementById('alt-pass'),
+  "passLength": document.getElementById('alt-length'),
+  "passEntropy": document.getElementById('alt-entropy'),
+  "entropyCheck": document.getElementById('alt-entropy-check'),
+}
+
 /**
  * Generate an Alternate passphrase based on the chosen word list.
  * @param {string} selection - An Alternate word list.
@@ -89,7 +96,7 @@ function generateAlternate(selection) {
     wordList = alternateTrump
   } else if (selection === 'Ukranian') {
     wordList = alternateUK
-  } else if (selection = "Verb, Adjective, Noun") {
+  } else if (selection === 'Verb, Adjective, Noun') {
     return generateVAN()
   } else if (selection === 'Wordle') {
     wordList = alternateWordle
@@ -99,38 +106,28 @@ function generateAlternate(selection) {
 
   const entropy = getEntropy()
   const len = Math.ceil(entropy / Math.log2(wordList.length))
-  const passId = document.getElementById('alt-pass')
-  const passLength = document.getElementById('alt-length')
-  const passEntropy = document.getElementById('alt-entropy')
-  const entropyCheck = document.getElementById('alt-entropy-check')
-
-  let useEntropy = false
-
-  if (entropyCheck.checked) {
-    useEntropy = true
-  }
 
   if (selection === 'Acronyms') {
     let counter = 4
     let results
 
     do {
-      results = generateAcronym(counter, wordList, useEntropy)
+      results = generateAcronym(counter, wordList, altProps.entropyCheck.checked)
       counter++
     } while (results.security < entropy)
 
     pass = results.passphrase
-    passId.classList.add('acronym')
-    passId.innerHTML = pass
-    passEntropy.innerText = results.security + ' bits,'
-    passLength.innerText = pass.replace(/<\/?span>/g, '').length + ' characters'
+    altProps.passId.classList.add('acronym')
+    altProps.passId.innerHTML = pass
+    altProps.passEntropy.innerText = results.security + ' bits,'
+    altProps.passLength.innerText = pass.replace(/<\/?span>/g, '').length + ' characters'
   } else {
-    pass = generatePass(len, wordList, true, useEntropy)
+    pass = generatePass(len, wordList, true, altProps.entropyCheck.checked)
     pass = pass.replace(/ /g, '-')
-    passId.classList.remove('acronym')
-    passEntropy.innerText = Math.floor(len * Math.log2(wordList.length)) + ' bits,'
-    passId.innerText = pass
-    passLength.innerText = [...pass].length + ' characters.'
+    altProps.passId.classList.remove('acronym')
+    altProps.passEntropy.innerText = Math.floor(len * Math.log2(wordList.length)) + ' bits,'
+    altProps.passId.innerText = pass
+    altProps.passLength.innerText = [...pass].length + ' characters.'
   }
 }
 
@@ -185,20 +182,10 @@ function generateColors() {
   const colorKeys = Object.keys(alternateColors)
   const entropy = getEntropy()
   const len = Math.ceil(entropy / Math.log2(colorKeys.length))
-  const passId = document.getElementById('alt-pass')
-  const passLength = document.getElementById('alt-length')
-  const passEntropy = document.getElementById('alt-entropy')
-  const entropyCheck = document.getElementById('alt-entropy-check')
 
-  passId.classList.remove("acronym") // Ensure leading word character is not red
+  altProps.passId.classList.remove("acronym") // Ensure leading word character is not red
 
-  let useEntropy = false
-
-  if (entropyCheck.checked) {
-    useEntropy = true
-  }
-
-  let pass = generatePass(len, colorKeys, true, useEntropy).split(' ')
+  let pass = generatePass(len, colorKeys, true, altProps.entropyCheck.checked).split(' ')
   const chosenTheme = localStorage.theme
 
   for (let i = 0; i < len; i++) {
@@ -221,7 +208,7 @@ function generateColors() {
     }
   }
 
-  passId.innerHTML = tmp.replace(/> </g, '>-<').trim()
+  altProps.passId.innerHTML = tmp.replace(/> </g, '>-<').trim()
   tmp = ''
 
   for (let i = 0; i < len; i++) {
@@ -230,8 +217,8 @@ function generateColors() {
 
   pass = tmp
   const totalLen = pass.length + (len - 1)
-  passLength.innerText = totalLen + ' characters.'
-  passEntropy.innerText = Math.floor(len * Math.log2(colorKeys.length)) + ' bits,'
+  altProps.passLength.innerText = totalLen + ' characters.'
+  altProps.passEntropy.innerText = Math.floor(len * Math.log2(colorKeys.length)) + ' bits,'
 }
 
 /**
@@ -242,18 +229,11 @@ function generateSKey() {
   const wordList = uniquesOnly(pseudoSKey)  // Force unique elements in array.
   const entropy = getEntropy()
   const len = Math.ceil(entropy / Math.log2(wordList.length))
-  const entropyCheck = document.getElementById('alt-entropy-check')
-
-  let useEntropy = false
-
-  if (entropyCheck.checked) {
-    useEntropy = true
-  }
 
   let pass = ''
 
   for (let i = 0; i < len; i++) {
-    pass += wordList[secRand(wordList.length, useEntropy)]
+    pass += wordList[secRand(wordList.length, altProps.entropyCheck.checked)]
     if (i !== len - 1) {
       pass += '-'
     }
@@ -268,29 +248,19 @@ function generateVAN() {
   const vanEntropy = Math.log2(alternateVAN[0].length * alternateVAN[1].length * alternateVAN[2].length)
   const len = Math.ceil(entropy / vanEntropy)
 
-  const passId = document.getElementById('alt-pass')
-  const passLength = document.getElementById('alt-length')
-  const passEntropy = document.getElementById('alt-entropy')
-  const entropyCheck = document.getElementById('alt-entropy-check')
-
-  passId.classList.remove("acronym") // Ensure leading word character is not red
+  altProps.passId.classList.remove("acronym") // Ensure leading word character is not red
 
   let pass
   let vans = []
-  let useEntropy = false
-
-  if (entropyCheck.checked) {
-    useEntropy = true
-  }
 
   for (let i = 0; i < len; i++) {
-    vans[i]  = generatePass(1, alternateVAN[0], false, useEntropy)
-    vans[i] += generatePass(1, alternateVAN[1], false, useEntropy)
-    vans[i] += generatePass(1, alternateVAN[2], false, useEntropy)
+    vans[i]  = generatePass(1, alternateVAN[0], false, altProps.entropyCheck.checked)
+    vans[i] += generatePass(1, alternateVAN[1], false, altProps.entropyCheck.checked)
+    vans[i] += generatePass(1, alternateVAN[2], false, altProps.entropyCheck.checked)
   }
 
   pass = vans.join("-")
-  passId.innerText = pass
-  passEntropy.innerText = Math.floor(len * vanEntropy) + ' bits,'
-  passLength.innerText = pass.length + ' characters.'
+  altProps.passId.innerText = pass
+  altProps.passEntropy.innerText = Math.floor(len * vanEntropy) + ' bits,'
+  altProps.passLength.innerText = pass.length + ' characters.'
 }

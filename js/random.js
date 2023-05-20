@@ -1,15 +1,19 @@
 "use strict"
 
+const randomProps = {
+  "passId": document.getElementById('random-pass'),
+  "passLength": document.getElementById('random-length'),
+  "passEntropy": document.getElementById('random-entropy'),
+  "passCheck": document.getElementById('random-check'),
+  "entropyCheck": document.getElementById('random-entropy-check'),
+}
+
 /** Generate a random meaningless password string. */
 function generateRandom() {
   let s = ''
   let check = ''
   let displayCheck = false
   const entropy = getEntropy()
-  const passId = document.getElementById('random-pass')
-  const passLength = document.getElementById('random-length')
-  const passEntropy = document.getElementById('random-entropy')
-  const passCheck = document.getElementById('random-check')
   const option = document.getElementById('random-options').value
 
   // ASCII optgroup
@@ -81,15 +85,8 @@ function generateRandom() {
   }
 
   const len = Math.ceil(entropy / Math.log2(s.length))
-  const entropyCheck = document.getElementById('random-entropy-check')
 
-  let useEntropy = false
-
-  if (entropyCheck.checked) {
-    useEntropy = true
-  }
-
-  let pass = generatePass(len, s, false, useEntropy)
+  let pass = generatePass(len, s, false, randomProps.entropyCheck.checked)
 
   if (option === 'Base32') {
     // Add Crockford's modulo 37 checksum
@@ -104,15 +101,15 @@ function generateRandom() {
     pass += check[res % 37n]
   }
 
-  passLength.innerText = pass.length + ' characters.'
-  passId.removeAttribute('style') // from emoji
-  passId.innerText = pass
-  passEntropy.innerText = Math.floor(len * Math.log2(s.length)) + ' bits,'
+  randomProps.passLength.innerText = pass.length + ' characters.'
+  randomProps.passId.removeAttribute('style') // from emoji
+  randomProps.passId.innerText = pass
+  randomProps.passEntropy.innerText = Math.floor(len * Math.log2(s.length)) + ' bits,'
 
   if (displayCheck) {
-    passCheck.innerText = 'Integrated checksum.'
+    randomProps.passCheck.innerText = 'Integrated checksum.'
   } else {
-    passCheck.innerText = ''
+    randomProps.passCheck.innerText = ''
   }
 }
 
@@ -121,21 +118,11 @@ function generateEmoji() {
   unicodeWarn()
 
   const entropy = getEntropy()
-  const passId = document.getElementById('random-pass')
-  const passLength = document.getElementById('random-length')
-  const passEntropy = document.getElementById('random-entropy')
   const len = Math.ceil(entropy / Math.log2(randomEmoji.length))
-  const entropyCheck = document.getElementById('random-entropy-check')
+  const pass = generatePass(len, randomEmoji, false, randomProps.entropyCheck.checked)
 
-  let useEntropy = false
-  if (entropyCheck.checked) {
-    useEntropy = true
-  }
-
-  const pass = generatePass(len, randomEmoji, false, useEntropy)
-
-  passLength.innerText = len + ' characters.'
-  passId.style.fontFamily = 'Twemoji Mozilla'
-  passId.innerText = pass
-  passEntropy.innerText = Math.floor(len * Math.log2(randomEmoji.length)) + ' bits,'
+  randomProps.passLength.innerText = len + ' characters.'
+  randomProps.passId.style.fontFamily = 'Twemoji Mozilla'
+  randomProps.passId.innerText = pass
+  randomProps.passEntropy.innerText = Math.floor(len * Math.log2(randomEmoji.length)) + ' bits,'
 }

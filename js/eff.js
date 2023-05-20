@@ -1,5 +1,12 @@
 "use strict"
 
+const effProps = {
+  "passId": document.getElementById('eff-pass'),
+  "passLength": document.getElementById('eff-length'),
+  "passEntropy": document.getElementById('eff-entropy'),
+  "entropyCheck": document.getElementById('eff-entropy-check'),
+}
+
 /**
  * Generate an EFF passphrase based on the chosen word list.
  * @param {string} selection - An EFF word list.
@@ -28,20 +35,10 @@ function generateEff(selection) {
 
   const entropy = getEntropy()
   const len = Math.ceil(entropy / Math.log2(wordList.length))
-  const passId = document.getElementById('eff-pass')
-  const passLength = document.getElementById('eff-length')
-  const passEntropy = document.getElementById('eff-entropy')
-  const entropyCheck = document.getElementById('eff-entropy-check')
 
-  let useEntropy = false
-
-  if (entropyCheck.checked) {
-    useEntropy = true
-  }
-
-  pass = generatePass(len, wordList, true, useEntropy)
+  pass = generatePass(len, wordList, true, effProps.entropyCheck.checked)
   pass = pass.replace(/ /g, '-')
-  passId.innerText = pass
-  passLength.innerText = pass.length + ' characters.'
-  passEntropy.innerText = Math.floor(len * Math.log2(wordList.length)) + ' bits,'
+  effProps.passId.innerText = pass
+  effProps.passLength.innerText = pass.length + ' characters.'
+  effProps.passEntropy.innerText = Math.floor(len * Math.log2(wordList.length)) + ' bits,'
 }

@@ -1,5 +1,49 @@
 "use strict"
 
+const dicewareProps = {
+  "passId": document.getElementById('diceware-pass'),
+  "passLength": document.getElementById('diceware-length'),
+  "passEntropy": document.getElementById('diceware-entropy'),
+  "entropyCheck": document.getElementById('diceware-entropy-check'),
+}
+
+function generateNLP(wordList, useEntropy) {
+  const entropy = getEntropy()
+  const len = Math.ceil(entropy / Math.log2(wordList[0].length)) // adjectives
+  const adjs = generatePass(len, wordList[0], true, useEntropy).split(' ')
+  const nouns = generatePass(len, wordList[1], true, useEntropy).split(' ')
+
+  let pass = ''
+  let bits = 0
+  let counter = 0
+
+  // building up the password alternating: adj-noun-adj-noun-...
+  while (bits <= entropy) {
+    if (counter % 2 === 0) {
+      pass += adjs[counter]
+      bits += Math.log2(wordList[0].length)
+    } else {
+      pass += nouns[counter]
+      bits += Math.log2(wordList[1].length)
+    }
+
+    pass += '-'
+    counter++
+  }
+
+  pass = pass.replace(/-$/g, '')
+
+  const tmpArr = pass.split('-')
+
+  if (tmpArr.length % 2 === 1) {
+    tmpArr.unshift(tmpArr.pop())
+    pass = tmpArr.join('-')
+  }
+
+  dicewareProps.passEntropy.innerText = Math.floor(bits) + ' bits,'
+  return pass
+}
+
 /**
  * Generate a Diceware passphrase based on the chosen language word list.
  * @param {string} selection - A Diceware language word list.
@@ -7,6 +51,7 @@
 function generateDiceware(selection) {
   let pass = ''
   let wordList = ''
+
 
   if (selection === 'Basque') {
     wordList = dicewareEU
@@ -77,61 +122,19 @@ function generateDiceware(selection) {
   wordList = uniquesOnly(wordList)  // Force unique elements in array.
 
   const entropy = getEntropy()
-  const passId = document.getElementById('diceware-pass')
-  const passLength = document.getElementById('diceware-length')
-  const passEntropy = document.getElementById('diceware-entropy')
-  const entropyCheck = document.getElementById('diceware-entropy-check')
 
-  let useEntropy = false
-
-  if (entropyCheck.checked) {
-    useEntropy = true
-  }
-
-  if (wordList.filter(Array.isArray).length === 2) {
-    // We're working on the 'Natural Language Passwords' list
-    const len = Math.ceil(entropy / Math.log2(wordList[0].length)) // adjectives
-    const adjs = generatePass(len, wordList[0], true, useEntropy).split(' ')
-    const nouns = generatePass(len, wordList[1], true, useEntropy).split(' ')
-
-    let bits = 0
-    let counter = 0
-
-    // building up the password alternating: adj-noun-adj-noun-...
-    while (bits <= entropy) {
-      if (counter % 2 === 0) {
-        pass += adjs[counter]
-        bits += Math.log2(wordList[0].length)
-      } else {
-        pass += nouns[counter]
-        bits += Math.log2(wordList[1].length)
-      }
-
-      pass += '-'
-      counter++
-    }
-
-    pass = pass.replace(/-$/g, '')
-
-    const tmpArr = pass.split('-')
-
-    if (tmpArr.length % 2 === 1) {
-      tmpArr.unshift(tmpArr.pop())
-      pass = tmpArr.join('-')
-    }
-
-    passEntropy.innerText = Math.floor(bits) + ' bits,'
+  if (selection === 'English (NLP)') {
+    pass = generateNLP(wordList, dicewareProps.entropyCheck.checked)
   } else {
     // Every other Diceware word list.
     const len = Math.ceil(entropy / Math.log2(wordList.length))
 
-    pass = generatePass(len, wordList, true, useEntropy)
+    pass = generatePass(len, wordList, true, dicewareProps.entropyCheck.checked)
     pass = pass.replace(/ /g, '-')
 
-    passEntropy.innerText = Math.floor(len * Math.log2(wordList.length)) + ' bits,'
+    dicewareProps.passEntropy.innerText = Math.floor(len * Math.log2(wordList.length)) + ' bits,'
   }
 
-  passId.innerText = pass
-  passLength.innerText = pass.length + ' characters.'
+  dicewareProps.passId.innerText = pass
+  dicewareProps.passLength.innerText = pass.length + ' characters.'
 }
-

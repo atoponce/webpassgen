@@ -198,7 +198,7 @@ button:hover {
   margin: 0 auto;
   padding: 0 10px 0 10px;
 }
-#alt-pass, #btc-pass, #diceware-pass, #eff-pass, #pseudo-pass {
+#alt-pass, #crypto-pass, #diceware-pass, #eff-pass, #pseudo-pass {
   word-break: break-word;
 }
 #random-pass {
