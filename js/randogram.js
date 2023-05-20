@@ -1,21 +1,25 @@
 "use strict"
 
-const LENGTH = 400
+const randogramProps = {
+  "lifetimeBits": parseInt(localStorage.lifetimeBits, 10) || 0,
+  "length": 400,
+  "entropy": [],
+  "bits": [],
+  "neumann": [],
+  "ctx": document.getElementById('randogram').getContext('2d'),
+  "officerRank": document.getElementById('officerRank'),
+  "rankPips": document.getElementById('rankPips'),
+  "nextRank": document.getElementById('nextRank'),
+  "remainingRankBits": document.getElementById('remainingRankBits'),
+  "entropyResult1": document.getElementById('entropyResult1'),
+  "entropyResult2": document.getElementById('entropyResult2'),
+}
 
-const CANVAS = document.getElementById('randogram')
-const CTX = CANVAS.getContext('2d')
-
-const OFFICERRANK = document.getElementById('officerRank')
-const RANKPIPS = document.getElementById('rankPips')
-const NEXTRANK = document.getElementById('nextRank')
-const REMAININGRANKBITS = document.getElementById('remainingRankBits')
-const ENTROPYRESULT1 = document.getElementById('entropyResult1')
-const ENTROPYRESULT2 = document.getElementById('entropyResult2')
-
-let ENTROPY = []
-let BITS = []
-let NEUMANN = []
-
+/**
+ * Awards a Star Trek officer rank based on the number of bits they've
+ * accumulated over the life of the game.
+ * @param {Number} bits - The amount of unbiased bits collected.
+ */
 function awardOfficerRank (bits) {
   // Thank you https://feathericons.com/
   const openPip = `
@@ -58,15 +62,19 @@ function awardOfficerRank (bits) {
   }
 
   /*
-    Rank is awarded exponentially based on the number of bits generated as 2**bits >> 4.
+    Rank is awarded exponentially based on the number of bits generated as
+    2**bits >> 4.
 
     For example:
       - Until you generate less than 64 bits, you are a cadet in the academy.
-      - When you have generated 1,280 bits, your awarded rank would be "Commander".
+      - When you have generated 1,280 bits, your awarded rank would be
+        "Commander".
       - When you have generated 128 samples, you would be promoted to "Captain".
-      - To reach 'Fleet Admiral', you need to generate 16,384 samples (262,144 bits).
+      - To reach 'Fleet Admiral', you need to generate 16,384 samples (262,144
+        bits).
 
-    Rank is only awarded, never revoked.
+    Rank is only awarded, never revoked. That is, unless you clear your
+    localStorage.
   */
   const rankOrder = [
     'Cadet',                   //       0 <= bits <      64
@@ -98,9 +106,9 @@ function awardOfficerRank (bits) {
   let nextRank = rankOrder[rankOrder.indexOf(rank) + 1]
 
   localStorage.rank = rank
-  OFFICERRANK.innerText = rank
-  NEXTRANK.innerText = nextRank
-  REMAININGRANKBITS.innerText = (2 ** (rankOrder.indexOf(nextRank) + 1) << 4) - localStorage.lifetimeBits
+  randogramProps.officerRank.innerText = rank
+  randogramProps.nextRank.innerText = nextRank
+  randogramProps.remainingRankBits.innerText = (2 ** (rankOrder.indexOf(nextRank) + 1) << 4) - localStorage.lifetimeBits
 
   // openPip, closedPip
   let pipString = ''
@@ -109,18 +117,24 @@ function awardOfficerRank (bits) {
   pipString = pips[1].replace(/O/, openPip)
   pipString = pipString.replace(/C/g, closedPip)
 
-  RANKPIPS.innerHTML = pipString
+  randogramProps.rankPips.innerHTML = pipString
 
   if (pips[0] === 1) {
-    RANKPIPS.style.background = '#333333'
-    RANKPIPS.style.border = '3px solid #d1a52c'
-    RANKPIPS.style.borderRadius = '5px'
-    RANKPIPS.style.padding = '11px 2px 2px 2px'
+    randogramProps.rankPips.style.background = '#333333'
+    randogramProps.rankPips.style.border = '3px solid #d1a52c'
+    randogramProps.rankPips.style.borderRadius = '5px'
+    randogramProps.rankPips.style.padding = '11px 2px 2px 2px'
   }
 }
 
-// https://exploringjs.com/impatient-js/ch_typed-arrays.html#concatenating-typed-arrays
-function concatenate (resultConstructor, ...arrays) {
+/**
+ * Concatenate multiple arrays into one.
+ * @param {Array} resultConstructor - A JavaScript typed Array to store tho concatenated arrays.
+ * @param  {...any} arrays - A iterable list of data to concatenate.
+ * @returns {Array} - A typed array.
+ */
+function concatenate(resultConstructor, ...arrays) {
+  // https://exploringjs.com/impatient-js/ch_typed-arrays.html#concatenating-typed-arrays
   let totalLength = 0
 
   for (const arr of arrays) {
@@ -138,21 +152,40 @@ function concatenate (resultConstructor, ...arrays) {
   return result
 }
 
+/** Generate cryptographically secure random numbers for one randogram. */
 function randogram () {
   return crypto.getRandomValues(new Uint8Array(40000))
 }
 
+/** Concatenate four cryptographically secure randograms to fill the canvas. */
 function genPixels () {
   return concatenate(Uint8Array, randogram(), randogram(), randogram(), randogram())
 }
 
+/** John von Neumann randomness extraction method. */
+function extractRandomness() {
+  if (randogramProps.neumann.length === 2) {
+    if (randogramProps.neumann[0] !== randogramProps.neumann[1]) {
+      randogramProps.bits.push(randogramProps.neumann[0])
+      randogramProps.lifetimeBits++
+
+      if (randogramProps.bits.length === 16) {
+        randogramProps.entropy.push(parseInt(randogramProps.bits.join(''), 2))
+        randogramProps.bits = []
+      }
+    }
+
+    randogramProps.neumann = []
+  }
+}
+
+/** Draw the actual randogram on the canvas and animate it. */
 function drawRandogram () {
-  let lifetimeBits = parseInt(localStorage.lifetimeBits, 10) || 0
-  const imgData = CTX.createImageData(LENGTH, LENGTH)
+  const imgData = randogramProps.ctx.createImageData(randogramProps.length, randogramProps.length)
   const pixels = genPixels()
 
   if (localStorage.hasOwnProperty('entropy')) {
-    ENTROPY = JSON.parse(localStorage.entropy)
+    randogramProps.entropy = JSON.parse(localStorage.entropy)
   }
 
   for (let i = 0; i < imgData.data.length; i += 4) {
@@ -166,43 +199,30 @@ function drawRandogram () {
   }
 
   updateEntropyCounts() // set count initially
-  awardOfficerRank(lifetimeBits)
+  awardOfficerRank(randogramProps.lifetimeBits)
 
-  CTX.putImageData(imgData, 0, 0)
+  randogramProps.ctx.putImageData(imgData, 0, 0)
   requestAnimationFrame(drawRandogram)
 
   document.getElementById('randogram').onpointermove = function (e) {
     const x = Math.floor(e.offsetX)
     const y = Math.floor(e.offsetY)
 
-    if (0 <= x && x < LENGTH && 0 <= y && y < LENGTH) {
-      const index = LENGTH * y + x
+    if (0 <= x && x < randogramProps.length && 0 <= y && y < randogramProps.length) {
+      const index = randogramProps.length * y + x
+      randogramProps.neumann.push(pixels[index] & 1)
+      extractRandomness()
+    }
 
-      NEUMANN.push(pixels[index] & 1)
-
-      // john von neumann randomness extractor
-      if (NEUMANN.length === 2) {
-        if (NEUMANN[0] !== NEUMANN[1]) {
-          BITS.push(NEUMANN[0])
-          lifetimeBits++
-
-          if (BITS.length === 16) {
-            ENTROPY.push(parseInt(BITS.join(''), 2))
-            BITS = []
-          }
-        }
-
-        NEUMANN = []
-      }
-    } // if 0 <= x < LENGTH && 0 <= y < LENGTH
-
-    localStorage.entropy = JSON.stringify(ENTROPY)
+    localStorage.entropy = JSON.stringify(randogramProps.entropy)
 
     updateEntropyCounts() // update counts on mouse movement
-    awardOfficerRank(lifetimeBits)
-  } // onpointermove
+    awardOfficerRank(randogramProps.lifetimeBits)
+  }
 }
 
+/** Update the statistics on the page for the user to see their randomness
+ * progress. */
 function updateEntropyCounts () {
   let items = 0
 
@@ -210,8 +230,8 @@ function updateEntropyCounts () {
     items = JSON.parse(localStorage.entropy).length
   }
 
-  ENTROPYRESULT1.innerText = items << 4
-  ENTROPYRESULT2.innerText = items
+  randogramProps.entropyResult1.innerText = items << 4
+  randogramProps.entropyResult2.innerText = items
 }
 
 drawRandogram()
