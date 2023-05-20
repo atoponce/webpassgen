@@ -114,7 +114,10 @@ Here is the English breakdown:
 | 12p | Star Trek       | EFF       | 4,000  | Unofficial                    |
 | 12q | Star Wars       | EFF       | 4,000  | Unofficial                    |
 | 12r | Trump           | Alternate | 8,192  | From his Twitter account      |
-| 12s | Wordle          | Alternate | 5,790  | See comment in word list      |
+| 12s | Verbs           | Alternate |   432  | American Oxford 5000          |
+| 12t | Adjectives      | Alternate |   373  | American Oxford 5000          |
+| 12u | Nouns           | Alternate |   402  | American Oxford 5000          |
+| 12v | Wordle          | Alternate | 5,790  | See comment in word list      |
 
 Here is the Spanish breakdown:
 
