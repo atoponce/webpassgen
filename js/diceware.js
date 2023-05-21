@@ -4,6 +4,7 @@ const dicewareProps = {
   "passId": document.getElementById('diceware-pass'),
   "passLength": document.getElementById('diceware-length'),
   "passEntropy": document.getElementById('diceware-entropy'),
+  "setSize": document.getElementById('diceware-set-size'),
   "entropyCheck": document.getElementById('diceware-entropy-check'),
 }
 
@@ -12,36 +13,33 @@ function generateNLP(wordList, useEntropy) {
   const len = Math.ceil(entropy / Math.log2(wordList[0].length)) // adjectives
   const adjs = generatePass(len, wordList[0], true, useEntropy).split(' ')
   const nouns = generatePass(len, wordList[1], true, useEntropy).split(' ')
+  const wordCount = wordList[0].length + wordList[1].length
 
-  let pass = ''
+  let pass = []
   let bits = 0
   let counter = 0
 
   // building up the password alternating: adj-noun-adj-noun-...
   while (bits <= entropy) {
     if (counter % 2 === 0) {
-      pass += adjs[counter]
+      pass.push(adjs[counter])
       bits += Math.log2(wordList[0].length)
     } else {
-      pass += nouns[counter]
+      pass.push(nouns[counter])
       bits += Math.log2(wordList[1].length)
     }
 
-    pass += '-'
     counter++
   }
 
-  pass = pass.replace(/-$/g, '')
-
-  const tmpArr = pass.split('-')
-
-  if (tmpArr.length % 2 === 1) {
-    tmpArr.unshift(tmpArr.pop())
-    pass = tmpArr.join('-')
+  if (pass.length % 2 === 1) { // adj_1, noun_1, ..., adj_n
+    pass.unshift(pass.pop())   // adj_n, adj_1, noun_1, ...
   }
 
-  dicewareProps.passEntropy.innerText = Math.floor(bits) + ' bits,'
-  return pass
+  dicewareProps.passEntropy.innerText = Math.floor(bits) + ' bits'
+  dicewareProps.setSize.innerText = wordCount.toLocaleString() + ' words'
+
+  return pass.join('-')
 }
 
 /**
@@ -51,7 +49,6 @@ function generateNLP(wordList, useEntropy) {
 function generateDiceware(selection) {
   let pass = ''
   let wordList = ''
-
 
   if (selection === 'Basque') {
     wordList = dicewareEU
@@ -132,9 +129,10 @@ function generateDiceware(selection) {
     pass = generatePass(len, wordList, true, dicewareProps.entropyCheck.checked)
     pass = pass.replace(/ /g, '-')
 
-    dicewareProps.passEntropy.innerText = Math.floor(len * Math.log2(wordList.length)) + ' bits,'
+    dicewareProps.passEntropy.innerText = Math.floor(len * Math.log2(wordList.length)) + ' bits'
+    dicewareProps.setSize.innerText = wordList.length.toLocaleString() + ' words'
   }
 
   dicewareProps.passId.innerText = pass
-  dicewareProps.passLength.innerText = pass.length + ' characters.'
+  dicewareProps.passLength.innerText = pass.length + ' characters'
 }

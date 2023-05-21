@@ -7,7 +7,23 @@
 body {
   color: black; background-color: white;
 }
-
+dl {
+  display: flex;
+  flex-flow: row wrap;
+  margin-bottom: 0px;
+  margin-top: 24px;
+}
+dt {
+  flex-basis: 35%;
+  margin-left: 10px;
+  padding: 2px 4px;
+  text-align: right;
+}
+dd {
+  flex-basis: 50%;
+  margin: 0;
+  padding: 2px 4px;
+}
 select {
   appearance: none;
   background-color: #dddddd;
@@ -47,12 +63,7 @@ button:hover {
 button:hover {
   box-shadow: 1px 1px 0px #CCC;
 }
-.pass-button {
-  display: inline-block;
-  position: absolute;
-  right: 10px;
-  top: 40px;
-}
+
 /* classes */
 .clear { clear: both; }
 .dark_contrast {
@@ -84,6 +95,23 @@ button:hover {
   right: 5px;
   font-size: 12px;
   position: absolute;
+}
+.statistics {
+  background-color: rgba(0, 0, 0, 0.85);
+  color: white;
+  cursor: pointer;
+  display: none;
+  font-size: xx-large;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+.statistics a {
+  color: yellow;
+}
+.statistics a:visited {
+  color: orange;
 }
 .entropy {
   right: 50%;
@@ -148,6 +176,12 @@ button:hover {
 .acronym span::first-letter {
   color: red;
   font-weight: bold;
+}
+.pass-button {
+  display: inline-block;
+  position: absolute;
+  right: 10px;
+  top: 40px;
 }
 
 /* ids */
@@ -290,6 +324,9 @@ body.dark-theme {color: white; background-color: black;}
 .dark-theme input[type=range]::-webkit-slider-thumb {border: 1px solid white;}
 .dark-theme input[type=range]::-moz-range-track {border: 1px solid white;}
 .dark-theme input[type=range]::-moz-range-thumb {border: 1px solid white;}
+.dark-theme .statistics {background-color: rgb(255, 255, 255, 0.85); color: black;}
+.dark-theme .statistics a {color: #0000EE;}
+.dark-theme .statistics a:visited {color: #551A8B;}
 
 #theme_switcher {
   text-decoration: none;

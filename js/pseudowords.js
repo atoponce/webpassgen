@@ -4,6 +4,7 @@ const pseudoProps = {
   "passId": document.getElementById('pseudo-pass'),
   "passLength": document.getElementById('pseudo-length'),
   "passEntropy": document.getElementById('pseudo-entropy'),
+  "setSize": document.getElementById('pseudo-set-size'),
   "passCheck": document.getElementById('pseudo-check'),
   "entropyCheck": document.getElementById('pseudo-entropy-check')
 }
@@ -41,8 +42,8 @@ function generatePseudowords() {
   const ent = ret[2]
 
   pseudoProps.passId.innerText = pass
-  pseudoProps.passLength.innerText = pass.length + ' characters.'
-  pseudoProps.passEntropy.innerText = ent + ' bits,'
+  pseudoProps.passLength.innerText = pass.length + ' characters'
+  pseudoProps.passEntropy.innerText = ent + ' bits'
 
   if (displayCheck) {
     pseudoProps.passCheck.innerText = 'Integrated checksum.'

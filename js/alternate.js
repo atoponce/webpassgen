@@ -4,6 +4,7 @@ const altProps = {
   "passId": document.getElementById('alt-pass'),
   "passLength": document.getElementById('alt-length'),
   "passEntropy": document.getElementById('alt-entropy'),
+  "setSize": document.getElementById('alt-set-size'),
   "entropyCheck": document.getElementById('alt-entropy-check'),
 }
 
@@ -119,15 +120,17 @@ function generateAlternate(selection) {
     pass = results.passphrase
     altProps.passId.classList.add('acronym')
     altProps.passId.innerHTML = pass
-    altProps.passEntropy.innerText = results.security + ' bits,'
+    altProps.passEntropy.innerText = results.security + ' bits'
     altProps.passLength.innerText = pass.replace(/<\/?span>/g, '').length + ' characters'
+    altProps.setSize.innerText = wordList.length.toLocaleString() + ' words'
   } else {
     pass = generatePass(len, wordList, true, altProps.entropyCheck.checked)
     pass = pass.replace(/ /g, '-')
     altProps.passId.classList.remove('acronym')
-    altProps.passEntropy.innerText = Math.floor(len * Math.log2(wordList.length)) + ' bits,'
+    altProps.passEntropy.innerText = Math.floor(len * Math.log2(wordList.length)) + ' bits'
     altProps.passId.innerText = pass
-    altProps.passLength.innerText = [...pass].length + ' characters.'
+    altProps.passLength.innerText = [...pass].length + ' characters'
+    altProps.setSize.innerText = wordList.length.toLocaleString() + ' words'
   }
 }
 

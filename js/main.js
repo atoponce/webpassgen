@@ -132,6 +132,34 @@ function generatePassphrase(source) {
   } 
 }
 
+/**
+ * 
+ * @param {String} source - One of the six generator cells.
+ */
+function toggleStats(source) {
+  let elem
+
+  if (source === 'alternate') {
+    elem = document.getElementById('alt-overlay')
+  } else if (source == 'cryptocurrency') {
+    elem = document.getElementById('crypto-overlay')
+  } else if (source == 'diceware') {
+    elem = document.getElementById('diceware-overlay')
+  } else if (source == 'eff') {
+    elem = document.getElementById('eff-overlay')
+  } else if (source == 'pseudo') {
+    elem = document.getElementById('pseudo-overlay')
+  } else if (source == 'random') {
+    elem = document.getElementById('random-overlay')
+  }
+
+  if (elem.style.display === '') {
+    elem.style.display = 'block'
+  } else {
+    elem.style.display = ''
+  }
+}
+
 /** 
  * Add a checkbox to use entropy if its present in localStorage.entropy.
  * Mozilla will not store localStorage key values to disk under the file:// protocol.

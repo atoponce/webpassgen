@@ -4,6 +4,7 @@ const cryptoProps = {
   "passId": document.getElementById('crypto-pass'),
   "passLength": document.getElementById('crypto-length'),
   "passEntropy": document.getElementById('crypto-entropy'),
+  "setSize": document.getElementById('crypto-set-size'),
   "entropyCheck": document.getElementById('crypto-entropy-check'),
   "passCheck": document.getElementById('crypto-check'),
 }
@@ -94,8 +95,9 @@ function generateBitcoin(selection) {
 
     pass = words.join('-')
     cryptoProps.passId.innerText = pass
-    cryptoProps.passLength.innerText = pass.length + ' characters.'
-    cryptoProps.passEntropy.innerText = entropy + ' bits,'
+    cryptoProps.passLength.innerText = pass.length + ' characters'
+    cryptoProps.passEntropy.innerText = entropy + ' bits'
+    cryptoProps.setSize.innerText = wordList.length.toLocaleString() + ' words'
     cryptoProps.passCheck.innerText = 'Integrated checksum.'
   })
 }
@@ -180,7 +182,8 @@ function generateMonero(selection) {
 
   pass = pass.join('-')
   cryptoProps.passId.innerText = pass
-  cryptoProps.passLength.innerText = pass.length + ' characters.'
-  cryptoProps.passEntropy.innerText = entropy + ' bits,'
+  cryptoProps.passLength.innerText = pass.length + ' characters'
+  cryptoProps.passEntropy.innerText = entropy + ' bits'
+  cryptoProps.setSize.innerText = wordList.length.toLocaleString() + ' words'
   cryptoProps.passCheck.innerText = 'Integrated checksum.'
 }

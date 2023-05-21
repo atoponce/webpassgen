@@ -4,6 +4,7 @@ const randomProps = {
   "passId": document.getElementById('random-pass'),
   "passLength": document.getElementById('random-length'),
   "passEntropy": document.getElementById('random-entropy'),
+  "setSize": document.getElementById('random-set-size'),
   "passCheck": document.getElementById('random-check'),
   "entropyCheck": document.getElementById('random-entropy-check'),
 }
@@ -101,10 +102,11 @@ function generateRandom() {
     pass += check[res % 37n]
   }
 
-  randomProps.passLength.innerText = pass.length + ' characters.'
+  randomProps.passLength.innerText = pass.length + ' characters'
   randomProps.passId.removeAttribute('style') // from emoji
   randomProps.passId.innerText = pass
-  randomProps.passEntropy.innerText = Math.floor(len * Math.log2(s.length)) + ' bits,'
+  randomProps.setSize.innerText = s.length.toLocaleString() + ' characters'
+  randomProps.passEntropy.innerText = Math.floor(len * Math.log2(s.length)) + ' bits'
 
   if (displayCheck) {
     randomProps.passCheck.innerText = 'Integrated checksum.'
@@ -121,8 +123,9 @@ function generateEmoji() {
   const len = Math.ceil(entropy / Math.log2(randomEmoji.length))
   const pass = generatePass(len, randomEmoji, false, randomProps.entropyCheck.checked)
 
-  randomProps.passLength.innerText = len + ' characters.'
+  randomProps.passLength.innerText = len + ' characters'
   randomProps.passId.style.fontFamily = 'Noto Color Emoji'
   randomProps.passId.innerText = pass
-  randomProps.passEntropy.innerText = Math.floor(len * Math.log2(randomEmoji.length)) + ' bits,'
+  randomProps.setSize.innerText = randomEmoji.length.toLocaleString() + ' emoji'
+  randomProps.passEntropy.innerText = Math.floor(len * Math.log2(randomEmoji.length)) + ' bits'
 }

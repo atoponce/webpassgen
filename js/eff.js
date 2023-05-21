@@ -4,6 +4,7 @@ const effProps = {
   "passId": document.getElementById('eff-pass'),
   "passLength": document.getElementById('eff-length'),
   "passEntropy": document.getElementById('eff-entropy'),
+  "setSize": document.getElementById('eff-set-size'),
   "entropyCheck": document.getElementById('eff-entropy-check'),
 }
 
@@ -39,6 +40,7 @@ function generateEff(selection) {
   pass = generatePass(len, wordList, true, effProps.entropyCheck.checked)
   pass = pass.replace(/ /g, '-')
   effProps.passId.innerText = pass
-  effProps.passLength.innerText = pass.length + ' characters.'
-  effProps.passEntropy.innerText = Math.floor(len * Math.log2(wordList.length)) + ' bits,'
+  effProps.passLength.innerText = pass.length + ' characters'
+  effProps.setSize.innerText = wordList.length.toLocaleString() + ' words'
+  effProps.passEntropy.innerText = Math.floor(len * Math.log2(wordList.length)) + ' bits'
 }

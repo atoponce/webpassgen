@@ -32,6 +32,7 @@
         </div>
       </div>
       <div id='content'>
+
         <div id='alt-default' class='cell'>
           <p class='cell-title'><strong>Alternate</strong></p>
           <div class='optional'>
@@ -73,12 +74,22 @@
             <label for='alt-entropy-check'> Add entropy?</label>
             <span></span> samples left.
           </div>
-          <div class='stats length'>
-            <span id='alt-entropy'></span>
-            <span id='alt-length'></span>
+          <div class='stats'>
+            <span><a href='#' onclick='toggleStats("alternate")'>Passphrase Statistics</a></span>
           </div>
           <div class='checksum'><span id='alt-check'></span></div>
+          <div id='alt-overlay' class='statistics'>
+            <dl>
+              <dt>Length:</dt><dd id='alt-length'></dd>
+              <dt>Security:</dt><dd id='alt-entropy'></dd>
+              <dt>Set size:</dt><dd id='alt-set-size'></dd>
+            </dl>
+            <p style='font-size: small; padding: 18px 0 0 0; text-align: center;'>
+              <a href='#' onclick='toggleStats("alternate")'>Click here to dismiss.</a>
+            </p>
+          </div>
         </div>
+
         <div id='crypto-default' class='cell'>
           <p class='cell-title'><strong>Cryptocurrency</strong></p>
           <div class='optional'>
@@ -118,12 +129,23 @@
             <label for='crypto-entropy-check'> Add entropy?</label>
             <span></span> samples left.
           </div>
-          <div class='stats length'>
-            <span id='crypto-entropy'></span>
-            <span id='crypto-length'></span>
+          <div class='stats'>
+            <span><a href='#' onclick='toggleStats("cryptocurrency")'>Passphrase Statistics</a></span>
+          </div>
+          <div class='checksum'><span id='crypto-check'></span></div>
+          <div id='crypto-overlay' class='statistics'>
+            <dl>
+              <dt>Length:</dt><dd id='crypto-length'></dd>
+              <dt>Security:</dt><dd id='crypto-entropy'></dd>
+              <dt>Set size:</dt><dd id='crypto-set-size'></dd>
+            </dl>
+            <p style='font-size: small; padding: 18px 0 0 0; text-align: center;'>
+              <a href='#' onclick='toggleStats("cryptocurrency")'>Click here to dismiss.</a>
+            </p>
           </div>
           <div class='checksum'><span id='crypto-check'></span></div>
         </div>
+
         <div id='diceware-default' class='cell'>
           <p class='cell-title'><strong>Diceware</strong></p>
           <div class='optional'>
@@ -169,12 +191,23 @@
             <label for='diceware-entropy-check'> Add entropy?</label>
             <span></span> samples left.
           </div>
-          <div class='stats length'>
-            <span id='diceware-entropy'></span>
-            <span id='diceware-length'></span>
+          <div class='stats'>
+            <span><a href='#' onclick='toggleStats("diceware")'>Passphrase Statistics</a></span>
+          </div>
+          <div class='checksum'><span id='diceware-check'></span></div>
+          <div id='diceware-overlay' class='statistics'>
+            <dl>
+              <dt>Length:</dt><dd id='diceware-length'></dd>
+              <dt>Security:</dt><dd id='diceware-entropy'></dd>
+              <dt>Set size:</dt><dd id='diceware-set-size'></dd>
+            </dl>
+            <p style='font-size: small; padding: 18px 0 0 0; text-align: center;'>
+              <a href='#' onclick='toggleStats("diceware")'>Click here to dismiss.</a>
+            </p>
           </div>
           <div class='checksum'><span id='diceware-check'></span></div>
         </div>
+
         <div id='eff-default' class='cell'>
           <p class='cell-title'><strong>EFF</strong></p>
           <div class='optional'>
@@ -198,12 +231,23 @@
             <label for='eff-entropy-check'> Add entropy?</label>
             <span></span> samples left.
           </div>
-          <div class='stats length'>
-            <span id='eff-entropy'></span>
-            <span id='eff-length'></span>
+          <div class='stats'>
+            <span><a href='#' onclick='toggleStats("eff")'>Passphrase Statistics</a></span>
+          </div>
+          <div class='checksum'><span id='eff-check'></span></div>
+          <div id='eff-overlay' class='statistics'>
+            <dl>
+              <dt>Length:</dt><dd id='eff-length'></dd>
+              <dt>Security:</dt><dd id='eff-entropy'></dd>
+              <dt>Set size:</dt><dd id='eff-set-size'></dd>
+            </dl>
+            <p style='font-size: small; padding: 18px 0 0 0; text-align: center;'>
+              <a href='#' onclick='toggleStats("eff")'>Click here to dismiss.</a>
+            </p>
           </div>
           <div class='checksum'><span id='eff-check'></span></div>
         </div>
+
         <div id='pseudo-default' class='cell'>
           <p class='cell-title'><strong>Pseudowords</strong></p>
           <div class='optional'>
@@ -226,12 +270,23 @@
             <label for='pseudo-entropy-check'> Add entropy?</label>
             <span></span> samples left.
           </div>
-          <div class='stats length'>
-            <span id='pseudo-entropy'></span>
-            <span id='pseudo-length'></span>
+          <div class='stats'>
+            <span><a href='#' onclick='toggleStats("pseudo")'>Pseudoword Statistics</a></span>
+          </div>
+          <div class='checksum'><span id='pseudo-check'></span></div>
+          <div id='pseudo-overlay' class='statistics'>
+            <dl>
+              <dt>Length:</dt><dd id='pseudo-length'></dd>
+              <dt>Security:</dt><dd id='pseudo-entropy'></dd>
+              <dt>Set size:</dt><dd id='pseudo-set-size'></dd>
+            </dl>
+            <p style='font-size: small; padding: 18px 0 0 0; text-align: center;'>
+              <a href='#' onclick='toggleStats("pseudo")'>Click here to dismiss.</a>
+            </p>
           </div>
           <div class='checksum'><span id='pseudo-check'></span></div>
         </div>
+
         <div id='random-default' class='cell'>
           <p class='cell-title'><strong>Random</strong></p>
           <div class='optional'>
@@ -268,9 +323,19 @@
             <label for='random-entropy-check'> Add entropy?</label>
             <span></span> samples left.
           </div>
-          <div class='stats length'>
-            <span id='random-entropy'></span>
-            <span id='random-length'></span>
+          <div class='stats'>
+            <span><a href='#' onclick='toggleStats("random")'>Password Statistics</a></span>
+          </div>
+          <div class='checksum'><span id='random-check'></span></div>
+          <div id='random-overlay' class='statistics'>
+            <dl>
+              <dt>Length:</dt><dd id='random-length'></dd>
+              <dt>Security:</dt><dd id='random-entropy'></dd>
+              <dt>Set size:</dt><dd id='random-set-size'></dd>
+            </dl>
+            <p style='font-size: small; padding: 18px 0 0 0; text-align: center;'>
+              <a href='#' onclick='toggleStats("random")'>Click here to dismiss.</a>
+            </p>
           </div>
           <div class='checksum'><span id='random-check'></span></div>
         </div>
