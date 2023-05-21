@@ -1,7 +1,8 @@
 @font-face {
-  font-family: "Twemoji Mozilla";
-  src: url("./twemoji.woff2") format("woff2");
+  font-family: "Noto Color Emoji";
+  src: url("./NotoColorEmoji-Regular.woff2") format("woff2");
 }
+
 /* body tags */
 body {
   color: black; background-color: white;
@@ -215,6 +216,7 @@ button:hover {
 
 input[type=range] {
   -webkit-appearance: none;
+  appearance: none;
   background: none;
   width: 200px;
 }
