@@ -123,7 +123,7 @@ function generateEmoji() {
   const len = Math.ceil(entropy / Math.log2(randomEmoji.length))
   const pass = generatePass(len, randomEmoji, false, randomProps.entropyCheck.checked)
 
-  randomProps.passLength.innerText = len + ' characters'
+  randomProps.passLength.innerText = len + ' emoji'
   randomProps.passId.style.fontFamily = 'Noto Color Emoji'
   randomProps.passId.innerText = pass
   randomProps.setSize.innerText = randomEmoji.length.toLocaleString() + ' emoji'
