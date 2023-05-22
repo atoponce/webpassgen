@@ -156,14 +156,16 @@ function toggleStats(source) {
     elem = document.getElementById('random-overlay')
   }
 
+  // Scrolls to the top of the page on display change, so ...
   if (elem.style.display === '') {
     elem.style.display = 'block'
   } else {
     elem.style.display = ''
   }
 
-  // Not working in Firefox. What gives?
-  setTimeout(function() {scrollTo(coords)}, 0)
+  // ... this hack scrolls back, but won't without without a timeout.
+  // Requires ~10 ms to work in Firefox consistently.
+  setTimeout(function() {scrollTo(coords)}, 10)
 }
 
 /** 
