@@ -159,11 +159,11 @@ Here is the Portuguese breakdown:
 |:---:|:-----------|:---------|:------:|:------------------------------|
 | 32a | Portuguese | Bitcoin  | 2,048  |                               |
 | 32b | Portuguese | Diceware | 7,776  |                               |
-| 32c | Portuguese | Moneroo  | 1,626  |                               |
+| 32c | Portuguese | Monero   | 1,626  |                               |
 
 Here is the Russian breakdown:
 
 | ID  | Name    | Wordlist | Unique | Notes                         |
 |:---:|:--------|:---------|:------:|:------------------------------|
 | 34a | Russian | Diceware | 7,776  |                               |
-| 34b | Russian | Moneroo  | 1,626  |                               |
+| 34b | Russian | Monero   | 1,626  |                               |
