@@ -90,11 +90,12 @@ button:hover {
   position: absolute;
   visibility: hidden;
 }
-.stats {
+.stats, .cell_overlay {
   bottom: 5px;
-  right: 5px;
   font-size: 12px;
+  margin: 0;
   position: absolute;
+  right: 5px;
 }
 .statistics {
   background-color: rgba(0, 0, 0, 0.85);
@@ -132,11 +133,6 @@ button:hover {
   margin: 5px;
   position: relative;
   width: 372px;
-}
-.cell_overlay{
-  font-size: small;
-  padding: 18px 0 0 0;
-  text-align: center;
 }
 .password {
   font-family: "Dejavu Sans Mono", "Courier New", "Lucidia Console", Monaco, monospace;
