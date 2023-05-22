@@ -18,24 +18,33 @@ function generatePseudowords() {
 
   if (pseudo === 'Apple Keychain') {
     ret = generateApple()
+    pseudoProps.setSize.innerHTML = "It's <a href='https://github.com/atoponce/webpassgen/blob/5598bb9dbc3658d33ec4b58b800a62d410571940/js/pseudowords.js#L65-L82'>complicated</a>"
   } else if (pseudo === 'Bubble Babble') {
     ret = generateBabble()
     displayCheck = true
+    pseudoProps.setSize.innerText = "65,536 pseudowords"
   } else if (pseudo === 'Daefen') {
     ret = generateDaefen()
+    pseudoProps.setSize.innerText = "3,456 syllables"
   } else if (pseudo === 'Koremutake') {
     ret = generateKoremutake()
+    pseudoProps.setSize.innerText = "128 syllables"
   } else if (pseudo === 'Lepron') {
     ret = generateLepron()
+    pseudoProps.setSize.innerText = "362,797,056 pseudowords"
   } else if (pseudo === 'Letterblock Diceware') {
     ret = generateLetterblock()
     displayCheck = true
+    pseudoProps.setSize.innerText = '1,679,616 blocks'
   } else if (pseudo === 'Munemo') {
     ret = generateMunemo()
+    pseudoProps.setSize.innerText = "100 syllables"
   } else if (pseudo === 'Proquints') {
     ret = generateProquints()
+    pseudoProps.setSize.innerText = "65,536 pseudowords"
   } else if (pseudo === 'Urbit') {
     ret = generateUrbit()
+    pseudoProps.setSize.innerText = "65,536 pseudowords"
   }
 
   const pass = ret[0]
@@ -525,9 +534,9 @@ function generateLetterblock() {
     ['0',  'QM', 'VW', 'gq', 'o', 'w']
   ]
   const delimiters = '.+-=@%'
-  const blockEntropy = 4 * Math.floor(Math.log2(36))
-  const totalEntropy = Math.ceil(entropy / blockEntropy) * blockEntropy
-  const numBlocks = totalEntropy / blockEntropy
+  const blockEntropy = Math.log2(36 ** 4)
+  const numBlocks = Math.ceil(entropy / blockEntropy)
+  const totalEntropy = Math.floor(numBlocks * blockEntropy)
   const blocks = []
   const checks = []
 
