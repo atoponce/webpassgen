@@ -220,8 +220,9 @@ function generateColors() {
 
   pass = tmp
   const totalLen = pass.length + (len - 1)
-  altProps.passLength.innerText = totalLen + ' characters.'
-  altProps.passEntropy.innerText = Math.floor(len * Math.log2(colorKeys.length)) + ' bits,'
+  altProps.passLength.innerText = totalLen + ' characters'
+  altProps.setSize.innerText = colorKeys.length.toLocaleString() + ' words'
+  altProps.passEntropy.innerText = Math.floor(len * Math.log2(colorKeys.length)) + ' bits'
 }
 
 /**
@@ -248,6 +249,7 @@ function generateSKey() {
 /** Generate a Verbs/Adjectives/Nouns passphrase */
 function generateVAN() {
   const entropy = getEntropy()
+  const wordCount = alternateVAN[0].length + alternateVAN[1].length + alternateVAN[2].length
   const vanEntropy = Math.log2(alternateVAN[0].length * alternateVAN[1].length * alternateVAN[2].length)
   const len = Math.ceil(entropy / vanEntropy)
 
@@ -264,6 +266,7 @@ function generateVAN() {
 
   pass = vans.join("-")
   altProps.passId.innerText = pass
-  altProps.passEntropy.innerText = Math.floor(len * vanEntropy) + ' bits,'
-  altProps.passLength.innerText = pass.length + ' characters.'
+  altProps.passEntropy.innerText = Math.floor(len * vanEntropy) + ' bits'
+  altProps.setSize.innerText = wordCount.toLocaleString() + ' words'
+  altProps.passLength.innerText = pass.length + ' characters'
 }
