@@ -11,7 +11,7 @@ dl {
   display: flex;
   flex-flow: row wrap;
   margin-bottom: 0px;
-  margin-top: 24px;
+  margin-top: 32px;
 }
 dt {
   flex-basis: 35%;
@@ -20,7 +20,7 @@ dt {
   text-align: right;
 }
 dd {
-  flex-basis: 50%;
+  flex-basis: 55%;
   margin: 0;
   padding: 2px 4px;
 }
@@ -101,7 +101,7 @@ button:hover {
   color: white;
   cursor: pointer;
   display: none;
-  font-size: xx-large;
+  font-size: x-large;
   height: 100%;
   position: absolute;
   top: 0;
@@ -133,6 +133,11 @@ button:hover {
   position: relative;
   width: 372px;
 }
+.cell_overlay{
+  font-size: small;
+  padding: 18px 0 0 0;
+  text-align: center;
+}
 .password {
   font-family: "Dejavu Sans Mono", "Courier New", "Lucidia Console", Monaco, monospace;
   font-size: 18px;
@@ -146,11 +151,6 @@ button:hover {
   margin-top: 0px;
   padding: 5px;
   text-align: center;
-}
-.info-link {
-  position: absolute;
-  bottom: 5px;
-  right: 5px;
 }
 .optional {
   left: 10px;
