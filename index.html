@@ -17,7 +17,7 @@
           <li><a href='entropy.html'>Entropy</a></li>
           <li><a href='bookmarklets.html'>Bookmarklets</a></li>
           <li>
-            <a href='#' onclick='toggleTheme(); loadPasses();' id='theme_switcher' title='Change theme'>
+            <a href='javascript:void(0)' onclick='toggleTheme(); loadPasses();' id='theme_switcher' title='Change theme'>
               <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='currentColor' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-moon'>
                 <path d='M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z'></path>
               </svg>
@@ -75,7 +75,7 @@
             <span></span> samples left.
           </div>
           <div class='stats'>
-            <span><a href='#' onclick='toggleStats("alternate")'>Passphrase Statistics</a></span>
+            <span><a href='javascript:void(0)' onclick='toggleStats("alternate")'>Passphrase Statistics</a></span>
           </div>
           <div class='checksum'><span id='alt-check'></span></div>
           <div id='alt-overlay' class='statistics'>
@@ -84,9 +84,9 @@
               <dt>Security:</dt><dd id='alt-entropy'></dd>
               <dt>Set size:</dt><dd id='alt-set-size'></dd>
             </dl>
-            <p class="cell_overlay">
-              <a href='#' onclick='toggleStats("alternate")'>Click here to dismiss</a>
-            </p>
+            <span class="cell_overlay">
+              <a href='javascript:void(0)' onclick='toggleStats("alternate")'>Click here to dismiss</a>
+            </span>
           </div>
         </div>
 
@@ -130,7 +130,7 @@
             <span></span> samples left.
           </div>
           <div class='stats'>
-            <span><a href='#' onclick='toggleStats("cryptocurrency")'>Passphrase Statistics</a></span>
+            <span><a href='javascript:void(0)' onclick='toggleStats("cryptocurrency")'>Passphrase Statistics</a></span>
           </div>
           <div class='checksum'><span id='crypto-check'></span></div>
           <div id='crypto-overlay' class='statistics'>
@@ -139,9 +139,9 @@
               <dt>Security:</dt><dd id='crypto-entropy'></dd>
               <dt>Set size:</dt><dd id='crypto-set-size'></dd>
             </dl>
-            <p class="cell_overlay">
-              <a href='#' onclick='toggleStats("cryptocurrency")'>Click here to dismiss</a>
-            </p>
+            <span class="cell_overlay">
+              <a href='javascript:void(0)' onclick='toggleStats("cryptocurrency")'>Click here to dismiss</a>
+            </span>
           </div>
           <div class='checksum'><span id='crypto-check'></span></div>
         </div>
@@ -192,7 +192,7 @@
             <span></span> samples left.
           </div>
           <div class='stats'>
-            <span><a href='#' onclick='toggleStats("diceware")'>Passphrase Statistics</a></span>
+            <span><a href='javascript:void(0)' onclick='toggleStats("diceware")'>Passphrase Statistics</a></span>
           </div>
           <div class='checksum'><span id='diceware-check'></span></div>
           <div id='diceware-overlay' class='statistics'>
@@ -201,9 +201,9 @@
               <dt>Security:</dt><dd id='diceware-entropy'></dd>
               <dt>Set size:</dt><dd id='diceware-set-size'></dd>
             </dl>
-            <p class="cell_overlay">
-              <a href='#' onclick='toggleStats("diceware")'>Click here to dismiss</a>
-            </p>
+            <span class="cell_overlay">
+              <a href='javascript:void(0)' onclick='toggleStats("diceware")'>Click here to dismiss</a>
+            </span>
           </div>
           <div class='checksum'><span id='diceware-check'></span></div>
         </div>
@@ -232,7 +232,7 @@
             <span></span> samples left.
           </div>
           <div class='stats'>
-            <span><a href='#' onclick='toggleStats("eff")'>Passphrase Statistics</a></span>
+            <span><a href='javascript:void(0)' onclick='toggleStats("eff")'>Passphrase Statistics</a></span>
           </div>
           <div class='checksum'><span id='eff-check'></span></div>
           <div id='eff-overlay' class='statistics'>
@@ -241,9 +241,9 @@
               <dt>Security:</dt><dd id='eff-entropy'></dd>
               <dt>Set size:</dt><dd id='eff-set-size'></dd>
             </dl>
-            <p class="cell_overlay">
-              <a href='#' onclick='toggleStats("eff")'>Click here to dismiss</a>
-            </p>
+            <span class="cell_overlay">
+              <a href='javascript:void(0)' onclick='toggleStats("eff")'>Click here to dismiss</a>
+            </span>
           </div>
           <div class='checksum'><span id='eff-check'></span></div>
         </div>
@@ -264,14 +264,14 @@
             </select>
           </div>
           <button class='pass-button' value='Generate' onclick='generatePseudowords();'>Generate</button>
-          <p id='pseudo-pass' class='password'></p>
+          <div id='pseudo-pass' class='password'></div>
           <div class='use-entropy'>
             <input type='checkbox' id='pseudo-entropy-check' name='entropy-check' value='pseudo-entropy'>
             <label for='pseudo-entropy-check'> Add entropy?</label>
             <span></span> samples left.
           </div>
           <div class='stats'>
-            <span><a href='#' onclick='toggleStats("pseudo")'>Pseudoword Statistics</a></span>
+            <span><a href='javascript:void(0)' onclick='toggleStats("pseudo")'>Pseudoword Statistics</a></span>
           </div>
           <div class='checksum'><span id='pseudo-check'></span></div>
           <div id='pseudo-overlay' class='statistics'>
@@ -280,9 +280,9 @@
               <dt>Security:</dt><dd id='pseudo-entropy'></dd>
               <dt>Set size:</dt><dd id='pseudo-set-size'>It's <a href='https://github.com/atoponce/webpassgen/issues/15#issuecomment-1556329560'>complicated</a></dd>
             </dl>
-            <p class="cell_overlay">
-              <a href='#' onclick='toggleStats("pseudo")'>Click here to dismiss</a>
-            </p>
+            <span class="cell_overlay">
+              <a href='javascript:void(0)' onclick='toggleStats("pseudo")'>Click here to dismiss</a>
+            </span>
           </div>
           <div class='checksum'><span id='pseudo-check'></span></div>
         </div>
@@ -317,14 +317,14 @@
             </select>
           </div>
           <button class='pass-button' value='Generate' onclick='generateRandom();'>Generate</button>
-          <p id='random-pass' class='password'></p>
+          <div id='random-pass' class='password'></div>
           <div class='use-entropy'>
             <input type='checkbox' id='random-entropy-check' name='entropy-check' value='random-entropy'>
             <label for='random-entropy-check'> Add entropy?</label>
             <span></span> samples left.
           </div>
           <div class='stats'>
-            <span><a href='#' onclick='toggleStats("random")'>Password Statistics</a></span>
+            <span><a href='javascript:void(0)' onclick='toggleStats("random")'>Password Statistics</a></span>
           </div>
           <div class='checksum'><span id='random-check'></span></div>
           <div id='random-overlay' class='statistics'>
@@ -333,9 +333,9 @@
               <dt>Security:</dt><dd id='random-entropy'></dd>
               <dt>Set size:</dt><dd id='random-set-size'></dd>
             </dl>
-            <p class="cell_overlay">
-              <a href='#' onclick='toggleStats("random")'>Click here to dismiss</a>
-            </p>
+            <span class="cell_overlay">
+              <a href='javascript:void(0)' onclick='toggleStats("random")'>Click here to dismiss</a>
+            </span>
           </div>
           <div class='checksum'><span id='random-check'></span></div>
         </div>
