@@ -93,7 +93,6 @@ button:hover {
 .stats, .cell_overlay {
   bottom: 5px;
   font-size: 12px;
-  margin: 0;
   position: absolute;
   right: 5px;
 }
@@ -108,11 +107,11 @@ button:hover {
   top: 0;
   width: 100%;
 }
-.statistics a {
-  color: yellow;
+.stats a, .stats a:visited {
+  color: blue;
 }
-.statistics a:visited {
-  color: orange;
+.statistics a, .statistics a:visited {
+  color: yellow;
 }
 .entropy {
   right: 50%;
@@ -321,8 +320,10 @@ body.dark-theme {color: white; background-color: black;}
 .dark-theme input[type=range]::-moz-range-track {border: 1px solid white;}
 .dark-theme input[type=range]::-moz-range-thumb {border: 1px solid white;}
 .dark-theme .statistics {background-color: rgb(255, 255, 255, 0.85); color: black;}
+.dark-theme .stats a {color: yellow;}
+.dark-theme .stats a:visited {color: yellow;}
 .dark-theme .statistics a {color: #0000EE;}
-.dark-theme .statistics a:visited {color: #551A8B;}
+.dark-theme .statistics a:visited {color: #0000EE;}
 
 #theme_switcher {
   text-decoration: none;
