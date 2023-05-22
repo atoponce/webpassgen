@@ -133,11 +133,14 @@ function generatePassphrase(source) {
 }
 
 /**
- * 
+ * Toggle the visibility of the cell overflow div for password stats.
  * @param {String} source - One of the six generator cells.
  */
 function toggleStats(source) {
   let elem
+  const coords = {left: scrollX, top: scrollY, behavior: 'instant'}
+
+  console.log(coords)
 
   if (source === 'alternate') {
     elem = document.getElementById('alt-overlay')
@@ -158,6 +161,9 @@ function toggleStats(source) {
   } else {
     elem.style.display = ''
   }
+
+  // Not working in Firefox. What gives?
+  setTimeout(function() {scrollTo(coords)}, 0)
 }
 
 /** 
