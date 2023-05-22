@@ -140,8 +140,6 @@ function toggleStats(source) {
   let elem
   const coords = {left: scrollX, top: scrollY, behavior: 'instant'}
 
-  console.log(coords)
-
   if (source === 'alternate') {
     elem = document.getElementById('alt-overlay')
   } else if (source == 'cryptocurrency') {
@@ -156,15 +154,20 @@ function toggleStats(source) {
     elem = document.getElementById('random-overlay')
   }
 
-  // Scrolls to the top of the page on display change, so ...
+  // Toggling the div display in CSS scrolls to the top of the page. I don't
+  // want to lock scrolling, as the user may want to still scroll after looking
+  // at the stats. So CSS "overflow: hidden;" isn't going to work. Neither will
+  // some disableScroll() and enableScroll() functions.
   if (elem.style.display === '') {
     elem.style.display = 'block'
   } else {
     elem.style.display = ''
   }
 
-  // ... this hack scrolls back, but won't without without a timeout.
-  // Requires ~10 ms to work in Firefox consistently.
+  // So this hack scrolls back to our previous position, but won't without a
+  // timeout. Requires ~10 ms to work in Firefox consistently. Unfortunately,
+  // this can create a quick page blink in the UI, which isn't great.
+  // I really hate this, but it works.
   setTimeout(function() {scrollTo(coords)}, 10)
 }
 
