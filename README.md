@@ -16,21 +16,23 @@ communicated with a web server.
 ## Desktop Screenshots
 <table style="border-collapse: collapse; border: 1px solid black;">
 <tr><td style="border: 1px solid black;">
-<img alt="Desktop main generator screenshot" src="https://user-images.githubusercontent.com/699572/179521747-ea497985-a083-4744-985c-23a418a6a414.png" />
+<img alt="Desktop main generator screenshot" src="https://user-images.githubusercontent.com/699572/240378653-a0e388be-69b5-46fb-83bc-3d061fe20d4c.png" />
 </td><td style="border: 1px solid black;">
-<img alt="Desktop mouse entropy screenshot" src="https://user-images.githubusercontent.com/699572/127556854-71a053ec-5b91-4cce-aa61-7bf9c6e0860b.png" />
+<img alt="Desktop mouse entropy screenshot" src="https://user-images.githubusercontent.com/699572/240378656-abaa1a2b-cf67-4cec-8eb5-d938581cf5e5.png" />
 </td></tr></table>
 
 ## Mobile-Friendly Screenshots
 <table style="border-collapse: collapse; border: 1px solid black;">
 <tr><td style="border: 1px solid black;">
-<img alt="Light theme mobile screenshot" src="https://user-images.githubusercontent.com/699572/179523336-3dc18856-18c1-4c4e-ba43-f159689e04d7.png" />
+<img alt="Light theme mobile screenshot" src="https://user-images.githubusercontent.com/699572/240378645-b3ba8d5d-0f58-4406-8c97-708b624da5f1.png" />
 </td><td style="border: 1px solid black;">
 <img alt="Dark theme mobile screenshot" src="https://user-images.githubusercontent.com/699572/179523337-f6f3cc5a-f48f-4274-94f8-de48fe1be3f4.png" />
 </td></tr></table>
 
 ## Supported Languages
 Here is the full breakdown of language support across the passphrase generators:
+
+[comment]: <> (Ignore the table column formatting in the table below. It sucks in Vim, but looks great in Visual Student Code)
 
 | ID | ISO | Language   | Unique | Alt. | Bit. | Mon. | Dice | EFF | Notes                              |
 |:--:|:---:|:-----------|:------:|:----:|:----:|:----:|:----:|:---:|:-----------------------------------|
