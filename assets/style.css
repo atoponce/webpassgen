@@ -4,6 +4,12 @@
 }
 
 /* body tags */
+a {
+  color: #0000EE;
+}
+a:visited {
+  color: #551a8b;
+}
 body {
   color: black; background-color: white;
 }
