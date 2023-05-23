@@ -66,13 +66,13 @@ function generatePseudowords() {
 
 /**
  * Generate a Keychain formatted password.
- * @returns {Array} The password string, the length of the password, and the entropy of the password.
+ * @return {Array} The password string, the length of the password, and the entropy of the password.
  */
 function generateApple() {
   /**
    * Calculate the entropy of an Apple password containing n-blocks.
    * @param {number} n - The number of blocks in the password.
-   * @returns {number} Entropy in bits.
+   * @return {number} Entropy in bits.
    */
   var apple = function (n) {
     /*
@@ -145,7 +145,7 @@ function generateApple() {
 
 /**
  * Generate a Bubble Babble compliant password. Contains checksum.
- * @returns {Array} The password string, the length of the password, and the entropy of the password.
+ * @return {Array} The password string, the length of the password, and the entropy of the password.
  */
 function generateBabble() {
   // Spec: https://web.mit.edu/kenta/www/one/bubblebabble/spec/jrtrjwzi/draft-huima-01.txt
@@ -191,7 +191,7 @@ function generateBabble() {
 
 /**
  * Generate a Daefen-compliant password.
- * @returns {Array} An array containing the password, its length, and the entropy.
+ * @return {Array} An array containing the password, its length, and the entropy.
  */
 function generateDaefen() {
   const syllables = []
@@ -248,7 +248,7 @@ function generateDaefen() {
   /**
    * Determine if the letter is a conosonant.
    * @param {string} letter - A letter to be added to the password.
-   * @returns True if the letter is a consonant, false if it is a vowel.
+   * @return True if the letter is a consonant, false if it is a vowel.
    */
   var isConsonant = function (letter) {
     return consonants.indexOf(letter) >= 0
@@ -280,7 +280,7 @@ function generateDaefen() {
 
 /**
  * Generate a DIBELS password.
- * @returns {Array} The password string, the length of the password, and the entropy of the password.
+ * @return {Array} The password string, the length of the password, and the entropy of the password.
  */
 function generateDibels() {
   // Word lists taken from:
@@ -301,7 +301,7 @@ function generateDibels() {
 
 /**
  * Generate a Munemo password.
- * @returns {Array} The password string, the length of the password, and the entropy of the password.
+ * @return {Array} The password string, the length of the password, and the entropy of the password.
  */
 function generateMunemo() {
   // https://github.com/jmettraux/munemo
@@ -309,7 +309,7 @@ function generateMunemo() {
    * Recursive function to build an encoded string from a given number.
    * @param {number} num - The number to encode.
    * @param {string} str - The encoded string.
-   * @returns {string} The encoded string.
+   * @return {string} The encoded string.
    */
   var tos = function (num, str) {
     const munemo = [
@@ -359,7 +359,7 @@ function generateMunemo() {
 
 /**
  * Generate a Koremutake password.
- * @returns {Array} The password string, the length of the password, and the entropy of the password.
+ * @return {Array} The password string, the length of the password, and the entropy of the password.
  */
 function generateKoremutake() {
   // https://shorl.com/koremutake.php
@@ -367,7 +367,7 @@ function generateKoremutake() {
    * Recursive function to build an encoded string from a given number.
    * @param {number} num - The number to encode.
    * @param {string} str - The encoded string.
-   * @returns {string} The encoded string.
+   * @return {string} The encoded string.
    */
   var tos = function (num, str) {
     const koremutake = [
@@ -415,7 +415,7 @@ function generateKoremutake() {
 
 /**
  * Generate a Lepron pseudoword password.
- * @returns {Array} The password string, the length of the password, and the entropy of the password.
+ * @return {Array} The password string, the length of the password, and the entropy of the password.
  */
 function generateLepron() {
   // https://www.cambridgeclarion.org/34.html
@@ -498,7 +498,7 @@ function generateLepron() {
 
 /**
  * Generate a Letterblock password. Contains checksum.
- * @returns {Array} The password string, the length of the password, and the entropy of the password.
+ * @return {Array} The password string, the length of the password, and the entropy of the password.
  */
 function generateLetterblock() {
   // https://www.draketo.de/software/letterblock-diceware
@@ -508,7 +508,7 @@ function generateLetterblock() {
   /**
    * Determines if the string is a digit.
    * @param {string} str - The string to check.
-   * @returns True if the string is a digit, false otherwise.
+   * @return True if the string is a digit, false otherwise.
    */
   var isDigit = function (str) {
     return str.length === 1 && str.match(/[0-9]/)
@@ -517,7 +517,7 @@ function generateLetterblock() {
   /**
    * Replace a string with a leet-speak version.
    * @param {string} str - A stringified number.
-   * @returns A leet-speak version of the number.
+   * @return A leet-speak version of the number.
    */
   var replaceDigit = function (str) {
     if (str === '0') {
@@ -574,7 +574,7 @@ function generateLetterblock() {
   /**
    * Get the highest weighted bigram in the array.
    * @param {Array} arr - An array of bigram candidates.
-   * @returns The highest weighted bigram.
+   * @return The highest weighted bigram.
    */
   var calculateScores = function (arr) {
     let results = {}
@@ -661,7 +661,7 @@ function generateLetterblock() {
 
 /**
  * Generate a Proquints-compliant password.
- * @returns {Array} The password string, the length of the password, and the entropy of the password.
+ * @return {Array} The password string, the length of the password, and the entropy of the password.
  */
 function generateProquints() {
   // https://arxiv.org/html/0901.4016
@@ -693,7 +693,7 @@ function generateProquints() {
 
 /**
  * Generate an Urbit phonetic password.
- * @returns {Array} An array containing the password, its length, and the entropy.
+ * @return {Array} An array containing the password, its length, and the entropy.
  */
 function generateUrbit() {
   const prefixes = [

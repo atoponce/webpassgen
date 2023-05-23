@@ -131,7 +131,7 @@ function awardOfficerRank (bits) {
  * Concatenate multiple arrays into one.
  * @param {Array} resultConstructor - A JavaScript typed Array to store tho concatenated arrays.
  * @param  {...any} arrays - A iterable list of data to concatenate.
- * @returns {Array} - A typed array.
+ * @return {Array} - A typed array.
  */
 function concatenate(resultConstructor, ...arrays) {
   // https://exploringjs.com/impatient-js/ch_typed-arrays.html#concatenating-typed-arrays

@@ -134,7 +134,13 @@ function generateAlternate(selection) {
   }
 }
 
-/** Generate a passphrase based on an acronym */
+/**
+ * Generate a passphrase built up from an acronym.
+ * @param {Number} wordCount - The number of words in the passphrase.
+ * @param {Array} wordList - A list of words to choose frome.
+ * @param {Boolean} useEntropy - Boolean to use collected entropy.
+ * @return {Object} - Dictionary containing the passphrase and its security.
+ */
 function generateAcronym(wordCount, wordList, useEntropy) {
   var getSecurity = function (entropyList) {
     let total = 0
@@ -227,7 +233,7 @@ function generateColors() {
 
 /**
  * Generate an SKEY passphrase.
- * @returns {Array} An array containing the password, its length and the entropy.
+ * @return {Array} An array containing the password, its length and the entropy.
  */
 function generateSKey() {
   const wordList = uniquesOnly(pseudoSKey)  // Force unique elements in array.

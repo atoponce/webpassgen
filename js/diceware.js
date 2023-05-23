@@ -8,6 +8,12 @@ const dicewareProps = {
   "entropyCheck": document.getElementById('diceware-entropy-check'),
 }
 
+/**
+ * Generate a Diceware Natural Language Passphrase, alternating adj./noun.
+ * @param {Array} wordList - A 2-dimensional array of adjectives and nouns.
+ * @param {Boolean} useEntropy - Boolean to use collected entropy.
+ * @return {String} - The generated password as a hyphenated string.
+ */
 function generateNLP(wordList, useEntropy) {
   const entropy = getEntropy()
   const len = Math.ceil(entropy / Math.log2(wordList[0].length)) // adjectives

@@ -90,7 +90,7 @@ function getEntropy() {
 /**
  * Return a word list from the Alternate, Bitcoin, Diceware, or EFF generator.
  * @param {string} source - The selected passphrase wordlist.
- * @returns {string} The HTML selected option.
+ * @return {string} - The HTML selected option.
  */
 function getSourceList(source) {
   let sourceList
@@ -197,7 +197,7 @@ function toggleEntropyVisibility() {
  * A cryptographically secure uniform random number generator.
  * @param {number} count - The max number a random number can be.
  * @param {boolean} useEntropy - Whether or not to use the data in localStorage.entropy.
- * @returns {number} Uniform random number.
+ * @return {number} - Uniform random number.
  */
 function secRand(count, useEntropy) {
   let num = 0
@@ -226,7 +226,7 @@ function secRand(count, useEntropy) {
 /**
  * Remove any and all duplicates from an array. Case sensitive.
  * @param {Array} list - An array of strings or numbers which might contain duplicates.
- * @returns {Array} The array with duplicates removed.
+ * @return {Array} - The array with duplicates removed.
  */
 function uniquesOnly(list) {
   return [...new Set(list)] // enforce unique elements in array
@@ -238,7 +238,7 @@ function uniquesOnly(list) {
  * @param {string|Array} set - The data set to pick from.
  * @param {boolean} spaces - Whether or not to space-separate the password.
  * @param {boolean} useEntropy - Whether or not to use save entropy in localStorage.entropy.
- * @returns {string} The generated password.
+ * @return {string} - The generated password.
  */
 function generatePass(len, set, spaces, useEntropy) {
   let pass = ''
@@ -274,7 +274,7 @@ function generatePass(len, set, spaces, useEntropy) {
 /**
  * Determine if the color name needs to be outlined with CSS.
  * @param {number} hex - The hex value of the color.
- * @returns true if color is too dark, false if light enough.
+ * @return {boolean} - true if color is too dark, false if light enough.
  */
 function isTooDark(hex) {
   const rgb = parseInt(hex, 16)
@@ -293,7 +293,7 @@ function isTooDark(hex) {
 /**
  * Determine if the color name needs to be outlined with CSS.
  * @param {number} hex - The hex value of the color.
- * @returns true if the color is too light, false if dark enough
+ * @return {boolean} -true if the color is too light, false if dark enough
  */
 function isTooLight(hex) {
   const rgb = parseInt(hex, 16)
