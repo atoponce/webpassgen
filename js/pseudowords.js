@@ -26,6 +26,9 @@ function generatePseudowords() {
   } else if (pseudo === 'Daefen') {
     ret = generateDaefen()
     pseudoProps.setSize.innerText = "3,456 syllables"
+  } else if (pseudo === 'DIBELS') {
+    ret = generateDibels()
+    pseudoProps.setSize.innerText = pseudoDibels.length.toLocaleString() + " pseudowords"
   } else if (pseudo === 'Koremutake') {
     ret = generateKoremutake()
     pseudoProps.setSize.innerText = "128 syllables"
@@ -48,7 +51,7 @@ function generatePseudowords() {
   }
 
   const pass = ret[0]
-  const ent = ret[2]
+  const ent = ret[1]
 
   pseudoProps.passId.innerText = pass
   pseudoProps.passLength.innerText = pass.length + ' characters'
@@ -137,7 +140,7 @@ function generateApple() {
     pass.splice(6 * i, 0, '-')
   }
 
-  return [pass.join(''), pass.length, apple(n)]
+  return [pass.join(''), apple(n)]
 }
 
 /**
@@ -183,7 +186,117 @@ function generateBabble() {
 
   pass += 'x'
 
-  return [pass, pass.length, entropy.length * 8]
+  return [pass, entropy.length * 8]
+}
+
+/**
+ * Generate a Daefen-compliant password.
+ * @returns {Array} An array containing the password, its length, and the entropy.
+ */
+function generateDaefen() {
+  const syllables = []
+  const consonants = 'bcdfghjklmnprstvwz'
+  const vowels = 'aeiouy'
+  const entropy = getEntropy()
+
+  let pass = ''
+
+  // taken from https://github.com/alexvandesande/Daefen/blob/master/index.js
+  // vowel + consonant
+  for (let i = 0; i < vowels.length; i++) {
+    for (let j = 0; j < consonants.length; j++) {
+      syllables.push(vowels[i] + consonants[j])
+    }
+  }
+
+  // consonant + vowel
+  for (let i = 0; i < consonants.length; i++) {
+    for (let j = 0; j < vowels.length; j++) {
+      syllables.push(consonants[i] + vowels[j])
+    }
+  }
+
+  // consonant + vowel + vowel
+  for (let i = 0; i < consonants.length; i++) {
+    for (let j = 0; j < vowels.length; j++) {
+      for (let k = 0; k < vowels.length; k++) {
+        syllables.push(consonants[i] + vowels[j] + vowels[k])
+      }
+    }
+  }
+
+  // consonant + vowel + consonant
+  for (let i = 0; i < consonants.length; i++) {
+    for (let j = 0; j < vowels.length; j++) {
+      for (let k = 0; k < consonants.length; k++) {
+        syllables.push(consonants[i] + vowels[j] + consonants[k])
+      }
+    }
+  }
+
+  // vowel + consonant + vowel
+  for (let i = 0; i < vowels.length; i++) {
+    for (let j = 0; j < consonants.length; j++) {
+      for (let k = 0; k < vowels.length; k++) {
+        syllables.push(vowels[i] + consonants[j] + vowels[k])
+      }
+    }
+  }
+
+  const len = Math.ceil(entropy / Math.log2(syllables.length)) // 16 bits per "word"
+
+  /**
+   * Determine if the letter is a conosonant.
+   * @param {string} letter - A letter to be added to the password.
+   * @returns True if the letter is a consonant, false if it is a vowel.
+   */
+  var isConsonant = function (letter) {
+    return consonants.indexOf(letter) >= 0
+  }
+
+  for (let i = 0; i < len; i ++) {
+    let n = secRand(syllables.length, pseudoProps.entropyCheck.checked)
+    let lastWord = pass.split('-').slice(-1)[0]
+
+    if (
+      pass === '' || lastWord.length === syllables[n].length ||
+      (
+        lastWord.length < 5 &&
+        isConsonant(lastWord.slice(-1)) &&
+        isConsonant(syllables[n].slice(0, 1))
+      )) {
+      pass += syllables[n]
+    } else {
+      pass += '-' + syllables[n]
+    }
+  }
+
+  pass = pass.replace(/\b[a-z]/g, function(f) {
+    return f.toUpperCase()
+  })
+
+  return [pass, Math.floor(len * Math.log2(syllables.length))]
+}
+
+/**
+ * Generate a DIBELS password.
+ * @returns {Array} The password string, the length of the password, and the entropy of the password.
+ */
+function generateDibels() {
+  // Word lists taken from:
+  //   - 6th edition progress monitoring materials: https://web.archive.org/web/20191102033345/https://dibels.uoregon.edu/assessment/index/materialdownload?agree=true#dibels
+  //   - 8th edition benchmark materials: https://dibels.uoregon.edu/materials/dibels#materials
+  //   - 8th edition progress monitoring materials: https://dibels.uoregon.edu/materials/dibels#progress
+  //   - Acadia Learning (formerly DIBELS Next): https://acadiencelearning.org/acadience-learning-online-materials-download/
+  // Only grades K-3 contain Nonsense Word Fluency (NWF) words
+  const wordList = uniquesOnly(pseudoDibels)
+  const entropy = getEntropy()
+  const wordCount = Math.ceil(entropy / Math.log2(wordList.length))
+
+  let pass = generatePass(wordCount, wordList, true, pseudoProps.entropyCheck.checked)
+  pass = pass.replace(/ /g, '-')
+
+  return [pass, Math.floor(wordCount * Math.log2(wordList.length))]
 }
 
 /**
@@ -241,7 +354,7 @@ function generateMunemo() {
     pass = 'xa' + pass
   }
 
-  return [pass, pass.length, minEntropy]
+  return [pass, minEntropy]
 }
 
 /**
@@ -297,39 +410,7 @@ function generateKoremutake() {
 
   let pass = tos(num, '')
 
-  return [pass, pass.length, minEntropy]
-}
-
-/**
- * Generate a Proquints-compliant password.
- * @returns {Array} The password string, the length of the password, and the entropy of the password.
- */
-function generateProquints() {
-  // https://arxiv.org/html/0901.4016
-  const vowels = 'aiou'
-  const consonants = 'bdfghjklmnprstvz'
-  const entropy = getEntropy()
-  const len = Math.ceil(entropy / 16)
-
-  let pass = consonants[secRand(16, pseudoProps.entropyCheck.checked)]
-
-  for (let i = len; i > 0; i--) {
-    pass += vowels[secRand(4, pseudoProps.entropyCheck.checked)]
-    pass += consonants[secRand(16, pseudoProps.entropyCheck.checked)]
-    pass += vowels[secRand(4, pseudoProps.entropyCheck.checked)]
-
-    if (i === 1) {
-      break
-    }
-
-    pass += consonants[secRand(16, pseudoProps.entropyCheck.checked)]
-    pass += '-'
-    pass += consonants[secRand(16, pseudoProps.entropyCheck.checked)]
-  }
-
-  pass += consonants[secRand(16, pseudoProps.entropyCheck.checked)]
-
-  return [pass, pass.length, len * 16]
+  return [pass, minEntropy]
 }
 
 /**
@@ -412,7 +493,7 @@ function generateLepron() {
 
   pass = pass.join('-')
 
-  return [pass, pass.length, Math.floor(len * minEntropy)]
+  return [pass, Math.floor(len * minEntropy)]
 }
 
 /**
@@ -540,7 +621,7 @@ function generateLetterblock() {
   const blocks = []
   const checks = []
 
-  let pw = ''
+  let pass = ''
 
   for (let i = 0; i < numBlocks; i++) {
     const jail = []
@@ -568,103 +649,46 @@ function generateLetterblock() {
   }
 
   for (let i = 0; i < blocks.length; i++) {
-    pw += blocks[i]
+    pass += blocks[i]
 
     if (checks[i + 1] !== undefined) {
-      pw += delimiters[(checks[i] + checks[i + 1]) % 6]
+      pass += delimiters[(checks[i] + checks[i + 1]) % 6]
     }
   }
 
-  return [pw, pw.length, totalEntropy]
+  return [pass, totalEntropy]
 }
 
 /**
- * Generate a Daefen-compliant password.
- * @returns {Array} An array containing the password, its length, and the entropy.
+ * Generate a Proquints-compliant password.
+ * @returns {Array} The password string, the length of the password, and the entropy of the password.
  */
-function generateDaefen() {
-  const syllables = []
-  const consonants = 'bcdfghjklmnprstvwz'
-  const vowels = 'aeiouy'
+function generateProquints() {
+  // https://arxiv.org/html/0901.4016
+  const vowels = 'aiou'
+  const consonants = 'bdfghjklmnprstvz'
   const entropy = getEntropy()
+  const len = Math.ceil(entropy / 16)
 
-  let pass = ''
+  let pass = consonants[secRand(16, pseudoProps.entropyCheck.checked)]
 
-  // taken from https://github.com/alexvandesande/Daefen/blob/master/index.js
-  // vowel + consonant
-  for (let i = 0; i < vowels.length; i++) {
-    for (let j = 0; j < consonants.length; j++) {
-      syllables.push(vowels[i] + consonants[j])
+  for (let i = len; i > 0; i--) {
+    pass += vowels[secRand(4, pseudoProps.entropyCheck.checked)]
+    pass += consonants[secRand(16, pseudoProps.entropyCheck.checked)]
+    pass += vowels[secRand(4, pseudoProps.entropyCheck.checked)]
+
+    if (i === 1) {
+      break
     }
+
+    pass += consonants[secRand(16, pseudoProps.entropyCheck.checked)]
+    pass += '-'
+    pass += consonants[secRand(16, pseudoProps.entropyCheck.checked)]
   }
 
-  // consonant + vowel
-  for (let i = 0; i < consonants.length; i++) {
-    for (let j = 0; j < vowels.length; j++) {
-      syllables.push(consonants[i] + vowels[j])
-    }
-  }
+  pass += consonants[secRand(16, pseudoProps.entropyCheck.checked)]
 
-  // consonant + vowel + vowel
-  for (let i = 0; i < consonants.length; i++) {
-    for (let j = 0; j < vowels.length; j++) {
-      for (let k = 0; k < vowels.length; k++) {
-        syllables.push(consonants[i] + vowels[j] + vowels[k])
-      }
-    }
-  }
-
-  // consonant + vowel + consonant
-  for (let i = 0; i < consonants.length; i++) {
-    for (let j = 0; j < vowels.length; j++) {
-      for (let k = 0; k < consonants.length; k++) {
-        syllables.push(consonants[i] + vowels[j] + consonants[k])
-      }
-    }
-  }
-
-  // vowel + consonant + vowel
-  for (let i = 0; i < vowels.length; i++) {
-    for (let j = 0; j < consonants.length; j++) {
-      for (let k = 0; k < vowels.length; k++) {
-        syllables.push(vowels[i] + consonants[j] + vowels[k])
-      }
-    }
-  }
-
-  const len = Math.ceil(entropy / Math.log2(syllables.length)) // 16 bits per "word"
-
-  /**
-   * Determine if the letter is a conosonant.
-   * @param {string} letter - A letter to be added to the password.
-   * @returns True if the letter is a consonant, false if it is a vowel.
-   */
-  var isConsonant = function (letter) {
-    return consonants.indexOf(letter) >= 0
-  }
-
-  for (let i = 0; i < len; i ++) {
-    let n = secRand(syllables.length, pseudoProps.entropyCheck.checked)
-    let lastWord = pass.split('-').slice(-1)[0]
-
-    if (
-      pass === '' || lastWord.length === syllables[n].length ||
-      (
-        lastWord.length < 5 &&
-        isConsonant(lastWord.slice(-1)) &&
-        isConsonant(syllables[n].slice(0, 1))
-      )) {
-      pass += syllables[n]
-    } else {
-      pass += '-' + syllables[n]
-    }
-  }
-
-  pass = pass.replace(/\b[a-z]/g, function(f) {
-    return f.toUpperCase()
-  })
-
-  return [pass, pass.length, Math.floor(len * Math.log2(syllables.length))]
+  return [pass, len * 16]
 }
 
 /**
@@ -719,5 +743,5 @@ function generateUrbit() {
     }
   }
 
-  return [pass, pass.length, len * 16]
+  return [pass, len * 16]
 }
