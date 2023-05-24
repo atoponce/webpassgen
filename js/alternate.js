@@ -119,6 +119,7 @@ function generateAlternate(selection) {
 
     pass = results.passphrase
     altProps.passId.classList.add('acronym')
+    altProps.passId.classList.remove('colors')
     altProps.passId.innerHTML = pass
     altProps.passEntropy.innerText = results.security + ' bits'
     altProps.passLength.innerText = pass.replace(/<\/?span>/g, '').length + ' characters'
@@ -127,6 +128,7 @@ function generateAlternate(selection) {
     pass = generatePass(len, wordList, true, altProps.entropyCheck.checked)
     pass = pass.replace(/ /g, '-')
     altProps.passId.classList.remove('acronym')
+    altProps.passId.classList.remove('colors')
     altProps.passEntropy.innerText = Math.floor(len * Math.log2(wordList.length)) + ' bits'
     altProps.passId.innerText = pass
     altProps.passLength.innerText = [...pass].length + ' characters'
@@ -170,7 +172,7 @@ function generateAcronym(wordCount, wordList, useEntropy) {
 
     for (let j = 0; j < wordList.length; j++) {
       if (wordList[j].charAt(0).toLowerCase() === acronym[i].charAt(0).toLowerCase()) {
-        candidates.push("<span>" + wordList[j] + "</span>")
+        candidates.push("<p>" + wordList[j] + "</p>")
       }
     }
 
@@ -193,7 +195,6 @@ function generateColors() {
   const len = Math.ceil(entropy / Math.log2(colorKeys.length))
 
   altProps.passId.classList.remove("acronym") // Ensure leading word character is not red
-  //altProps.passId.classList.remove("password")
   altProps.passId.classList.add("colors")
 
   let pass = generatePass(len, colorKeys, true, altProps.entropyCheck.checked).split(' ')
@@ -261,7 +262,6 @@ function generateVAN() {
   const vanEntropy = Math.log2(alternateVAN[0].length * alternateVAN[1].length * alternateVAN[2].length)
   const len = Math.ceil(entropy / vanEntropy)
 
-  altProps.passId.classList.remove("acronym") // Ensure leading word character is not red
 
   let pass
   let vans = []

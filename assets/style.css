@@ -155,9 +155,18 @@ button:hover {
   text-align: center;
   width: 352px;
 }
-.colors {
+.colors, .acronym {
+  display: block;
+  margin-top: 57px;
+}
+.acronym p{
+  align-items: center;
   display: inline-block;
-  margin-top: 50px;
+  margin: 0;
+}
+.acronym p::first-letter {
+  color: red;
+  font-weight: bold;
 }
 .cell-title {
   background-color: #5777c0; /* blue */
@@ -186,13 +195,6 @@ button:hover {
 }
 .feather {
   vertical-align: text-bottom;
-}
-.acronym span {
-  display: inline-block;
-}
-.acronym span::first-letter {
-  color: red;
-  font-weight: bold;
 }
 .pass-button {
   display: inline-block;
