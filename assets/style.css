@@ -3,6 +3,11 @@
   src: url("./NotoColorEmoji-Regular.woff2") format("woff2");
 }
 
+@font-face {
+  font-family: "Noto Sans Mono";
+  src: url("./NotoSansMono-Regular.woff2") format("woff2");
+}
+
 /* body tags */
 a {
   color: #0000EE;
@@ -97,10 +102,10 @@ button:hover {
   visibility: hidden;
 }
 .stats, .cell_overlay {
-  bottom: 5px;
+  bottom: 10px;
   font-size: 12px;
   position: absolute;
-  right: 5px;
+  right: 10px;
 }
 .statistics {
   background-color: rgba(0, 0, 0, 0.85);
@@ -124,8 +129,8 @@ button:hover {
   position: absolute;
 }
 .checksum {
-  bottom: 22px;
-  right: 5px;
+  bottom: 27px;
+  right: 10px;
   font-size: 12px;
   position: absolute;
 }
@@ -137,21 +142,28 @@ button:hover {
   height: 210px;
   margin: 5px;
   position: relative;
+  vertical-align: middle;
   width: 372px;
 }
 .password {
-  font-family: "Dejavu Sans Mono", "Courier New", "Lucidia Console", Monaco, monospace;
-  font-size: 18px;
-  margin: 50px 10px 0px 10px;
+  align-items: center;
+  display: inline-grid;
+  font-family: "Noto Sans Mono";
+  font-size: 12pt;
+  height: 180px;
+  padding: 0 10px;
   text-align: center;
+  width: 352px;
 }
 .cell-title {
   background-color: #5777c0; /* blue */
   border-bottom: 1px solid black;
   color: white;
+  display: inline-block;
   margin-top: 0px;
-  padding: 5px;
+  padding: 5px 0;
   text-align: center;
+  width: 100%;
 }
 .optional {
   left: 10px;
