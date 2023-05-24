@@ -155,6 +155,10 @@ button:hover {
   text-align: center;
   width: 352px;
 }
+.colors {
+  display: inline-block;
+  margin-top: 50px;
+}
 .cell-title {
   background-color: #5777c0; /* blue */
   border-bottom: 1px solid black;
@@ -321,10 +325,12 @@ input[type=range]::-moz-range-thumb {
 @media only screen and (max-width: 767px) {
   #container { width: 480px; }
   .cell { margin: 5px 10px; width: 460px; }
+  .password { width: 440px; }
 }
 @media only screen and (max-width: 479px) {
   #container { width: 100%; }
   .cell { width: 95%; }
+  .password { width: 95%; }
 }
 
 /* override styles for Dark Theme */

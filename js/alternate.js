@@ -193,6 +193,8 @@ function generateColors() {
   const len = Math.ceil(entropy / Math.log2(colorKeys.length))
 
   altProps.passId.classList.remove("acronym") // Ensure leading word character is not red
+  //altProps.passId.classList.remove("password")
+  altProps.passId.classList.add("colors")
 
   let pass = generatePass(len, colorKeys, true, altProps.entropyCheck.checked).split(' ')
   const chosenTheme = localStorage.theme
