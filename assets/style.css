@@ -95,8 +95,8 @@ button:hover {
   font-weight: bold;
 }
 .use-entropy {
-  bottom: 5px;
-  left: 5px;
+  bottom: 10px;
+  left: 10px;
   font-size: 12px;
   position: absolute;
   visibility: hidden;
