@@ -85,22 +85,42 @@ function generateRandom() {
     s += 'ø¿¡¬√ƒ≈∆«»…ÀÃÕŒœ–—“”‘’÷◊ÿŸ⁄€‹›ﬁﬂ‡·‚„‰ÂÊÁËÈÍÎÏÌÓÔÒÚÛÙıˆ˜¯˘˙˚¸˝˛ˇ'
   } else if (option === "Whitespace" ) {
     unicodeWarn()
-    s  = '	' // character tabulation, U+0009
-    s += ' ' // space, U+0020
-    s += ' ' // no-break space, U+00A0
-    s += ' ' // en quad, U+2000
-    s += ' ' // em quad, U+2001
-    s += ' ' // en space, U+2002
-    s += ' ' // em space, U+2003
-    s += ' ' // three-per-em space, U+2004
-    s += ' ' // four-per-em space, U+2005
-    s += ' ' // six-per-em space, U+2006
-    s += ' ' // figure space, U+2007
-    s += ' ' // punctuation space, U+2008
-    s += ' ' // thin space, U+2009
-    s += ' ' // hair space, U+200A
-    s += ' ' // medium mathematical space, U+205F
-    s += '　' // ideographic space, U+3000
+    // Base22
+
+    /**
+     * Problematic whitespace characters that aren't printing:
+     *   '	': character tabulation, U+009
+     *   ' ': non-breaking space, U+00A0
+     *
+     * Defined as space characters in Unicode, but have a graphical mark:
+     *   ' ': Ogham space mark, U+1680
+     *   '〿': Ideographic half fill space, U+303F
+     */
+
+    // Sorted by Unicode hex code
+    s = []
+    s.push(' ') // Space, U+0020
+    s.push('᠎') // Mongolian vowel separator, U+180E
+    s.push(' ') // En quad, U+2000
+    s.push(' ') // Em quad, U+2001
+    s.push(' ') // En space, U+2002
+    s.push(' ') // Em space, U+2003
+    s.push(' ') // Three-per-em space, U+2004
+    s.push(' ') // Four-per-em space, U+2005
+    s.push(' ') // Six-per-em space, U+2006
+    s.push(' ') // Figure space, U+2007
+    s.push(' ') // Punctuation space, U+2008
+    s.push(' ') // Thin space, U+2009
+    s.push(' ') // Hair space, U+200A
+    s.push('​') // Zero width space, U+200B
+    s.push('‌') // Zero width non-joiner, U+200C
+    s.push('‍') // Zero width joiner, U+200D
+    s.push(' ') // Narrow no-break space, U+202F
+    s.push(' ') // Medium mathematical space, U+205F
+    s.push('⁠') // Word joiner, U+2060
+    s.push('　') // Ideographic space, U+3000
+    s.push('﻿') // Zero width non-breaking space, U+FEFF
+    s.push('󠀠') // Tag space, U+E0020
   }
 
   const len = Math.ceil(entropy / Math.log2(s.length))
