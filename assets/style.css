@@ -206,8 +206,11 @@ button:hover {
   display: block;
   margin-top: 80px;
 }
-.whitespace::before, .whitespace::after {
-  content: '"'
+.whitespace::before {
+  content: '“';
+}
+.whitespace::after {
+  content: '”';
 }
 
 /* ids */
