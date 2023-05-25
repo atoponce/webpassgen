@@ -89,12 +89,12 @@ function generateRandom() {
 
     /**
      * Problematic whitespace characters that aren't printing:
-     *   '	', character tabulation, U+009
-     *   ' ', non-breaking space, U+00A0
+     *   '	': character tabulation, U+009
+     *   ' ': non-breaking space, U+00A0
      *
      * Defined as space characters in Unicode, but have a graphical mark:
-     *   ' ', Ogham space mark, U+1680
-     *   '〿', Ideographic half fill space, U+303F
+     *   ' ': Ogham space mark, U+1680
+     *   '〿': Ideographic half fill space, U+303F
      */
 
     // Sorted by Unicode hex code
@@ -147,7 +147,7 @@ function generateRandom() {
     randomProps.passId.classList.remove('whitespace')
   }
 
-  randomProps.passLength.innerText = pass.length + ' characters'
+  randomProps.passLength.innerText = len + ' characters'
   randomProps.passId.removeAttribute('style') // from emoji
   randomProps.passId.innerText = pass
   randomProps.setSize.innerText = s.length.toLocaleString() + ' characters'
