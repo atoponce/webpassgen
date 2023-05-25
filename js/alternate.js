@@ -125,7 +125,7 @@ function generateAlternate(selection) {
     altProps.passLength.innerText = pass.replace(/<\/?span>/g, '').length + ' characters'
     altProps.setSize.innerText = wordList.length.toLocaleString() + ' words'
   } else {
-    pass = generatePass(len, wordList, true, altProps.entropyCheck.checked)
+    pass = generatePass(len, wordList, true, altProps.entropyCheck.checked).trim()
     pass = pass.replace(/ /g, '-')
     altProps.passId.classList.remove('acronym')
     altProps.passId.classList.remove('colors')
@@ -182,7 +182,7 @@ function generateAcronym(wordCount, wordList, useEntropy) {
   }
 
   const security = getSecurity(entropies)
-  const passphrase = passphraseWords.join('-');
+  const passphrase = passphraseWords.join('-')
 
   return {passphrase, security}
 }

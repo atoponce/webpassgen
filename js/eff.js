@@ -37,7 +37,7 @@ function generateEff(selection) {
   const entropy = getEntropy()
   const len = Math.ceil(entropy / Math.log2(wordList.length))
 
-  pass = generatePass(len, wordList, true, effProps.entropyCheck.checked)
+  pass = generatePass(len, wordList, true, effProps.entropyCheck.checked).trim()
   pass = pass.replace(/ /g, '-')
   effProps.passId.innerText = pass
   effProps.passLength.innerText = pass.length + ' characters'

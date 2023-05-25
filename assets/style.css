@@ -202,6 +202,13 @@ button:hover {
   right: 10px;
   top: 40px;
 }
+.whitespace {
+  display: block;
+  margin-top: 80px;
+}
+.whitespace::before, .whitespace::after {
+  content: '"'
+}
 
 /* ids */
 #container {

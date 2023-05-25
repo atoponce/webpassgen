@@ -293,7 +293,7 @@ function generateDibels() {
   const entropy = getEntropy()
   const wordCount = Math.ceil(entropy / Math.log2(wordList.length))
 
-  let pass = generatePass(wordCount, wordList, true, pseudoProps.entropyCheck.checked)
+  let pass = generatePass(wordCount, wordList, true, pseudoProps.entropyCheck.checked).trim()
   pass = pass.replace(/ /g, '-')
 
   return [pass, Math.floor(wordCount * Math.log2(wordList.length))]

@@ -83,11 +83,31 @@ function generateRandom() {
     // Excludes Unicode U+F8FF in the Corporate Private Use Area for the Apple logo
     s += 'ÄÅÇÉÑÖÜáàâäãåçéèêëíìîïñóòôöõúùûü†°¢£§•¶ß®©™´¨≠ÆØ∞±≤≥¥µ∂∑∏π∫ªºΩæ'
     s += 'ø¿¡¬√ƒ≈∆«»…ÀÃÕŒœ–—“”‘’÷◊ÿŸ⁄€‹›ﬁﬂ‡·‚„‰ÂÊÁËÈÍÎÏÌÓÔÒÚÛÙıˆ˜¯˘˙˚¸˝˛ˇ'
+  } else if (option === "Whitespace" ) {
+    unicodeWarn()
+    s = []
+    s += '	' // character tabulation, U+0009
+    s += ' ' // space, U+0020
+    s += ' ' // no-break space, U+00A0
+    s += ' ' // en quad, U+2000
+    s += ' ' // em quad, U+2001
+    s += ' ' // en space, U+2002
+    s += ' ' // em space, U+2003
+    s += ' ' // three-per-em space, U+2004
+    s += ' ' // four-per-em space, U+2005
+    s += ' ' // six-per-em space, U+2006
+    s += ' ' // figure space, U+2007
+    s += ' ' // punctuation space, U+2008
+    s += ' ' // thin space, U+2009
+    s += ' ' // hair space, U+200A
+    s += ' ' // medium mathematical space, U+205F
+    s += '　' // ideographic space, U+3000
   }
 
   const len = Math.ceil(entropy / Math.log2(s.length))
 
   let pass = generatePass(len, s, false, randomProps.entropyCheck.checked)
+  console.log(pass.length)
 
   if (option === 'Base32') {
     // Add Crockford's modulo 37 checksum
@@ -100,6 +120,12 @@ function generateRandom() {
     }
 
     pass += check[res % 37n]
+  }
+
+  if (option === 'Whitespace') {
+    randomProps.passId.classList.add('whitespace')
+  } else {
+    randomProps.passId.classList.remove('whitespace')
   }
 
   randomProps.passLength.innerText = pass.length + ' characters'

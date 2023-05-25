@@ -132,7 +132,7 @@ function generateDiceware(selection) {
     // Every other Diceware word list.
     const len = Math.ceil(entropy / Math.log2(wordList.length))
 
-    pass = generatePass(len, wordList, true, dicewareProps.entropyCheck.checked)
+    pass = generatePass(len, wordList, true, dicewareProps.entropyCheck.checked).trim()
     pass = pass.replace(/ /g, '-')
 
     dicewareProps.passEntropy.innerText = Math.floor(len * Math.log2(wordList.length)) + ' bits'
