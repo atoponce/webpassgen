@@ -85,8 +85,7 @@ function generateRandom() {
     s += 'ø¿¡¬√ƒ≈∆«»…ÀÃÕŒœ–—“”‘’÷◊ÿŸ⁄€‹›ﬁﬂ‡·‚„‰ÂÊÁËÈÍÎÏÌÓÔÒÚÛÙıˆ˜¯˘˙˚¸˝˛ˇ'
   } else if (option === "Whitespace" ) {
     unicodeWarn()
-    s = []
-    s += '	' // character tabulation, U+0009
+    s  = '	' // character tabulation, U+0009
     s += ' ' // space, U+0020
     s += ' ' // no-break space, U+00A0
     s += ' ' // en quad, U+2000
