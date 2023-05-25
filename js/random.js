@@ -106,7 +106,6 @@ function generateRandom() {
   const len = Math.ceil(entropy / Math.log2(s.length))
 
   let pass = generatePass(len, s, false, randomProps.entropyCheck.checked)
-  console.log(pass.length)
 
   if (option === 'Base32') {
     // Add Crockford's modulo 37 checksum
