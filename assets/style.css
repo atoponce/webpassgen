@@ -205,6 +205,7 @@ button:hover {
 .whitespace {
   display: block;
   margin-top: 80px;
+  white-space: pre-wrap;
 }
 .whitespace::before {
   content: '“';
