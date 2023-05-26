@@ -155,10 +155,10 @@ button:hover {
   text-align: center;
   width: 352px;
 }
-.password::selection {
-  background-color: #7F7F7F;
-  color: white;
-}
+.p48::selection { background-color: #ff6464; }
+.p56::selection { background-color: #ffcb64; }
+.p64::selection { background-color: #ffff64; }
+.p72::selection { background-color: #55d955; }
 .colors, .acronym {
   display: block;
   margin-top: 57px;
@@ -365,7 +365,6 @@ body.dark-theme {color: white; background-color: black;}
 .dark-theme .stats a:visited {color: yellow;}
 .dark-theme .statistics a {color: #0000EE;}
 .dark-theme .statistics a:visited {color: #0000EE;}
-.dark-theme .password::selection {color: white; background-color: #7F7F7F;}
 
 #theme_switcher {
   text-decoration: none;

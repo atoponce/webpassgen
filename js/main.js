@@ -340,15 +340,39 @@ function addEntropy(hex) {
  */
 function updateSlider(n) {
   const slider = document.getElementById('input')
+  const passClass = document.getElementsByClassName('password')
+
+  for (let i = 0; i < 6; i++) {
+    passClass[i].classList.remove('p48')
+    passClass[i].classList.remove('p56')
+    passClass[i].classList.remove('p64')
+    passClass[i].classList.remove('p72')
+  }
 
   if (n === 48) {
     slider.style.setProperty('--track-background', SITECOLORS.red)
+
+    for (let i = 0; i < 6; i++) {
+      passClass[i].classList.add('p48')
+    }
   } else if (n === 56) {
     slider.style.setProperty('--track-background', SITECOLORS.orange)
+
+    for (let i = 0; i < 6; i++) {
+      passClass[i].classList.add('p56')
+    }
   } else if (n === 64) {
     slider.style.setProperty('--track-background', SITECOLORS.yellow)
+
+    for (let i = 0; i < 6; i++) {
+      passClass[i].classList.add('p64')
+    }
   } else if (n >= 72) {
     slider.style.setProperty('--track-background', SITECOLORS.green)
+
+    for (let i = 0; i < 6; i++) {
+      passClass[i].classList.add('p72')
+    }
   }
 
   document.querySelector('#output').value = n
