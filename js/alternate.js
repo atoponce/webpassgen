@@ -117,7 +117,7 @@ function generateAlternate(selection) {
       counter++
     } while (results.security < entropy)
 
-    pass = results.passphrase
+    pass = results.passphrase.trim()
     altProps.passId.classList.add('acronym')
     altProps.passId.classList.remove('colors')
     altProps.passId.innerHTML = pass
