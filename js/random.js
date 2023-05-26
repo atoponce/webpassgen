@@ -85,42 +85,43 @@ function generateRandom() {
     s += 'ø¿¡¬√ƒ≈∆«»…ÀÃÕŒœ–—“”‘’÷◊ÿŸ⁄€‹›ﬁﬂ‡·‚„‰ÂÊÁËÈÍÎÏÌÓÔÒÚÛÙıˆ˜¯˘˙˚¸˝˛ˇ'
   } else if (option === "Whitespace" ) {
     unicodeWarn()
-    // Base22
-
+    // Base23
     /**
-     * Problematic whitespace characters that aren't printing:
-     *   '	': character tabulation, U+009
-     *   ' ': non-breaking space, U+00A0
-     *
+     * Test with https://tinyurl.com/yckk2jpc (CyberChef recipe)
+     * 
+     * '\u{0020}' (Space) is problematic in that it's collapsible and treated
+     * similarly as '\u{00A0}' when rendered.
+     * 
      * Defined as space characters in Unicode, but have a graphical mark:
-     *   ' ': Ogham space mark, U+1680
-     *   '〿': Ideographic half fill space, U+303F
+     *   '\u{1680}', // Ogham space mark
+     *   '\u{303F}', // Ideographic half fill space
+     * 
+     * Must be printed in pre-formatted text (<pre> or CSS) to catch tab.
      */
-
-    // Sorted by Unicode hex code
     s = [
-      ' ', // Space, U+0020
-      '᠎', // Mongolian vowel separator, U+180E
-      ' ', // En quad, U+2000
-      ' ', // Em quad, U+2001
-      ' ', // En space, U+2002
-      ' ', // Em space, U+2003
-      ' ', // Three-per-em space, U+2004
-      ' ', // Four-per-em space, U+2005
-      ' ', // Six-per-em space, U+2006
-      ' ', // Figure space, U+2007
-      ' ', // Punctuation space, U+2008
-      ' ', // Thin space, U+2009
-      ' ', // Hair space, U+200A
-      '​', // Zero width space, U+200B
-      '‌', // Zero width non-joiner, U+200C
-      '‍', // Zero width joiner, U+200D
-      ' ', // Narrow no-break space, U+202F
-      ' ', // Medium mathematical space, U+205F
-      '⁠', // Word joiner, U+2060
-      '　', // Ideographic space, U+3000
-      '﻿', // Zero width non-breaking space, U+FEFF
-      '󠀠', // Tag space, U+E0020
+      '\u{0009}', // Character tabulation
+      '\u{00A0}', // Non-breaking space
+      '\u{180E}', // Mongolian vowel separator
+      '\u{2000}', // En quad
+      '\u{2001}', // Em quad
+      '\u{2002}', // En space
+      '\u{2003}', // Em space
+      '\u{2004}', // Three-per-em space
+      '\u{2005}', // Four-per-em space
+      '\u{2006}', // Six-per-em space
+      '\u{2007}', // Figure space
+      '\u{2008}', // Punctuation space
+      '\u{2009}', // Thin space
+      '\u{200A}', // Hair space
+      '\u{200B}', // Zero width space
+      '\u{200C}', // Zero width non-joiner
+      '\u{200D}', // Zero width joiner
+      '\u{202F}', // Narrow no-break space
+      '\u{205F}', // Medium mathematical space
+      '\u{2060}', // Word joiner
+      '\u{3000}', // Ideographic space
+      '\u{FEFF}', // Zero width non-breaking space
+      '\u{E0020}', // Tag space
     ]
   }
 
