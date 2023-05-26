@@ -17,6 +17,10 @@ function generateRandom() {
   const entropy = getEntropy()
   const option = document.getElementById('random-options').value
 
+  randomProps.passCheck.innerText = ''
+  randomProps.passId.classList.remove('whitespace')
+  randomProps.passId.removeAttribute('style') // from emoji
+
   // ASCII optgroup
   if (option === 'Base94') {
     for (let i = 0; i < 94; i++) {
@@ -87,8 +91,6 @@ function generateRandom() {
     unicodeWarn()
     // Base23
     /**
-     * Test with https://tinyurl.com/yckk2jpc (CyberChef recipe)
-     * 
      * '\u{0020}' (Space) is problematic in that it's collapsible and treated
      * similarly as '\u{00A0}' when rendered.
      * 
@@ -126,7 +128,6 @@ function generateRandom() {
   }
 
   const len = Math.ceil(entropy / Math.log2(s.length))
-
   let pass = generatePass(len, s, false, randomProps.entropyCheck.checked)
 
   if (option === 'Base32') {
@@ -142,10 +143,7 @@ function generateRandom() {
     pass += check[res % 37n]
   }
 
-  randomProps.passCheck.innerText = ''
-  randomProps.passId.classList.remove('whitespace')
   randomProps.passLength.innerText = len + ' characters'
-  randomProps.passId.removeAttribute('style') // from emoji
   randomProps.passId.innerText = pass
   randomProps.setSize.innerText = s.length.toLocaleString() + ' characters'
   randomProps.passEntropy.innerText = Math.floor(len * Math.log2(s.length)) + ' bits'
@@ -162,7 +160,7 @@ function generateRandom() {
     selection.removeAllRanges()
     selection.addRange(range)
 
-    randomProps.passCheck.innerText = '(Ctrl-c to copy)'
+    randomProps.passCheck.innerText = '(Preselected to copy)'
     randomProps.passId.classList.add('whitespace')
   }
 
