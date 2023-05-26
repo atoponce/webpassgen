@@ -268,7 +268,6 @@ function generatePass(len, set, spaces, useEntropy) {
     }
   }
 
-  //return pass.trim()
   return pass
 }
 
