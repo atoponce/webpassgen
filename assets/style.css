@@ -156,7 +156,7 @@ button:hover {
   width: 352px;
 }
 .password::selection {
-  background-color: #5777c0;
+  background-color: #7F7F7F;
   color: white;
 }
 .colors, .acronym {
@@ -207,15 +207,15 @@ button:hover {
   top: 40px;
 }
 .whitespace {
+  display: inline-flex;
+  justify-content: center;
   white-space: break-spaces;
 }
 .whitespace::before {
-  content: '“';
-  display: contents;
+  content: '«';
 }
 .whitespace::after {
-  content: '”';
-  display: contents;
+  content: '»';
 }
 
 /* ids */
@@ -365,7 +365,7 @@ body.dark-theme {color: white; background-color: black;}
 .dark-theme .stats a:visited {color: yellow;}
 .dark-theme .statistics a {color: #0000EE;}
 .dark-theme .statistics a:visited {color: #0000EE;}
-.dark-theme .password::selection {color: black; background-color: #5777c0;}
+.dark-theme .password::selection {color: white; background-color: #7F7F7F;}
 
 #theme_switcher {
   text-decoration: none;
