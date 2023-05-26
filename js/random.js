@@ -142,12 +142,8 @@ function generateRandom() {
     pass += check[res % 37n]
   }
 
-  if (option === 'Whitespace') {
-    randomProps.passId.classList.add('whitespace')
-  } else {
-    randomProps.passId.classList.remove('whitespace')
-  }
-
+  randomProps.passCheck.innerText = ''
+  randomProps.passId.classList.remove('whitespace')
   randomProps.passLength.innerText = len + ' characters'
   randomProps.passId.removeAttribute('style') // from emoji
   randomProps.passId.innerText = pass
@@ -156,9 +152,20 @@ function generateRandom() {
 
   if (displayCheck) {
     randomProps.passCheck.innerText = 'Integrated checksum.'
-  } else {
-    randomProps.passCheck.innerText = ''
   }
+
+  if (option === 'Whitespace') {
+    const selection = window.getSelection()
+    const range = document.createRange()
+
+    range.selectNodeContents(randomProps.passId)
+    selection.removeAllRanges()
+    selection.addRange(range)
+
+    randomProps.passCheck.innerText = '(Ctrl-c to copy)'
+    randomProps.passId.classList.add('whitespace')
+  }
+
 }
 
 /** Generate an emoji password. */
