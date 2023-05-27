@@ -89,21 +89,16 @@ function generateRandom() {
     s += 'ø¿¡¬√ƒ≈∆«»…ÀÃÕŒœ–—“”‘’÷◊ÿŸ⁄€‹›ﬁﬂ‡·‚„‰ÂÊÁËÈÍÎÏÌÓÔÒÚÛÙıˆ˜¯˘˙˚¸˝˛ˇ'
   } else if (option === "Whitespace" ) {
     unicodeWarn()
-    // Base23
-    /**
-     * '\u{0020}' (Space) is problematic in that it's collapsible and treated
-     * similarly as '\u{00A0}' when rendered.
-     * 
-     * Defined as space characters in Unicode, but have a graphical mark:
-     *   '\u{1680}', // Ogham space mark
-     *   '\u{303F}', // Ideographic half fill space
-     * 
-     * Must be printed in pre-formatted text (<pre> or CSS) to catch tab.
-     */
+
+    // Must have a horizontal, printable, non-vertical, non-graphical width.
+    // Must be inside HTML <pre> or CSS pre-wrap/break-spaces to render tab.
+    //
+    // \u00A0 is converted to \u0020 on copy. This is a long-standing bug:
+    //   - Chrome: https://bugs.chromium.org/p/chromium/issues/detail?id=346096
+    //   - Firefox: https://bugzilla.mozilla.org/show_bug.cgi?id=359303
     s = [
       '\u{0009}', // Character tabulation
-      '\u{00A0}', // Non-breaking space
-      '\u{180E}', // Mongolian vowel separator
+      '\u{0020}', // Space
       '\u{2000}', // En quad
       '\u{2001}', // Em quad
       '\u{2002}', // En space
@@ -115,15 +110,10 @@ function generateRandom() {
       '\u{2008}', // Punctuation space
       '\u{2009}', // Thin space
       '\u{200A}', // Hair space
-      '\u{200B}', // Zero width space
-      '\u{200C}', // Zero width non-joiner
-      '\u{200D}', // Zero width joiner
       '\u{202F}', // Narrow no-break space
       '\u{205F}', // Medium mathematical space
-      '\u{2060}', // Word joiner
+      '\u{2800}', // Braille pattern blank
       '\u{3000}', // Ideographic space
-      '\u{FEFF}', // Zero width non-breaking space
-      '\u{E0020}', // Tag space
     ]
   }
 
