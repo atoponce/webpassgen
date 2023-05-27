@@ -187,7 +187,7 @@ button:hover {
   position: absolute;
   top: 40px;
 }
-.optional:after {
+.optional::after {
   bottom: 3px;
   color: black;
   content: '▶';
@@ -209,6 +209,7 @@ button:hover {
 .whitespace {
   display: inline-flex;
   justify-content: center;
+  tab-size: 1;
   white-space: break-spaces;
 }
 .whitespace::before {
