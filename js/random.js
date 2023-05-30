@@ -19,6 +19,7 @@ function generateRandom() {
 
   randomProps.passCheck.innerText = ''
   randomProps.passId.classList.remove('whitespace')
+  randomProps.passId.removeAttribute('lang') // from whitespace
   randomProps.passId.removeAttribute('style') // from emoji
 
   // ASCII optgroup
@@ -92,7 +93,6 @@ function generateRandom() {
 
     // Must have a horizontal, printable, non-vertical, non-graphical width.
     // Must be inside CSS "break-spaces" to render tab and not collapse or trim spaces.
-    //
     // \u{00A0} is converted to \u{0020} on copy. This is a long-standing bug:
     //   - https://bugs.chromium.org/p/chromium/issues/detail?id=346096
     //   - https://bugzilla.mozilla.org/show_bug.cgi?id=359303
@@ -154,6 +154,7 @@ function generateRandom() {
 
     randomProps.passCheck.innerText = '(Preselected to copy)'
     randomProps.passId.classList.add('whitespace')
+    randomProps.passId.lang = navigator.language
   }
 
 }
