@@ -91,14 +91,16 @@ function generateRandom() {
     unicodeWarn()
 
     // Must have a horizontal, printable, non-vertical, non-graphical width.
-    // Must be inside HTML <pre> or CSS pre-wrap/break-spaces to render tab.
+    // Must be inside CSS "break-spaces" to render tab and not collapse or trim spaces.
     //
-    // \u00A0 is converted to \u0020 on copy. This is a long-standing bug:
-    //   - Chrome: https://bugs.chromium.org/p/chromium/issues/detail?id=346096
-    //   - Firefox: https://bugzilla.mozilla.org/show_bug.cgi?id=359303
+    // \u{00A0} is converted to \u{0020} on copy. This is a long-standing bug:
+    //   - https://bugs.chromium.org/p/chromium/issues/detail?id=346096
+    //   - https://bugzilla.mozilla.org/show_bug.cgi?id=359303
+    //   - https://bugzilla.mozilla.org/show_bug.cgi?id=1769534
     s = [
       '\u{0009}', // Character tabulation
       '\u{0020}', // Space
+    //'\u{00A0}', // Non-breaking space
       '\u{2000}', // En quad
       '\u{2001}', // Em quad
       '\u{2002}', // En space
