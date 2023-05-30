@@ -212,7 +212,7 @@ button:hover {
   quotes: auto;
   tab-size: 1;
   /* Do not use "pre-wrap", as it removes end-of-line space.
-     "break-paces" does not collapse tabs and spaces.
+     "break-spaces" does not collapse tabs and spaces.
      https://developer.mozilla.org/en-US/docs/Web/CSS/white-space */
   white-space: break-spaces;
 }
