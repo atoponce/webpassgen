@@ -209,14 +209,18 @@ button:hover {
 .whitespace {
   display: inline-flex;
   justify-content: center;
+  quotes: auto;
   tab-size: 1;
+  /* Do not use "pre-wrap", as it removes end-of-line space.
+     "break-paces" does not collapse tabs and spaces.
+     https://developer.mozilla.org/en-US/docs/Web/CSS/white-space */
   white-space: break-spaces;
 }
 .whitespace::before {
-  content: '«';
+  content: open-quote;
 }
 .whitespace::after {
-  content: '»';
+  content: close-quote;
 }
 
 /* ids */
