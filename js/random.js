@@ -97,6 +97,7 @@ function generateRandom() {
     //   - https://bugzilla.mozilla.org/show_bug.cgi?id=359303
     //   - https://bugzilla.mozilla.org/show_bug.cgi?id=1769534
     s = [
+      //'a', 'b', 'c', // Use for testing
       '\u{0009}', // Character tabulation
       '\u{0020}', // Space
     //'\u{00A0}', // Non-breaking space
@@ -111,10 +112,13 @@ function generateRandom() {
       '\u{2008}', // Punctuation space
       '\u{2009}', // Thin space
       '\u{200A}', // Hair space
+      '\u{2028}', // Line separator
+      '\u{2029}', // Paragraph separator
       '\u{202F}', // Narrow no-break space
       '\u{205F}', // Medium mathematical space
       '\u{2800}', // Braille pattern blank
       '\u{3000}', // Ideographic space
+      '\u{FFA0}', // Halfwidth hangul filler
     ]
   }
 
