@@ -19,7 +19,6 @@ function generateRandom() {
 
   randomProps.passCheck.innerText = ''
   randomProps.passId.classList.remove('whitespace')
-  randomProps.passId.removeAttribute('lang') // from whitespace
   randomProps.passId.removeAttribute('style') // from emoji
 
   // ASCII optgroup
@@ -154,7 +153,6 @@ function generateRandom() {
 
     randomProps.passCheck.innerText = '(Preselected to copy)'
     randomProps.passId.classList.add('whitespace')
-    randomProps.passId.lang = navigator.language
   }
 
 }
