@@ -91,14 +91,15 @@ function generateRandom() {
     // Must be inside CSS "break-spaces" to render tab and not collapse or trim spaces.
     unicodeWarn()
 
-    /*
-     * Horizontal non-graphical non-zero width spaces/blanks.
-     * \u{00A0} is converted to \u{0020} on copy. This is a long-standing bug:
-     *   - https://bugs.chromium.org/p/chromium/issues/detail?id=346096
-     *   - https://bugzilla.mozilla.org/show_bug.cgi?id=359303
-     *   - https://bugzilla.mozilla.org/show_bug.cgi?id=1769534
-     */
     s = [
+      /*
+       * Non-zero width, horizontal, non-graphical spaces/blanks.
+       *
+       * \u{00A0} is converted to \u{0020} on copy. This is a long-standing bug:
+       *   - https://bugs.chromium.org/p/chromium/issues/detail?id=346096
+       *   - https://bugzilla.mozilla.org/show_bug.cgi?id=359303
+       *   - https://bugzilla.mozilla.org/show_bug.cgi?id=1769534
+       */
       '\u{0009}', // Character tabulation
       '\u{0020}', // Space
     //'\u{00A0}', // Non-breaking space
@@ -121,9 +122,10 @@ function generateRandom() {
       '\u{3000}', // Ideographic space
       '\u{FFA0}', // Halfwidth hangul filler
       /*
-       * Zero-width non-control spaces/blanks.
-       * "\u{115F}\u{1160}" creates a graphical glyph. However,
-       * "\u{1160}\u{3164}" creates a non-zero, non-graphical space width.
+       * Zero width, non-control spaces/blanks.
+       *
+       * "\u{115F}\u{1160}" produces a graphical glyph with Noto Sans. However,
+       * "\u{1160}\u{3164}" produces a non-zero width, horizontal, non-graphical space.
        */
     //'\u{115F}', // Hangul choseong filler
       '\u{1160}', // Hangul jungseong filler
