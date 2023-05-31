@@ -88,16 +88,17 @@ function generateRandom() {
     s += 'ÄÅÇÉÑÖÜáàâäãåçéèêëíìîïñóòôöõúùûü†°¢£§•¶ß®©™´¨≠ÆØ∞±≤≥¥µ∂∑∏π∫ªºΩæ'
     s += 'ø¿¡¬√ƒ≈∆«»…ÀÃÕŒœ–—“”‘’÷◊ÿŸ⁄€‹›ﬁﬂ‡·‚„‰ÂÊÁËÈÍÎÏÌÓÔÒÚÛÙıˆ˜¯˘˙˚¸˝˛ˇ'
   } else if (option === "Whitespace" ) {
+    // Must be inside CSS "break-spaces" to render tab and not collapse or trim spaces.
     unicodeWarn()
 
-    // Must have a horizontal, printable, non-vertical, non-graphical width.
-    // Must be inside CSS "break-spaces" to render tab and not collapse or trim spaces.
-    // \u{00A0} is converted to \u{0020} on copy. This is a long-standing bug:
-    //   - https://bugs.chromium.org/p/chromium/issues/detail?id=346096
-    //   - https://bugzilla.mozilla.org/show_bug.cgi?id=359303
-    //   - https://bugzilla.mozilla.org/show_bug.cgi?id=1769534
+    /*
+     * Horizontal non-graphical non-zero width spaces/blanks.
+     * \u{00A0} is converted to \u{0020} on copy. This is a long-standing bug:
+     *   - https://bugs.chromium.org/p/chromium/issues/detail?id=346096
+     *   - https://bugzilla.mozilla.org/show_bug.cgi?id=359303
+     *   - https://bugzilla.mozilla.org/show_bug.cgi?id=1769534
+     */
     s = [
-      //'a', 'b', 'c', // Use for testing
       '\u{0009}', // Character tabulation
       '\u{0020}', // Space
     //'\u{00A0}', // Non-breaking space
@@ -119,6 +120,20 @@ function generateRandom() {
       '\u{2800}', // Braille pattern blank
       '\u{3000}', // Ideographic space
       '\u{FFA0}', // Halfwidth hangul filler
+      /*
+       * Zero-width non-control spaces/blanks.
+       * "\u{115F}\u{1160}" creates a graphical glyph. However,
+       * "\u{1160}\u{3164}" creates a non-zero, non-graphical space width.
+       */
+    //'\u{115F}', // Hangul choseong filler
+      '\u{1160}', // Hangul jungseong filler
+      '\u{180E}', // Mongolian vowel separator
+      '\u{200B}', // Zero width space
+      '\u{200C}', // Zero width non-joiner
+      '\u{200D}', // Zero width joiner
+      '\u{2060}', // Word joiner
+      '\u{3164}', // Hangul filler
+      '\u{FEFF}', // Zero width non-breaking space
     ]
   }
 
