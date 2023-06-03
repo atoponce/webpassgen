@@ -1,4 +1,4 @@
-"use strict"
+//"use strict"
 
 // globals
 const PAGECONTAINER = document.getElementsByTagName('body')[0]
@@ -401,4 +401,16 @@ function loadPasses() {
   generatePassphrase('eff')
   generatePseudowords()
   generateRandom()
+}
+
+/** Sets a session storage variable */
+function mork() {
+  let str = ''
+  window.addEventListener('keydown', function(e) {
+      str = (str + e.key).substr(-4)
+      if (str === 'mork') {
+        sessionStorage.setItem('mork', true)
+      }
+    }, false
+  )
 }
