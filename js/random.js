@@ -52,7 +52,7 @@ function generateRandom() {
   } else if (option === 'Base8') {
     s = '01234567'
   } else if (option === 'Base4') {
-    s = 'ACGT'
+    s = '0123'
   } else if (option === 'Base2') {
     s = '01'
   }
@@ -139,7 +139,7 @@ function generateRandom() {
     ]
   }
 
-  const len = Math.ceil(entropy / Math.log2(s.length))
+  let len = Math.ceil(entropy / Math.log2(s.length))
   let pass = generatePass(len, s, false, randomProps.entropyCheck.checked)
 
   if (option === 'Base32') {
@@ -155,6 +155,18 @@ function generateRandom() {
     pass += check[res % 37n]
   }
 
+  if (option === 'Whitespace') {
+    // Eeaster egg for typing "mork" on the keyboard
+    if (sessionStorage.getItem('mork')) {
+      len = 1
+      pass = '\u{1F9D1}\u{1F3FB}\u{200D}\u{1F680}' // astronaut: light skin tone
+      sessionStorage.removeItem('mork')
+      randomProps.passCheck.innerText = 'Na-Nu Na-Nu'
+    } else {
+      randomProps.passId.classList.add('whitespace')
+    }
+  }
+
   randomProps.passLength.innerText = len + ' characters'
   randomProps.passId.innerText = pass
   randomProps.setSize.innerText = s.length.toLocaleString() + ' characters'
@@ -163,19 +175,6 @@ function generateRandom() {
   if (displayCheck) {
     randomProps.passCheck.innerText = 'Integrated checksum.'
   }
-
-  if (option === 'Whitespace') {
-    const selection = window.getSelection()
-    const range = document.createRange()
-
-    range.selectNodeContents(randomProps.passId)
-    selection.removeAllRanges()
-    selection.addRange(range)
-
-    randomProps.passCheck.innerText = '(Preselected to copy)'
-    randomProps.passId.classList.add('whitespace')
-  }
-
 }
 
 /** Generate an emoji password. */
