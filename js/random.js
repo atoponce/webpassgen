@@ -99,6 +99,7 @@ function generateRandom() {
        *   - https://bugs.chromium.org/p/chromium/issues/detail?id=346096
        *   - https://bugzilla.mozilla.org/show_bug.cgi?id=359303
        *   - https://bugzilla.mozilla.org/show_bug.cgi?id=1769534
+       * \u{00AD} replaces \u{00A0} in the meantime to provide exactly 32 characetrs.
        */
       '\u{0009}', // Character tabulation
       '\u{0020}', // Space
@@ -123,19 +124,16 @@ function generateRandom() {
       '\u{3000}', // Ideographic space
       '\u{3164}', // Hangul filler
       '\u{FFA0}', // Halfwidth hangul filler
-      /*
-       * Zero width, non-control spaces/blanks.
-       *
-       * "\u{115F}\u{1160}" produces a graphical glyph with Noto Sans.
-       */
+      // Zero width, non-control spaces/blanks.
       '\u{034F}', // Combining grapheme joiner
-    //'\u{115F}', // Hangul choseong filler
+      '\u{115F}', // Hangul choseong filler
       '\u{1160}', // Hangul jungseong filler
       '\u{180E}', // Mongolian vowel separator
       '\u{200B}', // Zero width space
       '\u{200C}', // Zero width non-joiner
       '\u{200D}', // Zero width joiner
       '\u{2060}', // Word joiner
+      '\u{2063}', // Invisible separator
       '\u{FEFF}', // Zero width non-breaking space
     ]
   }
