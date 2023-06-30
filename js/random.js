@@ -103,6 +103,7 @@ function generateRandom() {
       '\u{0009}', // Character tabulation
       '\u{0020}', // Space
     //'\u{00A0}', // Non-breaking space
+      '\u{00AD}', // Soft hyphen
       '\u{2000}', // En quad
       '\u{2001}', // Em quad
       '\u{2002}', // En space
@@ -120,13 +121,14 @@ function generateRandom() {
       '\u{205F}', // Medium mathematical space
       '\u{2800}', // Braille pattern blank
       '\u{3000}', // Ideographic space
+      '\u{3164}', // Hangul filler
       '\u{FFA0}', // Halfwidth hangul filler
       /*
        * Zero width, non-control spaces/blanks.
        *
-       * "\u{115F}\u{1160}" produces a graphical glyph with Noto Sans. However,
-       * "\u{1160}\u{3164}" produces a non-zero width, horizontal, non-graphical space.
+       * "\u{115F}\u{1160}" produces a graphical glyph with Noto Sans.
        */
+      '\u{034F}', // Combining grapheme joiner
     //'\u{115F}', // Hangul choseong filler
       '\u{1160}', // Hangul jungseong filler
       '\u{180E}', // Mongolian vowel separator
@@ -134,7 +136,6 @@ function generateRandom() {
       '\u{200C}', // Zero width non-joiner
       '\u{200D}', // Zero width joiner
       '\u{2060}', // Word joiner
-      '\u{3164}', // Hangul filler
       '\u{FEFF}', // Zero width non-breaking space
     ]
   }
