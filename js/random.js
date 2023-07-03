@@ -100,11 +100,12 @@ function generateRandom() {
        *   - https://bugzilla.mozilla.org/show_bug.cgi?id=359303
        *   - https://bugzilla.mozilla.org/show_bug.cgi?id=1769534
        * \u{00AD} replaces \u{00A0} in the meantime to provide exactly 32 characetrs.
+       *
+       * "\u{115F}\u{1160}" produces tofu with the Noto Sans Mono font. Replaced with \u{2062}
+       * and \u{2064} to accompany \u{2063}.
        */
       '\u{0009}', // Character tabulation
       '\u{0020}', // Space
-    //'\u{00A0}', // Non-breaking space
-      '\u{00AD}', // Soft hyphen
       '\u{2000}', // En quad
       '\u{2001}', // Em quad
       '\u{2002}', // En space
@@ -125,15 +126,16 @@ function generateRandom() {
       '\u{3164}', // Hangul filler
       '\u{FFA0}', // Halfwidth hangul filler
       // Zero width, non-control spaces/blanks.
+      '\u{00AD}', // Soft hyphen
       '\u{034F}', // Combining grapheme joiner
-      '\u{115F}', // Hangul choseong filler
-      '\u{1160}', // Hangul jungseong filler
       '\u{180E}', // Mongolian vowel separator
       '\u{200B}', // Zero width space
       '\u{200C}', // Zero width non-joiner
       '\u{200D}', // Zero width joiner
       '\u{2060}', // Word joiner
+      '\u{2062}', // Invisible times
       '\u{2063}', // Invisible separator
+      '\u{2064}', // Invisible plus
       '\u{FEFF}', // Zero width non-breaking space
     ]
   }
