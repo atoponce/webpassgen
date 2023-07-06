@@ -141,7 +141,7 @@ function generateRandom() {
   }
 
   let len = Math.ceil(entropy / Math.log2(s.length))
-  let pass = "\u{2800}" + generatePass(len, s, false, randomProps.entropyCheck.checked) + "\u{2800}"
+  let pass = generatePass(len, s, false, randomProps.entropyCheck.checked)
 
   if (option === 'Base32') {
     // Add Crockford's modulo 37 checksum
@@ -164,6 +164,7 @@ function generateRandom() {
       sessionStorage.removeItem('mork')
       randomProps.passCheck.innerText = 'Na-Nu Na-Nu'
     } else {
+      pass = "\u{2800}" + pass + "\u{2800}"
       randomProps.passId.classList.add('whitespace')
     }
   }
