@@ -27,31 +27,32 @@ function generateAlternate(selection) {
   } else if (selection === 'Elvish') {
     wordList = alternateElvish
   } else if (selection === 'Acronyms' || selection === 'Every Word List') {
-    wordList = Object.keys(alternateColors)           // 1029 words
-    wordList = wordList.concat(alternateEyeware)      // 8192 words
-    wordList = wordList.concat(alternatePgp)          //  512 words
-    wordList = wordList.concat(alternatePokerware)    // 5304 words
-    wordList = wordList.concat(alternateRockyou)      // 7776 words
-    wordList = wordList.concat(alternateSimpsons)     // 5000 words
-    wordList = wordList.concat(alternateSkey)         // 2048 words
-    wordList = wordList.concat(alternateTrump)        // 8192 words
-    wordList = wordList.concat(alternateWordle)       // 5790 words
-    wordList = wordList.concat(alternateVAN[0])       //  432 words
-    wordList = wordList.concat(alternateVAN[1])       //  373 words
-    wordList = wordList.concat(alternateVAN[2])       //  402 words
-    wordList = wordList.concat(bitcoinEN)             // 2048 words
-    wordList = wordList.concat(dicewareEN)            // 8192 words
-    wordList = wordList.concat(dicewareBeale)         // 7776 words
-    wordList = wordList.concat(dicewareNLP[0])        // 1296 words
-    wordList = wordList.concat(dicewareNLP[1])        // 7776 words
-    wordList = wordList.concat(effDistant)            // 1296 words
-    wordList = wordList.concat(effGameOfThrones)      // 4000 words
-    wordList = wordList.concat(effHarryPotter)        // 4000 words
-    wordList = wordList.concat(effLong)               // 7776 words
-    wordList = wordList.concat(effShort)              // 1296 words
-    wordList = wordList.concat(effStarTrek)           // 4000 words
-    wordList = wordList.concat(effStarWars)           // 4000 words
-    wordList = wordList.concat(moneroEN)              // 1626 words
+    wordList = Object.keys(alternateColors)           //  1029 words
+    wordList = wordList.concat(alternateEyeware)      //  8192 words
+    wordList = wordList.concat(alternateObscure)      // 18296 words
+    wordList = wordList.concat(alternatePgp)          //   512 words
+    wordList = wordList.concat(alternatePokerware)    //  5304 words
+    wordList = wordList.concat(alternateRockyou)      //  7776 words
+    wordList = wordList.concat(alternateSimpsons)     //  5000 words
+    wordList = wordList.concat(alternateSkey)         //  2048 words
+    wordList = wordList.concat(alternateTrump)        //  8192 words
+    wordList = wordList.concat(alternateWordle)       //  5790 words
+    wordList = wordList.concat(alternateVAN[0])       //   432 words
+    wordList = wordList.concat(alternateVAN[1])       //   373 words
+    wordList = wordList.concat(alternateVAN[2])       //   402 words
+    wordList = wordList.concat(bitcoinEN)             //  2048 words
+    wordList = wordList.concat(dicewareEN)            //  8192 words
+    wordList = wordList.concat(dicewareBeale)         //  7776 words
+    wordList = wordList.concat(dicewareNLP[0])        //  1296 words
+    wordList = wordList.concat(dicewareNLP[1])        //  7776 words
+    wordList = wordList.concat(effDistant)            //  1296 words
+    wordList = wordList.concat(effGameOfThrones)      //  4000 words
+    wordList = wordList.concat(effHarryPotter)        //  4000 words
+    wordList = wordList.concat(effLong)               //  7776 words
+    wordList = wordList.concat(effShort)              //  1296 words
+    wordList = wordList.concat(effStarTrek)           //  4000 words
+    wordList = wordList.concat(effStarWars)           //  4000 words
+    wordList = wordList.concat(moneroEN)              //  1626 words
     if (selection === 'Acronyms') {
       // Ensure only alphabetic characters.
       wordList = wordList.filter(element => /^[a-z]+$/gi.test(element))
@@ -81,6 +82,8 @@ function generateAlternate(selection) {
     wordList = alternateEyeware
   } else if (selection === 'Mongolian') {
     wordList = alternateMN
+  } else if (selection === 'Obscure') {
+    wordList = alternateObscure
   } else if (selection === 'PGP') {
     wordList = alternatePgp
   } else if (selection === 'Pokerware') {
@@ -109,12 +112,26 @@ function generateAlternate(selection) {
   const len = Math.ceil(entropy / Math.log2(wordList.length))
 
   if (selection === 'Acronyms') {
-    let counter = 4
-    let results
+    /**
+     * This is a hack to prevent wasting too much time iterating through the
+     * generation process. These minimum word counts were found via generation
+     * of 5,000 passphrases at each of the different entropy levels and counting
+     * the results.
+     *
+     * See https://gist.github.com/atoponce/317d8a697b685b73d8fa31b2c0615d05
+     */
+    let minWords = (entropy >> 3) - 2
 
+    if ([80, 88, 96, 104].indexOf(entropy) > -1) {
+      minWords -= 1
+    } else if ([112, 120, 128].indexOf(entropy) > -1) {
+      minWords -= 2
+    }
+
+    let results
     do {
-      results = generateAcronym(counter, wordList, altProps.entropyCheck.checked)
-      counter++
+      results = generateAcronym(minWords, wordList, altProps.entropyCheck.checked)
+      minWords++
     } while (results.security < entropy)
 
     pass = results.passphrase.trim()
@@ -145,13 +162,9 @@ function generateAlternate(selection) {
  */
 function generateAcronym(wordCount, wordList, useEntropy) {
   var getSecurity = function (entropyList) {
-    let total = 0
-
-    for (let i = 0; i < entropyList.length; i++) {
-      total += Math.log2(entropyList[i])
-    }
-
-    return Math.floor(total)
+    return Math.floor(
+      entropyList.reduce((total, a) => total + Math.log2(a), 0)
+    )
   }
 
   const candidates = []
@@ -167,11 +180,11 @@ function generateAcronym(wordCount, wordList, useEntropy) {
   const entropies = []
   const passphraseWords = []
 
-  for (let i = 0; i < acronym.length; i++) {
+  for(let i = 0; i < acronym.length; i++) {
     const candidates = []
 
     for (let j = 0; j < wordList.length; j++) {
-      if (wordList[j].charAt(0).toLowerCase() === acronym[i].charAt(0).toLowerCase()) {
+      if (wordList[j][0].toLowerCase() === acronym[i][0].toLowerCase()) {
         candidates.push("<p>" + wordList[j] + "</p>")
       }
     }
