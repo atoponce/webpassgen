@@ -32,7 +32,7 @@ communicated with a web server.
 ## Supported Languages
 Here is the full breakdown of language support across the passphrase generators:
 
-[comment]: <> (Ignore the table column formatting in the table below. It sucks in Vim, but looks great in Visual Student Code)
+[comment]: <> (Ignore the table column formatting in the table below. It sucks in Vim, but looks great in Visual Studio Code)
 
 | ID | ISO | Language   | Unique | Alt. | Bit. | Mon. | Dice | EFF | Notes                              |
 |:--:|:---:|:-----------|:------:|:----:|:----:|:----:|:----:|:---:|:-----------------------------------|
@@ -98,30 +98,31 @@ Here is the English breakdown:
 
 | ID  | Name                  | Wordlist  | Unique | Notes                                |
 |:---:|:----------------------|:----------|:------:|:-------------------------------------|
-| 12a | Colors                | Alternate | 1,029  | More available in the project        |
-| 12b | Deseret               | Alternate | 7,776  | Alternate English alphabet           |
-| 12c | Distant               | EFF       | 1,296  |                                      |
-| 12d | English               | Bitcoin   | 2,048  |                                      |
-| 12e | English               | Diceware  | 8,192  | 8k word list                         |
-| 12f | English               | Monero    | 1,626  |                                      |
-| 12g | English (Beale)       | Diceware  | 7,776  |                                      |
-| 12h | English (NLP)         | Diceware  | 9,072  | 1,296 adjectives, 7,776 nouns        |
-| 12i | Game of Thrones       | EFF       | 4,000  | Unofficial                           |
-| 12j | Harry Potter          | EFF       | 4,000  | Unofficial                           |
-| 12k | Long                  | EFF       | 1,296  |                                      |
-| 12l | Lord of the Rings     | Alternate | 7,776  | Eyeware list                         |
-| 12m | PGP                   | Alternate |   512  |                                      |
-| 12n | Pokerware             | Alternate | 5,304  | Formal list                          |
-| 12o | RockYou               | Alternate | 7,776  | Primarily English. RockYou breach    |
-| 12p | S/KEY                 | Alternate | 2,048  | RFC 2289                             |
-| 12q | Shavian               | Alternate | 7,776  | Alternate English alphabet           |
-| 12r | Short                 | EFF       | 1,296  |                                      |
-| 12s | Simpsons              | Alternate | 5,000  | From Peerio                          |
-| 12t | Star Trek             | EFF       | 4,000  | Unofficial                           |
-| 12u | Star Wars             | EFF       | 4,000  | Unofficial                           |
-| 12v | Trump                 | Alternate | 8,192  | From his Twitter account             |
-| 12w | Verb, Adjective, Noun | Alternate | 1,207  | 432 verbs, 373 adjectives, 402 nouns |
-| 12x | Wordle                | Alternate | 5,790  | See comment in word list             |
+| 12a | Colors                | Alternate |  1,029 | More available in the project        |
+| 12b | Deseret               | Alternate |  7,776 | Alternate English alphabet           |
+| 12c | Distant               | EFF       |  1,296 |                                      |
+| 12d | English               | Bitcoin   |  2,048 |                                      |
+| 12e | English               | Diceware  |  8,192 | 8k word list                         |
+| 12f | English               | Monero    |  1,626 |                                      |
+| 12g | English (Beale)       | Diceware  |  7,776 |                                      |
+| 12h | English (NLP)         | Diceware  |  9,072 | 1,296 adjectives, 7,776 nouns        |
+| 12i | Game of Thrones       | EFF       |  4,000 | Unofficial                           |
+| 12j | Harry Potter          | EFF       |  4,000 | Unofficial                           |
+| 12k | Long                  | EFF       |  1,296 |                                      |
+| 12l | Lord of the Rings     | Alternate |  7,776 | Eyeware list                         |
+| 12m | Obscure               | Alternate | 19,392 | Compiled from phrontistry.info       |
+| 12n | PGP                   | Alternate |    512 |                                      |
+| 12o | Pokerware             | Alternate |  5,304 | Formal list                          |
+| 12p | RockYou               | Alternate |  7,776 | Primarily English. RockYou breach    |
+| 12q | S/KEY                 | Alternate |  2,048 | RFC 2289                             |
+| 12r | Shavian               | Alternate |  7,776 | Alternate English alphabet           |
+| 12s | Short                 | EFF       |  1,296 |                                      |
+| 12t | Simpsons              | Alternate |  5,000 | From Peerio                          |
+| 12u | Star Trek             | EFF       |  4,000 | Unofficial                           |
+| 12v | Star Wars             | EFF       |  4,000 | Unofficial                           |
+| 12w | Trump                 | Alternate |  8,192 | From his Twitter account             |
+| 12x | Verb, Adjective, Noun | Alternate |  1,207 | 432 verbs, 373 adjectives, 402 nouns |
+| 12y | Wordle                | Alternate |  5,790 | See comment in word list             |
 
 Here is the Spanish breakdown:
 
