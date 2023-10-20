@@ -29,7 +29,7 @@ function generateAlternate(selection) {
   } else if (selection === 'Acronyms' || selection === 'Every Word List') {
     wordList = Object.keys(alternateColors)           //  1029 words
     wordList = wordList.concat(alternateEyeware)      //  8192 words
-    wordList = wordList.concat(alternateObscure)      // 18296 words
+    wordList = wordList.concat(alternateObscure)      // 19392 words
     wordList = wordList.concat(alternatePgp)          //   512 words
     wordList = wordList.concat(alternatePokerware)    //  5304 words
     wordList = wordList.concat(alternateRockyou)      //  7776 words
