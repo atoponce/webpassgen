@@ -201,7 +201,7 @@ function toggleEntropyVisibility() {
  */
 function secRand(count, useEntropy) {
   let num = 0
-  const min = 2 ** 16 % count
+  const min = 2 ** 32 % count
   const rand = new Uint16Array(1)
 
   if (useEntropy) {
