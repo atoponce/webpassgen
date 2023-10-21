@@ -53,6 +53,7 @@ function generateAlternate(selection) {
     wordList = wordList.concat(effStarTrek)           //  4000 words
     wordList = wordList.concat(effStarWars)           //  4000 words
     wordList = wordList.concat(moneroEN)              //  1626 words
+    wordList = wordList.concat(pseudoDibels)          //  3215 words
     if (selection === 'Acronyms') {
       // Ensure only alphabetic characters.
       wordList = wordList.filter(element => /^[a-z]+$/gi.test(element))
