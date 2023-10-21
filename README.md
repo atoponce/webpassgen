@@ -110,7 +110,7 @@ Here is the English breakdown:
 | 12j | Harry Potter          | EFF       |  4,000 | Unofficial                           |
 | 12k | Long                  | EFF       |  1,296 |                                      |
 | 12l | Lord of the Rings     | Alternate |  7,776 | Eyeware list                         |
-| 12m | Obscure               | Alternate | 19,392 | Compiled from phrontistry.info       |
+| 12m | Obscure               | Alternate | 19,687 | Compiled from phrontistry.info       |
 | 12n | PGP                   | Alternate |    512 |                                      |
 | 12o | Pokerware             | Alternate |  5,304 | Formal list                          |
 | 12p | RockYou               | Alternate |  7,776 | Primarily English. RockYou breach    |
