@@ -156,6 +156,9 @@ function generateAlternate(selection) {
 
 /**
  * Generate a passphrase built up from an acronym.
+ * There is some discussion that my approach might not be secure. A Mastodon
+ * discussion about it: https://fosstodon.org/deck/@atoponce/110839994357941432
+ * I'm not convinced this approach is flawed. But PR's are welcome!
  * @param {Number} wordCount - The number of words in the passphrase.
  * @param {Array} wordList - A list of words to choose frome.
  * @param {Boolean} useEntropy - Boolean to use collected entropy.
