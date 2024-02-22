@@ -168,7 +168,7 @@ function generateMonero(selection) {
   const entropy = Math.ceil(getEntropy() / 32) * 32 // Multiple of 32 bits
   const len = Math.ceil(entropy / Math.log2(wordList.length))
 
-  pass = generatePass(len, wordList, true, cryptoProps.entropyCheck.checked).split(' ')
+  pass = generatePass(len, wordList, true, cryptoProps.entropyCheck.checked).trim().split(' ')
 
   let prefixes = ''
 
