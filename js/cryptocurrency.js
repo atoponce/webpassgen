@@ -177,7 +177,8 @@ function generateMonero(selection) {
     prefixes += pass[i].substring(0, prefixLen)
   }
 
-  const checksum = crc32(prefixes)
+  const encoder = new TextEncoder()
+  const checksum = crc32(String.fromCharCode(...encoder.encode(prefixes)))
   const checkWord = pass[checksum % pass.length]
   pass.push(checkWord)
 
