@@ -136,31 +136,32 @@ function generateMonero(selection) {
 
   let pass = ''
   let wordList = ''
+  let prefixLen = 0
 
   if (selection === 'Chinese') {
-    wordList = moneroCN
+    wordList = moneroCN; prefixLen = 1
   } else if (selection === 'Dutch') {
-    wordList = moneroNL
+    wordList = moneroNL; prefixLen = 4
   } else if (selection === 'English') {
-    wordList = moneroEN
+    wordList = moneroEN; prefixLen = 3
   } else if (selection === 'Esperanto') {
-    wordList = moneroEO
+    wordList = moneroEO; prefixLen = 4
   } else if (selection === 'French') {
-    wordList = moneroFR
+    wordList = moneroFR; prefixLen = 4
   } else if (selection === 'German') {
-    wordList = moneroDE
+    wordList = moneroDE; prefixLen = 4
   } else if (selection === 'Italian') {
-    wordList = moneroIT
+    wordList = moneroIT; prefixLen = 4
   } else if (selection === 'Japanese') {
-    wordList = moneroJP
+    wordList = moneroJP; prefixLen = 3
   } else if (selection === 'Lojban') {
-    wordList = moneroJBO
+    wordList = moneroJBO; prefixLen = 4
   } else if (selection === 'Portuguese') {
-    wordList = moneroPT
+    wordList = moneroPT; prefixLen = 4
   } else if (selection === 'Russian') {
-    wordList = moneroRU
+    wordList = moneroRU; prefixLen = 4
   } else if (selection === 'Spanish') {
-    wordList = moneroES
+    wordList = moneroES; prefixLen = 4
   }
 
   wordList = uniquesOnly(wordList)  // Force unique elements in array.
@@ -168,15 +169,16 @@ function generateMonero(selection) {
   const entropy = Math.ceil(getEntropy() / 32) * 32 // Multiple of 32 bits
   const len = Math.ceil(entropy / Math.log2(wordList.length))
 
-  pass = generatePass(len, wordList, true, cryptoProps.entropyCheck.checked).split(' ')
+  pass = generatePass(len, wordList, true, cryptoProps.entropyCheck.checked).trim().split(' ')
 
   let prefixes = ''
 
   for (let i = 0; i < pass.length; i++) {
-    prefixes += pass[i].substring(0, 3)
+    prefixes += pass[i].substring(0, prefixLen)
   }
 
-  const checksum = crc32(prefixes)
+  const encoder = new TextEncoder()
+  const checksum = crc32(String.fromCharCode(...encoder.encode(prefixes)))
   const checkWord = pass[checksum % pass.length]
   pass.push(checkWord)
 
