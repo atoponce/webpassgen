@@ -109,14 +109,16 @@ function generateBitcoin(selection) {
 function generateMonero(selection) {
   /**
    * Calculate the CRC32 of a string.
+   * https://gist.github.com/lenqwang/1be7b4843a580f2c1df84d5360e5e88c
    * @param {string} string - The string to calculate.
    * @returns {number} A 32-bit integer.
    */
   var crc32 = function (str) {
-    // https://gist.github.com/lenqwang/1be7b4843a580f2c1df84d5360e5e88c
     let crc = 0 ^ -1
     const crcTable = []
+    const encoder = new TextEncoder()
 
+    // Build the CRC32 table.
     for (let i = 0; i < 256; i++) {
       let c = i
 
@@ -127,6 +129,10 @@ function generateMonero(selection) {
       crcTable[i] = c
     }
 
+    // Encode the string as raw bytes.
+    str = String.fromCharCode(...encoder.encode(str))
+
+    // Calculate the string checksum
     for (let i = 0; i < str.length; i++) {
       crc = (crc >>> 8) ^ crcTable[(crc ^ str.charCodeAt(i)) & 0xff]
     }
@@ -136,32 +142,35 @@ function generateMonero(selection) {
 
   let pass = ''
   let wordList = ''
-  let prefixLen = 0
+  let prefixLen = 4 // Common for most languages below
 
   if (selection === 'Chinese') {
-    wordList = moneroCN; prefixLen = 1
+    prefixLen = 1
+    wordList = moneroCN
   } else if (selection === 'Dutch') {
-    wordList = moneroNL; prefixLen = 4
+    wordList = moneroNL
   } else if (selection === 'English') {
-    wordList = moneroEN; prefixLen = 3
+    prefixLen = 3
+    wordList = moneroEN
   } else if (selection === 'Esperanto') {
-    wordList = moneroEO; prefixLen = 4
+    wordList = moneroEO
   } else if (selection === 'French') {
-    wordList = moneroFR; prefixLen = 4
+    wordList = moneroFR
   } else if (selection === 'German') {
-    wordList = moneroDE; prefixLen = 4
+    wordList = moneroDE
   } else if (selection === 'Italian') {
-    wordList = moneroIT; prefixLen = 4
+    wordList = moneroIT
   } else if (selection === 'Japanese') {
-    wordList = moneroJP; prefixLen = 3
+    prefixLen = 3
+    wordList = moneroJP
   } else if (selection === 'Lojban') {
-    wordList = moneroJBO; prefixLen = 4
+    wordList = moneroJBO
   } else if (selection === 'Portuguese') {
-    wordList = moneroPT; prefixLen = 4
+    wordList = moneroPT
   } else if (selection === 'Russian') {
-    wordList = moneroRU; prefixLen = 4
+    wordList = moneroRU
   } else if (selection === 'Spanish') {
-    wordList = moneroES; prefixLen = 4
+    wordList = moneroES
   }
 
   wordList = uniquesOnly(wordList)  // Force unique elements in array.
@@ -177,8 +186,7 @@ function generateMonero(selection) {
     prefixes += pass[i].substring(0, prefixLen)
   }
 
-  const encoder = new TextEncoder()
-  const checksum = crc32(String.fromCharCode(...encoder.encode(prefixes)))
+  const checksum = crc32(prefixes)
   const checkWord = pass[checksum % pass.length]
   pass.push(checkWord)
 
