@@ -113,11 +113,7 @@ function generateMonero(selection) {
    * @param {string} string - The string to calculate.
    * @returns {number} A 32-bit integer.
    */
-<<<<<<< HEAD
   var crc32 = function (str) {
-=======
-  var crc32 = function(str) {
->>>>>>> 8cda8f8 (small code cleanup with generateMonero())
     let crc = 0 ^ -1
     const crcTable = []
     const encoder = new TextEncoder()
@@ -133,15 +129,9 @@ function generateMonero(selection) {
       crcTable[i] = c
     }
 
-<<<<<<< HEAD
     // Encode the string as raw bytes.
     str = String.fromCharCode(...encoder.encode(str))
 
-    // Calculate the string checksum
-=======
-    str = String.fromCharCode(...encoder.encode(str))
-
->>>>>>> 8cda8f8 (small code cleanup with generateMonero())
     for (let i = 0; i < str.length; i++) {
       crc = (crc >>> 8) ^ crcTable[(crc ^ str.charCodeAt(i)) & 0xff]
     }
@@ -151,7 +141,6 @@ function generateMonero(selection) {
 
   let pass = ''
   let wordList = ''
-<<<<<<< HEAD
   let prefixLen = 4 // Common for most languages below
 
   if (selection === 'Chinese') {
@@ -162,18 +151,6 @@ function generateMonero(selection) {
   } else if (selection === 'English') {
     prefixLen = 3
     wordList = moneroEN
-=======
-  let prefixLen = 4
-
-  if (selection === 'Chinese') {
-    wordList = moneroCN
-    prefixLen = 1
-  } else if (selection === 'Dutch') {
-    wordList = moneroNL
-  } else if (selection === 'English') {
-    wordList = moneroEN
-    prefixLen = 3
->>>>>>> 8cda8f8 (small code cleanup with generateMonero())
   } else if (selection === 'Esperanto') {
     wordList = moneroEO
   } else if (selection === 'French') {
@@ -183,13 +160,8 @@ function generateMonero(selection) {
   } else if (selection === 'Italian') {
     wordList = moneroIT
   } else if (selection === 'Japanese') {
-<<<<<<< HEAD
     prefixLen = 3
     wordList = moneroJP
-=======
-    wordList = moneroJP
-    prefixLen = 3
->>>>>>> 8cda8f8 (small code cleanup with generateMonero())
   } else if (selection === 'Lojban') {
     wordList = moneroJBO
   } else if (selection === 'Portuguese') {
