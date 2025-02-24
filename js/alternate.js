@@ -32,14 +32,14 @@ function generateAlternate(selection) {
     wordList = wordList.concat(alternateObscure)      // 19392 words
     wordList = wordList.concat(alternatePgp)          //   512 words
     wordList = wordList.concat(alternatePokerware)    //  5304 words
-    wordList = wordList.concat(alternateRockyou)      //  7776 words
     wordList = wordList.concat(alternateSimpsons)     //  5000 words
     wordList = wordList.concat(alternateSkey)         //  2048 words
     wordList = wordList.concat(alternateTrump)        //  8192 words
-    wordList = wordList.concat(alternateWordle)       //  5790 words
     wordList = wordList.concat(alternateVAN[0])       //   432 words
     wordList = wordList.concat(alternateVAN[1])       //   373 words
     wordList = wordList.concat(alternateVAN[2])       //   402 words
+    wordList = wordList.concat(alternateWordle)       //  5790 words
+    wordList = wordList.concat(alternateZxcvbn)       // 30000 words
     wordList = wordList.concat(bitcoinEN)             //  2048 words
     wordList = wordList.concat(dicewareEN)            //  8192 words
     wordList = wordList.concat(dicewareBeale)         //  7776 words
@@ -89,8 +89,6 @@ function generateAlternate(selection) {
     wordList = alternatePgp
   } else if (selection === 'Pokerware') {
     wordList = alternatePokerware
-  } else if (selection === 'RockYou') {
-    wordList = alternateRockyou
   } else if (selection === 'Simpsons') {
     wordList = alternateSimpsons
   } else if (selection === 'Serbian') {
@@ -105,6 +103,8 @@ function generateAlternate(selection) {
     return generateVAN()
   } else if (selection === 'Wordle') {
     wordList = alternateWordle
+  } else if (selection === 'zxcvbn') {
+    wordList = alternateZxcvbn
   }
 
   wordList = uniquesOnly(wordList)  // Force unique elements in array.
