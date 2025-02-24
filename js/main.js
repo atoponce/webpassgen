@@ -202,7 +202,7 @@ function toggleEntropyVisibility() {
 function secRand(count, useEntropy) {
   let num = 0
   const min = 2 ** 32 % count
-  const rand = new Uint16Array(1)
+  const rand = new Uint32Array(1)
 
   if (useEntropy) {
     const entropy = JSON.parse(localStorage.entropy)
