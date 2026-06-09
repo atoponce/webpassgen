@@ -138,7 +138,7 @@ Here is the French breakdown:
 | ID  | Name   | Wordlist | Unique | Notes                         |
 |:---:|:-------|:---------|:------:|:------------------------------|
 | 18a | French | Bitcoin  | 2,048  |                               |
-| 18b | French | Diceware | 7,776  |                               |
+| 18b | French | Diceware | 8,192  |                               |
 | 18c | French | Monero   | 1,626  |                               |
 
 Here is the Italian breakdown:
