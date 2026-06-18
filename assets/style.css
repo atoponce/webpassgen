@@ -159,16 +159,16 @@ button:hover {
 .p56::selection { background-color: #ffcb64; }
 .p64::selection { background-color: #ffff64; }
 .p72::selection { background-color: #55d955; }
-.colors, .acronym {
+.colors, .backronym {
   display: block;
   margin-top: 57px;
 }
-.acronym p{
+.backronym p{
   align-items: center;
   display: inline-block;
   margin: 0;
 }
-.acronym p::first-letter {
+.backronym p::first-letter {
   color: red;
   font-weight: bold;
 }
