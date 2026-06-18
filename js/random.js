@@ -156,6 +156,8 @@ function generateRandom() {
     pass += check[res % 37n]
   }
 
+  let layout;
+
   if (option === 'Whitespace') {
     // Eeaster egg for typing "mork" on the keyboard
     if (sessionStorage.getItem('mork')) {
@@ -167,6 +169,36 @@ function generateRandom() {
       pass = "\u{2800}" + pass + "\u{2800}"
       randomProps.passId.classList.add('whitespace')
     }
+  } else if (option === 'Colemak' ) {
+    layout = layouts.COLEMAK;
+  } else if (option === 'Dvorak' ) {
+    layout = layouts.DVORAK;
+  } else if (option === 'Norman' ) {
+    layout = layouts.NORMAN;
+  } else if (option === 'Qwerty' ) {
+    layout = layouts.QWERTY;
+  } else if (option === 'Workman') {
+    layout = layouts.WORKMAN;
+  }
+
+  if (typeof(layout) === 'object') {
+    const entropy = getEntropy();
+    let rand = secRand(94, randomProps.entropyCheck.checked);
+    let bits = Math.log2(94);
+    let char = String.fromCharCode(rand + 33);
+
+    pass = char;
+
+    while (bits <= entropy) {
+      const len = layout[char].length;
+
+      bits += Math.log2(len);
+      rand = secRand(len, randomProps.entropyCheck.checked);
+      char = layout[char][rand];
+      pass += char;
+    }
+
+    len = pass.length;
   }
 
   randomProps.passLength.innerText = len + ' characters'

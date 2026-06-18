@@ -36,12 +36,13 @@
       </div>
       <div id='content'>
 
+        <!-- Alternate -->
         <div id='alt-default' class='cell'>
           <span class='cell-title'><strong>Alternate</strong></span>
           <div class='optional'>
             <select id='alt-options'>
               <optgroup label='English'>
-                <option>Acronyms</option>
+                <option>Backronyms</option>
                 <option selected='selected'>Common Words Only</option>
                 <option>Every Word List</option>
                 <option disabled>――――――――――</option>
@@ -94,6 +95,7 @@
           </div>
         </div>
 
+        <!-- Cryptocurrency -->
         <div id='crypto-default' class='cell'>
           <span class='cell-title'><strong>Cryptocurrency</strong></span>
           <div class='optional'>
@@ -150,6 +152,7 @@
           <div class='checksum'><span id='crypto-check'></span></div>
         </div>
 
+        <!-- Diceware -->
         <div id='diceware-default' class='cell'>
           <span class='cell-title'><strong>Diceware</strong></span>
           <div class='optional'>
@@ -212,6 +215,7 @@
           <div class='checksum'><span id='diceware-check'></span></div>
         </div>
 
+        <!-- EFF -->
         <div id='eff-default' class='cell'>
           <span class='cell-title'><strong>EFF</strong></span>
           <div class='optional'>
@@ -252,6 +256,7 @@
           <div class='checksum'><span id='eff-check'></span></div>
         </div>
 
+        <!-- Pseudowords -->
         <div id='pseudo-default' class='cell'>
           <span class='cell-title'><strong>Pseudowords</strong></span>
           <div class='optional'>
@@ -292,6 +297,7 @@
           <div class='checksum'><span id='pseudo-check'></span></div>
         </div>
 
+        <!--- Random -->
         <div id='random-default' class='cell'>
           <span class='cell-title'><strong>Random</strong></span>
           <div class='optional'>
@@ -312,6 +318,13 @@
                 <option>Base8</option>
                 <option>Base4</option>
                 <option>Base2</option>
+              </optgroup>
+              <optgroup label='Keyboard Walk'>
+                <option>Colemak</option>
+                <option>Dvorak</option>
+                <option>Norman</option>
+                <option>Qwerty</option>
+                <option>Workman</option>
               </optgroup>
               <optgroup label='Unicode'>
                 <option>Emoji</option>
@@ -478,6 +491,7 @@
 
     <!-- emoji - on its own -->
     <script src='lists/randomEmoji.js'></script>
+    <script src='lists/randomWalk.js'></script>
 
     <script>
       "use strict"
