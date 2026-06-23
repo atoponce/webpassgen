@@ -175,7 +175,7 @@ function generateRandom() {
     layout = layouts.DVORAK;
   } else if (option === 'Norman' ) {
     layout = layouts.NORMAN;
-  } else if (option === 'Qwerty' ) {
+  } else if (option === 'QWERTY' ) {
     layout = layouts.QWERTY;
   } else if (option === 'Workman') {
     layout = layouts.WORKMAN;
