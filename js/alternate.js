@@ -30,6 +30,8 @@ function generateAlternate(selection) {
     wordList = Object.keys(alternateColors)           //  1029 words
     wordList = wordList.concat(alternateEyeware)      //  8192 words
     wordList = wordList.concat(alternateObscure)      // 19392 words
+    wordList = wordList.concat(alternateOrchardAlpha) //  1296 words
+    wordList = wordList.concat(alternateOrchardQWERTY)//  1296 words
     wordList = wordList.concat(alternatePgp)          //   512 words
     wordList = wordList.concat(alternatePokerware)    //  5304 words
     wordList = wordList.concat(alternateSimpsons)     //  5000 words
@@ -60,6 +62,8 @@ function generateAlternate(selection) {
     }
   } else if (selection === 'Common Words Only') {
     wordList = alternatePgp
+    wordList = wordList.concat(alternateOrchardAlpha) //  1296 words
+    wordList = wordList.concat(alternateOrchardQWERTY)//  1296 words
     wordList = wordList.concat(alternatePokerware)
     wordList = wordList.concat(alternateVAN[0])
     wordList = wordList.concat(alternateVAN[1])
@@ -85,6 +89,10 @@ function generateAlternate(selection) {
     wordList = alternateMN
   } else if (selection === 'Obscure') {
     wordList = alternateObscure
+  } else if (selection === 'Orchard Street Alpha') {
+    wordList = alternateOrchardAlpha
+  } else if (selection === 'Orchard Street QWERTY') {
+    wordList = alternateOrchardQWERTY
   } else if (selection === 'PGP') {
     wordList = alternatePgp
   } else if (selection === 'Pokerware') {
