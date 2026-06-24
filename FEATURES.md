@@ -31,7 +31,7 @@ on the keyboard, and memorability of passphrases.
 Those three families of generators are broken down into six general categories:
 
 1. Alternate: A selection of different approaches to passphrase generation.
-2. Bitcoin: All [officially defined][1] BIP 0039 language word lists.
+2. Cryptocurrency: All [officially defined][1] BIP 0039 language word lists, and the [Monero project][5].
 3. Diceware: All [officially defined][2] word lists.
 4. EFF: The [official lists][3] provided by the EFF and [unofficial lists][4] corrected by me.
 5. Pseudowords: A selection of different approaches to pseudoword generation.
@@ -41,6 +41,7 @@ Those three families of generators are broken down into six general categories:
 [2]: https://diceware.com
 [3]: https://www.eff.org/dice
 [4]: https://gist.github.com/atoponce/03109c0a51aededbddaf40b4c0aa0d7d/
+[5]: https://github.com/monero-project/monero/tree/master/src/mnemonics
 
 Below is a list of the features that this project supports, with the various generators that supply
 each feature. Note that many generators have multiple features.
@@ -59,6 +60,13 @@ preventing hashing of wrong passwords.
 * Bitcoin
 * Pseudowords: Bubble Babble, Letterblock Diceware
 * Random: Base32
+
+## Convenience
+Sometimes passwords need to be entered into non-computing devices like televisions. Entering these
+can be cumbersome if a keyboard is not present, such as when using a remote control. Word lists
+can be built to accomodate this.
+
+* Alternate: Orchard Street Alpha, Orchard Street QWERTY
 
 ## Educational Discussion
 Passphrases from a deck of playing cards? Twitter? Simpsons episodes? Leaked passwords? These
@@ -87,11 +95,13 @@ for tactile use, not visual use.
 Just categorizes character density for the same security level into high, medium, and low.
 
 ### High
+* Alternate: Every Word List
 * Pseudowords: Letterblock Diceware
 * Random: Base94 - Base52
 * Random: Braille, Emoji, ISO 8859-1, Latin Extended
 
 ### Medium
+* Alternate: Common Words Only
 * Pseudowords: Apple, Inc.
 * Random: Base36 - Base16
 
@@ -109,12 +119,19 @@ generators. It may take a couple generations for the site to accept it however.
 * Pseudowords: Apple, Inc, Letterblock Diceware
 * Random: Base94, Base85
 
+## Memorability
+Are there tricks such as visual cues or mneomonics we can use to help remember the password or
+passphrase? We should all be using a password manager, but sometimes it's not immediately available
+or we type it just barely enough that it remains on the frings of our memory.
+
+* Alternate: Bacronyms, Colors, "Verb, Adjective, Noun"
+
 ## More Natural English Grammar
 One problem with passphrases is their lack of language structure. These generators attempt either
 implicitly or explicitly to crease passphrases that seem more "natural", in hopes of making them
 easier to recall from memory.
 
-* Alternate: Simpsons, Trump
+* Alternate: Simpsons, Trump, "Verb, Adjective, Noun"
 * Diceware: English (NLP)
 
 ## Multiple Languages
@@ -161,5 +178,5 @@ in a data center. These word lists are designed such that each word has its own 
 As with verbal unambiguity, these are visually unambiguous, even you might need to know the
 character set in advance. They should read from screens or printed documents without confusion.
 
-* Alternate: Colors
+* Alternate: Bacronyms, Colors
 * Random: Base32 - Base2, Coin Flips, DNA Sequence
