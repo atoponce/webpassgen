@@ -44,8 +44,8 @@
             <li><strong>What is the goal?</strong> To add entropy to the browser CSPRNG to produce a true random password.</li>
             <li><strong>Do I need it?</strong> Most likely not. Your passwords are already secure even if you don't use this tool.</li>
             <li><strong>Why then?</strong> Paranoia—you suspect the browser CSPRNG is compromised or not sufficiently seeded.</li>
-            <li><strong>What is a "sample"?</strong> It's 16 bits that can be used for a passphrase word or password character.</li>
-            <li><strong>How much do I need?</strong> You'll need about 5-7 samples per passphrase, and 11-15 samples per password.</li>
+            <li><strong>What is a sample?</strong> It's 32 bits that can be used for a passphrase word or password character.</li>
+            <li><strong>How much do I need?</strong> For 72 bits, 5-7 samples per passphrase, and 11-15 samples per password.</li>
             <li><strong>Then what?</strong> Go back to the <a href='index.html'>password generator</a>, check "Add entropy?", then the purple "Generate" button.</li>
             <li><strong>Star Trek? Seriously?</strong> A bit of fun collecting entropy. The more bits you collect, the higher your rank.</li>
             <li><strong>What are the ranks?</strong> There are 13 ranks from "Cadet" to "Fleet Admiral". It grows exponentially.</li>
@@ -57,9 +57,9 @@
             <li>The noise above is generated with the browser's CSPRNG.</li>
             <li>When your mouse or finger is moved, the bit at the xy-coordinate is collected.</li>
             <li>When two bits are collected, they are decorrelated using <a href='https://en.wikipedia.org/wiki/Hardware_random_number_generator#Software_whitening'>John von Neumann's randomness extractor</a>.</li>
-            <li>16 decorrelated bits are stored in an array as 1 sample.</li>
-            <li>During password generation, each 16-bit sample is mixed with the browser CSPRNG using XOR.</li>
-            <li>Each used 16-bit sample is then discarded.</li>
+            <li>32 decorrelated bits are stored in an array as 1 sample.</li>
+            <li>During password generation, each 32-bit sample is mixed with the browser CSPRNG using XOR.</li>
+            <li>Each used 32-bit sample is then discarded.</li>
           </ol>
         </p>
       </div>
@@ -71,7 +71,7 @@
         <p>
           <a href="https://github.com/atoponce/webpassgen"><img alt="Github logo" title="Get the source code" src="assets/github.png" /></a>
           <a href="https://github.com/atoponce/webpassgen/releases/latest"><img alt="Download icon" title="Download latest release" src="assets/download.png" /></a>
-          <a href="https://twitter.com/AaronToponce"><img alt="Twitter logo" title="Meet the author" src="assets/twitter.png" /></a>
+          <a href='https://fosstodon.org/@atoponce'><img alt='Mastodon logo' title='Meet the author' src='assets/mastodon.png' /></a>
         </p>
         <p id='version'>Version: development</p>
       </div>
