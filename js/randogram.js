@@ -169,7 +169,7 @@ function extractRandomness() {
       randogramProps.bits.push(randogramProps.neumann[0])
       randogramProps.lifetimeBits++
 
-      if (randogramProps.bits.length === 16) {
+      if (randogramProps.bits.length === 32) {
         randogramProps.entropy.push(parseInt(randogramProps.bits.join(''), 2))
         randogramProps.bits = []
       }
@@ -230,7 +230,7 @@ function updateEntropyCounts () {
     items = JSON.parse(localStorage.entropy).length
   }
 
-  randogramProps.entropyResult1.innerText = items << 4
+  randogramProps.entropyResult1.innerText = items << 5
   randogramProps.entropyResult2.innerText = items
 }
 
