@@ -217,13 +217,9 @@ function getEntropyBytes() {
  * @return {number} - Uniform random number.
  */
 function secRand(count, useEntropy) {
-  let bytes = 0;
+  let bytes = useEntropy ? getEntropyBytes() : 0;
   const min = 2 ** 32 % count;
   const rand = new Uint32Array(1);
-
-  if (useEntropy) {
-    bytes = getEntropyBytes();
-  }
 
   do {
     bytes ^= crypto.getRandomValues(rand)[0];
