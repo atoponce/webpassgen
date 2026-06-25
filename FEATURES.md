@@ -67,6 +67,7 @@ can be cumbersome if a keyboard is not present, such as when using a remote cont
 can be built to accomodate this.
 
 * Alternate: Orchard Street Alpha, Orchard Street QWERTY
+* Random: Colemak, Dvorak, Norman, QWERTY, Workman
 
 ## Educational Discussion
 Passphrases from a deck of playing cards? Twitter? Simpsons episodes? Leaked passwords? These
