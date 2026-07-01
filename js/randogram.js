@@ -210,7 +210,7 @@ function drawRandogram () {
 
     if (0 <= x && x < randogramProps.length && 0 <= y && y < randogramProps.length) {
       const index = randogramProps.length * y + x
-      randogramProps.neumann.push(pixels[index] & 1)
+      randogramProps.neumann.push(pixels[index] & 1) // The LSB is not a problem with a CSPRNG
       extractRandomness()
     }
 
@@ -230,8 +230,8 @@ function updateEntropyCounts () {
     items = JSON.parse(localStorage.entropy).length
   }
 
-  randogramProps.entropyResult1.innerText = items << 5
-  randogramProps.entropyResult2.innerText = items
+  randogramProps.entropyResult1.innerText = items << 5 // EG, "2048 bits"
+  randogramProps.entropyResult2.innerText = items      // EG, "64 samples"
 }
 
 drawRandogram()
