@@ -332,7 +332,7 @@ input[type=range]::-moz-range-thumb {
 
 /* Mouse Entropy CSS */
 #randogram {
-  cursor: url('data:image/gif;base64,R0lGODlhFAAUAPABAKoAAP///yH5BAUKAAEALAAAAAAUABQAQAIsRI6pCe2+1Is0PFPl3Vj3zGzgwU2UOFpfqrJh46rmWNLl6t3nPSOXC4nhUgUAOw=='), crosshair;
+  cursor: default;
   margin: 0 calc((100% - 400px)/2);
   touch-action: none;
 }
