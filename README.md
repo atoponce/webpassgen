@@ -75,7 +75,7 @@ Here is the full breakdown of language support across the passphrase generators:
 | 37 | SR  | Serbian    | 8,670  |  ✔️  |      |      |      |     |                                    |
 | 38 | SV  | Swedish    | 7,776  |      |      |      |  ✔️  |     | 7,775 unique at first. Added "2a". |
 | 39 | TR  | Turkish    | 7,776  |      |      |      |  ✔️  |     | 7,775 unique at first. Added "2a". |
-| 40 | UK  | Ukranian   | 7,000  |  ✔️  |      |      |      |     |                                    |
+| 40 | UK  | Ukranian   | 7,000  |  ✔️  |      |      |  ✔️  |     | 10,870 wordlist for Diceware       |
 
 Here is the Chinese breakdown:
 
@@ -171,3 +171,11 @@ Here is the Russian breakdown:
 |:---:|:--------|:---------|:------:|:------------------------------|
 | 34a | Russian | Diceware | 7,776  |                               |
 | 34b | Russian | Monero   | 1,626  |                               |
+
+Here is the Ukranian breakdown:
+
+| ID  | Name     | Wordlist  | Unique | Notes                         |
+|:---:|:---------|:----------|:------:|:------------------------------|
+| 40b | Ukranian | Alternate | 7,000  |                               |
+| 40a | Ukranian | Diceware  | 10,870 |                               |
+
