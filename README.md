@@ -157,6 +157,12 @@ Here is the Japanese breakdown:
 | 24b | Japanese | Diceware | 7,776  |                               |
 | 24c | Japanese | Monero   | 1,626  |                               |
 
+Here is the Dutch breakdown:
+| ID  | Name  | Wordlist | Unique | Notes                         |
+|:---:|:------|:---------|:------:|:------------------------------|
+| 29a | Dutch | Diceware | 8,192  |                               |
+| 29b | Dutch | Monero   | 1,626  |                               |
+
 Here is the Portuguese breakdown:
 
 | ID  | Name       | Wordlist | Unique | Notes                         |
