@@ -121,7 +121,7 @@ function generateDiceware(selection) {
   } else if (selection === 'Turkish') {
     wordList = dicewareTR
   } else if (selection === 'Ukranian') {
-    wordList = dicewareUA
+    wordList = dicewareUK
   }
 
   wordList = uniquesOnly(wordList)  // Force unique elements in array.
