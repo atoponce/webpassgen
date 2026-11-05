@@ -14,32 +14,20 @@ const cryptoProps = {
  * @param {string} selection - The selection option chosen by the user.
  */
 function generateBitcoin(selection) {
-  let pass = ''
-  let wordList = ''
-
-  if (selection === 'Chinese (Simp)') {
-    wordList = bitcoinCNSimp
-  } else if (selection === 'Chinese (Trad)') {
-    wordList = bitcoinCNTrad
-  } else if (selection === 'Czech') {
-    wordList = bitcoinCZ
-  } else if (selection === 'English') {
-    wordList = bitcoinEN
-  } else if (selection === 'French') {
-    wordList = bitcoinFR
-  } else if (selection === 'Italian') {
-    wordList = bitcoinIT
-  } else if (selection === 'Japanese') {
-    wordList = bitcoinJP
-  } else if (selection === 'Korean') {
-    wordList = bitcoinKR
-  } else if (selection === 'Portuguese') {
-    wordList = bitcoinPT
-  } else if (selection === 'Spanish') {
-    wordList = bitcoinES
+  const cryptoLists = {
+    'Chinese (Simp)': bitcoinCNSimp,
+    'Chinese (Trad)': bitcoinCNTrad,
+    'Czech': bitcoinCZ,
+    'English': bitcoinEN,
+    'French': bitcoinFR,
+    'Italian': bitcoinIT,
+    'Japanese': bitcoinJP,
+    'Korean': bitcoinKR,
+    'Portuguese': bitcoinPT,
+    'Spanish': bitcoinES,
   }
 
-  wordList = uniquesOnly(wordList)  // Force unique elements in array.
+  const wordList = uniquesOnly(cryptoLists[selection])  // Force unique elements in array.
 
   /**
    * Convert 8-bit byte objects to binary strings.
@@ -93,7 +81,7 @@ function generateBitcoin(selection) {
       return wordList[index]
     })
 
-    pass = words.join('-')
+    const pass = words.join('-')
     cryptoProps.passId.innerText = pass
     cryptoProps.passLength.innerText = pass.length + ' characters'
     cryptoProps.passEntropy.innerText = entropy + ' bits'
@@ -139,45 +127,27 @@ function generateMonero(selection) {
     return (crc ^ -1) >>> 0
   }
 
-  let pass = ''
-  let wordList = ''
-  let prefixLen = 4 // Common for most languages below
-
-  if (selection === 'Chinese') {
-    prefixLen = 1
-    wordList = moneroCN
-  } else if (selection === 'Dutch') {
-    wordList = moneroNL
-  } else if (selection === 'English') {
-    prefixLen = 3
-    wordList = moneroEN
-  } else if (selection === 'Esperanto') {
-    wordList = moneroEO
-  } else if (selection === 'French') {
-    wordList = moneroFR
-  } else if (selection === 'German') {
-    wordList = moneroDE
-  } else if (selection === 'Italian') {
-    wordList = moneroIT
-  } else if (selection === 'Japanese') {
-    prefixLen = 3
-    wordList = moneroJP
-  } else if (selection === 'Lojban') {
-    wordList = moneroJBO
-  } else if (selection === 'Portuguese') {
-    wordList = moneroPT
-  } else if (selection === 'Russian') {
-    wordList = moneroRU
-  } else if (selection === 'Spanish') {
-    wordList = moneroES
+  const moneroWordLists = {
+    'Chinese': { wordList: moneroCN, prefixLen: 1 },
+    'Dutch': { wordList: moneroNL },
+    'English': { wordList: moneroEN, prefixLen: 3 },
+    'Esperanto': { wordList: moneroEO },
+    'French': { wordList: moneroFR },
+    'German': { wordList: moneroDE },
+    'Italian': { wordList: moneroIT },
+    'Japanese': { wordList: moneroJP, prefixLen: 3 },
+    'Lojban': { wordList: moneroJBO },
+    'Portuguese': { wordList: moneroPT },
+    'Russian': { wordList: moneroRU },
+    'Spanish': { wordList: moneroES },
   }
-
-  wordList = uniquesOnly(wordList)  // Force unique elements in array.
-
+  
+  const selected = moneroWordLists[selection]
+  const prefixLen = selected.prefixLen ?? 4
+  const wordList = uniquesOnly(selected.wordList)  // Force unique elements in array.
   const entropy = Math.ceil(getEntropy() / 32) * 32 // Multiple of 32 bits
   const len = Math.ceil(entropy / Math.log2(wordList.length))
-
-  pass = generatePass(len, wordList, true, cryptoProps.entropyCheck.checked).trim().split(' ')
+  let pass = generatePass(len, wordList, true, cryptoProps.entropyCheck.checked).trim().split(' ')
 
   let prefixes = ''
 

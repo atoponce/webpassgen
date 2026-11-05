@@ -53,79 +53,44 @@ function generateNLP(wordList, useEntropy) {
  * @param {string} selection - A Diceware language word list.
  */
 function generateDiceware(selection) {
-  let pass = ''
-  let wordList = ''
-
-  if (selection === 'Basque') {
-    wordList = dicewareEU
-  } else if (selection === 'Bulgarian') {
-    wordList = dicewareBG
-  } else if (selection === 'Catalan') {
-    wordList = dicewareCA
-  } else if (selection === 'Chinese') {
-    wordList = dicewareCN
-  } else if (selection === 'Czech') {
-    wordList = dicewareCZ
-  } else if (selection === 'Danish') {
-    wordList = dicewareDA
-  } else if (selection === 'Dutch') {
-    wordList = dicewareNL
-  } else if (selection === 'English') {
-    wordList = dicewareEN
-  } else if (selection === 'English (Beale)') {
-    wordList = dicewareBeale
-  } else if (selection === 'English (NLP)') {
-    wordList = dicewareNLP
-  } else if (selection === 'Esperanto') {
-    wordList = dicewareEO
-  } else if (selection === 'Estonian') {
-    wordList = dicewareET
-  } else if (selection === 'Finnish') {
-    wordList = dicewareFI
-  } else if (selection === 'French') {
-    wordList = dicewareFR
-  } else if (selection === 'German') {
-    wordList = dicewareDE
-  } else if (selection === 'Greek') {
-    wordList = dicewareEL
-  } else if (selection === 'Hebrew') {
-    wordList = dicewareIW
-  } else if (selection === 'Hungarian') {
-    wordList = dicewareHU
-  } else if (selection === 'Italian') {
-    wordList = dicewareIT
-  } else if (selection === 'Japanese') {
-    wordList = dicewareJP
-  } else if (selection === 'Latin') {
-    wordList = dicewareLA
-  } else if (selection === 'Maori') {
-    wordList = dicewareMI
-  } else if (selection === 'Norwegian') {
-    wordList = dicewareNO
-  } else if (selection === 'Polish') {
-    wordList = dicewarePL
-  } else if (selection === 'Portuguese') {
-    wordList = dicewarePT
-  } else if (selection === 'Romanian') {
-    wordList = dicewareRO
-  } else if (selection === 'Russian') {
-    wordList = dicewareRU
-  } else if (selection === 'Slovak') {
-    wordList = dicewareSK
-  } else if (selection === 'Slovenian') {
-    wordList = dicewareSL
-  } else if (selection === 'Spanish') {
-    wordList = dicewareES
-  } else if (selection === 'Swedish') {
-    wordList = dicewareSV
-  } else if (selection === 'Turkish') {
-    wordList = dicewareTR
-  } else if (selection === 'Ukranian') {
-    wordList = dicewareUK
+  const dicewareLists = {
+    'Basque'         : dicewareEU,
+    'Bulgarian'      : dicewareBG,
+    'Catalan'        : dicewareCA,
+    'Chinese'        : dicewareCN,
+    'Czech'          : dicewareCZ,
+    'Danish'         : dicewareDA,
+    'Dutch'          : dicewareNL,
+    'English'        : dicewareEN,
+    'English (Beale)': dicewareBeale,
+    'English (NLP)'  : dicewareNLP,
+    'Esperanto'      : dicewareEO,
+    'Estonian'       : dicewareET,
+    'Finnish'        : dicewareFI,
+    'French'         : dicewareFR,
+    'German'         : dicewareDE,
+    'Greek'          : dicewareEL,
+    'Hebrew'         : dicewareIW,
+    'Hungarian'      : dicewareHU,
+    'Italian'        : dicewareIT,
+    'Japanese'       : dicewareJP,
+    'Latin'          : dicewareLA,
+    'Maori'          : dicewareMI,
+    'Norwegian'      : dicewareNO,
+    'Polish'         : dicewarePL,
+    'Portuguese'     : dicewarePT,
+    'Romanian'       : dicewareRO,
+    'Russian'        : dicewareRU,
+    'Slovak'         : dicewareSK,
+    'Slovenian'      : dicewareSL,
+    'Spanish'        : dicewareES,
+    'Swedish'        : dicewareSV,
+    'Turkish'        : dicewareTR,
+    'Ukranian'       : dicewareUK,
   }
 
-  wordList = uniquesOnly(wordList)  // Force unique elements in array.
-
+  let pass
+  const wordList = uniquesOnly(dicewareLists[selection])  // Force unique elements in array.
   const entropy = getEntropy()
 
   if (selection === 'English (NLP)') {
@@ -134,9 +99,7 @@ function generateDiceware(selection) {
     // Every other Diceware word list.
     const len = Math.ceil(entropy / Math.log2(wordList.length))
 
-    pass = generatePass(len, wordList, true, dicewareProps.entropyCheck.checked).trim()
-    pass = pass.replace(/ /g, '-')
-
+    pass = generatePass(len, wordList, true, dicewareProps.entropyCheck.checked).trim().replace(/ /g, '-')
     dicewareProps.passEntropy.innerText = Math.floor(len * Math.log2(wordList.length)) + ' bits'
     dicewareProps.setSize.innerText = wordList.length.toLocaleString() + ' words'
   }

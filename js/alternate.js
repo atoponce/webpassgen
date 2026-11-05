@@ -6,6 +6,7 @@ const altProps = {
   "passEntropy": document.getElementById('alt-entropy'),
   "setSize": document.getElementById('alt-set-size'),
   "entropyCheck": document.getElementById('alt-entropy-check'),
+  "passCheck": document.getElementById('alt-check'),
 }
 
 /**
@@ -13,112 +14,84 @@ const altProps = {
  * @param {string} selection - An Alternate word list.
  */
 function generateAlternate(selection) {
-  let pass = ''
-  let wordList = ''
+  const commonWordLists = () => [
+    ...alternatePgp,          //  512 words
+    ...alternateMnemonikey,   // 4096 words
+    ...alternateOrchardAlpha, // 1296 words
+    ...alternateOrchardQWERTY,// 1296 words
+    ...alternatePokerware,    // 5304 words
+    ...alternateVAN[0],       //  432 words
+    ...alternateVAN[1],       //  373 words
+    ...alternateVAN[2],       //  402 words
+    ...alternateWordle,       // 5790 words
+    ...bitcoinEN,             // 2048 words
+    ...dicewareNLP[0],        // 1296 words
+    ...dicewareNLP[1],        // 7776 words
+    ...effDistant,            // 1296 words
+    ...effLong,               // 7776 words
+    ...effShort,              // 1296 words
+    ...moneroEN,              // 1626 words
+  ]
 
-  if (selection === 'Afrikaans') {
-    wordList = alternateAF
-  } else if (selection === 'Belarusian') {
-    wordList = alternateBE
-  } else if (selection === 'Colors') {
-    return generateColors()
-  } else if (selection === 'Croatian') {
-    wordList = alternateHR
-  } else if (selection === 'Elvish') {
-    wordList = alternateElvish
-  } else if (selection === 'Backronyms' || selection === 'Every Word List') {
-    wordList = Object.keys(alternateColors)           //  1029 words
-    wordList = wordList.concat(alternateEyeware)      //  8192 words
-    wordList = wordList.concat(alternateObscure)      // 19392 words
-    wordList = wordList.concat(alternateOrchardAlpha) //  1296 words
-    wordList = wordList.concat(alternateOrchardQWERTY)//  1296 words
-    wordList = wordList.concat(alternatePgp)          //   512 words
-    wordList = wordList.concat(alternatePokerware)    //  5304 words
-    wordList = wordList.concat(alternateSimpsons)     //  5000 words
-    wordList = wordList.concat(alternateSkey)         //  2048 words
-    wordList = wordList.concat(alternateTrump)        //  8192 words
-    wordList = wordList.concat(alternateVAN[0])       //   432 words
-    wordList = wordList.concat(alternateVAN[1])       //   373 words
-    wordList = wordList.concat(alternateVAN[2])       //   402 words
-    wordList = wordList.concat(alternateWordle)       //  5790 words
-    wordList = wordList.concat(alternateZxcvbn)       // 30000 words
-    wordList = wordList.concat(bitcoinEN)             //  2048 words
-    wordList = wordList.concat(dicewareEN)            //  8192 words
-    wordList = wordList.concat(dicewareBeale)         //  7776 words
-    wordList = wordList.concat(dicewareNLP[0])        //  1296 words
-    wordList = wordList.concat(dicewareNLP[1])        //  7776 words
-    wordList = wordList.concat(effDistant)            //  1296 words
-    wordList = wordList.concat(effGameOfThrones)      //  4000 words
-    wordList = wordList.concat(effHarryPotter)        //  4000 words
-    wordList = wordList.concat(effLong)               //  7776 words
-    wordList = wordList.concat(effShort)              //  1296 words
-    wordList = wordList.concat(effStarTrek)           //  4000 words
-    wordList = wordList.concat(effStarWars)           //  4000 words
-    wordList = wordList.concat(moneroEN)              //  1626 words
-    wordList = wordList.concat(pseudoDibels)          //  3215 words
-    if (selection === 'Backronyms') {
-      // Ensure only alphabetic characters.
-      wordList = wordList.filter(element => /^[a-z]+$/gi.test(element))
-    }
-  } else if (selection === 'Common Words Only') {
-    wordList = alternatePgp
-    wordList = wordList.concat(alternateOrchardAlpha) //  1296 words
-    wordList = wordList.concat(alternateOrchardQWERTY)//  1296 words
-    wordList = wordList.concat(alternatePokerware)
-    wordList = wordList.concat(alternateVAN[0])
-    wordList = wordList.concat(alternateVAN[1])
-    wordList = wordList.concat(alternateVAN[2])
-    wordList = wordList.concat(alternateWordle)
-    wordList = wordList.concat(bitcoinEN)
-    wordList = wordList.concat(dicewareNLP[0])
-    wordList = wordList.concat(dicewareNLP[1])
-    wordList = wordList.concat(effDistant)
-    wordList = wordList.concat(effLong)
-    wordList = wordList.concat(effShort)
-    wordList = wordList.concat(moneroEN)
-    wordList = wordList.map(v => v.toLowerCase()) // Lowercase every character.
-  } else if (selection === 'Deseret Alphabet') {
-    wordList = alternateDeseret
-  } else if (selection === 'Shavian Alphabet') {
-    wordList = alternateShavian
-  } else if (selection === 'Klingon') {
-    wordList = alternateKlingon
-  } else if (selection === 'Lord of the Rings') {
-    wordList = alternateEyeware
-  } else if (selection === 'Mongolian') {
-    wordList = alternateMN
-  } else if (selection === 'Obscure') {
-    wordList = alternateObscure
-  } else if (selection === 'Orchard Street Alpha') {
-    wordList = alternateOrchardAlpha
-  } else if (selection === 'Orchard Street QWERTY') {
-    wordList = alternateOrchardQWERTY
-  } else if (selection === 'PGP') {
-    wordList = alternatePgp
-  } else if (selection === 'Pokerware') {
-    wordList = alternatePokerware
-  } else if (selection === 'Simpsons') {
-    wordList = alternateSimpsons
-  } else if (selection === 'Serbian') {
-    wordList = alternateSR
-  } else if (selection === 'S/KEY') {
-    wordList = alternateSkey
-  } else if (selection === 'Trump') {
-    wordList = alternateTrump
-  } else if (selection === 'Ukranian') {
-    wordList = alternateUK
-  } else if (selection === 'Verb, Adjective, Noun') {
-    return generateVAN()
-  } else if (selection === 'Wordle') {
-    wordList = alternateWordle
-  } else if (selection === 'zxcvbn') {
-    wordList = alternateZxcvbn
+  const obscureWordLists = () => [
+    ...Object.keys(alternateColors), //  1029 words
+    ...alternateEyeware,             //  8192 words
+    ...alternateObscure,             // 19392 words
+    ...alternateSimpsons,            //  5000 words
+    ...alternateSkey,                //  2048 words
+    ...alternateTrump,               //  8192 words
+    ...alternateZxcvbn,              // 30000 words
+    ...dicewareEN,                   //  8192 words
+    ...dicewareBeale,                //  7776 words
+    ...effGameOfThrones,             //  4000 words
+    ...effHarryPotter,               //  4000 words
+    ...effStarTrek,                  //  4000 words
+    ...effStarWars,                  //  4000 words
+    ...pseudoDibels,                 //  3215 words
+  ]
+
+  const everyWordList = () => [
+    ...commonWordLists(),
+    ...obscureWordLists(),
+  ]
+
+  const alternateWordLists = {
+    'Afrikaans':              alternateAF,
+    'Belarusian':             alternateBE,
+    'Croatian':               alternateHR,
+    'Elvish':                 alternateElvish,
+    'Backronyms':             everyWordList().filter(word => /^[a-z]+$/i.test(word)),
+    'Common Words Only':      commonWordLists().map(word => word.toLowerCase()),
+    'Deseret Alphabet':       alternateDeseret,
+    'Every Word List':        everyWordList(),
+    'Shavian Alphabet':       alternateShavian,
+    'Klingon':                alternateKlingon,
+    'Lord of the Rings':      alternateEyeware,
+    'Mongolian':              alternateMN,
+    'Obscure':                alternateObscure,
+    'Orchard Street Alpha':   alternateOrchardAlpha,
+    'Orchard Street QWERTY':  alternateOrchardQWERTY,
+    'PGP':                    alternatePgp,
+    'Pokerware':              alternatePokerware,
+    'Simpsons':               alternateSimpsons,
+    'Serbian':                alternateSR,
+    'S/KEY':                  alternateSkey,
+    'Trump':                  alternateTrump,
+    'Ukranian':               alternateUK,
+    'Verb, Adjective, Noun':  generateVAN(),
+    'Wordle':                 alternateWordle,
+    'zxcvbn':                 alternateZxcvbn,
   }
 
-  wordList = uniquesOnly(wordList)  // Force unique elements in array.
+  if (selection === 'Colors') return generateColors()
+  if (selection === 'Mnemonikey') return generateMnemonikey()
+  if (selection === 'Verb, Adjective, Noun') return generateVAN()
 
+  const wordList = uniquesOnly(alternateWordLists[selection]) // Force unique elements in array.
   const entropy = getEntropy()
   const len = Math.ceil(entropy / Math.log2(wordList.length))
+
+  altProps.passCheck.innerText = '';
 
   if (selection === 'Backronyms') {
     const results = generateBackronym(wordList, altProps.entropyCheck.checked)
@@ -128,7 +101,7 @@ function generateAlternate(selection) {
     }).join('.') + '.';
 
     // Put generatePass() or generatePassphrase() in generateBackronym?
-    pass = results.passphrase.map(word => { return `<p>${word}</p>`; }).join('-');
+    const pass = results.passphrase.map(word => { return `<p>${word}</p>`; }).join('-');
 
     altProps.passId.classList.add('backronym')
     altProps.passId.classList.remove('colors')
@@ -137,8 +110,8 @@ function generateAlternate(selection) {
     altProps.passLength.innerText = pass.replace(/<\/?span>/g, '').length + ' characters'
     altProps.setSize.innerText = wordList.length.toLocaleString() + ' words'
   } else {
-    pass = generatePass(len, wordList, true, altProps.entropyCheck.checked).trim()
-    pass = pass.replace(/ /g, '-')
+    const pass = generatePass(len, wordList, true, altProps.entropyCheck.checked).trim().replace(/ /g, '-')
+
     altProps.passId.classList.remove('backronym')
     altProps.passId.classList.remove('colors')
     altProps.passEntropy.innerText = Math.floor(len * Math.log2(wordList.length)) + ' bits'
@@ -315,11 +288,71 @@ function generateColors() {
   altProps.passLength.innerText = totalLen + ' characters'
   altProps.setSize.innerText = colorKeys.length.toLocaleString() + ' words'
   altProps.passEntropy.innerText = Math.floor(len * Math.log2(colorKeys.length)) + ' bits'
+  altProps.passCheck.innerText = '';
+}
+
+/**
+ * Generate a Mnemonikey passphrase.
+ */
+function generateMnemonikey() {
+  const crc_table = (() => {
+    const table = new Uint32Array(256);
+    for (let n = 0; n < 256; n++) {
+      let c = n;
+      for (let k = 0; k < 8; k++) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1;
+      table[n] = c;
+    }
+    return table;
+  })();
+
+  // CRC-32 (IEEE), same as Go's crc32.ChecksumIEEE / zlib.crc32
+  const crc32 = (bytes) => {
+    let c = 0xffffffff;
+    for (const b of bytes) c = crc_table[(c ^ b) & 0xff] ^ (c >>> 8);
+    return (c ^ 0xffffffff) >>> 0;
+  };
+
+  const randomBits = () => {
+    const bits = 128; // Seed phrases are 128 bits
+    const buf = new Uint8Array(Math.ceil(bits / 8));
+    crypto.getRandomValues(buf);
+    let n = 0n;
+    for (const b of buf) n = (n << 8n) | BigInt(b);
+    return n & ((1n << BigInt(bits)) - 1n);
+  };
+
+  // big-endian, left-padded wiht zero bits
+  const toBytes = (n, len) => {
+    const out = new Uint8Array(len);
+    for (let i = len - 1; i >= 0; i--) { out[i] = Number(n & 0xFFn); n >>= 8n; }
+    return out;
+  };
+
+  const words = [];
+  const wordList = uniquesOnly(alternateMnemonikey); // Force unique elements in array.
+  const len = 13; // Seed phrases are static at 13 words + 1 checksum word
+  const epoch = 1672531200; // 2023-01-01T00:00:00Z
+  const creationOffset = secRand(Math.floor(Date.now() / 1000) - epoch + 1);
+  const version = 0n;
+  const seed = randomBits();
+  let payload = (version << 159n) | (seed << 31n) | BigInt(creationOffset);
+  const checksum = BigInt(crc32(toBytes(payload, 21)) & 0x1f);
+
+  payload = (payload << 5n) | checksum;
+
+  for (let i = 13; i >= 0; i--) words.push(alternateMnemonikey[Number((payload >> BigInt(12 * i)) & 0xfffn)]);
+
+  const pass = words.join('-');
+  altProps.passId.innerText = pass;
+  altProps.passEntropy.innerText = Math.floor(len * Math.log2(wordList.length)) + ' bits';
+  altProps.setSize.innerText = wordList.length + ' words';
+  altProps.passLength.innerText = pass.length + ' characters';
+  altProps.passCheck.innerText = 'Integrated checksum.';
 }
 
 /**
  * Generate an SKEY passphrase.
- * @return {Array} An array containing the password, its length and the entropy.
+ * @return {Array} An array containing the passphrase, its length, and the entropy.
  */
 function generateSKey() {
   const wordList = uniquesOnly(pseudoSKey)  // Force unique elements in array.
@@ -360,4 +393,5 @@ function generateVAN() {
   altProps.passEntropy.innerText = Math.floor(len * vanEntropy) + ' bits'
   altProps.setSize.innerText = wordCount.toLocaleString() + ' words'
   altProps.passLength.innerText = pass.length + ' characters'
+  altProps.passCheck.innerText = '';
 }

@@ -12,56 +12,73 @@ const pseudoProps = {
 
 /** Generate a pseudowords password. */
 function generatePseudowords() {
-  let ret = []
-  let displayCheck = false
-  const pseudo = document.getElementById('pseudo-options').value
-
-  if (pseudo === 'Apple Keychain') {
-    ret = generateApple()
-    pseudoProps.setSize.innerHTML = "It's <a href='https://github.com/atoponce/webpassgen/blob/5598bb9dbc3658d33ec4b58b800a62d410571940/js/pseudowords.js#L65-L82'>complicated</a>"
-  } else if (pseudo === 'Bubble Babble') {
-    ret = generateBabble()
-    displayCheck = true
-    pseudoProps.setSize.innerText = "65,536 pseudowords"
-  } else if (pseudo === 'Daefen') {
-    ret = generateDaefen()
-    pseudoProps.setSize.innerText = "3,456 syllables"
-  } else if (pseudo === 'DIBELS') {
-    ret = generateDibels()
-    pseudoProps.setSize.innerText = pseudoDibels.length.toLocaleString() + " pseudowords"
-  } else if (pseudo === 'Koremutake') {
-    ret = generateKoremutake()
-    pseudoProps.setSize.innerText = "128 syllables"
-  } else if (pseudo === 'Lepron') {
-    ret = generateLepron()
-    pseudoProps.setSize.innerText = "362,797,056 pseudowords"
-  } else if (pseudo === 'Letterblock Diceware') {
-    ret = generateLetterblock()
-    displayCheck = true
-    pseudoProps.setSize.innerText = '1,679,616 blocks'
-  } else if (pseudo === 'Munemo') {
-    ret = generateMunemo()
-    pseudoProps.setSize.innerText = "100 syllables"
-  } else if (pseudo === 'Proquints') {
-    ret = generateProquints()
-    pseudoProps.setSize.innerText = "65,536 pseudowords"
-  } else if (pseudo === 'Urbit') {
-    ret = generateUrbit()
-    pseudoProps.setSize.innerText = "65,536 pseudowords"
+  const pseudoGenerators = {
+    'Apple Keychain': {
+      generate: generateApple,
+      setSize: {
+        html: "It's <a href='https://github.com/atoponce/webpassgen/blob/5598bb9dbc3658d33ec4b58b800a62d410571940/js/pseudowords.js#L65-L82'>complicated</a>"
+      },
+    },
+    'Bubble Babble': {
+      generate: generateBabble,
+      displayCheck: true,
+      setSize: "65,536 pseudowords",
+    },
+    'Daefen': {
+      generate: generateDaefen,
+      setSize: "3,456 syllables",
+    },
+    'DIBELS': {
+      generate: generateDibels,
+      setSize: `${pseudoDibels.length.toLocaleString()} pseudowords`,
+    },
+    'Koremutake': {
+      generate: generateKoremutake,
+      setSize: "128 syllables",
+    },
+    'Lepron': {
+      generate: generateLepron,
+      setSize: "362,797,056 pseudowords",
+    },
+    'Letterblock Diceware': {
+      generate: generateLetterblock,
+      displayCheck: true,
+      setSize: '1,679,616 blocks'
+    },
+    'Munemo': {
+      generate: generateMunemo,
+      setSize: "100 syllables",
+    },
+    'Proquints': {
+      generate: generateProquints,
+      setSize: "65,536 pseudowords",
+    },
+    'Urbit': {
+      generate: generateUrbit,
+      setSize: "65,536 pseudowords",
+    },
   }
 
-  const pass = ret[0]
-  const ent = ret[1]
+  const pseudo = document.getElementById('pseudo-options').value
+  const selected = pseudoGenerators[pseudo]
+  const [pass, entropy] = selected.generate()
+
+  if (selected.setSize?.html) {
+    pseudoProps.setSize.innerHTML = selected.setSize.html
+  } else {
+    const setSize = typeof selected.setSize === 'function'
+      ? selected.setSize()
+      : selected.setSize
+
+    pseudoProps.setSize.innerText = setSize
+  }
 
   pseudoProps.passId.innerText = pass
   pseudoProps.passLength.innerText = pass.length + ' characters'
-  pseudoProps.passEntropy.innerText = ent + ' bits'
-
-  if (displayCheck) {
-    pseudoProps.passCheck.innerText = 'Integrated checksum.'
-  } else {
-    pseudoProps.passCheck.innerText = ''
-  }
+  pseudoProps.passEntropy.innerText = entropy + ' bits'
+  pseudoProps.passCheck.innerText = selected.displayCheck
+    ? 'Integrated checksum.'
+    : ''
 }
 
 /**
@@ -74,7 +91,7 @@ function generateApple() {
    * @param {number} n - The number of blocks in the password.
    * @return {number} Entropy in bits.
    */
-  var apple = function (n) {
+  const apple = function (n) {
     /*
       See https://web.archive.org/web/20210430183515/https://twitter.com/AaronToponce/status/1131406726069084160 for full analysis.
 
@@ -250,7 +267,7 @@ function generateDaefen() {
    * @param {string} letter - A letter to be added to the password.
    * @return True if the letter is a consonant, false if it is a vowel.
    */
-  var isConsonant = function (letter) {
+  const isConsonant = function (letter) {
     return consonants.indexOf(letter) >= 0
   }
 
@@ -311,7 +328,7 @@ function generateMunemo() {
    * @param {string} str - The encoded string.
    * @return {string} The encoded string.
    */
-  var tos = function (num, str) {
+  const tos = function (num, str) {
     const munemo = [
       'ba',  'bi',  'bu',  'be',  'bo',  'cha', 'chi', 'chu', 'che', 'cho',
       'da',  'di',  'du',  'de',  'do',  'fa',  'fi',  'fu',  'fe',  'fo',
@@ -369,7 +386,7 @@ function generateKoremutake() {
    * @param {string} str - The encoded string.
    * @return {string} The encoded string.
    */
-  var tos = function (num, str) {
+  const tos = function (num, str) {
     const koremutake = [
       'ba',  'be',  'bi',  'bo',  'bu',  'by',  'da',  'de',
       'di',  'do',  'du',  'dy',  'fa',  'fe',  'fi',  'fo',
@@ -510,7 +527,7 @@ function generateLetterblock() {
    * @param {string} str - The string to check.
    * @return True if the string is a digit, false otherwise.
    */
-  var isDigit = function (str) {
+  const isDigit = function (str) {
     return str.length === 1 && str.match(/[0-9]/)
   }
 
@@ -519,29 +536,20 @@ function generateLetterblock() {
    * @param {string} str - A stringified number.
    * @return A leet-speak version of the number.
    */
-  var replaceDigit = function (str) {
-    if (str === '0') {
-      return 'o'
-    } else if (str === '1') {
-      return 'l'
-    } else if (str === '2') {
-      return 'z'
-    } else if (str === '3') {
-      return 'e'
-    } else if (str === '4') {
-      return 'a'
-    } else if (str === '5') {
-      return 's'
-    } else if (str === '6') {
-      return 'b'
-    } else if (str === '7') {
-      return 't'
-    } else if (str === '8') {
-      return 'b'
-    } else if (str === '9') {
-      return 'g'
-    }
+  const digitReplacements = {
+    '0': 'o',
+    '1': 'l',
+    '2': 'z',
+    '3': 'e',
+    '4': 'a',
+    '5': 's',
+    '6': 'b',
+    '7': 't',
+    '8': 'b',
+    '9': 'g',
   }
+
+  const replaceDigit = str => digitReplacements[str]
 
   /**
    * A recursive function to build a cross-product array of strings based on the contents of "arr".
@@ -549,7 +557,7 @@ function generateLetterblock() {
    * @param {Array} res - The cross-product of the elements on "arr".
    * @param {number} ctr - A counter to keep track of the number of digits in the string.
    */
-  var getCombos = function (arr, res, ctr) {
+  const getCombos = function (arr, res, ctr) {
     const ptr0 = ctr.toString(2).padStart(4, '0')[0]  // most significant bit in bin(ctr)
     const ptr1 = ctr.toString(2).padStart(4, '0')[1]
     const ptr2 = ctr.toString(2).padStart(4, '0')[2]
@@ -576,7 +584,7 @@ function generateLetterblock() {
    * @param {Array} arr - An array of bigram candidates.
    * @return The highest weighted bigram.
    */
-  var calculateScores = function (arr) {
+  const calculateScores = function (arr) {
     let results = {}
 
     for (let i = 0; i < arr.length; i++) {
